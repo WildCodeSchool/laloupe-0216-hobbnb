@@ -1,0 +1,28 @@
+.card-image{
+  height: 210px;
+  overflow: hidden;
+  vertical-align: middle;
+  z-index: 5;
+}
+.placepict{
+  transform: translateY(-10%);
+}
+.actpict{
+  position: absolute;
+  width: 32px;
+}
+.authorpict{
+  position: absolute;
+  border-radius: 100%;
+  width: 64px;
+  top : 190px;
+  right : 20px;
+  border: 3px solid white;
+  z-index: 10;
+}
+.card-content div{
+  padding-left: 60px;
+}
+.card-title{
+  background-color: rgba(100,100,100,0.5);
+}
