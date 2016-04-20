@@ -1,4 +1,7 @@
 angular.module('app', ['ngRoute'])
     .config(routes)
     .controller('mainController', mainController)
-    .service('mainService', mainService);
+    .controller('placesController', placesController)
+    .service('mainService', mainService)
+    .service('placesService', placesService)
+    .factory('placesFactory', placesFactory);

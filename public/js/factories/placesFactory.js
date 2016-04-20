@@ -1,0 +1,5 @@
+function placesFactory() {
+    return {
+        datas: {}
+    };
+}
