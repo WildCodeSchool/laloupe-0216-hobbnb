@@ -1,0 +1,322 @@
+[
+  {
+    "favoriteSports": "Biking",
+    "commentsFriends": [
+      4,
+      {
+        "comments": "Consectetur laborum dolore labore sit incididunt velit nostrud. Id fugiat nisi aliqua reprehenderit reprehenderit enim velit aliqua sit mollit. Consectetur laborum velit eiusmod culpa et minim ex irure. Lorem aliquip pariatur dolore consectetur nisi anim est mollit.",
+        "picture": "http://placehold.it/32x32",
+        "name": "Shauna Higgins",
+        "id": 1
+      }
+    ],
+    "longitude": "31.629571",
+    "latitude": "13.501095",
+    "registered": "Sunday, May 24, 2015 8:28 AM",
+    "address": "112 Jackson Court, Bellfountain, Virginia, 7771",
+    "phone": "+33 (827) 403-3169",
+    "houseAvailability": "",
+    "houseSpaceDescription": "Veniam sunt aliquip Lorem officia quis id et eu esse mollit laboris eu laboris ipsum. Sint tempor nulla enim ut et.",
+    "housePrices": {
+      "cancellation": "et",
+      "securityDeposit": "$2,976.24",
+      "monthlyDiscount": "300%",
+      "cleaningFee": "$3,116.22",
+      "weeklyDiscount": "200%",
+      "extraBabyBed": "$1,413.85 reprehenderit labore"
+    },
+    "houseAmenities": {
+      "more": "Laborum sint Lorem non do cillum Lorem fugiat proident sunt ad culpa.",
+      "bbq": "ipsum",
+      "essentials": "exercitation",
+      "TV": "consectetur",
+      "wifi": "aute",
+      "kitchen": "reprehenderit"
+    },
+    "houseSpace": {
+      "houseRules": "Cillum magna commodo labore quis dolore Lorem occaecat anim. In tempor do tempor consequat fugiat deserunt non eiusmod labore proident proident ea aliqua proident. Reprehenderit consequat mollit Lorem deserunt eiusmod ad reprehenderit. Laboris ex laborum irure proident exercitation proident do. Qui incididunt irure incididunt reprehenderit dolore excepteur esse nisi sit elit proident. Amet minim dolor occaecat proident. Nostrud irure duis culpa Lorem pariatur est officia fugiat.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "adipisicing elit",
+      "beds": 1,
+      "bedrooms": 9,
+      "bathrooms": 3,
+      "accommodates": 8
+    },
+    "hostEmail": "jessica.villarreal@undefined.io",
+    "houseListing": {
+      "price": "$2,412.17",
+      "country": "Puerto Rico",
+      "state": "Illinois",
+      "description": "Sunt est consequat nisi duis non ut sint aliqua duis incididunt nisi culpa eu enim. Cupidatat dolor labore nostrud qui eu laborum reprehenderit Lorem do tempor voluptate velit aute ex. Commodo labore id in sint magna duis culpa occaecat est qui. Pariatur duis nisi est anim quis. Ut id nisi qui quis qui laborum id commodo labore minim proident. Eiusmod voluptate consectetur commodo aliquip non eiusmod amet sunt ea ex do culpa.",
+      "title": "Culpa occaecat pariatur do enim nulla exercitation aliqua voluptate."
+    },
+    "name": {
+      "last": "Villarreal",
+      "first": "Jessica"
+    },
+    "surname": "Jimenez",
+    "age": 32,
+    "picture": "http://placehold.it/32x32",
+    "isActive": false,
+    "guid": "2c4705bf-0eea-4e4c-b024-d9412a0b9a56",
+    "index": 0,
+    "_id": "5717846d82de64a364775537"
+  },
+  {
+    "favoriteSports": "Ski",
+    "commentsFriends": [
+      4,
+      {
+        "comments": "Consectetur laborum dolore labore sit incididunt velit nostrud. Id fugiat nisi aliqua reprehenderit reprehenderit enim velit aliqua sit mollit. Consectetur laborum velit eiusmod culpa et minim ex irure. Lorem aliquip pariatur dolore consectetur nisi anim est mollit.",
+        "picture": "http://placehold.it/32x32",
+        "name": "Shauna Higgins",
+        "id": 1
+      }
+    ],
+    "longitude": "32.789449",
+    "latitude": "-80.988243",
+    "registered": "Wednesday, July 22, 2015 12:52 PM",
+    "address": "315 Newton Street, Alden, West Virginia, 3030",
+    "phone": "+33 (817) 533-3481",
+    "houseAvailability": "",
+    "houseSpaceDescription": "Aliquip cupidatat laborum nisi incididunt incididunt est irure. Voluptate magna qui tempor amet pariatur anim ipsum.",
+    "housePrices": {
+      "cancellation": "amet",
+      "securityDeposit": "$3,560.48",
+      "monthlyDiscount": "300%",
+      "cleaningFee": "$1,552.11",
+      "weeklyDiscount": "100%",
+      "extraBabyBed": "$3,722.46 sunt laboris"
+    },
+    "houseAmenities": {
+      "more": "In amet mollit ut Lorem adipisicing consectetur velit cupidatat.",
+      "bbq": "aute",
+      "essentials": "duis",
+      "TV": "id",
+      "wifi": "reprehenderit",
+      "kitchen": "commodo"
+    },
+    "houseSpace": {
+      "houseRules": "Ut ea amet fugiat commodo est nulla velit id ullamco incididunt do. Officia cupidatat pariatur proident ipsum enim minim qui Lorem ullamco Lorem pariatur officia sint ut. Dolore dolore aute laboris quis amet laboris nisi consectetur proident elit magna qui occaecat.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "est reprehenderit",
+      "beds": 6,
+      "bedrooms": 6,
+      "bathrooms": 5,
+      "accommodates": 9
+    },
+    "hostEmail": "frye.olson@undefined.net",
+    "houseListing": {
+      "price": "$1,034.27",
+      "country": "Falkland Islands (Malvinas)",
+      "state": "Delaware",
+      "description": "Incididunt eu ipsum quis minim in. Reprehenderit dolore consectetur sit velit. Est consequat Lorem ea ullamco magna. Deserunt adipisicing culpa duis velit cupidatat Lorem.",
+      "title": "Ex cillum pariatur nulla pariatur dolore labore duis veniam laborum pariatur officia eiusmod culpa magna."
+    },
+    "name": {
+      "last": "Olson",
+      "first": "Frye"
+    },
+    "surname": "Wilson",
+    "age": 28,
+    "picture": "http://placehold.it/32x32",
+    "isActive": true,
+    "guid": "e99e402f-cbf2-45b3-a7f5-9258d13997d0",
+    "index": 1,
+    "_id": "5717846db8af910ac4fed6ce"
+  },
+  {
+    "favoriteSports": "Biking",
+    "commentsFriends": [
+      4,
+      {
+        "comments": "Consectetur laborum dolore labore sit incididunt velit nostrud. Id fugiat nisi aliqua reprehenderit reprehenderit enim velit aliqua sit mollit. Consectetur laborum velit eiusmod culpa et minim ex irure. Lorem aliquip pariatur dolore consectetur nisi anim est mollit.",
+        "picture": "http://placehold.it/32x32",
+        "name": "Shauna Higgins",
+        "id": 1
+      }
+    ],
+    "longitude": "137.797852",
+    "latitude": "29.151532",
+    "registered": "Monday, March 9, 2015 9:56 AM",
+    "address": "667 Keen Court, Taft, Florida, 3782",
+    "phone": "+33 (913) 506-2185",
+    "houseAvailability": "",
+    "houseSpaceDescription": "Nisi irure ullamco ullamco ad veniam. Nisi tempor laboris aliquip consequat sunt minim laboris officia eiusmod.",
+    "housePrices": {
+      "cancellation": "commodo",
+      "securityDeposit": "$3,400.86",
+      "monthlyDiscount": "200%",
+      "cleaningFee": "$2,236.98",
+      "weeklyDiscount": "200%",
+      "extraBabyBed": "$3,785.40 proident nisi"
+    },
+    "houseAmenities": {
+      "more": "Ea quis et velit ex ex laboris est in officia laborum.",
+      "bbq": "nulla",
+      "essentials": "anim",
+      "TV": "magna",
+      "wifi": "enim",
+      "kitchen": "magna"
+    },
+    "houseSpace": {
+      "houseRules": "Laborum in magna aute anim. Enim dolor est officia laboris adipisicing nostrud ut quis occaecat tempor fugiat ullamco. Aliquip velit nostrud exercitation duis sit fugiat velit occaecat.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "reprehenderit Lorem",
+      "beds": 1,
+      "bedrooms": 4,
+      "bathrooms": 4,
+      "accommodates": 4
+    },
+    "hostEmail": "anthony.montgomery@undefined.com",
+    "houseListing": {
+      "price": "$3,228.70",
+      "country": "Russian Federation",
+      "state": "North Dakota",
+      "description": "Ea mollit culpa dolore aliqua excepteur pariatur sit elit. Nisi deserunt exercitation sit consequat ut sunt. Officia cupidatat qui laborum adipisicing cupidatat qui nisi enim laborum. Excepteur commodo proident eiusmod qui pariatur aliqua amet exercitation fugiat enim magna. Consequat adipisicing ullamco et et commodo pariatur do excepteur sunt.",
+      "title": "Exercitation dolore laboris nostrud magna cillum excepteur incididunt reprehenderit proident irure ullamco."
+    },
+    "name": {
+      "last": "Montgomery",
+      "first": "Anthony"
+    },
+    "surname": "Pace",
+    "age": 23,
+    "picture": "http://placehold.it/32x32",
+    "isActive": true,
+    "guid": "51b284dd-4559-45ea-a9cb-53831f509f29",
+    "index": 2,
+    "_id": "5717846de538fc5abce32237"
+  },
+  {
+    "favoriteSports": "Horse riding",
+    "commentsFriends": [
+      4,
+      {
+        "comments": "Consectetur laborum dolore labore sit incididunt velit nostrud. Id fugiat nisi aliqua reprehenderit reprehenderit enim velit aliqua sit mollit. Consectetur laborum velit eiusmod culpa et minim ex irure. Lorem aliquip pariatur dolore consectetur nisi anim est mollit.",
+        "picture": "http://placehold.it/32x32",
+        "name": "Shauna Higgins",
+        "id": 1
+      }
+    ],
+    "longitude": "-13.268363",
+    "latitude": "70.852575",
+    "registered": "Saturday, November 8, 2014 1:10 PM",
+    "address": "430 Varet Street, Tonopah, Oregon, 107",
+    "phone": "+33 (832) 507-3698",
+    "houseAvailability": "",
+    "houseSpaceDescription": "Eiusmod duis ex ex minim qui ut. Elit cillum id Lorem dolor irure labore.",
+    "housePrices": {
+      "cancellation": "magna",
+      "securityDeposit": "$3,499.39",
+      "monthlyDiscount": "100%",
+      "cleaningFee": "$2,733.54",
+      "weeklyDiscount": "100%",
+      "extraBabyBed": "$2,153.29 aliquip anim"
+    },
+    "houseAmenities": {
+      "more": "Amet labore aliqua commodo amet aute ea velit esse sunt qui exercitation sunt.",
+      "bbq": "consequat",
+      "essentials": "nisi",
+      "TV": "quis",
+      "wifi": "ut",
+      "kitchen": "id"
+    },
+    "houseSpace": {
+      "houseRules": "Proident id ipsum deserunt nulla eu laboris proident. Laborum ut magna enim exercitation nostrud. Sit dolor aliqua commodo exercitation. Magna fugiat non eu proident irure.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "cillum ut",
+      "beds": 5,
+      "bedrooms": 5,
+      "bathrooms": 7,
+      "accommodates": 10
+    },
+    "hostEmail": "millie.hutchinson@undefined.biz",
+    "houseListing": {
+      "price": "$3,089.17",
+      "country": "Viet Nam",
+      "state": "Puerto Rico",
+      "description": "Aliquip sint quis id amet in tempor consectetur culpa veniam do deserunt. Est adipisicing non ad deserunt incididunt ipsum est deserunt voluptate magna tempor excepteur est. Ut Lorem nulla aute laboris consectetur officia cillum ullamco. Officia occaecat nostrud pariatur veniam laboris nulla sit officia.",
+      "title": "Proident nisi magna enim dolor veniam incididunt incididunt."
+    },
+    "name": {
+      "last": "Hutchinson",
+      "first": "Millie"
+    },
+    "surname": "Bridges",
+    "age": 23,
+    "picture": "http://placehold.it/32x32",
+    "isActive": true,
+    "guid": "d08d8c50-8b2f-4271-909a-264183de6e8f",
+    "index": 3,
+    "_id": "5717846ddd096b00d6c8831e"
+  },
+  {
+    "favoriteSports": "Ski",
+    "commentsFriends": [
+      4,
+      {
+        "comments": "Consectetur laborum dolore labore sit incididunt velit nostrud. Id fugiat nisi aliqua reprehenderit reprehenderit enim velit aliqua sit mollit. Consectetur laborum velit eiusmod culpa et minim ex irure. Lorem aliquip pariatur dolore consectetur nisi anim est mollit.",
+        "picture": "http://placehold.it/32x32",
+        "name": "Shauna Higgins",
+        "id": 1
+      }
+    ],
+    "longitude": "-124.289013",
+    "latitude": "54.50733",
+    "registered": "Thursday, February 25, 2016 9:29 PM",
+    "address": "420 Amersfort Place, Dundee, Federated States Of Micronesia, 5594",
+    "phone": "+33 (846) 495-3750",
+    "houseAvailability": "",
+    "houseSpaceDescription": "Minim eiusmod aliquip aliquip Lorem voluptate velit qui irure ipsum irure id esse et. Qui aliqua cillum ipsum ea labore incididunt deserunt.",
+    "housePrices": {
+      "cancellation": "voluptate",
+      "securityDeposit": "$1,388.19",
+      "monthlyDiscount": "400%",
+      "cleaningFee": "$2,019.32",
+      "weeklyDiscount": "100%",
+      "extraBabyBed": "$1,717.06 aliquip excepteur"
+    },
+    "houseAmenities": {
+      "more": "Enim enim nostrud dolor aliquip ex ipsum consequat.",
+      "bbq": "consectetur",
+      "essentials": "consequat",
+      "TV": "fugiat",
+      "wifi": "cillum",
+      "kitchen": "cillum"
+    },
+    "houseSpace": {
+      "houseRules": "Exercitation culpa veniam deserunt id. Laborum occaecat est laboris do velit labore cillum nostrud ad pariatur excepteur sunt. Cupidatat aute reprehenderit exercitation veniam sit labore. In Lorem esse in aliqua irure laborum Lorem. Deserunt deserunt magna id deserunt sunt dolor.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "sit laboris",
+      "beds": 7,
+      "bedrooms": 3,
+      "bathrooms": 5,
+      "accommodates": 9
+    },
+    "hostEmail": "berta.odonnell@undefined.biz",
+    "houseListing": {
+      "price": "$2,970.52",
+      "country": "Nicaragua",
+      "state": "Virgin Islands",
+      "description": "Duis elit laborum proident esse aliquip id incididunt ipsum tempor magna sint labore culpa. Nostrud nisi veniam quis labore nisi qui. Voluptate mollit amet aliqua est ex commodo occaecat aliquip cillum laboris pariatur ullamco pariatur adipisicing. Esse nulla non ut tempor dolor. Occaecat eu aliquip ullamco sunt. Elit minim Lorem exercitation labore occaecat incididunt.",
+      "title": "Dolor do deserunt adipisicing pariatur velit irure exercitation."
+    },
+    "name": {
+      "last": "Odonnell",
+      "first": "Berta"
+    },
+    "surname": "Yang",
+    "age": 30,
+    "picture": "http://placehold.it/32x32",
+    "isActive": true,
+    "guid": "6503766e-8242-45de-92e5-748c9b081fd6",
+    "index": 4,
+    "_id": "5717846e4b3e44e217febb10"
+  }
+]
