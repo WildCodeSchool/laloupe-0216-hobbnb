@@ -1,0 +1,74 @@
+[
+  {
+    'repeat:5': {
+      _id: '{{objectId()}}',
+      index: '{{index()}}',
+      guid: '{{guid()}}',
+      isActive: '{{bool()}}',
+      picture: 'http://placehold.it/1900x400',
+      name: {
+        first: '{{firstName()}}',
+        last: '{{surname()}}'
+      },
+      houseListing: {
+        title: '{{lorem(1, "sentences")}}',
+        description: '{{lorem(1, "paragraphs")}}',
+        state: '{{state()}}',
+        country: '{{country()}}',
+        price: '{{floating(1000, 4000, 2, "$0,0.00")}}',
+        cleanness: '5 stars',
+        location: '5 stars',
+        valueForMoney: '5 stars'
+      },
+      houseSpace: {
+        accommodates: '{{integer(1, 10)}}',
+        bathrooms: '{{integer(1, 10)}}',
+        bedrooms: '{{integer(1, 10)}}',
+        beds: '{{integer(1, 10)}}',
+        propertyType: '{{lorem(2, "words")}}',
+        checkIn: '2:00 PM',
+        checkOut: '11:00 AM',
+        houseRules: '{{lorem(1, "paragraphs")}}'
+      },
+      houseAmenities: {
+        kitchen: '{{lorem(1, "words")}}',
+		wifi: '{{lorem(1, "words")}}',
+		TV: '{{lorem(1, "words")}}',
+		essentials: '{{lorem(1, "words")}}',
+		bbq: '{{lorem(1, "words")}}',
+        more: '{{lorem(1, "sentences")}}'
+      },
+      housePrices: {
+        extraBabyBed: '{{floating(1000, 4000, 2, "$0,0.00")}} {{lorem(2, "words")}}',
+        weeklyDiscount: '{{integer(1, 2, "%")}}',
+        cleaningFee: '{{floating(1000, 4000, 2, "$0,0.00")}}',
+        monthlyDiscount: '{{integer(1, 5, "%")}}',
+        securityDeposit: '{{floating(1000, 4000, 2, "$0,0.00")}}',
+        cancellation: '{{lorem(1, "words")}}'
+      },
+      houseSpaceDescription : '{{lorem(2, "sentences")}}',
+      houseAvailability: '2 nights minimum stay',
+      address: '{{integer(100, 999)}} {{street()}}, {{city()}}, {{state()}}, {{integer(100, 10000)}}',
+      registered: '{{moment(this.date(new Date(2014, 0, 1), new Date())).format("LLLL")}}',
+      latitude: '{{floating(-90.000001, 90)}}',
+      longitude: '{{floating(-180.000001, 180)}}',
+      commentsFriends: [
+        {
+          id: '{{index()}}',
+          name: '{{firstName()}} {{surname()}}',
+          picture: 'http://placehold.it/32x32',
+          comments: '{{lorem(1, "paragraphs")}}',
+          likes: '{{integer(1, 10)}}'
+        }
+      ],
+      favoriteSports: function (tags) {
+        var sports = ['Surfing', 'KiteBoarding', 'Skiing', 'Kayak', 'Biking', 'Horse riding', 'Fishing', 'Flying', 'Hiking'];
+        return sports[tags.integer(0, sports.length - 1)];
+      }, 
+      secondaireSports: function (tags) {
+        var sports = ['Basketball', 'Bodybuilding', 'jiu-jitsu', 'Camping', 'Hunting', 'Jogging', 'Mountain biking', 'Paintball','Swimming','Walking'];
+        return sports[tags.integer(0, sports.length - 1)];
+      }
+    }
+  }
+]
