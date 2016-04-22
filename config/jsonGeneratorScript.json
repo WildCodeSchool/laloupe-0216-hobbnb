@@ -31,11 +31,11 @@
         houseRules: '{{lorem(1, "paragraphs")}}'
       },
       houseAmenities: {
-        kitchen: '{{lorem(1, "words")}}',
-		wifi: '{{lorem(1, "words")}}',
-		TV: '{{lorem(1, "words")}}',
-		essentials: '{{lorem(1, "words")}}',
-		bbq: '{{lorem(1, "words")}}',
+        kitchen: '{{bool()}}',
+		    wifi: '{{bool()}}',
+		    TV: '{{bool()}}',
+		    essentials: '{{bool()}}',
+		    bbq: '{{bool()}}',
         more: '{{lorem(1, "sentences")}}'
       },
       housePrices: {
@@ -64,7 +64,7 @@
       favoriteSports: function (tags) {
         var sports = ['Surfing', 'KiteBoarding', 'Skiing', 'Kayak', 'Biking', 'Horse riding', 'Fishing', 'Flying', 'Hiking'];
         return sports[tags.integer(0, sports.length - 1)];
-      }, 
+      },
       secondaireSports: function (tags) {
         var sports = ['Basketball', 'Bodybuilding', 'jiu-jitsu', 'Camping', 'Hunting', 'Jogging', 'Mountain biking', 'Paintball','Swimming','Walking'];
         return sports[tags.integer(0, sports.length - 1)];

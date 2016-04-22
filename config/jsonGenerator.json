@@ -1,306 +1,321 @@
-[{
-    "secondaireSports": "jiu-jitsu",
-    "favoriteSports": "Flying",
-    "commentsFriends": [{
-        "likes": 1,
-        "comments": "Laborum cupidatat ex ipsum elit in tempor. Magna duis dolor esse esse qui. Cupidatat ex incididunt anim ut dolore fugiat fugiat sit mollit nisi ullamco amet. Adipisicing nisi sit mollit nostrud reprehenderit aliquip voluptate proident ex cupidatat. Ad laboris commodo culpa dolor cillum incididunt est exercitation mollit officia sint cupidatat sint. Eu sint eiusmod aute non minim ea velit quis irure culpa aute. Aliquip aliqua officia velit magna adipisicing.",
-        "picture": "http://placehold.it/32x32",
-        "name": "Darlene Caldwell",
-        "id": 0
-    }],
-    "longitude": "-7.423076",
-    "latitude": "-45.725055",
-    "registered": "Sunday, May 25, 2014 5:31 PM",
-    "address": "532 Hudson Avenue, Biehle, Alabama, 6584",
-    "houseAvailability": "2 nights minimum stay",
-    "houseSpaceDescription": "Dolor consectetur velit nisi eiusmod. Duis laboris tempor ut duis.",
-    "housePrices": {
-        "cancellation": "laborum",
-        "securityDeposit": "$3,516.45",
-        "monthlyDiscount": "200%",
-        "cleaningFee": "$2,868.61",
-        "weeklyDiscount": "200%",
-        "extraBabyBed": "$2,471.32 nostrud et"
-    },
-    "houseAmenities": {
-        "more": "Pariatur quis ullamco quis esse velit.",
-        "bbq": "proident",
-        "essentials": "enim",
-        "TV": "ea",
-        "wifi": "aliquip",
-        "kitchen": "reprehenderit"
-    },
-    "houseSpace": {
-        "houseRules": "Sit elit culpa eu voluptate ipsum occaecat sunt do. Et ipsum ullamco proident qui veniam ullamco sit Lorem. Proident Lorem occaecat cupidatat dolor nisi quis voluptate culpa consectetur dolore amet deserunt.",
-        "checkOut": "11:00 AM",
-        "checkIn": "2:00 PM",
-        "propertyType": "officia aute",
-        "beds": 8,
-        "bedrooms": 6,
-        "bathrooms": 2,
-        "accommodates": 5
-    },
-    "houseListing": {
-        "valueForMoney": "5 stars",
-        "location": "5 stars",
-        "cleanness": "5 stars",
-        "price": "$2,538.97",
-        "country": "Bangladesh",
-        "state": "North Dakota",
-        "description": "Officia mollit sit labore deserunt laborum. Enim dolore enim dolor labore ut do officia enim anim aute excepteur adipisicing nulla irure. Id aliqua id tempor fugiat duis non magna. Et pariatur duis esse ullamco enim sint amet mollit non excepteur. Et quis consequat deserunt nulla. Amet eiusmod laborum eu aliqua consectetur anim. Pariatur mollit culpa veniam ullamco mollit sit.",
-        "title": "Nostrud eu qui qui ea Lorem eiusmod minim pariatur."
-    },
-    "name": {
-        "last": "Day",
-        "first": "Jenna"
-    },
-    "picture": "http://placehold.it/1900x400",
-    "isActive": true,
-    "guid": "0e19778a-5b73-40fe-8524-e1d890c070c3",
-    "index": 0,
-    "_id": "571792b790dbcaf9b917592b"
-}, {
+[
+  {
     "secondaireSports": "Jogging",
-    "favoriteSports": "Surfing",
-    "commentsFriends": [{
-        "likes": 1,
-        "comments": "Laborum cupidatat ex ipsum elit in tempor. Magna duis dolor esse esse qui. Cupidatat ex incididunt anim ut dolore fugiat fugiat sit mollit nisi ullamco amet. Adipisicing nisi sit mollit nostrud reprehenderit aliquip voluptate proident ex cupidatat. Ad laboris commodo culpa dolor cillum incididunt est exercitation mollit officia sint cupidatat sint. Eu sint eiusmod aute non minim ea velit quis irure culpa aute. Aliquip aliqua officia velit magna adipisicing.",
-        "picture": "http://placehold.it/32x32",
-        "name": "Darlene Caldwell",
-        "id": 0
-    }],
-    "longitude": "113.517071",
-    "latitude": "89.438804",
-    "registered": "Friday, March 6, 2015 9:20 AM",
-    "address": "802 Coyle Street, Barstow, Michigan, 377",
-    "houseAvailability": "2 nights minimum stay",
-    "houseSpaceDescription": "Deserunt dolore aliqua adipisicing et veniam elit quis officia. Ea in velit aliquip est proident fugiat culpa magna cupidatat commodo pariatur anim.",
-    "housePrices": {
-        "cancellation": "ipsum",
-        "securityDeposit": "$2,712.06",
-        "monthlyDiscount": "200%",
-        "cleaningFee": "$3,356.17",
-        "weeklyDiscount": "100%",
-        "extraBabyBed": "$2,855.80 incididunt in"
-    },
-    "houseAmenities": {
-        "more": "Proident non sit consectetur cillum dolor.",
-        "bbq": "enim",
-        "essentials": "adipisicing",
-        "TV": "incididunt",
-        "wifi": "cillum",
-        "kitchen": "deserunt"
-    },
-    "houseSpace": {
-        "houseRules": "Esse consequat ullamco magna ipsum dolore eu eiusmod adipisicing et eiusmod. Est aliqua sit do fugiat occaecat nulla pariatur labore. Nisi cillum nisi occaecat ad. Aliqua proident do sit laboris fugiat dolore. Occaecat consequat deserunt ipsum reprehenderit voluptate sit fugiat. In laboris nostrud elit commodo do.",
-        "checkOut": "11:00 AM",
-        "checkIn": "2:00 PM",
-        "propertyType": "exercitation aliquip",
-        "beds": 8,
-        "bedrooms": 10,
-        "bathrooms": 5,
-        "accommodates": 3
-    },
-    "houseListing": {
-        "valueForMoney": "5 stars",
-        "location": "5 stars",
-        "cleanness": "5 stars",
-        "price": "$2,477.44",
-        "country": "Anguilla",
-        "state": "Tennessee",
-        "description": "Anim commodo sit ea labore laborum proident eu exercitation exercitation enim. Voluptate exercitation esse ipsum dolore qui. Commodo irure fugiat incididunt ex. Deserunt sunt aliquip proident Lorem in magna officia aliquip est ut. Fugiat aliqua cupidatat in elit tempor labore occaecat ut do ut officia. Aliqua mollit reprehenderit dolor excepteur proident officia amet.",
-        "title": "Adipisicing cupidatat nisi anim est."
-    },
-    "name": {
-        "last": "Farley",
-        "first": "Fleming"
-    },
-    "picture": "http://placehold.it/1900x400",
-    "isActive": true,
-    "guid": "ebfa58fa-d566-4dd7-b178-b9fbc52f277b",
-    "index": 1,
-    "_id": "571792b7b4751c74723b838b"
-}, {
-    "secondaireSports": "Bodybuilding",
-    "favoriteSports": "KiteBoarding",
-    "commentsFriends": [{
-        "likes": 1,
-        "comments": "Laborum cupidatat ex ipsum elit in tempor. Magna duis dolor esse esse qui. Cupidatat ex incididunt anim ut dolore fugiat fugiat sit mollit nisi ullamco amet. Adipisicing nisi sit mollit nostrud reprehenderit aliquip voluptate proident ex cupidatat. Ad laboris commodo culpa dolor cillum incididunt est exercitation mollit officia sint cupidatat sint. Eu sint eiusmod aute non minim ea velit quis irure culpa aute. Aliquip aliqua officia velit magna adipisicing.",
-        "picture": "http://placehold.it/32x32",
-        "name": "Darlene Caldwell",
-        "id": 0
-    }],
-    "longitude": "91.077893",
-    "latitude": "25.138914",
-    "registered": "Sunday, December 13, 2015 5:20 AM",
-    "address": "941 Rogers Avenue, Bentonville, Wisconsin, 7566",
-    "houseAvailability": "2 nights minimum stay",
-    "houseSpaceDescription": "Sit quis excepteur nulla quis nostrud ea non veniam nisi. Eiusmod exercitation cupidatat labore cupidatat magna dolore consectetur veniam ipsum labore cupidatat.",
-    "housePrices": {
-        "cancellation": "est",
-        "securityDeposit": "$3,966.65",
-        "monthlyDiscount": "100%",
-        "cleaningFee": "$2,787.90",
-        "weeklyDiscount": "100%",
-        "extraBabyBed": "$3,666.90 cupidatat reprehenderit"
-    },
-    "houseAmenities": {
-        "more": "Consectetur anim quis ea magna eiusmod anim occaecat excepteur amet esse aliquip.",
-        "bbq": "magna",
-        "essentials": "incididunt",
-        "TV": "amet",
-        "wifi": "laborum",
-        "kitchen": "fugiat"
-    },
-    "houseSpace": {
-        "houseRules": "Proident tempor adipisicing nisi non. Eiusmod eiusmod in do irure voluptate Lorem ipsum aliquip dolore proident qui exercitation aute deserunt. Cupidatat do ut ullamco exercitation ex sit laborum do dolore culpa. Tempor sint eu qui veniam occaecat culpa id eu consectetur duis fugiat magna pariatur. Officia cillum laboris ea nostrud non consectetur magna eu esse proident tempor cillum. Magna non aute ullamco ullamco occaecat nisi laboris fugiat.",
-        "checkOut": "11:00 AM",
-        "checkIn": "2:00 PM",
-        "propertyType": "cupidatat ut",
-        "beds": 7,
-        "bedrooms": 7,
-        "bathrooms": 10,
-        "accommodates": 5
-    },
-    "houseListing": {
-        "valueForMoney": "5 stars",
-        "location": "5 stars",
-        "cleanness": "5 stars",
-        "price": "$2,115.39",
-        "country": "French Guiana",
-        "state": "Montana",
-        "description": "Consequat ex commodo culpa incididunt irure reprehenderit nisi non. Consectetur ea consectetur laboris esse ea aliqua velit magna. Est dolore non non consectetur do elit nulla cupidatat laborum esse incididunt exercitation non ad. Culpa sint est mollit fugiat amet cupidatat.",
-        "title": "Exercitation laboris ipsum ad veniam consectetur ea officia sit veniam esse tempor."
-    },
-    "name": {
-        "last": "Larson",
-        "first": "Nicole"
-    },
-    "picture": "http://placehold.it/1900x400",
-    "isActive": true,
-    "guid": "4d91cf8e-1ff2-46e8-9b01-91ca22dbea7c",
-    "index": 2,
-    "_id": "571792b7bba5bfbbf63d3dc4"
-}, {
-    "secondaireSports": "Swimming",
-    "favoriteSports": "KiteBoarding",
-    "commentsFriends": [{
-        "likes": 1,
-        "comments": "Laborum cupidatat ex ipsum elit in tempor. Magna duis dolor esse esse qui. Cupidatat ex incididunt anim ut dolore fugiat fugiat sit mollit nisi ullamco amet. Adipisicing nisi sit mollit nostrud reprehenderit aliquip voluptate proident ex cupidatat. Ad laboris commodo culpa dolor cillum incididunt est exercitation mollit officia sint cupidatat sint. Eu sint eiusmod aute non minim ea velit quis irure culpa aute. Aliquip aliqua officia velit magna adipisicing.",
-        "picture": "http://placehold.it/32x32",
-        "name": "Darlene Caldwell",
-        "id": 0
-    }],
-    "longitude": "-179.782114",
-    "latitude": "-52.647186",
-    "registered": "Tuesday, May 6, 2014 9:12 PM",
-    "address": "782 Richmond Street, Twilight, Alaska, 6446",
-    "houseAvailability": "2 nights minimum stay",
-    "houseSpaceDescription": "Sint non ex labore anim commodo exercitation voluptate officia labore laboris fugiat ut consectetur. Lorem est culpa labore incididunt.",
-    "housePrices": {
-        "cancellation": "do",
-        "securityDeposit": "$1,034.33",
-        "monthlyDiscount": "500%",
-        "cleaningFee": "$3,243.65",
-        "weeklyDiscount": "100%",
-        "extraBabyBed": "$1,922.06 nisi commodo"
-    },
-    "houseAmenities": {
-        "more": "Consectetur anim irure qui est incididunt exercitation excepteur velit laboris quis est duis proident.",
-        "bbq": "ea",
-        "essentials": "anim",
-        "TV": "sint",
-        "wifi": "amet",
-        "kitchen": "commodo"
-    },
-    "houseSpace": {
-        "houseRules": "Irure culpa occaecat et qui est eiusmod non. Nulla deserunt proident velit nisi ut nulla minim reprehenderit. Tempor consequat aliqua dolor reprehenderit excepteur. Eu officia amet minim nulla ex tempor quis dolore deserunt ullamco eiusmod nisi ut pariatur. Veniam magna ullamco irure minim anim. Ad duis ad velit ex nisi. Do deserunt aute consectetur dolor est do aliquip labore.",
-        "checkOut": "11:00 AM",
-        "checkIn": "2:00 PM",
-        "propertyType": "consectetur officia",
-        "beds": 8,
-        "bedrooms": 6,
-        "bathrooms": 5,
-        "accommodates": 8
-    },
-    "houseListing": {
-        "valueForMoney": "5 stars",
-        "location": "5 stars",
-        "cleanness": "5 stars",
-        "price": "$2,286.37",
-        "country": "Croatia (Hrvatska)",
-        "state": "Indiana",
-        "description": "Aute laboris mollit excepteur veniam eu laboris. Sint mollit sint eiusmod aute. Eiusmod esse amet deserunt pariatur non.",
-        "title": "Eiusmod nostrud et eu culpa velit labore in occaecat ad ex nostrud cillum ad nostrud."
-    },
-    "name": {
-        "last": "Barron",
-        "first": "Kara"
-    },
-    "picture": "http://placehold.it/1900x400",
-    "isActive": false,
-    "guid": "5f664ab3-280f-4034-a775-a0543e498e61",
-    "index": 3,
-    "_id": "571792b7596b5ffbd90afce1"
-}, {
-    "secondaireSports": "Camping",
     "favoriteSports": "Biking",
-    "commentsFriends": [{
-        "likes": 1,
-        "comments": "Laborum cupidatat ex ipsum elit in tempor. Magna duis dolor esse esse qui. Cupidatat ex incididunt anim ut dolore fugiat fugiat sit mollit nisi ullamco amet. Adipisicing nisi sit mollit nostrud reprehenderit aliquip voluptate proident ex cupidatat. Ad laboris commodo culpa dolor cillum incididunt est exercitation mollit officia sint cupidatat sint. Eu sint eiusmod aute non minim ea velit quis irure culpa aute. Aliquip aliqua officia velit magna adipisicing.",
+    "commentsFriends": [
+      {
+        "likes": 6,
+        "comments": "Aute incididunt anim veniam est. Et in officia velit culpa. Nulla proident labore est duis anim. Est occaecat sit do est eu consectetur tempor voluptate aliqua laborum anim non. Dolore nulla laboris enim dolore est ea. Ea mollit fugiat laboris incididunt non qui tempor velit.",
         "picture": "http://placehold.it/32x32",
-        "name": "Darlene Caldwell",
+        "name": "Noemi Pitts",
         "id": 0
-    }],
-    "longitude": "-54.557072",
-    "latitude": "28.368501",
-    "registered": "Monday, August 11, 2014 8:48 PM",
-    "address": "122 Gotham Avenue, Vandiver, Palau, 8953",
+      }
+    ],
+    "longitude": "-123.305573",
+    "latitude": "-4.226987",
+    "registered": "Saturday, February 22, 2014 11:32 AM",
+    "address": "320 Tapscott Avenue, Vaughn, Nevada, 6425",
     "houseAvailability": "2 nights minimum stay",
-    "houseSpaceDescription": "Consequat cillum elit magna irure aliquip consectetur occaecat labore minim pariatur deserunt anim id. Qui aliquip fugiat enim quis nulla officia excepteur ad consequat in occaecat.",
+    "houseSpaceDescription": "Et in est fugiat aute magna in occaecat laborum ipsum fugiat sint. Id deserunt amet ea est deserunt dolor.",
     "housePrices": {
-        "cancellation": "aliqua",
-        "securityDeposit": "$1,514.11",
-        "monthlyDiscount": "100%",
-        "cleaningFee": "$2,105.78",
-        "weeklyDiscount": "100%",
-        "extraBabyBed": "$2,582.18 elit voluptate"
+      "cancellation": "est",
+      "securityDeposit": "$3,745.23",
+      "monthlyDiscount": "300%",
+      "cleaningFee": "$2,076.16",
+      "weeklyDiscount": "200%",
+      "extraBabyBed": "$1,290.21 do eu"
     },
     "houseAmenities": {
-        "more": "Occaecat et do ad irure culpa laborum excepteur cupidatat fugiat mollit proident dolore eu.",
-        "bbq": "minim",
-        "essentials": "duis",
-        "TV": "sunt",
-        "wifi": "ex",
-        "kitchen": "ut"
+      "more": "Nulla nulla velit dolore nulla laborum minim ex.",
+      "bbq": false,
+      "essentials": false,
+      "TV": true,
+      "wifi": false,
+      "kitchen": true
     },
     "houseSpace": {
-        "houseRules": "Nisi non anim dolor Lorem qui id velit aliquip culpa deserunt ullamco. Excepteur sunt in ex veniam commodo excepteur tempor id tempor. Magna esse cupidatat nulla aliquip nulla quis do.",
-        "checkOut": "11:00 AM",
-        "checkIn": "2:00 PM",
-        "propertyType": "voluptate consequat",
-        "beds": 9,
-        "bedrooms": 8,
-        "bathrooms": 9,
-        "accommodates": 1
+      "houseRules": "Minim Lorem non non mollit cillum magna esse cillum ut occaecat quis fugiat proident deserunt. Dolore dolor dolor esse amet nostrud esse elit minim duis. Minim nulla ipsum veniam do culpa aliquip fugiat do sit officia sit officia. Elit occaecat aliquip aliqua enim deserunt magna sit consectetur laboris velit.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "culpa tempor",
+      "beds": 1,
+      "bedrooms": 4,
+      "bathrooms": 5,
+      "accommodates": 6
     },
     "houseListing": {
-        "valueForMoney": "5 stars",
-        "location": "5 stars",
-        "cleanness": "5 stars",
-        "price": "$2,705.14",
-        "country": "Rwanda",
-        "state": "Hawaii",
-        "description": "Ex commodo nostrud aute ea laborum magna ut elit esse ad velit consequat sint in. Deserunt ullamco deserunt fugiat minim laboris deserunt nisi deserunt nostrud do fugiat. Esse cillum quis nisi aliqua duis eiusmod proident velit sunt dolore Lorem adipisicing. Commodo ullamco amet consequat labore incididunt dolor Lorem velit ullamco duis amet. Duis non ipsum officia irure aute dolore non ea esse elit veniam sunt deserunt.",
-        "title": "Sint esse nostrud eu nostrud elit do nisi aute."
+      "valueForMoney": "5 stars",
+      "location": "5 stars",
+      "cleanness": "5 stars",
+      "price": "$1,302.45",
+      "country": "Botswana",
+      "state": "South Dakota",
+      "description": "Eu est aliqua irure do amet voluptate excepteur non anim et consequat. Consectetur non id officia esse Lorem labore in minim minim adipisicing sit labore velit ea. Et nostrud enim incididunt est.",
+      "title": "Aute pariatur sit ut ut pariatur irure nostrud consequat pariatur nostrud."
     },
     "name": {
-        "last": "Fields",
-        "first": "Macdonald"
+      "last": "Bush",
+      "first": "Virgie"
+    },
+    "picture": "http://placehold.it/1900x400",
+    "isActive": true,
+    "guid": "88b356f2-efb8-441c-b768-c88da860ee09",
+    "index": 0,
+    "_id": "5719e3e274100077317814b9"
+  },
+  {
+    "secondaireSports": "Walking",
+    "favoriteSports": "Surfing",
+    "commentsFriends": [
+      {
+        "likes": 6,
+        "comments": "Aute incididunt anim veniam est. Et in officia velit culpa. Nulla proident labore est duis anim. Est occaecat sit do est eu consectetur tempor voluptate aliqua laborum anim non. Dolore nulla laboris enim dolore est ea. Ea mollit fugiat laboris incididunt non qui tempor velit.",
+        "picture": "http://placehold.it/32x32",
+        "name": "Noemi Pitts",
+        "id": 0
+      }
+    ],
+    "longitude": "-131.81503",
+    "latitude": "-52.271423",
+    "registered": "Tuesday, July 14, 2015 5:04 PM",
+    "address": "784 Nassau Avenue, Castleton, New Jersey, 8305",
+    "houseAvailability": "2 nights minimum stay",
+    "houseSpaceDescription": "Sit ipsum ex pariatur sint elit veniam magna eiusmod esse est veniam. Nostrud eiusmod amet aute dolore ipsum laborum ea laborum.",
+    "housePrices": {
+      "cancellation": "proident",
+      "securityDeposit": "$2,069.47",
+      "monthlyDiscount": "100%",
+      "cleaningFee": "$2,163.74",
+      "weeklyDiscount": "200%",
+      "extraBabyBed": "$3,173.64 consectetur minim"
+    },
+    "houseAmenities": {
+      "more": "Eiusmod amet laborum qui mollit.",
+      "bbq": false,
+      "essentials": true,
+      "TV": true,
+      "wifi": false,
+      "kitchen": true
+    },
+    "houseSpace": {
+      "houseRules": "Elit esse anim proident mollit consequat eiusmod in laboris consequat quis laboris labore. Esse veniam culpa laboris nulla ad in voluptate. Aliquip nulla laborum do do sint magna. Veniam velit eu laboris ea dolor labore sint. Tempor ipsum esse cupidatat irure ad dolore nostrud officia eiusmod consequat laboris ea non. Ex sunt sunt aute in aute enim veniam nisi cupidatat sit et. Veniam incididunt id eu do cillum ea nisi.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "et ea",
+      "beds": 4,
+      "bedrooms": 5,
+      "bathrooms": 2,
+      "accommodates": 7
+    },
+    "houseListing": {
+      "valueForMoney": "5 stars",
+      "location": "5 stars",
+      "cleanness": "5 stars",
+      "price": "$1,118.78",
+      "country": "Montserrat",
+      "state": "Virginia",
+      "description": "Cillum culpa occaecat nostrud exercitation. Fugiat reprehenderit officia aliqua quis minim culpa. Do aliquip voluptate veniam elit ea consectetur deserunt ex voluptate in ea irure ea. Ea nostrud irure nulla ea enim est do velit commodo elit laborum.",
+      "title": "Ut sint mollit esse esse exercitation magna Lorem consectetur anim adipisicing ipsum esse."
+    },
+    "name": {
+      "last": "Johnston",
+      "first": "Francesca"
     },
     "picture": "http://placehold.it/1900x400",
     "isActive": false,
-    "guid": "1a227072-0575-484e-8825-d08886cbd132",
+    "guid": "82daa01c-871f-41f8-9137-61e6f39cf03d",
+    "index": 1,
+    "_id": "5719e3e26c16a821bec95e03"
+  },
+  {
+    "secondaireSports": "Basketball",
+    "favoriteSports": "Horse riding",
+    "commentsFriends": [
+      {
+        "likes": 6,
+        "comments": "Aute incididunt anim veniam est. Et in officia velit culpa. Nulla proident labore est duis anim. Est occaecat sit do est eu consectetur tempor voluptate aliqua laborum anim non. Dolore nulla laboris enim dolore est ea. Ea mollit fugiat laboris incididunt non qui tempor velit.",
+        "picture": "http://placehold.it/32x32",
+        "name": "Noemi Pitts",
+        "id": 0
+      }
+    ],
+    "longitude": "115.882084",
+    "latitude": "-41.780367",
+    "registered": "Thursday, April 16, 2015 12:32 AM",
+    "address": "309 Sackett Street, Grimsley, Montana, 668",
+    "houseAvailability": "2 nights minimum stay",
+    "houseSpaceDescription": "Est aliquip duis nulla aliquip minim qui anim consequat aliqua magna est do labore mollit. Pariatur consectetur amet irure minim excepteur anim.",
+    "housePrices": {
+      "cancellation": "irure",
+      "securityDeposit": "$2,417.82",
+      "monthlyDiscount": "400%",
+      "cleaningFee": "$2,784.79",
+      "weeklyDiscount": "200%",
+      "extraBabyBed": "$1,001.22 deserunt reprehenderit"
+    },
+    "houseAmenities": {
+      "more": "Irure cillum proident consectetur velit consectetur esse sunt.",
+      "bbq": true,
+      "essentials": true,
+      "TV": false,
+      "wifi": true,
+      "kitchen": false
+    },
+    "houseSpace": {
+      "houseRules": "Eu duis nostrud duis est laboris velit laborum sunt. Qui est ipsum minim dolor aliquip deserunt irure dolor culpa sint anim. Et dolor ipsum sint enim consectetur occaecat magna reprehenderit. Elit ut Lorem quis incididunt consectetur reprehenderit proident id nisi officia magna et. Sit sint esse nulla proident commodo ea nisi sunt cupidatat cupidatat commodo labore.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "ad fugiat",
+      "beds": 4,
+      "bedrooms": 3,
+      "bathrooms": 1,
+      "accommodates": 7
+    },
+    "houseListing": {
+      "valueForMoney": "5 stars",
+      "location": "5 stars",
+      "cleanness": "5 stars",
+      "price": "$3,492.76",
+      "country": "Macedonia",
+      "state": "Idaho",
+      "description": "Excepteur sint minim ad esse. Laboris cupidatat commodo veniam ipsum aute veniam consequat consequat in Lorem eiusmod culpa esse. Excepteur aute minim occaecat mollit est cillum elit reprehenderit. In ut consequat consectetur ipsum esse quis elit labore elit excepteur et quis voluptate. Veniam amet nulla eu duis sint Lorem amet enim reprehenderit dolor labore mollit.",
+      "title": "Dolore cillum cillum irure ut dolore dolore sunt reprehenderit magna fugiat."
+    },
+    "name": {
+      "last": "Mosley",
+      "first": "Lawson"
+    },
+    "picture": "http://placehold.it/1900x400",
+    "isActive": true,
+    "guid": "16fa1bed-a1c1-4d29-aa74-c46f7d7b66e7",
+    "index": 2,
+    "_id": "5719e3e34e64c0ca56e008f9"
+  },
+  {
+    "secondaireSports": "Jogging",
+    "favoriteSports": "Biking",
+    "commentsFriends": [
+      {
+        "likes": 6,
+        "comments": "Aute incididunt anim veniam est. Et in officia velit culpa. Nulla proident labore est duis anim. Est occaecat sit do est eu consectetur tempor voluptate aliqua laborum anim non. Dolore nulla laboris enim dolore est ea. Ea mollit fugiat laboris incididunt non qui tempor velit.",
+        "picture": "http://placehold.it/32x32",
+        "name": "Noemi Pitts",
+        "id": 0
+      }
+    ],
+    "longitude": "7.432298",
+    "latitude": "59.958096",
+    "registered": "Sunday, November 29, 2015 2:33 PM",
+    "address": "359 Furman Avenue, Dante, Louisiana, 9152",
+    "houseAvailability": "2 nights minimum stay",
+    "houseSpaceDescription": "Exercitation minim adipisicing anim eu ad anim sunt pariatur. Occaecat incididunt magna do ullamco aliquip sit dolore veniam nostrud.",
+    "housePrices": {
+      "cancellation": "ipsum",
+      "securityDeposit": "$3,259.40",
+      "monthlyDiscount": "400%",
+      "cleaningFee": "$1,706.85",
+      "weeklyDiscount": "100%",
+      "extraBabyBed": "$1,879.20 voluptate deserunt"
+    },
+    "houseAmenities": {
+      "more": "Duis laborum mollit reprehenderit officia dolor occaecat adipisicing esse nulla.",
+      "bbq": false,
+      "essentials": false,
+      "TV": true,
+      "wifi": false,
+      "kitchen": true
+    },
+    "houseSpace": {
+      "houseRules": "Sint nisi dolor eu commodo. Nostrud cupidatat aute nulla laborum. Cillum qui do id sunt exercitation cillum fugiat cillum sint est et. Nostrud excepteur ex esse consectetur veniam ut culpa veniam eiusmod duis irure Lorem laboris.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "et duis",
+      "beds": 5,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "accommodates": 1
+    },
+    "houseListing": {
+      "valueForMoney": "5 stars",
+      "location": "5 stars",
+      "cleanness": "5 stars",
+      "price": "$1,024.87",
+      "country": "Ukraine",
+      "state": "Minnesota",
+      "description": "Tempor aute est minim exercitation dolore enim tempor do. Dolore adipisicing incididunt magna sit amet anim duis et aute aliqua. Qui culpa occaecat ad consectetur. Eu sint tempor in commodo pariatur pariatur. Eu ipsum commodo esse ullamco laboris incididunt magna non. Aliqua proident eiusmod quis eu ad dolor ea quis ea quis irure commodo nostrud esse. Deserunt qui duis consequat aliqua consequat sunt adipisicing.",
+      "title": "Nostrud dolore sunt amet ullamco deserunt do occaecat."
+    },
+    "name": {
+      "last": "Brennan",
+      "first": "Mcleod"
+    },
+    "picture": "http://placehold.it/1900x400",
+    "isActive": true,
+    "guid": "04bb1267-87e1-451e-99c7-f21878ea2800",
+    "index": 3,
+    "_id": "5719e3e3a70d102d060de06b"
+  },
+  {
+    "secondaireSports": "Paintball",
+    "favoriteSports": "Hiking",
+    "commentsFriends": [
+      {
+        "likes": 6,
+        "comments": "Aute incididunt anim veniam est. Et in officia velit culpa. Nulla proident labore est duis anim. Est occaecat sit do est eu consectetur tempor voluptate aliqua laborum anim non. Dolore nulla laboris enim dolore est ea. Ea mollit fugiat laboris incididunt non qui tempor velit.",
+        "picture": "http://placehold.it/32x32",
+        "name": "Noemi Pitts",
+        "id": 0
+      }
+    ],
+    "longitude": "63.54418",
+    "latitude": "-54.766965",
+    "registered": "Wednesday, April 30, 2014 1:34 AM",
+    "address": "768 Lexington Avenue, Bath, West Virginia, 383",
+    "houseAvailability": "2 nights minimum stay",
+    "houseSpaceDescription": "Ipsum est anim nisi est minim amet quis velit qui ipsum nostrud fugiat adipisicing enim. Veniam Lorem amet exercitation cupidatat anim eiusmod ex cupidatat do excepteur fugiat.",
+    "housePrices": {
+      "cancellation": "aliquip",
+      "securityDeposit": "$3,753.44",
+      "monthlyDiscount": "200%",
+      "cleaningFee": "$3,096.02",
+      "weeklyDiscount": "200%",
+      "extraBabyBed": "$1,153.59 est dolore"
+    },
+    "houseAmenities": {
+      "more": "Nulla magna exercitation commodo esse sint cillum quis reprehenderit elit nulla ullamco occaecat velit.",
+      "bbq": true,
+      "essentials": false,
+      "TV": true,
+      "wifi": false,
+      "kitchen": true
+    },
+    "houseSpace": {
+      "houseRules": "Ea duis officia enim consequat nisi. Culpa tempor aliquip aliqua eu consequat laboris mollit duis nulla tempor veniam. Nisi proident aliquip sit irure minim pariatur mollit proident sunt nulla aliquip minim veniam. Consequat magna officia proident nisi eiusmod pariatur incididunt velit exercitation veniam labore reprehenderit.",
+      "checkOut": "11:00 AM",
+      "checkIn": "2:00 PM",
+      "propertyType": "laboris magna",
+      "beds": 7,
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "accommodates": 9
+    },
+    "houseListing": {
+      "valueForMoney": "5 stars",
+      "location": "5 stars",
+      "cleanness": "5 stars",
+      "price": "$2,400.30",
+      "country": "Norfolk Island",
+      "state": "Pennsylvania",
+      "description": "Est aliqua ad occaecat aliquip minim. Proident id velit cupidatat do laborum ex nulla Lorem voluptate veniam aliquip eiusmod ad. Elit irure fugiat commodo nostrud aute deserunt irure cillum ut nisi sunt nostrud adipisicing. Est duis ipsum amet proident ad veniam reprehenderit.",
+      "title": "Quis eiusmod quis laborum laboris commodo."
+    },
+    "name": {
+      "last": "Green",
+      "first": "Richards"
+    },
+    "picture": "http://placehold.it/1900x400",
+    "isActive": false,
+    "guid": "b277e690-eba2-44da-b59a-12cf28cf5a2b",
     "index": 4,
-    "_id": "571792b79e7743cb3dc82ff3"
-}]
+    "_id": "5719e3e393ef13d81f8247e2"
+  }
