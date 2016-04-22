@@ -4,10 +4,10 @@ function routes($routeProvider) {
             templateUrl: 'views/main.html',
             controller: 'mainController'
         })
-            .when('/place', {
-                templateUrl: 'views/place-page.html',
-                controller: 'placesController'
-            })
+        .when('/place', {
+            templateUrl: 'views/place-page.html',
+            controller: 'placesController'
+        })
         .otherwise({
             redirectTo: '/'
         });
