@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 
 
 var placesSchema = new mongoose.Schema({
-  index: Number,
   isActive: Boolean,
   picture: String,
   name: {
@@ -14,7 +13,16 @@ var placesSchema = new mongoose.Schema({
     title: String,
     description: String,
     state: String,
-    postaCode: {type: Number, min: 5, max: 5},
+    postalCode: {
+      type: String,
+      validate: {
+          validator: function(v) {
+            return /^[0-9]{5}$/.test(v);
+          },
+          message: '{VALUE} is not a valid postal code number!'
+        },
+        required: [true, 'postal code number required']
+    },
     country: String,
     price: Number,
     cleanness: {type: Number, max: 5},
@@ -41,9 +49,9 @@ var placesSchema = new mongoose.Schema({
   },
   housePrices: {
     extraBabyBed: Number,
-    weeklyDiscount: {type: Number,min: 1, max: 100 },
+    weeklyDiscount: {type: Number,min: 0, max: 100 },
     cleaningFee: Number,
-    monthlyDiscount: {type: Number,min: 1, max: 100 },
+    monthlyDiscount: {type: Number,min: 0, max: 100 },
     securityDeposit: Number,
     cancellation: String
   },
@@ -60,18 +68,14 @@ var placesSchema = new mongoose.Schema({
     comments: String,
     likes: Number
   },
-  favoriteSports: {
-    sports: {
+  favoriteSports: [{
       type: String,
       enum: ['Surfing', 'KiteBoarding', 'Skiing', 'Kayak', 'Biking', 'Horse riding', 'Fishing', 'Flying', 'Hiking']
-    }
-  },
-  secondaireSports: {
-    sports: {
+    }],
+  secondaireSports: [{
       type: String,
       enum: ['Basketball', 'Bodybuilding', 'jiu-jitsu', 'Camping', 'Hunting', 'Jogging', 'Mountain biking', 'Paintball','Swimming','Walking']
-    }
-  }
+    }]
 });
 
 var Places = {
@@ -79,10 +83,12 @@ var Places = {
     model: mongoose.model('Places', placesSchema),
 
     create: function(req, res) {
-		Places.model.create({
-            description: req.body.description
-		}, function(){
-			res.sendStatus(200);
+		Places.model.create(req.body.content, function(err){
+			if (err) {
+        res.send(err);
+      }else {
+        res.sendStatus(200);
+      }
 		});
 	},
 
