@@ -17,7 +17,7 @@ p {
 	font-size: 14px;
 }
 h1 {
-	font-size: 24px;
+	font-size: 41px;
 }
 .navTop {
 	background-color: #67C9FF;
@@ -25,4 +25,12 @@ h1 {
 .brand-logo {
 	margin-top: 7px;
 	margin-left: 7px;
+}
+.slider {
+	position: absolute;
+	z-index: 1;
+}
+.logo {
+	position: relative;
+	z-index: 2;
 }
