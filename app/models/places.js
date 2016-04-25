@@ -6,13 +6,13 @@ var placesSchema = new mongoose.Schema({
   isActive: Boolean,
   picture: String,
   name: {
-    first: String,
-    last: String
+    first: { type:String, required: [true, 'first name required']},
+    last: { type:String, required: [true, 'last name required']},
   },
   houseListing: {
-    title: String,
-    description: String,
-    state: String,
+    title: { type:String, required: [true, 'title required']},
+    description: { type:String, required: [true, 'description required']},
+    state: { type:String, required: [true, 'state required']},
     postalCode: {
       type: String,
       validate: {
@@ -20,10 +20,10 @@ var placesSchema = new mongoose.Schema({
             return /^[0-9]{5}$/.test(v);
           },
           message: '{VALUE} is not a valid postal code number!'
-        },
-        required: [true, 'postal code number required']
+      },
+      required: [true, 'postal code number required']
     },
-    country: String,
+    country: { type:String, required: [true, 'country required']},
     price: Number,
     cleanness: {type: Number, max: 5},
     location: {type: Number, max: 5},
@@ -57,7 +57,7 @@ var placesSchema = new mongoose.Schema({
   },
   houseSpaceDescription : String,
   houseAvailability: String,
-  address: String,
+  address: { type:String, required: [true, 'title required']},
   registered: Date,
   latitude: Number,
   longitude: Number,
