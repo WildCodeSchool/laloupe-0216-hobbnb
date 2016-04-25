@@ -92,23 +92,43 @@ var Places = {
 		});
 	},
 
+  findOne: function(req, res) {
+		Places.model.findById(req.params.id, function (err, data) {
+      if (err) {
+        res.send(err);
+      }else {
+        res.send(data);
+      }
+		});
+	},
+
 	findAll: function(req, res) {
 		Places.model.find(function (err, data) {
-			res.send(data);
+      if (err) {
+        res.send(err);
+      }else {
+        res.send(data);
+      }
 		});
 	},
 
 	update: function(req, res){
-		Places.model.findByIdAndUpdate(req.params.id, {
-			description: req.body.description
-		}, function(){
-			res.sendStatus(200);
+		Places.model.findByIdAndUpdate(req.params.id, req.body.content, function(err){
+      if (err) {
+        res.send(err);
+      }else {
+        res.sendStatus(200);
+      }
 		});
 	},
 
 	delete: function(req, res){
-		Places.model.findByIdAndRemove(req.params.id, function(){
-			res.sendStatus(200);
+		Places.model.findByIdAndRemove(req.params.id, function(err){
+      if (err) {
+        res.send(err);
+      }else {
+        res.sendStatus(200);
+      }
 		});
 	}
 };
