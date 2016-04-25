@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute'])
+angular.module('app', ['ngRoute', 'ui.materialize'])
     .config(routes)
     .controller('mainController', mainController)
     .controller('placesController', placesController)

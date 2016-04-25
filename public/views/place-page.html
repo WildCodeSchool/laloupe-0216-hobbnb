@@ -231,10 +231,48 @@
                 <div class="row">
                     <div class="col s12 center grey lighten-2 flow-text">40 € / night</div>
                     <div class="input-field col s4">
-                        <input placeholder="Arrival" id="arrival" type="date">
+                        <input
+                            input-date
+                            type="text"
+                            name="arrival"
+                            id="arrival"
+                            ng-model="arrival"
+                            container="body"
+                            format="dd/mm/yyyy"
+                            months-full="{{ month }}"
+                            months-short="{{ monthShort }}"
+                            weekdays-full="{{ weekdaysFull }}"
+                            weekdays-short="{{ weekdaysShort }}"
+                            weekdays-letter="{{ weekdaysLetter }}"
+                            disable="disable"
+                            min="{{ minDate }}"
+                            max="{{ maxDate }}"
+                            today="today"
+                            clear="clear"
+                            close="close"
+                            select-years="15">
                     </div>
                     <div class="input-field col s4">
-                        <input placeholder="Departure" id="departure" type="date">
+                        <input
+                            input-date
+                            type="text"
+                            name="departure"
+                            id="departure"
+                            ng-model="departure"
+                            container="body"
+                            format="dd/mm/yyyy"
+                            months-full="{{ month }}"
+                            months-short="{{ monthShort }}"
+                            weekdays-full="{{ weekdaysFull }}"
+                            weekdays-short="{{ weekdaysShort }}"
+                            weekdays-letter="{{ weekdaysLetter }}"
+                            disable="disable"
+                            min="{{ minDateD }}"
+                            max="{{ maxDateD }}"
+                            today="today"
+                            clear="clear"
+                            close="close"
+                            select-years="15">
                     </div>
                     <div class="input-field col s4">
                         <input placeholder="Guests" id="guests" type="number">
@@ -250,9 +288,7 @@
                         <i class='small material-icons text-grey text-lighten-2'>streetview</i>
                     </div>
                     <hr>
-                    <div class="col s12">
-                        
-                    </div>
+                    <div class="col s12"></div>
                     <hr>
                     <div class="col s2">
                         <p class='flow-text center'>
@@ -280,21 +316,20 @@
                 </div>
             </div>
         </div>
-            <div class="col s12 m4">
-                <div class="card-panel">
-                    <div class="row">
-                        <div class="col s12 center">
-                            <p class='flow-text'>
-                                <button class='btn waves-effect grey text-black lighten-1'>
-                                    <i class='large material-icons text-grey text-lighten-2'>favorite</i>&nbsp;
-                                    Add to Wishlist
-                                </button>
-                            </p>
-                            62 hobbinauts saved this place
-                        </div>
+        <div class="col s12 m4">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="col s12 center">
+                        <p class='flow-text'>
+                            <button class='btn waves-effect grey text-black lighten-1'>
+                                <i class='large material-icons text-grey text-lighten-2'>favorite</i>&nbsp; Add to Wishlist
+                            </button>
+                        </p>
+                        62 hobbinauts saved this place
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 
 </div>
