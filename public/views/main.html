@@ -1,4 +1,4 @@
-<header style="height:496px">
+<header style="height:400px">
 	<div class="homecar">
 		<div class="slider">
 		    <ul class="slides">
@@ -40,14 +40,6 @@
 			    </li>
 		    </ul>
 		</div>
-		<script>
-			$(document).ready(function(){
-		    	$('.slider').slider({full_width: true});
-		    	$('.slider').slider({indicators: false});
-		    });
-	    </script>
-
-
 		<div class="logo">
 			<div class="container">
 				<h1><B>Étendez votre air de jeu</B></h1>
@@ -66,7 +58,12 @@
 	<div class="exploregal">
 		<h2>Explorez vos hobby et soyez inspirés</h2>
 		<p>Trouvez votre logement pour les vacances par hobby et rencontrez des hôtes partageant vos passions</p>
-		<div id="galleryex"></div>
+			<div class="carousel">
+				<a class="carousel-item" href="#one!"><img src="http://lorempixel.com/800/400/food/1"></a>
+				<a class="carousel-item" href="#two!"><img src="http://lorempixel.com/800/400/food/2"></a>
+				<a class="carousel-item" href="#three!"><img src="http://lorempixel.com/800/400/food/3"></a>
+				<a class="carousel-item" href="#four!"><img src="http://lorempixel.com/800/400/food/4"></a>
+			</div>
 	</div>
 </div>
 
@@ -79,18 +76,26 @@
 
 <h2>Louer par hobby change la donne</h2>
 <div class="container">
-	<div class="row">
-		<div class="col s4">
-			<img src="../images/carte.png" href="#" /><br>
-			<p style="font-size:22px"><B>Logez au coeur de l'action</p>
-		</div>
-		<div class="col s4">
-			<img src="../images/friends.svg" href="#" height="88px"/><br>
-			<p style="font-size:22px">Recevez des conseils de votre hôte</p>
-		</div>
-		<div class="col s4">
-			<img src="../images/cochon.png" href="#" /><br>
-			<p style="font-size:22px">Faites vous de l'argent grâce à vos hobbys</B></p>
+	<div class="rentic">
+		<div class="row">
+			<div class="col s4">
+				<a href="#">
+					<img src="../images/carte.png" />
+					<p style="font-size:22px"><B>Logez au coeur de l'action</p>
+				</a>
+			</div>
+			<div class="col s4">
+				<a href="#">
+					<img src="../images/friends.svg" style="height:88px; margin-top:45px" />
+					<p style="font-size:22px">Recevez des conseils de votre hôte</p>
+				</a>
+			</div>
+			<div class="col s4">
+				<a href="#">
+					<img src="../images/cochon.png" style="margin-top:25px" />
+					<p style="font-size:22px">Faites vous de l'argent grâce à vos hobbys</B></p>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
@@ -100,36 +105,45 @@
 <div class="think">
 	<h2>Qu'en pense-t-il</h2>
 	<div class="container">
-		<div class="row">
-			<div class="col s4">
-				<div class="pcenter">
-					<img src="../images/hobbynauts/images-1.jpeg" class="portrait"/>
+		<div class="valign wrapper">
+			<div class="row">
+				<div class="col s4">
+					<div class="pcenter">
+						<img src="../images/hobbynauts/images-1.jpeg" class="circle"/>
+					</div>
+					<h2 class="valign">"Super concept"</h2><br>
+					<p class="valign">Vous avez un hobby et aimez partager vos expériences, des conseils et peut être de l'équipement ? Faites-en un atout pour augmenter vos revenus en louant à 68% des voyageurs voulant découvrir ou profiter de leurs hobbys préférés durant leurs vacances.</p>
 				</div>
-				<h2>"Super concept"</h2><br>
-				<p>Vous avez un hobby et aimez partager vos expériences, des conseils et peut être de l'équipement ? Faites-en un atout pour augmenter vos revenus en louant à 68% des voyageurs voulant découvrir ou profiter de leurs hobbys préférés durant leurs vacances.</p>
-			</div>
-			<div class="col s4">
-				<div class="pcenter">
-					<img src="../images/hobbynauts/images-4.jpeg" class="portrait"/>
+				<div class="col s4">
+					<div class="pcenter">
+						<img src="../images/hobbynauts/images-5.jpeg" class="circle"/>
+					</div>
+					<h2 class="valign">"Une expérience incroyable"</h2><br>
+					<p class="valign">C'est tellement plus facile et sympa d'ouvrir sa porte aux personnes partageant vos hobbys. Les hobbys brisent la glace instantanément, font disparaitre les barrières sociales et sont le plus puissant générateur d'amitié.</p>
 				</div>
-				<h2>"Une expérience incroyable"</h2><br>
-				<p>C'est tellement plus facile et sympa d'ouvrir sa porte aux personnes partageant vos hobbys. Les hobbys brisent la glace instantanément, font disparaitre les barrières sociales et sont le plus puissant générateur d'amitié.</p>
-			</div>
-			<div class="col s4">
-				<div class="pcenter">
-					<img src="../images/hobbynauts/images.jpeg" class="portrait"/>
+				<div class="col s4">
+					<div class="pcenter">
+						<img src="../images/hobbynauts/images-6.jpeg" class="circle"/>
+					</div>
+					<h2 class="valign">"Le futur des voyages"</h2><br>
+					<p class="valign">Découvrez le profil de voyageurs et leur notations avant d'accepter une location. Tous les payements sont 100% sécurisés et vous bénéficiez d'une assurance supplémentaire pour couvrir votre logement.</p>
 				</div>
-				<h2>"Le futur des voyages"</h2><br>
-				<p>Découvrez le profil de voyageurs et leur notations avant d'accepter une location. Tous les payements sont 100% sécurisés et vous bénéficiez d'une assurance supplémentaire pour couvrir votre logement.</p>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col s5 offset-s7">
-				<p>L'aventure commence ici ! <button href="http://www.hobbnb.com/">Rejoignez nous</button></p>
+			<div class="col s6 offset-s6">
+				<p>L'aventure commence ici ! <a class="waves-effect waves-light btn">Rejoignez nous</a></p>
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$('.slider').slider({full_width: true});
+		$('.slider').slider({indicators: false});
+		$('.carousel').carousel();
+	});
+</script>
 
 <footer>
 	<div class="container">

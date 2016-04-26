@@ -47,11 +47,6 @@ footer {
 	z-index: 2;
 	color: #ffffff;
 }
-.portrait {
-	border-radius: 100px;
-	width: 88px;
-	height: 88px;
-}
 .browser-default {
 	background-color: #64737C;
 	width: 145px;
@@ -59,4 +54,16 @@ footer {
 	margin-top: 6px;
 	font-size: 13px;
 	color: white;
+}
+.homecar {
+	margin-top: -32px;
+}
+.rentic {
+	text-align: center;
+	display: inline;
+	font-size: 22px;
+}
+.circle {
+	width: 88px;
+	height: 88px;
 }
