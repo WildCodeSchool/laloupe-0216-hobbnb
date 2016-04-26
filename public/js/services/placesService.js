@@ -1,15 +1,18 @@
 function placesService($http) {
     return {
-        get : function() {
+        get: function() {
             return $http.get('/api/places');
         },
-        update : function(id, data){
+        getOne: function() {
+            return $http.get('/api/places/' + id);
+        },
+        update: function(id, data) {
             return $http.put('/api/places/' + id, data);
         },
-        create : function(data) {
+        create: function(data) {
             return $http.post('/api/places', data);
         },
-        delete : function(id) {
+        delete: function(id) {
             return $http.delete('/api/places/' + id);
         }
     };

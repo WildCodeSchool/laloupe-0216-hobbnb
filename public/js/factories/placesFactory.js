@@ -1,5 +1,5 @@
 function placesFactory() {
     return {
-        datas: {}
+        places: {}
     };
 }

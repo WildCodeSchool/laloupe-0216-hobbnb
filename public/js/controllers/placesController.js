@@ -1,7 +1,7 @@
 // PLACES CONTROLLER
-function placesController($scope, $http, placesFactory, placesService) {
+function placesController($scope, $http, $routeParams, placesFactory, placesService) {
 
-    
+
 
     /* Generate calendar for booking */
     var currentTime = new Date();
@@ -21,5 +21,11 @@ function placesController($scope, $http, placesFactory, placesService) {
     $scope.minDateD = $scope.departure;
     $scope.maxDateD = (new Date(currentTime.getTime() + ( 1000 * 60 * 60 *24 * days ))).toISOString();
 
+
+    $scope.currentHost = $routeParams.id;
+    placesService.getOne($scope.currentHost).then(function(e) {
+        console.log(e.data);
+        $scope.host = e.data;
+    });
 
 }

@@ -4,7 +4,7 @@ function routes($routeProvider) {
             templateUrl: 'views/main.html',
             controller: 'mainController'
         })
-        .when('/place', {
+        .when('/place/:id', {
             templateUrl: 'views/place-page.html',
             controller: 'placesController'
         })
