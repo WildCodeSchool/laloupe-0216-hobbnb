@@ -24,7 +24,7 @@ function placesController($scope, $http, $routeParams, placesFactory, placesServ
 
     $scope.currentHost = $routeParams.id;
     placesService.getOne($scope.currentHost).then(function(e) {
-        console.log(e.data);
+        console.dir(e.data);
         $scope.host = e.data;
     });
 
