@@ -22,6 +22,12 @@ p {
 footer {
 	background-color: #64737C;
 }
+.buttonR {
+	 float: right;
+}
+.buttonL {
+	 float: left;
+}
 .bg-fullwidth {
     width:100%;
     height:45vh;
@@ -37,10 +43,6 @@ footer {
 .brand-logo {
 	margin-top: 7px;
 	margin-left: 7px;
-}
-.slider {
-	position: absolute;
-	z-index: 1;
 }
 .logo {
 	position: relative;
