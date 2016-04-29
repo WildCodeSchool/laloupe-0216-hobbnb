@@ -49,20 +49,6 @@ app.post('/upload', function(req, res) {
         // Location where we want to copy the uploaded file //
         var new_location = 'uploads/';
 
-        var options = {
-            width: 120,
-            height: 80,
-            srcPath: file_name,
-            dstPath: temp_path
-        };
-
-        im.resize(options, function(err) {
-            if (err) {
-                throw err;
-            }
-            res.end("Image resize complete");
-        });
-
         fs.copy(temp_path, new_location + file_name, function(err) {
             if (err) {
                 console.error(err);
