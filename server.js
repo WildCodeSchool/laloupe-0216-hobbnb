@@ -26,6 +26,7 @@ app.use(bodyParser.json({
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
 // Use quickthumb ==================================================================
 app.use(qt.static(__dirname + '/'));
+
 app.post('/upload', function(req, res) {
 
     var form = new formidable.IncomingForm();
@@ -41,6 +42,11 @@ app.post('/upload', function(req, res) {
         }));
     });
 
+    form.on('progress', function(bytesReceived, bytesExpected) {
+        var percent_complete = (bytesReceived / bytesExpected) * 100;
+        console.log('Progress so far: '+ percent_complete.toFixed(2) +" %");
+    });
+
     form.on('end', function(fields, files) {
         // Temporary location of our uploaded file //
         var temp_path = this.openedFiles[0].path;
@@ -54,6 +60,15 @@ app.post('/upload', function(req, res) {
                 console.error(err);
             } else {
                 console.log("success!");
+                // Delete the "temp" file
+                fs.unlink(temp_path, function(err) {
+                    if (err) {
+                        console.error(err);
+                        console.log("TROUBLE deleted temp !");
+                    } else {
+                        console.log("success deleted temp !");
+                    }
+                });
             }
         });
     });
