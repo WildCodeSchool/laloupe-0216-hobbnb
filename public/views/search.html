@@ -1,75 +1,138 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" type="image/png" href="" />
-    <title>HOBBNB</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/style.css">
-    <!-- jquery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <style type="text/css">
-      #map { height: 400px; }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-    </style>
-
-  </head>
-  <body>
-    <div id="floating-panel">
-      <input id="address" type="textbox" value="La Loupe">
-      <input id="submit" type="button" value="Geocode">
+<div class="row" id="myMap">
+  <div class="grid-example col s12 m6">
+    <div class="row">
+      <div class="input-field col s6">
+        <a class="waves-effect waves-light btn" ng-click="spotOrHome(false)" Id="btnSpot">
+        <img src="../assets/search/locateSpot.png" alt="" />
+        <span class="grey-text text-darken-2">Spots</span></a>
+      </div>
+      <div class="input-field col s6" >
+        <a class="waves-effect waves-light btn" ng-click="spotOrHome(true)" Id="btnHome">
+        <img src="../assets/search/locateHost.png" alt="" />
+        <span class="grey-text text-darken-2">Hebergement</span> </a>
+      </div>
     </div>
-    <div id="map"></div>
-    <script type="text/javascript">
+    <form class="row">
+      <div class="input-field col s12 m9">
+        <select>
+          <option value="" disabled selected ng-model="formHobby" ng-change="changeHobby()">Choisir le hobby</option>
+          <option value="1">Surf</option>
+          <option value="2">Kitesurf</option>
+          <option value="3">Ski</option>
+          <option value="4">Kayak</option>
+          <option value="5">Vélo</option>
+          <option value="6">Equitation</option>
+          <option value="7">Pêche</option>
+          <option value="8">Parrapente</option>
+          <option value="9">Randonnée</option>
+        </select>
+        <label>Hobby</label>
+      </div>
+      <div class="input-field col s12 m3">
+        <select>
+          <option value="" disabled selected>Popularité</option>
+          <option value="1">+ de 100</option>
+          <option value="2">50 à 100</option>
+          <option value="3">10 à 50</option>
+          <option value="4">- de 10</option>
+          <option value="5">aucun</option>
+        </select>
+        <label>Popularité</label>
+      </div>
+      <div class="input-field col s12">
+        <i class="material-icons prefix">search</i>
+        <input placeholder="Lieu" id="city" type="text" class="validate" ng-model="formPlace" ng-change="changePlace()">
+        <label>Lieu</label>
+      </div>
+      <div class="input-field col s6 m3">
+        <select>
+          <option value="" disabled selected>Quality</option>
+          <option value="5">5 étoiles</option>
+          <option value="4">4 étoiles</option>
+          <option value="3">3 étoiles</option>
+          <option value="2">2 étoiles</option>
+          <option value="1">1 étoiles</option>
+          <option value="0">aucun</option>
+        </select>
+        <label>Quality</label>
+      </div>
+      <div class="input-field col s6 m3">
+        <select>
+          <option value="" disabled selected>Beauty</option>
+          <option value="5">5 étoiles</option>
+          <option value="4">4 étoiles</option>
+          <option value="3">3 étoiles</option>
+          <option value="2">2 étoiles</option>
+          <option value="1">1 étoiles</option>
+          <option value="0">aucun</option>
+        </select>
+        <label>Beauty</label>
+      </div>
+      <div class="input-field col s6 m3">
+        <select>
+          <option value="" disabled selected>Facility</option>
+          <option value="5">5 étoiles</option>
+          <option value="4">4 étoiles</option>
+          <option value="3">3 étoiles</option>
+          <option value="2">2 étoiles</option>
+          <option value="1">1 étoiles</option>
+          <option value="0">aucun</option>
+        </select>
+        <label>Facility</label>
+      </div>
+      <div class="input-field col s6 m3">
+        <select>
+          <option value="" disabled selected>Over all rating</option>
+          <option value="5">5 étoiles</option>
+          <option value="4">4 étoiles</option>
+          <option value="3">3 étoiles</option>
+          <option value="2">2 étoiles</option>
+          <option value="1">1 étoiles</option>
+          <option value="0">aucun</option>
+        </select>
+        <label>Over all rating</label>
+      </div>
+    </form>
+  </div>
 
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 48, lng: 0},
-          zoom: 7
-        });
-        var geocoder = new google.maps.Geocoder();
 
-        document.getElementById('submit').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
-        });
-      }
+<!-- Panneau de droite = carte -->
+  <div class="grid-example col s12 m6">
+    <ng-map default-style="false" center={{centerMap}} zoom="8" id="myMap">
+        <marker ng-repeat="p in positions"
+            position="[{{p.latitude}},{{p.longitude}}]"
+            title={{p.shortDescription}}
+            icon="{
+            url:'../assets/search/tileHome.png',
+            scaledSize:[42,45],
+            origin: [0,0],
+            anchor: [21,45]
+            }"
+            on-click="map.showInfoWindow(event, 'popup')"
+            shortDescription="{{p.shortDescription}}"
+            clickable="true"></marker>
+        <info-window id="popup" max-width="200">
+          <div class="card hoverable" ng-non-bindable="">
+            <div class="card-image">
+              <img class="placepict" src="../assets/widget/chalet.jpg">
+              <span class="card-title">57€</span>
+            </div>
+            <div class="card-content">
+              <p>
+                <div>{{this}}</div>
+                <div>
+                  <i class="tiny material-icons yellow-text text-darken-2">star star star star star</i>
+                  <sup>({{$index}})</sup>
+                </div>
+              </p>
+            </div>
+          </div>
+        </info-window>
+    </ng-map>
+  </div>
 
-      function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === google.maps.GeocoderStatus.OK) {
-            resultsMap.setCenter(results[0].geometry.location);
-            var image ='../assets/search/tileWalking.png';
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location,
-              icon: image
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
-    </script>
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAamy-iuBFyQu-qNuihVdTQDCPyaqzrUac&callback=initMap">
-    </script>
-
-  </body>
-</html>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
