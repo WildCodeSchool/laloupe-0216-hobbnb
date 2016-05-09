@@ -1,7 +1,7 @@
 // MODEL PLACES
 var mongoose = require('mongoose');
 
-var hobbiesListing = ['Surfing', 'KiteBoarding', 'Skiing', 'Kayak', 'Biking', 'Horse riding', 'Fishing', 'Flying', 'Hiking', 'Basketball', 'Bodybuilding', 'jiu-jitsu', 'Camping', 'Hunting', 'Jogging', 'Mountain biking', 'Paintball', 'Swimming', 'Walking'];
+var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
 var placesSchema = new mongoose.Schema({
     isActive: Boolean,
     owner: String,
@@ -44,21 +44,21 @@ var placesSchema = new mongoose.Schema({
         complement: String
     },
     rating: {
-        cleanness: {
+        cleanness: [{
             type: Number,
             max: 5,
             min: 0
-        },
-        location: {
+        }],
+        location: [{
             type: Number,
             max: 5,
             min: 0
-        },
-        valueForMoney: {
+        }],
+        valueForMoney: [{
             type: Number,
             max: 5,
             min: 0
-        }
+        }]
     },
     home: {
         price: Number,

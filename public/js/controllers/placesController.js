@@ -23,9 +23,15 @@ function placesController($scope, $http, $routeParams, placesFactory, placesServ
 
 
     $scope.currentHost = $routeParams.id;
+    $scope.howManyPositive = function(t) {
+        return !!t ? (~~(t.reduce(function(a,b){return a+b;}) / t.length) || 0) : 0;
+    }
     placesService.getOne($scope.currentHost).then(function(e) {
         console.dir(e.data);
         $scope.host = e.data;
+        $scope.globalRating = $scope.howManyPositive($scope.host.rating.cleaness.concat($scope.host.rating.location, $scope.host.rating.valueForMoney));
+        $scope.globalLowerRating = 5 - $scope.globalRating;
+        $scope.numReviews = ~~(($scope.host.rating.cleaness.length + $scope.host.rating.location.length + $scope.host.rating.valueForMoney.length) / 3);
     });
 
 }

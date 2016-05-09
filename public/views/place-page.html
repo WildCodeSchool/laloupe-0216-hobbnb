@@ -23,8 +23,8 @@
                     <h5>{{host.houseListing.state}}, {{host.houseListing.country}}</h5>
                     <div class='row'>
                         <div class="col s12">
-                            <i class="small material-icons yellow-text text-darken-2">star star star</i>
-                            <i class="small material-icons yellow-text text-lighten-2">star star</i>
+                            <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
+                            <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
                             <sup>(27)</sup>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                 <div class="col s12">
                     <h5>A propos</h5>
                     <p class='flow-text'>
-                        Aliqua aute anim culpa occaecat irure duis ut. Consequat cupidatat ex elit eiusmod ea ut culpa fugiat adipisicing nisi eu mollit occaecat occaecat dolore dolor. Pariatur ullamco aliqua magna minim enim esse labore reprehenderit laborum.
+                        {{host.shortDescription}}
                     </p>
                     <a href="#">Contacter l'hébergeur</a>
                     <div class="divider"></div>
@@ -200,30 +200,30 @@
                     </div>
                     <div class="divider"></div>
                     <div class="row">
+                        <br>
                         <div class="col s4">
-                            <div class="right-align">
-                                <b>11 Reviews</b><br/>
-                                <i class="small material-icons yellow-text text-darken-2">star star star</i>
-                                <i class="small material-icons yellow-text text-lighten-2">star star</i>
+                            <div class="center-align">
+                                <b>{{numReviews}} Reviews</b><br/>
+                                <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
+                                <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
                             </div>
                         </div>
                         <div class="col s8">
-                            <p class="center-align">More than 95% of hobbynauts recommend this place</p>
                             <div class="row">
                                 <div class="col s4 center">
                                     Cleaness<br/>
-                                    <i class="tiny material-icons yellow-text text-darken-2">star star star</i>
-                                    <i class="tiny material-icons yellow-text text-lighten-2">star star</i>
+                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.cleaness)'>star</i>
+                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.cleaness))'>star</i>
                                 </div>
                                 <div class="col s4 center">
                                     Location<br/>
-                                    <i class="tiny material-icons yellow-text text-darken-2">star star star star</i>
-                                    <i class="tiny material-icons yellow-text text-lighten-2">star</i>
+                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.location)'>star</i>
+                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.location))'>star</i>
                                 </div>
                                 <div class="col s4 center">
                                     Value for money<br/>
-                                    <i class="tiny material-icons yellow-text text-darken-2">star star</i>
-                                    <i class="tiny material-icons yellow-text text-lighten-2">star star star</i>
+                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.valueForMoney)'>star</i>
+                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.valueForMoney))'>star</i>
                                 </div>
                             </div>
                         </div>
@@ -320,7 +320,17 @@
                     <div class="row">
                         <div class="col s10 offset-s1">
                             <b>Location</b>
-                            <br>#GMAPS
+                            <br>
+                              <ng-map default-style="true" center="{{host.address.city}}" zoom="8">
+                                  <marker
+                                      position="[{{host.latitude}},{{host.longitude}}]"
+                                      icon="{
+                                      url:'../assets/search/tileHome.png',
+                                      scaledSize:[42,45],
+                                      origin: [0,0],
+                                      anchor: [21,45]
+                                      }"></marker>
+                              </ng-map>
                         </div>
                     </div>
                 </div>
