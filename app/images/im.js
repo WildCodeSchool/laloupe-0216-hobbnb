@@ -1,29 +1,20 @@
 module.exports = function(app) {
 	'use strict';
     var formidable = require('formidable'); // package for image resizing
-    var util = require('util'); // package for test and inspect
     var fs = require('fs-extra'); // package for image resizing
     var qt = require('quickthumb'); // package for image resizing
     var im = require('imagemagick'); // package for image resizing
     app.use(qt.static(__dirname + '/'));
-    app.post('/upload', function(req, res) {
+    app.post('/picture', function(req, res) {
         var form = new formidable.IncomingForm();
-
-          var wdth = 0, hgth = 0;
+        var wdth = 0, hgth = 0;
         form.parse(req, function(err, fields, files) {
             wdth = fields.width, hgth = fields.height;
             if (err) {
                 console.error(err);
             } else {
-            res.writeHead(200, {
-                'content-type': 'text/plain'
-            });
-          }
-            res.write('received upload:\n\n');
-            res.end(util.inspect({
-                fields: fields,
-                files: files
-            }));
+              res.sendStatus(200);
+            }
         });
 
         form.on('progress', function(bytesReceived, bytesExpected) {
@@ -59,9 +50,9 @@ module.exports = function(app) {
                                 quality: 1,
                                 gravity: "North"
                             }, function(err, stdout, stderr) {
-                              if(err) {
-                                console.log(err);
-                              }
+                                  if(err) {
+                                    console.log(err);
+                                  }
                             });
                         }
                     });
