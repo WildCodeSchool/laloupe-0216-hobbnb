@@ -62,6 +62,10 @@ var placesSchema = new mongoose.Schema({
     },
     home: {
         price: Number,
+        intro: {
+            travellers: Number,
+            rooms: Number
+        },
         houseSpace: {
             accommodates: Number,
             bathrooms: Number,

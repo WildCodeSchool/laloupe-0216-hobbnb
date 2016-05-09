@@ -13,7 +13,7 @@
                         <br/>
                         <b>Thomas</b>
                         <p>
-                            <span class="center-align grey-text lighten-5" style='font-size:12px;'>4.6 / 12 reviews<br/>Rookie</span>
+                            <span class="center-align grey-text lighten-5" style='font-size:12px;'>{{globalRating}}/5 | {{numReviews}} reviews<br/>Rookie</span>
                         </p>
                         <img src="assets/places/shaka.png" alt="Sh" class="responsive-img" style='max-width:20px;margin:8px;'/>
                     </div>
@@ -25,7 +25,7 @@
                         <div class="col s12">
                             <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
                             <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
-                            <sup>(27)</sup>
+                            <sup>({{numReviews}})</sup>
                         </div>
                     </div>
                     <div class="row center-align">
@@ -34,23 +34,23 @@
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">pool</i><br/>
-                            Hobby
+                            {{host.primarySports}}
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">home</i><br/>
-                            Entire house
+                            {{host.houseSpace.propertyType}}
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">person</i><br/>
-                            6 travellers
+                            {{host.intro.travellers}} travellers
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">donut_small</i><br/>
-                            3 rooms
+                            {{host.intro.rooms}} rooms
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">hotel</i><br/>
-                            4 beds
+                            {{host.houseSpace.beds}} beds
                         </div>
                     </div>
                 </div>
@@ -69,19 +69,19 @@
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>Accommodates : 6</li>
-                                <li>Bathrooms : 3</li>
-                                <li>Bedrooms : 3</li>
-                                <li>Beds : 4</li>
+                                <li>Accommodates : {{host.home.houseSpace.accommodates || 0}}</li>
+                                <li>Bathrooms : {{host.home.houseSpace.bathrooms || 0}}</li>
+                                <li>Bedrooms : {{host.home.houseSpace.bedrooms || 0}}</li>
+                                <li>Beds : {{host.home.houseSpace.beds || 0}}</li>
                             </ul>
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>Property type : Entire house</li>
-                                <li>Check In : 2:00PM</li>
-                                <li>Check Out : 11:00AM</li>
+                                <li>Property type : {{host.home.houseSpace.propertyType || "Entire house"}}</li>
+                                <li>Check In : {{host.home.houseSpace.checkIn || "09:00"}}</li>
+                                <li>Check Out : {{host.home.houseSpace.checkOut || "18:00"}}</li>
                                 <li>
-                                    <a href='#'>House rules</a>
+                                    <a href='#'>House rules{{host.home.houseSpace.houseRules || " "}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -113,15 +113,15 @@
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>Kitchen</li>
-                                <li>TV</li>
-                                <li>BBQ</li>
+                                <li>{{host.houseAmenities.kitchen ? "Kitchen" : ""}}</li>
+                                <li>{{host.houseAmenities.tv ? "TV" : ""}}</li>
+                                <li>{{host.houseAmenities.bbq ? "BBQ" : ""}}</li>
                             </ul>
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>WIFI</li>
-                                <li>Essentials</li>
+                                <li>{{host.houseAmenities.wifi ? "Wifi" : ""}}</li>
+                                <li>{{host.houseAmenities.essentials ? "Essentials" : ""}}</li>
                                 <li>
                                     <a href="#">More</a>
                                 </li>
@@ -136,26 +136,26 @@
                         <div class="col m8 l5">
                             <ul>
                                 <li>Extra baby bed:
-                                    <b>14€ / night</b>
+                                    <b>{{host.houseExtras.extraBabyBed}}</b>
                                 </li>
                                 <li>Cleaning Fee:
-                                    <b>120€</b>
+                                    <b>{{host.houseExtras.cleaningFee}}</b>
                                 </li>
                                 <li>Security Deposit:
-                                    <b>185€</b>
+                                    <b>{{host.houseExtras.securityDeposit}}</b>
                                 </li>
                             </ul>
                         </div>
                         <div class="col m8 l5">
                             <ul>
                                 <li>Weekly discount:
-                                    <b>0%</b>
+                                    <b>{{host.houseExtras.weeklyDiscount}}%</b>
                                 </li>
                                 <li>Monthly discount:
-                                    <b>50%</b>
+                                    <b>{{host.houseExtras.monthlyDiscount}}%</b>
                                 </li>
                                 <li>Cancellation:
-                                    <a href='#'>Strict</a>
+                                    <a href='#'>{{host.houseExtras.cancellation}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -167,8 +167,7 @@
                         </div>
                         <div class="col m8 l10">
                             <b class='center'>The space</b><br/>
-                            <p>Veniam duis id eu minim exercitation Lorem id amet cupidatat occaecat. Labore eiusmod fugiat qui eiusmod pariatur laboris enim nisi enim aliqua. Pariatur dolor amet dolor ipsum reprehenderit officia mollit eu nisi velit quis irure quis ex officia.
-                                Ipsum anim veniam minim id qui laboris exercitation nostrud elit.</p>
+                            <p>{{host.houseSpaceDescription}}</p>
                             <a href="#">More</a>
                         </div>
                     </div>
@@ -178,7 +177,7 @@
                             Availibility
                         </div>
                         <div class="col m8 l10">
-                            <b>2 nights minimum stay</b>
+                            <b>{{host.houseAvailability || 1}} nights minimum stay</b>
                             <span class='right'>
                                 <a href="#">View Calendar</a>
                             </span>
