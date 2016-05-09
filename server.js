@@ -17,7 +17,7 @@ app.use(bodyParser.json({
     type: 'application/vnd.api+json'
 })); // parse application/vnd.api+json as json
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
-// Use mauriciothumb ==================================================================
+// picture thumb ==================================================================
 require('./app/images/im')(app);
 // Mongoose ====================================================================
 require('./config/database');
