@@ -7,8 +7,6 @@ var util = require('util'); // package for test and inspect
 var fs = require('fs-extra'); // package for image resizing
 var qt = require('quickthumb'); // package for image resizing
 var im = require('imagemagick'); // package for image resizing
-var easyimg = require('easyimage'); // package for image resizing
-var gm = require('gm');
 var port = process.env.PORT || 8000; // set the port
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
@@ -67,6 +65,16 @@ app.post('/upload', function(req, res) {
                         console.log("TROUBLE deleted temp !");
                     } else {
                         console.log("success deleted temp !");
+                        im.crop({
+                          srcPath: new_location + file_name,
+                          dstPath: new_location + "thumb_" + file_name,
+                          width: 200,
+                          height: 200,
+                          quality: 1,
+                          gravity: "North"
+                        }, function(err, stdout, stderr){
+                          // foo
+                        });
                     }
                 });
             }
