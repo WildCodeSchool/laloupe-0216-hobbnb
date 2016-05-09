@@ -46,15 +46,18 @@ var placesSchema = new mongoose.Schema({
     rating: {
         cleanness: {
             type: Number,
-            max: 5
+            max: 5,
+            min: 0
         },
         location: {
             type: Number,
-            max: 5
+            max: 5,
+            min: 0
         },
         valueForMoney: {
             type: Number,
-            max: 5
+            max: 5,
+            min: 0
         }
     },
     home: {
