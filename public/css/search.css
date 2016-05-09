@@ -1,0 +1,36 @@
+#myMap { height: 800px; }
+#floating-panel {
+  position: absolute;
+  top: 80px;
+  left: 75%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+.card-image{
+  height: 80px;
+  overflow: hidden;
+  vertical-align: middle;
+  z-index: 5;
+}
+.placepict{
+  width:120px;
+  transform: translateY(-10%);
+}
+.card-content div{
+  width:150px;
+}
+.card .card-image .card-title {
+  background-color: rgba(100,100,100,0.5);
+  padding:2px;
+}
+
+.btn img{
+  height: 32px;
+  vertical-align:middle;
+}

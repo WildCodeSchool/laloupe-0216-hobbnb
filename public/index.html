@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/material-icons.css">
         <link rel="stylesheet" href="css/materialize.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/search.css">
 
         <script src="js/libs/jquery.min.js"></script>
         <script src="js/libs/materialize.min.js"></script>
@@ -31,6 +32,13 @@
 
         <script src="js/routes.js"></script>
         <script src="js/app.js"></script>
+        <script>
+          angular.module('ngMap').run(function($rootScope, NgMap) {
+            NgMap.getMap().then(function(map) {
+              $rootScope.map = map;
+            });
+          });
+        </script>
     </head>
     <body>
         <ng-include src="'views/static/navbar.html'"></ng-include>
