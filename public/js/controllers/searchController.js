@@ -1,5 +1,4 @@
 function searchController($scope, $http, placesFactory, placesService) {
-debugger;
 placesService.get().then(function(res){
 	$scope.places = res.data;
 	/*
