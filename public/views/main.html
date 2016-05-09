@@ -104,13 +104,13 @@
 						<img src="../images/activities_copyright_free/zen.jpg" width="100%">
 					</div>
 				</div>
-				<div class="row">				
+				<div class="row">
 					<div class="col s6">
 						<img src="../images/activities_with_copyright/800x600_bike-park-1980.jpg" width="100%">
-					</div>				
+					</div>
 					<div class="col s6">
 						<img src="../images/activities_with_copyright/985.jpg" width="100%">
-					</div>				
+					</div>
 				</div>
 				<div class="row">
 					<div class="col s4">
@@ -126,38 +126,115 @@
 </div>
 
 <div class="news">
-	<div class="container">
-		<div class="row">
-			<div class="col s3 offset-s2">
-				<a href="#/">Quoi de neuf
-			</div>
-			<div class="col s3">
-				<a href="#/">Les mieux notés
-			</div>
-			<div class="col s3">
-				<a href="#/">Les plus populaires
+	<div id="tabs" class="row" ng-init="showTabs = true" ng-hide="true">
+		<a class="btn cyan lighten-3" ng-click="showTabs = !showTabs">Cacher la recherche</a>
+	</div>
+	<div class="row" ng-if="showTabs">
+		<div class="col s12">
+				<ul class="tabs" tabs>
+						<li class="tab col s3 offset-s2"><a class="active" href="#neuf" style="color: #7F7F7F; text-decoration:none;">Quoi de neuf</a></li>
+						<li class="tab col s3"><a href="#note" style="color: #7F7F7F; text-decoration:none;">Les mieux notés</a></li>
+						<li class="tab col s3"><a href="#populaire" style="color: #7F7F7F; text-decoration:none;">Les plus populaires</a></li>
+				</ul>
+		</div>
+		<div id="neuf">
+			<div class="row" ng-if="showTabs">
+			  <div class="col s12">
+			      <ul class="tabs" tabs>
+			          <li class="tab col s3 offset-s1"><a href="#spotNeuf" style="color: #7F7F7F;">Spot</a></li>
+			          <li class="tab col s3"><a class="active" href="#logNeuf" style="color: #7F7F7F;">Logement</a></li>
+			      </ul>
+			  </div>
+			  <div id="spotNeuf" class="col s12">
+			    <div class="col s4">
+			      <img src="../images/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/activities_copyright_free/alpinisme.jpg" style="height:245px">
+			    </div>
+			  </div>
+			  <div id="logNeuf">
+			    <div class="col s4">
+			      <img src="../images/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px">
+			    </div>
+			  </div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col s3 offset-s3">
-				<form action="#">
-					<p>
-						<input class="with-gap" type="radio" />
-						<label>Red</label>
-					</p>
-	      		</form>
+		<div id="note">
+			<div class="row" ng-if="showTabs">
+			  <div class="col s12">
+			      <ul class="tabs" tabs>
+			          <li class="tab col s3 offset-s1"><a href="#spotNote" style="color: #7F7F7F;">Spot</a></li>
+			          <li class="tab col s3"><a class="active" href="#logNote" style="color: #7F7F7F;">Logement</a></li>
+			      </ul>
+			  </div>
+			  <div id="spotNote" class="col s12">
+			    <div class="col s4">
+			      <img src="../images/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/activities_copyright_free/alpinisme.jpg" style="height:245px">
+			    </div>
+			  </div>
+			  <div id="logNote">
+			    <div class="col s4">
+			      <img src="../images/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px">
+			    </div>
+			  </div>
 			</div>
-			<div class="col s3">
-				<form action="#">
-					<p>
-				      	<input class="with-gap" type="radio" />
-				      	<label>Green</label>
-				    </p>
-	      		</form>
-	      	</div>
-	    </div>
-	</div>
-	<div id="gallerynew"></div>
+		</div>
+		<div id="populaire">
+			<div class="row" ng-if="showTabs">
+			  <div class="col s12">
+			      <ul class="tabs" tabs>
+			          <li class="tab col s3 offset-s1"><a href="#spotPop" style="color: #7F7F7F;">Spot</a></li>
+			          <li class="tab col s3"><a class="active" href="#logPop" style="color: #7F7F7F;">Logement</a></li>
+			      </ul>
+			  </div>
+			  <div id="spotPop" class="col s12">
+			    <div class="col s4">
+			      <img src="../images/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/activities_copyright_free/alpinisme.jpg" style="height:245px">
+			    </div>
+			  </div>
+			  <div id="logPop">
+			    <div class="col s4">
+			      <img src="../images/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px">
+			    </div>
+			    <div class="col s4">
+			      <img src="../images/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px">
+			    </div>
+			  </div>
+			</div>
+		</div>
+</div>
+
 </div>
 
 <h2>Louer par hobby change la donne</h2>
@@ -229,61 +306,3 @@
 		$('.slider').slider({indicators: false});
 	});
 </script>
-
-<footer>
-	<div class="container">
-		<div class="row">
-			<div class="col s3">
-				<h3><B>Language setting</B></h3>
-				<div class="divider"></div>
-					<select class="browser-default">
-						<option value="english">English</option>
-						<option value="français" selected>Français</option>
-						<option value="deutsch">Deutsch</option>
-						<option value="espagnol">Espagnol</option>
-					</select><br>
-					<select class="browser-default">
-						<option value="€ EUR">€ EUR</option>
-						<option value="$ USD">$ USD</option>
-						<option value="£ GBP">£ GBP</option>
-					</select>
-			</div>
-			<div class="col s3 offset-s1">
-				<h3><B>Découvrez</B></h3>
-				<div class="divider"></div>
-				<a href="#"><font color="white">Comment ça marche</font></a><br>
-				<a href="#"><font color="white">Connections sociales</font></a><br>
-				<a href="#"><font color="white">Pourquoi héberger ?</font></a><br>
-				<a href="#"><font color="white">Politique d'annulation de réservation</font></a>
-			</div>
-			<div class="col s3 offset-s1">
-				<h3><B>Compagnie</B></h3>
-				<div class="divider"></div>
-				<a href="#"><font color="white">Nous contacter</font></a><br>
-				<a href="http://demohobbnb.businesscatalyst.com/faq.html"><font color="white">FAQ</font></a><br>
-				<a href="#"><font color="white">Termes & vie privée</font></a><br>
-				<a href="#"><font color="white">À propos</font></a><br>
-				<a href="#"><font color="white">Presse</font></a>
-			</div>
-		</div>
-		<div class="divider"></div>
-		<h3>Rejoignez nous sur</h3>
-		<div class="row">
-			<div class="col s4 offset-s4">
-				<div class="pcenter">
-					<img src="#" href="#"></img>
-					<img src="#" href="#"></img>
-					<img src="#" href="#"></img>
-					<img src="#" href="#"></img>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s4 offset-s4">
-				<div class="pcenter">
-					<p style="color:white;">L'aventure commence à hobbnb | 2016</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>

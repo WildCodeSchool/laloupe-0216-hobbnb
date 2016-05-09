@@ -22,6 +22,9 @@ p {
 footer {
 	background-color: #64737C;
 }
+.tabs .indicator {
+	background-color: #7F7F7F;
+}
 .news {
 	font-size: 21px;
 	text-decoration: none;
