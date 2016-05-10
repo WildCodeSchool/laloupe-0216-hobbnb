@@ -13,7 +13,7 @@ module.exports = function(app) {
             if (err) {
                 console.error(err);
             } else {
-              res.sendStatus(200);
+              res.send('<script>window.location = \'/#/picture\';</script>'); /* on a jamais fait CA ! */
             }
         });
 
@@ -52,5 +52,6 @@ module.exports = function(app) {
                 }
             });
         });
+
     });
 };
