@@ -14,7 +14,7 @@ function routes($routeProvider) {
         })
         .when('/picture', {
             templateUrl: 'views/picture.html',
-            controller: 'mainController',
+            controller: 'fileUploadController',
         })
         .otherwise({
             redirectTo: '/'

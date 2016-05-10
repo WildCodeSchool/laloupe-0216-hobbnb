@@ -5,11 +5,11 @@
         <title>Picture Upload</title>
     </head>
     <body>
-        <h1>Picture Upload Test</h1>
+        <h1>Picture Upload</h1>
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-2">
-                    <form action="/picture" enctype="multipart/form-data" method="post">
+                  <form action="/picture" enctype="multipart/form-data" method="post">
                       <fieldset>
                         <div class="input-field">
                             Add a title:
@@ -19,15 +19,17 @@
                             height:
                             <input name="height" type="text"/>
                         </div>
-                        <div class="input-field">
+                        <!-- <div class="input-field">
                             <input multiple="multiple" name="upload" type="file"/>
-                        </div><br>
+                        </div><br> -->
+                        <div class="input-field">
+                          <input multiple="multiple" name="upload" type="file" data-file="param.file"/>
+                        </div>
                         <div class="input-field">
                             <input type="submit" value="Upload" class="btn btn-info"/>
                         </div>
                      </fieldset>
                     </form>
-                    <div class="">progress-bar-success</div>
                 </div>
             </div>
         </div>
