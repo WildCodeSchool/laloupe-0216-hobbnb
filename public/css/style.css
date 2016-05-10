@@ -84,3 +84,7 @@ footer {
 .wrapped-input {
 	border-radius: 60px;
 }
+.searchbar {
+	background-color: rgba(0,0,0,0.5);
+	margin-top: 82px;
+}
