@@ -8,6 +8,7 @@ module.exports = function(app) {
     app.post('/picture', function(req, res) {
         var form = new formidable.IncomingForm();
         var wdth = 0, hgth = 0;
+				
         form.parse(req, function(err, fields, files) {
             wdth = fields.width, hgth = fields.height;
             if (err) {
