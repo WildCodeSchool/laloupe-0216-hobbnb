@@ -17,17 +17,17 @@
               <div class="row">
                 <div class="input-field col s12 m6">
                   <i class="material-icons prefix">search</i>
-                  <input placeholder="Lieu" id="city" type="text" class="validate" ng-model="formPlace" ng-change="changePlace()">
+                  <input placeholder="Lieu" id="city" type="text" class="validate" ng-model="filters.place" ng-change="changePlace()">
                   <label>Lieu</label>
                 </div>
                 <div class="input-field col s12 m3">
-                    <select class='' material-select watch ng-model="formHobby"  ng-change="changeHobby()">
+                    <select class='' material-select watch ng-model="filters.hobby"  ng-change="changeHobby()">
                         <option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
                     </select>
                     <label>Hobby</label>
                 </div>
                 <div class="input-field col s12 m3">
-                    <select>
+                    <select ng-model="filters.popularity">
                         <option value="" disabled selected>Popularité</option>
                         <option value="1">+ de 100</option>
                         <option value="2">50 à 100</option>
@@ -41,7 +41,7 @@
               <!-- Formulaire pour spot -->
               <div class="row" ng-hide="selectHome">
                   <div class="input-field col s6 m3">
-                      <select>
+                      <select ng-model="filters.quality">
                           <option value="" disabled selected>Quality</option>
                           <option value="5">5 étoiles</option>
                           <option value="4">4 étoiles</option>
@@ -53,7 +53,7 @@
                       <label>Quality</label>
                   </div>
                   <div class="input-field col s6 m3">
-                      <select>
+                      <select ng-model="filters.beauty">
                           <option value="" disabled selected>Beauty</option>
                           <option value="5">5 étoiles</option>
                           <option value="4">4 étoiles</option>
@@ -65,7 +65,7 @@
                       <label>Beauty</label>
                   </div>
                   <div class="input-field col s6 m3">
-                      <select>
+                      <select ng-model="filters.facility">
                           <option value="" disabled selected>Facility</option>
                           <option value="5">5 étoiles</option>
                           <option value="4">4 étoiles</option>
@@ -77,7 +77,7 @@
                       <label>Facility</label>
                   </div>
                   <div class="input-field col s6 m3">
-                      <select>
+                      <select ng-model="filters.overallRating">
                           <option value="" disabled selected>Over all rating</option>
                           <option value="5">5 étoiles</option>
                           <option value="4">4 étoiles</option>
@@ -92,7 +92,7 @@
                 <!-- Formulaire pour home -->
               <div class="row" ng-show="selectHome">
                   <div class="input-field col s6 m3">
-                      <select>
+                      <select ng-model="filters.typeOfPlace">
                           <option value="" disabled selected>Hebergement</option>
                           <option value="1">Maison</option>
                           <option value="2">Appartement</option>
@@ -108,7 +108,7 @@
                       <label>Hebergement</label>
                   </div>
                   <div class="input-field col s6 m3">
-                      <select>
+                      <select ng-model="filters.numPeople">
                           <option value="1" selected>1 personne</option>
                           <option value="2">2 personnes</option>
                           <option value="3">3 personnes</option>
@@ -120,12 +120,12 @@
                   </div>
                   <div class="input-field col s6 m3">
                       <img src="../assets/search/icoPrivate.png" class="prefix" alt="" />
-                      <input type="checkbox" ng-model="chkPrivate" id="chkPrivate"/>
+                      <input type="checkbox" ng-model="filters.privatePlace" id="chkPrivate"/>
                       <label for="chkPrivate">Privée</label>
                   </div>
                   <div class="input-field col s6 m3">
                       <img src="../assets/search/icoShared.png" class="prefix" alt="" />
-                      <input type="checkbox" ng-model="chkShared" id="chkShared"/>
+                      <input type="checkbox" ng-model="filters.sharedPlace" id="chkShared"/>
                       <label for="chkShared">Partagé</label>
                   </div>
               </div>
@@ -136,7 +136,7 @@
                         type="text"
                         name="created"
                         id="inputBegin"
-                        ng-model="currentTime"
+                        ng-model="filters.arrivalDate"
                         container="body"
                         format="dd/mm/yyyy"
                         months-full="{{ month }}"
@@ -164,7 +164,7 @@
                         type="text"
                         name="created"
                         id="inputEnd"
-                        ng-model="currentTime"
+                        ng-model="filters.departureDate"
                         container="body"
                         format="dd/mm/yyyy"
                         months-full="{{ month }}"
@@ -187,12 +187,31 @@
                         on-stop="onStop()" />
                   </div>
                   <div class="input-field col s12 m6">
-                    <div range-slider min="demo2.range.min" max="demo2.range.max" model-min="demo2.minPrice" model-max="demo2.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
+                    <div range-slider min="demo2.range.min" max="demo2.range.max" model-min="filters.minPrice" model-max="filters.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
+                  </div>
+                  <div class="input-field col s6">
+                      <a class="waves-effect waves-light btn green accent-2" ng-click="moreFiltrer()" >
+                          <span class="grey-text text-darken-2">Plus d'options</span></a>
+                  </div>
+                  <div ng-show="developOptions">
+                    <div class="input-field col s6 m3">
+                        <input type="checkbox" ng-model="filters.hasKitchen" id="chkKitchen"/>
+                        <label for="chkKitchen">Cuisine</label>
+                    </div>
+                    <div class="input-field col s6 m3">
+                        <input type="checkbox" ng-model="filters.hasTV" id="chkTV"/>
+                        <label for="chkTV">TV</label>
+                    </div>
+                    <div class="input-field col s6 m3">
+                        <input type="checkbox" ng-model="filters.hasWifi" id="chkWifi"/>
+                        <label for="chkWifi">WiFi</label>
+                    </div>
+
                   </div>
               </div>
             </form>
             <div id="widgets">
-              <div class="col s12 m6" ng-repeat="p in positions">
+              <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter">
                   <div class="card hoverable">
                     <div class="card-image">
                       <img class="placepict" src="{{p.picture}}">
@@ -223,7 +242,7 @@
         <!-- Panneau de droite = carte -->
         <div class="grid-example col s12 m6">
             <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap">
-                <marker ng-repeat="p in positions" position="[{{p.latitude}},{{p.longitude}}]" title={{p.shortDescription}} icon="{
+                <marker ng-repeat="p in positions | filter : definitiveFilter" position="[{{p.latitude}},{{p.longitude}}]" title={{p.shortDescription}} icon="{
               url:'{{tile}}',
               scaledSize:[42,45],
               origin: [0,0],
