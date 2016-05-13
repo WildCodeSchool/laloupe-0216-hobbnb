@@ -5,11 +5,7 @@ angular.module('app').controller('searchController', function($scope, $http, pla
         minPrice: 0,
         maxPrice: 1000
     };
-    $scope.definitiveFilter = {
-        shortDescription: function(toto) {
-					return !toto;
-				}
-    };
+    $scope.definitiveFilter = {};
     $scope.$watchCollection('filters', function(newCol, oldCol) {
         if (!!newCol.hobby) {
             if (newCol.hobby == 'Peu importe') {
@@ -20,26 +16,21 @@ angular.module('app').controller('searchController', function($scope, $http, pla
             }
         }
         if (!!newCol.place) {
-            if (newCol.place == '') {
-                if (!!$scope.definitiveFilter.latitude) delete $scope.definitiveFilter.latitude;
-                if (!!$scope.definitiveFilter.longitude) delete $scope.definitiveFilter.longitude;
-            } else {
-                $scope.latitude = 48;
-                $scope.latitudemin = $scope.latitude - 0.5;
-                $scope.latitudemax = $scope.latitude + 0.5;
-                $scope.kmbydegree = (111 * Math.cos($scope.latitude));
-                $scope.longitude = -3.362480;
-                $scope.longitudemin = $scope.longitude - 50 / $scope.kmbydegree;
-                $scope.longitudemax = $scope.longitude + 50 / $scope.kmbydegree;
-                $scope.definitiveFilter.latitude = function(val) {
-                    return (val > $scope.latitudemin && val < $scope.latitudemax);
-                };
-                $scope.definitiveFilter.longitude = function(val) {
-                    return (val > $scope.longitudemin && val < $scope.longitudemax);
-                };
-            }
+            $scope.latitude = 48;
+            $scope.longitude = -3.362480;
+            $scope.latitudemin = $scope.latitude - 0.5;
+            $scope.latitudemax = $scope.latitude + 0.5;
+            $scope.kmbydegree = (111 * Math.cos($scope.latitude));
+            $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
+            $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
+        } else {
+            if (!!$scope.longitudemin) delete $scope.longitudemin;
+            if (!!$scope.longitudemax) delete $scope.longitudemax;
+            if (!!$scope.latitudemin) delete $scope.latitudemin;
+            if (!!$scope.latitudemax) delete $scope.latitudemax;
         }
     });
+    /*
     placesService.get().then(function(res) {
         $scope.places = res.data;
         /*
@@ -51,7 +42,7 @@ angular.module('app').controller('searchController', function($scope, $http, pla
         rating = (rating.cleanness + rating.location + rating.valueForMoney) / 3
         um of avis => ~~((rating.cleanness.length + rating.location.length + rating.valueForMoney.length) / 3))
         */
-    });
+    //});
     $scope.changeHobby = function() {
             if ($scope.selectHome == false) {
                 $scope.tile = '../assets/search/tile' + $scope.formHobby + '.png';
@@ -166,7 +157,7 @@ angular.module('app').controller('searchController', function($scope, $http, pla
             cleaness: [3]
         },
         home: {
-            price: 52
+            price: 530
         },
         primarySports: "Kitesurf"
     }, ];

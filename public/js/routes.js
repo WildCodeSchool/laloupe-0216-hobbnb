@@ -27,6 +27,7 @@ function routes($routeProvider) {
                             'js/services/placesService.js',
                             'js/factories/placesFactory.js',
                             'js/filters/rangeFilter.js',
+                            'js/filters/betweenFilter.js',
                             'js/controllers/searchController.js'
                         ]
                     });

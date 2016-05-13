@@ -211,7 +211,7 @@
               </div>
             </form>
             <div id="widgets">
-              <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter">
+              <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice">
                   <div class="card hoverable">
                     <div class="card-image">
                       <img class="placepict" src="{{p.picture}}">
@@ -242,7 +242,7 @@
         <!-- Panneau de droite = carte -->
         <div class="grid-example col s12 m6">
             <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap">
-                <marker ng-repeat="p in positions | filter : definitiveFilter" position="[{{p.latitude}},{{p.longitude}}]" title={{p.shortDescription}} icon="{
+                <marker ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice" position="[{{p.latitude}},{{p.longitude}}]" title={{p.shortDescription}} icon="{
               url:'{{tile}}',
               scaledSize:[42,45],
               origin: [0,0],
