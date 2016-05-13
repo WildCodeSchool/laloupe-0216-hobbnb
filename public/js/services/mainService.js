@@ -1,4 +1,5 @@
-function mainService($http) {
+angular.module('app')
+    .service('mainService', function($http) {
     return {
         get : function() {
             return $http.get('/api');
@@ -13,4 +14,4 @@ function mainService($http) {
             return $http.delete('/api/' + id);
         }
     };
-}
+});

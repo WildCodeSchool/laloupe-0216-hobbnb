@@ -1,5 +1,5 @@
 // PLACES CONTROLLER
-function placesController($scope, $http, $routeParams, placesFactory, placesService) {
+angular.module('app', ['ngMap', 'ui-rangeSlider']).controller('placesController', function($scope, $http, $routeParams, placesFactory, placesService) {
 
 
 
@@ -34,4 +34,4 @@ function placesController($scope, $http, $routeParams, placesFactory, placesServ
         $scope.numReviews = ~~(($scope.host.rating.cleaness.length + $scope.host.rating.location.length + $scope.host.rating.valueForMoney.length) / 3);
     });
 
-}
+});

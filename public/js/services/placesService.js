@@ -1,4 +1,5 @@
-function placesService($http) {
+angular.module('app')
+    .service('placesService', function($http) {
     return {
         get: function() {
             return $http.get('/places');
@@ -16,4 +17,4 @@ function placesService($http) {
             return $http.delete('/places/' + id);
         }
     };
-}
+});

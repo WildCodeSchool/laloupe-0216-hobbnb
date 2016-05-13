@@ -1,4 +1,5 @@
-function fileUploadService($http) {
+angular.module('app')
+    .service('fileUploadService', function($http) {
     return {
         get : function() {
             return $http.get('/picture');
@@ -13,4 +14,4 @@ function fileUploadService($http) {
             return $http.delete('/picture/' + id);
         }
     };
-}
+});
