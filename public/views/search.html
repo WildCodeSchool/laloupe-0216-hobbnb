@@ -1,138 +1,266 @@
-<div class="row" id="myMap">
-  <div class="grid-example col s12 m6">
-    <div class="row">
-      <div class="input-field col s6">
-        <a class="waves-effect waves-light btn" ng-click="spotOrHome(false)" Id="btnSpot">
-        <img src="../assets/search/locateSpot.png" alt="" />
-        <span class="grey-text text-darken-2">Spots</span></a>
-      </div>
-      <div class="input-field col s6" >
-        <a class="waves-effect waves-light btn" ng-click="spotOrHome(true)" Id="btnHome">
-        <img src="../assets/search/locateHost.png" alt="" />
-        <span class="grey-text text-darken-2">Hebergement</span> </a>
-      </div>
-    </div>
-    <form class="row">
-      <div class="input-field col s12 m9">
-        <select>
-          <option value="" disabled selected ng-model="formHobby" ng-change="changeHobby()">Choisir le hobby</option>
-          <option value="1">Surf</option>
-          <option value="2">Kitesurf</option>
-          <option value="3">Ski</option>
-          <option value="4">Kayak</option>
-          <option value="5">Vélo</option>
-          <option value="6">Equitation</option>
-          <option value="7">Pêche</option>
-          <option value="8">Parrapente</option>
-          <option value="9">Randonnée</option>
-        </select>
-        <label>Hobby</label>
-      </div>
-      <div class="input-field col s12 m3">
-        <select>
-          <option value="" disabled selected>Popularité</option>
-          <option value="1">+ de 100</option>
-          <option value="2">50 à 100</option>
-          <option value="3">10 à 50</option>
-          <option value="4">- de 10</option>
-          <option value="5">aucun</option>
-        </select>
-        <label>Popularité</label>
-      </div>
-      <div class="input-field col s12">
-        <i class="material-icons prefix">search</i>
-        <input placeholder="Lieu" id="city" type="text" class="validate" ng-model="formPlace" ng-change="changePlace()">
-        <label>Lieu</label>
-      </div>
-      <div class="input-field col s6 m3">
-        <select>
-          <option value="" disabled selected>Quality</option>
-          <option value="5">5 étoiles</option>
-          <option value="4">4 étoiles</option>
-          <option value="3">3 étoiles</option>
-          <option value="2">2 étoiles</option>
-          <option value="1">1 étoiles</option>
-          <option value="0">aucun</option>
-        </select>
-        <label>Quality</label>
-      </div>
-      <div class="input-field col s6 m3">
-        <select>
-          <option value="" disabled selected>Beauty</option>
-          <option value="5">5 étoiles</option>
-          <option value="4">4 étoiles</option>
-          <option value="3">3 étoiles</option>
-          <option value="2">2 étoiles</option>
-          <option value="1">1 étoiles</option>
-          <option value="0">aucun</option>
-        </select>
-        <label>Beauty</label>
-      </div>
-      <div class="input-field col s6 m3">
-        <select>
-          <option value="" disabled selected>Facility</option>
-          <option value="5">5 étoiles</option>
-          <option value="4">4 étoiles</option>
-          <option value="3">3 étoiles</option>
-          <option value="2">2 étoiles</option>
-          <option value="1">1 étoiles</option>
-          <option value="0">aucun</option>
-        </select>
-        <label>Facility</label>
-      </div>
-      <div class="input-field col s6 m3">
-        <select>
-          <option value="" disabled selected>Over all rating</option>
-          <option value="5">5 étoiles</option>
-          <option value="4">4 étoiles</option>
-          <option value="3">3 étoiles</option>
-          <option value="2">2 étoiles</option>
-          <option value="1">1 étoiles</option>
-          <option value="0">aucun</option>
-        </select>
-        <label>Over all rating</label>
-      </div>
-    </form>
-  </div>
-
-
-<!-- Panneau de droite = carte -->
-  <div class="grid-example col s12 m6">
-    <ng-map default-style="false" center={{centerMap}} zoom="8" id="myMap">
-        <marker ng-repeat="p in positions"
-            position="[{{p.latitude}},{{p.longitude}}]"
-            title={{p.shortDescription}}
-            icon="{
-            url:'../assets/search/tileHome.png',
-            scaledSize:[42,45],
-            origin: [0,0],
-            anchor: [21,45]
-            }"
-            on-click="map.showInfoWindow(event, 'popup')"
-            shortDescription="{{p.shortDescription}}"
-            clickable="true"></marker>
-        <info-window id="popup" max-width="200">
-          <div class="card hoverable" ng-non-bindable="">
-            <div class="card-image">
-              <img class="placepict" src="../assets/widget/chalet.jpg">
-              <span class="card-title">57€</span>
-            </div>
-            <div class="card-content">
-              <p>
-                <div>{{this}}</div>
-                <div>
-                  <i class="tiny material-icons yellow-text text-darken-2">star star star star star</i>
-                  <sup>({{$index}})</sup>
+<div ng-controller="searchController">
+    <div class="row" id="myMap">
+        <div class="grid-example col s12 m6">
+            <div class="row">
+                <div class="input-field col s6">
+                    <a class="waves-effect waves-light btn" ng-click="spotOrHome(false)" Id="btnSpot">
+                        <img src="../assets/search/locateSpot.png" alt="" />
+                        <span class="grey-text text-darken-2">Spots</span></a>
                 </div>
-              </p>
+                <div class="input-field col s6">
+                    <a class="waves-effect waves-light btn" ng-click="spotOrHome(true)" Id="btnHome">
+                        <img src="../assets/search/locateHost.png" alt="" />
+                        <span class="grey-text text-darken-2">Hebergement</span> </a>
+                </div>
             </div>
-          </div>
-        </info-window>
-    </ng-map>
-  </div>
+            <form>
+              <div class="row">
+                <div class="input-field col s12 m6">
+                  <i class="material-icons prefix">search</i>
+                  <input placeholder="Lieu" id="city" type="text" class="validate" ng-model="formPlace" ng-change="changePlace()">
+                  <label>Lieu</label>
+                </div>
+                <div class="input-field col s12 m3">
+                    <select class='' material-select watch ng-model="formHobby"  ng-change="changeHobby()">
+                        <option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
+                    </select>
+                    <label>Hobby</label>
+                </div>
+                <div class="input-field col s12 m3">
+                    <select>
+                        <option value="" disabled selected>Popularité</option>
+                        <option value="1">+ de 100</option>
+                        <option value="2">50 à 100</option>
+                        <option value="3">10 à 50</option>
+                        <option value="4">- de 10</option>
+                        <option value="5">aucun</option>
+                    </select>
+                    <label>Popularité</label>
+                </div>
+              </div>
+              <!-- Formulaire pour spot -->
+              <div class="row" ng-hide="selectHome">
+                  <div class="input-field col s6 m3">
+                      <select>
+                          <option value="" disabled selected>Quality</option>
+                          <option value="5">5 étoiles</option>
+                          <option value="4">4 étoiles</option>
+                          <option value="3">3 étoiles</option>
+                          <option value="2">2 étoiles</option>
+                          <option value="1">1 étoiles</option>
+                          <option value="0">aucun</option>
+                      </select>
+                      <label>Quality</label>
+                  </div>
+                  <div class="input-field col s6 m3">
+                      <select>
+                          <option value="" disabled selected>Beauty</option>
+                          <option value="5">5 étoiles</option>
+                          <option value="4">4 étoiles</option>
+                          <option value="3">3 étoiles</option>
+                          <option value="2">2 étoiles</option>
+                          <option value="1">1 étoiles</option>
+                          <option value="0">aucun</option>
+                      </select>
+                      <label>Beauty</label>
+                  </div>
+                  <div class="input-field col s6 m3">
+                      <select>
+                          <option value="" disabled selected>Facility</option>
+                          <option value="5">5 étoiles</option>
+                          <option value="4">4 étoiles</option>
+                          <option value="3">3 étoiles</option>
+                          <option value="2">2 étoiles</option>
+                          <option value="1">1 étoiles</option>
+                          <option value="0">aucun</option>
+                      </select>
+                      <label>Facility</label>
+                  </div>
+                  <div class="input-field col s6 m3">
+                      <select>
+                          <option value="" disabled selected>Over all rating</option>
+                          <option value="5">5 étoiles</option>
+                          <option value="4">4 étoiles</option>
+                          <option value="3">3 étoiles</option>
+                          <option value="2">2 étoiles</option>
+                          <option value="1">1 étoiles</option>
+                          <option value="0">aucun</option>
+                      </select>
+                      <label>Over all rating</label>
+                  </div>
+              </div>
+                <!-- Formulaire pour home -->
+              <div class="row" ng-show="selectHome">
+                  <div class="input-field col s6 m3">
+                      <select>
+                          <option value="" disabled selected>Hebergement</option>
+                          <option value="1">Maison</option>
+                          <option value="2">Appartement</option>
+                          <option value="3">Chambre</option>
+                          <option value="4">Couchage</option>
+                          <option value="5">Place de camping</option>
+                          <option value="6">Cabane dans les arbres</option>
+                          <option value="7">Camping car</option>
+                          <option value="8">Tipy</option>
+                          <option value="9">Bateau</option>
+                          <option value="10">Yourte</option>
+                      </select>
+                      <label>Hebergement</label>
+                  </div>
+                  <div class="input-field col s6 m3">
+                      <select>
+                          <option value="1" selected>1 personne</option>
+                          <option value="2">2 personnes</option>
+                          <option value="3">3 personnes</option>
+                          <option value="4">4 personnes</option>
+                          <option value="5">5 personnes</option>
+                          <option value="6">6 personnes</option>
+                      </select>
+                      <label>Invités</label>
+                  </div>
+                  <div class="input-field col s6 m3">
+                      <img src="../assets/search/icoPrivate.png" class="prefix" alt="" />
+                      <input type="checkbox" ng-model="chkPrivate" id="chkPrivate"/>
+                      <label for="chkPrivate">Privée</label>
+                  </div>
+                  <div class="input-field col s6 m3">
+                      <img src="../assets/search/icoShared.png" class="prefix" alt="" />
+                      <input type="checkbox" ng-model="chkShared" id="chkShared"/>
+                      <label for="chkShared">Partagé</label>
+                  </div>
+              </div>
+              <div class="row" ng-show="selectHome">
+                  <div class="input-field col s6 m3">
+                    <label for="inputBegin">Arrivée</label>
+                    <input input-date
+                        type="text"
+                        name="created"
+                        id="inputBegin"
+                        ng-model="currentTime"
+                        container="body"
+                        format="dd/mm/yyyy"
+                        months-full="{{ month }}"
+                        months-short="{{ monthShort }}"
+                        weekdays-full="{{ weekdaysFull }}"
+                        weekdays-short="{{ weekdaysShort }}"
+                        weekdays-letter="{{ weekdaysLetter }}"
+                        disable="disable"
+                        min="{{ minDate }}"
+                        max="{{ maxDate }}"
+                        today="today"
+                        clear="clear"
+                        close="close"
+                        select-years="15"
+                        on-start="onStart()"
+                        on-render="onRender()"
+                        on-open="onOpen()"
+                        on-close="onClose()"
+                        on-set="onSet()"
+                        on-stop="onStop()" />
+                  </div>
+                  <div class="input-field col s6 m3">
+                    <label for="inputEnd">Départ</label>
+                    <input input-date
+                        type="text"
+                        name="created"
+                        id="inputEnd"
+                        ng-model="currentTime"
+                        container="body"
+                        format="dd/mm/yyyy"
+                        months-full="{{ month }}"
+                        months-short="{{ monthShort }}"
+                        weekdays-full="{{ weekdaysFull }}"
+                        weekdays-short="{{ weekdaysShort }}"
+                        weekdays-letter="{{ weekdaysLetter }}"
+                        disable="disable"
+                        min="{{ minDate }}"
+                        max="{{ maxDate }}"
+                        today="today"
+                        clear="clear"
+                        close="close"
+                        select-years="15"
+                        on-start="onStart()"
+                        on-render="onRender()"
+                        on-open="onOpen()"
+                        on-close="onClose()"
+                        on-set="onSet()"
+                        on-stop="onStop()" />
+                  </div>
+                  <div class="input-field col s12 m6">
+                    <div range-slider min="demo2.range.min" max="demo2.range.max" model-min="demo2.minPrice" model-max="demo2.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
+                  </div>
+              </div>
+            </form>
+            <div id="widgets">
+              <div class="col s12 m6" ng-repeat="p in positions">
+                  <div class="card hoverable">
+                    <div class="card-image">
+                      <img class="placepict" src="{{p.picture}}">
+                      <span class="card-title">{{p.home.price|currency:'€'}}</span>
+                    </div>
+                    <div class="card-content">
+                      <p>
+                        <a href="#/place/1">
+                          <img class="actpict" src="{{hobbyIco(p)}}" alt="" />
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('select').material_select();
-  });
-</script>
+                          <img class="authorpict" src="../assets/widget/portrait.jpg" alt="" />
+                          <div>{{p.shortDescription}}</div>
+                          <div>
+                            <i class="tiny material-icons yellow-text text-darken-2">{{calculStars(p.rating)}}</i>
+                            <i class="tiny material-icons yellow-text text-lighten-2">{{calculLowerStars(p.rating)}}</i>
+                            <sup>({{nbReview(p.rating)}})</sup>
+                          </div>
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+        </div>
+
+
+        <!-- Panneau de droite = carte -->
+        <div class="grid-example col s12 m6">
+            <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap">
+                <marker ng-repeat="p in positions" position="[{{p.latitude}},{{p.longitude}}]" title={{p.shortDescription}} icon="{
+              url:'{{tile}}',
+              scaledSize:[42,45],
+              origin: [0,0],
+              anchor: [21,45]
+              }" on-click="toggleInfoWindow(event, $index)" clickable="true"></marker>
+                <info-window id="popup" max-width="200">
+                    <div class="card hoverable">
+                        <div class="card-image">
+                            <img class="placepict" src="{{positions[indexOfTheTruc].picture}}">
+                            <span class="card-title">{{positions[indexOfTheTruc].home.price}}€</span>
+                        </div>
+                        <div class="card-content">
+                            <p>
+                                <div>{{positions[indexOfTheTruc].shortDescription}}</div>
+                                <div>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>0'>star</i>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>1'>star</i>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>2'>star</i>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>3'>star</i>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>4'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>0'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>1'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>2'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>3'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>4'>star</i>
+                                    <sup>({{reviewNb}})</sup>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </info-window>
+            </ng-map>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+    </script>

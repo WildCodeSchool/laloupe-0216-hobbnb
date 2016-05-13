@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'ui.materialize', 'ngMap'])
+angular.module('app', ['ngRoute', 'ui.materialize', 'ngMap', 'ui-rangeSlider'])
     .config(routes)
     .controller('mainController', mainController)
     .controller('placesController', placesController)

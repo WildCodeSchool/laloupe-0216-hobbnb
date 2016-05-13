@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
+
 var placesSchema = new mongoose.Schema({
     isActive: Boolean,
     owner: String,

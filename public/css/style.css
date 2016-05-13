@@ -20,6 +20,7 @@ p {
 	text-align: center;
 }
 footer {
+	clear: both;
 	background-color: #64737C;
 }
 .tabs .indicator {
