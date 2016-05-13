@@ -18,6 +18,7 @@
     "gm": "^1.22.0",
     "l": "0.0.1",
     "method-override": "^2.3.5",
+    "mmmagic": "^0.4.4",
     "mongoose": "^4.4.12",
     "morgan": "^1.7.0",
     "quickthumb": "0.0.12"

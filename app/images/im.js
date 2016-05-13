@@ -1,58 +1,129 @@
-module.exports = function(app) {
-	'use strict';
-    var formidable = require('formidable'); // package for image resizing
-    var fs = require('fs-extra'); // package for image resizing
-    var qt = require('quickthumb'); // package for image resizing
-    var im = require('imagemagick'); // package for image resizing
-    app.use(qt.static(__dirname + '/'));
-    app.post('/picture', function(req, res) {
-        var form = new formidable.IncomingForm();
-        var wdth = 0, hgth = 0;
-				
-        form.parse(req, function(err, fields, files) {
-            wdth = fields.width, hgth = fields.height;
-            if (err) {
-                console.error(err);
-            } else {
-              res.send('<script>window.location = \'/#/picture\';</script>'); /* on a jamais fait CA ! */
-            }
-        });
+ /* on a jamais fait CA ! */
+ module.exports = function(app) {
+     'use strict';
+     var formidable = require('formidable'); // package for image resizing
+     var fs = require('fs-extra'); // package for image resizing
+     var qt = require('quickthumb'); // package for image resizing
+     var im = require('imagemagick'); // package for image resizing
+     var mmm = require('mmmagic').Magic;
 
-        form.on('end', function(fields, files) {
-            // Temporary location of our uploaded file //
-            var temp_path = this.openedFiles[0].path;
-            // The file name of the uploaded file //
-            var file_name = this.openedFiles[0].name;
-            // Location where we want to copy the uploaded file //
-            var new_location = 'uploads/';
+     app.use(qt.static(__dirname + '/'));
+     app.post('/picture', function(req, res) {
 
-            fs.copy(temp_path, new_location + file_name, function(err) {
-                if (err) {
-                    console.error(err);
-                } else {
-                    console.log("success!");
-                    // Delete the "temp" file
-                    fs.unlink(temp_path, function(err) {
-                        if (err) {
-                            console.error(err);
-                        } else {
-                            im.crop({
-                                srcPath: new_location + file_name,
-                                dstPath: new_location + 'thumb/thumb_' + file_name,
-                                width: Number(wdth),
-                                height: Number(hgth),
-                                quality: 1,
-                                gravity: "North"
-                            }, function(err, stdout, stderr) {
-                                  if(err) {
-                                    console.log(err);
-                                  }
-                            });
-                        }
-                    });
-                }
-            });
-        });
+         var howManyFileProcessed = 0,
+             wdth = 0,
+             hgth = 0,
+             path = 'junk',
+             new_location = 'uploads/';
 
-    });
-};
+
+         new formidable.IncomingForm()
+             .parse(req, function(err, fields, files) {
+                 if (err) {
+                     console.error(err);
+                 }
+             })
+             .on('field', function(name, field) {
+                 if (name == 'width' && field < 2000) {
+                     wdth = field;
+                 }
+                 if (name == 'height' && field < 2000) {
+                     hgth = field;
+                 }
+                 if (name == 'title') {
+                     path = field;
+                     new_location += path + '/';
+                     fs.stat(new_location + 'thumb', function(err, stats) {
+                         if (!err) {
+                             fs.readdir(new_location + 'thumb', function(err, files) {
+                                 howManyFileProcessed += files.length;
+                             });
+                         }
+                     });
+                 }
+             })
+
+         .on('file', function(name, f) {
+             howManyFileProcessed++;
+             if (howManyFileProcessed < 8) {
+                 // Temporary location of our uploaded file //
+                 var temp_path = f.path;
+                 // The file name of the uploaded file //
+                 var file_name = f.name;
+                 // Location where we want to copy the uploaded file //
+                 var magic = new mmm();
+                 magic.detectFile(temp_path, function(err, result) {
+                     if (err) {
+                         console.log(err);
+                     } else {
+                         if (result.indexOf('image') != -1 && path != 'junk' && wdth !== 0 && !isNaN(Number(wdth)) && hgth !== 0 && !isNaN(Number(hgth)) && path.indexOf('..') === -1 && path !== '') {
+                             fs.copy(temp_path, new_location + file_name, function(err) {
+                                 if (err) {
+                                     console.error(err);
+                                 } else {
+                                     // Delete the "temp" file
+                                     fs.unlink(temp_path, function(err) {
+                                         if (err) {
+                                             console.error(err);
+                                         } else {
+                                             if (!fs.existsSync(new_location + 'thumb')) {
+                                                 fs.mkdirSync(new_location + 'thumb');
+                                             }
+                                             im.crop({
+                                                 srcPath: new_location + file_name,
+                                                 dstPath: new_location + 'thumb/img_' + file_name,
+                                                 width: Number(wdth),
+                                                 height: Number(hgth),
+                                                 quality: 1,
+                                                 gravity: "North"
+                                             }, function(err, stdout, stderr) {
+                                                 if (err) {
+                                                     console.log(err);
+                                                 } else {
+                                                     console.log('One file uploaded & croped with success');
+                                                 }
+                                             });
+                                         }
+                                     });
+                                 }
+                             });
+                         } else {
+                             fs.unlink(temp_path);
+                             console.log('Someone try to upload ' + file_name + ' with a height of ' + hgth + ' and a width of ' + wdth + ', he want to write to ' + path + ', the server denied this');
+                         }
+                     }
+                 });
+             }
+         })
+
+         .on('end', function(fields, files) {
+             var interValeuh = setInterval(function() {
+                 fs.readdir(new_location + 'thumb', function(err, files) {
+                     if (!err) {
+                         if (files.length == howManyFileProcessed) {
+                             clearInterval(interValeuh);
+                             fs.stat(new_location + 'thumb', function(err, stats) {
+                                 if (!err) {
+                                     var processed = 0;
+                                     fs.readdir(new_location, function(error, files) {
+                                         files.forEach(function(file) {
+                                             if (file.indexOf('.') != -1) {
+                                                 fs.renameSync(new_location + file, new_location + processed + file.substr(file.lastIndexOf('.')));
+                                                 fs.renameSync(new_location + 'thumb/img_' + file, new_location + 'thumb/img_' + processed + file.substr(file.lastIndexOf('.')));
+                                                 processed++;
+                                             }
+                                         });
+                                         console.log("File processing ended - " + processed + " files done");
+                                     });
+                                 }
+                             });
+                         }
+                     }
+                 });
+             }, 1000);
+             res.send('<script>window.location = \'/#/picture\';</script>'); /*Ah Ah */
+             return;
+         });
+
+     });
+ };
