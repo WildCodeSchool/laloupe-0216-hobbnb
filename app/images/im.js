@@ -14,6 +14,8 @@ module.exports = function(app) {
             wdth = 0,
             hgth = 0,
             path = 'junk',
+            id = '',
+            whatAmI = 'trash',
             new_location = 'uploads/';
 
 
@@ -31,6 +33,16 @@ module.exports = function(app) {
                     hgth = field;
                 }
                 if (name == 'title') {
+                    id = field;
+
+                    var splitMePlease = field.split('/');
+                    if (splitMePlease.length == 2) {
+                        id = splitMePlease[1];
+                        whatAmI = splitMePlease[0]; //places or user
+                    } else {
+                        id = field;
+                    }
+
                     path = field;
                     new_location += path + '/';
                     fs.stat(new_location + 'thumb', function(err, stats) {
@@ -45,7 +57,7 @@ module.exports = function(app) {
 
         .on('file', function(name, f) {
             howManyFileProcessed++;
-            if (howManyFileProcessed < 8) {
+            if (howManyFileProcessed < 8 && (whatAmI == 'places' || whatAmI == 'user')) {
                 // Temporary location of our uploaded file //
                 var temp_path = f.path;
                 // The file name of the uploaded file //
@@ -93,6 +105,9 @@ module.exports = function(app) {
                         }
                     }
                 });
+            } else {
+                howManyFileProcessed--;
+                fs.unlink(f.path);
             }
         })
 
@@ -106,14 +121,32 @@ module.exports = function(app) {
                                 if (!err) {
                                     var processed = 0;
                                     fs.readdir(new_location, function(error, files) {
+                                        var caption = [];
                                         files.forEach(function(file) {
                                             if (file.indexOf('.') != -1) {
+                                                caption.push(processed + file.substr(file.lastIndexOf('.')));
                                                 fs.renameSync(new_location + file, new_location + processed + file.substr(file.lastIndexOf('.')));
                                                 fs.renameSync(new_location + 'thumb/img_' + file, new_location + 'thumb/img_' + processed + file.substr(file.lastIndexOf('.')));
                                                 processed++;
                                             }
                                         });
                                         console.log("File processing ended - " + processed + " files done");
+                                        console.log(caption);
+                                        var Place = require('../models/places.js');
+                                        if (whatAmI == 'places') {
+                                            var req2 = {
+                                                body: {
+                                                    content: {
+                                                        picture: caption[0],
+                                                        caption: caption.slice(1)
+                                                    }
+                                                },
+                                                params: {
+                                                    id: id
+                                                }
+                                            };
+                                            Place.updateAndDontUpdate(req2, res);
+                                        }
                                     });
                                 }
                             });
@@ -121,9 +154,12 @@ module.exports = function(app) {
                     }
                 });
             }, 1000);
-            res.send('<script>window.location = \'/#/picture\';</script>'); /*Ah Ah */
+            if (whatAmI == 'places' || whatAmI == 'user') {
+                if (!res.headersSent) res.send('<script>window.location="/#/picture";</script>');
+            } else if (!res.headersSent) {
+                res.sendStatus(403);
+            }
             return;
         });
-
     });
 };

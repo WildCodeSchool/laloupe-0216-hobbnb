@@ -18,13 +18,13 @@ app.use(bodyParser.json({
 })); // parse application/vnd.api+json as json
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
 // picture thumb ==================================================================
-require('./app/images/im')(app);
 // Mongoose ====================================================================
 require('./config/database');
 // Serveur ===================================================================
 var server = http.Server(app);
 // routes ======================================================================
 require('./app/routes')(app);
+require('./app/images/im')(app);
 process.on('SIGINT', function() {
     console.log('Stopping...');
     process.exit();
