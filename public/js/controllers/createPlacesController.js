@@ -2,4 +2,3 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
 
 });
- 
