@@ -108,7 +108,7 @@
                       <label>Hebergement</label>
                   </div>
                   <div class="input-field col s6 m3">
-                      <select ng-model="filters.numPeople">
+                      <select ng-model="filters.beds">
                           <option value="1" selected>1 personne</option>
                           <option value="2">2 personnes</option>
                           <option value="3">3 personnes</option>
@@ -131,11 +131,11 @@
               </div>
               <div class="row" ng-show="selectHome">
                   <div class="input-field col s6 m3">
-                    <label for="inputBegin">Arrivée</label>
+                    <label for="arrivalDate">Arrivée</label>
                     <input input-date
                         type="text"
-                        name="created"
-                        id="inputBegin"
+                        name="arrivalDate"
+                        id="arrivalDate"
                         ng-model="filters.arrivalDate"
                         container="body"
                         format="dd/mm/yyyy"
@@ -159,11 +159,11 @@
                         on-stop="onStop()" />
                   </div>
                   <div class="input-field col s6 m3">
-                    <label for="inputEnd">Départ</label>
+                    <label for="departureDate">Départ</label>
                     <input input-date
                         type="text"
-                        name="created"
-                        id="inputEnd"
+                        name="departureDate"
+                        id="departureDate"
                         ng-model="filters.departureDate"
                         container="body"
                         format="dd/mm/yyyy"
@@ -187,7 +187,7 @@
                         on-stop="onStop()" />
                   </div>
                   <div class="input-field col s12 m6">
-                    <div range-slider min="demo2.range.min" max="demo2.range.max" model-min="filters.minPrice" model-max="filters.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
+                    <div range-slider min="filters.priceRange.min" max="filters.priceRange.max" model-min="filters.minPrice" model-max="filters.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
                   </div>
                   <div class="input-field col s6">
                       <a class="waves-effect waves-light btn green accent-2" ng-click="moreFiltrer()" >

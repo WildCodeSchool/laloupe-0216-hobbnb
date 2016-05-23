@@ -3,7 +3,11 @@ angular.module('app').controller('searchController', function($scope, $http, pla
     $scope.formHobby = 'Choisissez un hobby...';
     $scope.filters = {
         minPrice: 0,
-        maxPrice: 1000
+        maxPrice: 1000,
+        priceRange: {
+            min: 0,
+            max: 1000
+        }
     };
     $scope.definitiveFilter = {};
     $scope.$watchCollection('filters', function(newCol, oldCol) {
@@ -14,6 +18,38 @@ angular.module('app').controller('searchController', function($scope, $http, pla
             } else {
                 $scope.definitiveFilter.primarySports = newCol.hobby;
             }
+        }
+        if (!!newCol.beds) {
+            if(!$scope.definitiveFilter.home) $scope.definitiveFilter.home = [];
+            if(!$scope.definitiveFilter.home.houseSpace) $scope.definitiveFilter.home.houseSpace = [];
+            $scope.definitiveFilter.home.houseSpace.beds = newCol.beds;
+        }
+        if (!!newCol.hasKitchen) {
+            if(!$scope.definitiveFilter.home) $scope.definitiveFilter.home = [];
+            if(!$scope.definitiveFilter.home.houseAmenities) $scope.definitiveFilter.home.houseAmenities = [];
+            $scope.definitiveFilter.home.houseAmenities.kitchen = newCol.hasKitchen;
+        } else {
+          if(!$scope.definitiveFilter.home) $scope.definitiveFilter.home = [];
+          if(!$scope.definitiveFilter.home.houseAmenities) $scope.definitiveFilter.home.houseAmenities = [];
+          if(!!$scope.definitiveFilter.home.houseAmenities.kitchen) delete $scope.definitiveFilter.home.houseAmenities.kitchen;
+        }
+        if (!!newCol.hasWifi) {
+          if(!$scope.definitiveFilter.home) $scope.definitiveFilter.home = [];
+          if(!$scope.definitiveFilter.home.houseAmenities) $scope.definitiveFilter.home.houseAmenities = [];
+            $scope.definitiveFilter.home.houseAmenities.wifi = newCol.hasWifi;
+        } else {
+          if(!$scope.definitiveFilter.home) $scope.definitiveFilter.home = [];
+          if(!$scope.definitiveFilter.home.houseAmenities) $scope.definitiveFilter.home.houseAmenities = [];
+          if(!!$scope.definitiveFilter.home.houseAmenities.wifi) delete $scope.definitiveFilter.home.houseAmenities.wifi;
+        }
+        if (!!newCol.hasTV) {
+          if(!$scope.definitiveFilter.home) $scope.definitiveFilter.home = [];
+          if(!$scope.definitiveFilter.home.houseAmenities) $scope.definitiveFilter.home.houseAmenities = [];
+            $scope.definitiveFilter.home.houseAmenities.tv = newCol.hasTV;
+        } else {
+          if(!$scope.definitiveFilter.home) $scope.definitiveFilter.home = [];
+          if(!$scope.definitiveFilter.home.houseAmenities) $scope.definitiveFilter.home.houseAmenities = [];
+          if(!!$scope.definitiveFilter.home.houseAmenities.tv) delete $scope.definitiveFilter.home.houseAmenities.tv;
         }
         if (!!newCol.place) {
             $scope.latitude = 48;
@@ -77,8 +113,26 @@ angular.module('app').controller('searchController', function($scope, $http, pla
         }
         // API Google
     $scope.changePlace = function() {
-        setTimeout($scope.centerMap = $scope.filters.place, 1);
-    }
+            setTimeout($scope.centerMap = $scope.filters.place, 1);
+        }
+        /* Generate calendar for booking */
+    var currentTime = new Date();
+    $scope.arrivalDate = (new Date(currentTime.getTime() + (1000 * 60 * 60 * 24))).toISOString();
+    $scope.departureDate = (new Date(currentTime.getTime() + (1000 * 60 * 60 * 24 * 2))).toISOString();
+    $scope.month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    $scope.monthShort = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec'];
+    $scope.weekdaysFull = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+    $scope.weekdaysLetter = ['L', 'M', 'Me', 'J', 'V', 'S', 'D'];
+    $scope.disable = [false];
+    $scope.today = 'Aujourd\'hui';
+    $scope.clear = '';
+    $scope.close = 'Fermer';
+    var days = 365;
+    $scope.minDate = $scope.arrivalDate;
+    $scope.maxDate = (new Date(currentTime.getTime() + (1000 * 60 * 60 * 24 * days))).toISOString();
+    $scope.minDateD = $scope.departureDate;
+    $scope.maxDateD = (new Date(currentTime.getTime() + (1000 * 60 * 60 * 24 * days))).toISOString();
+
     NgMap.getMap().then(function(map) {
         $scope.map = map;
     });
@@ -129,7 +183,15 @@ angular.module('app').controller('searchController', function($scope, $http, pla
             cleaness: [5]
         },
         home: {
-            price: 57
+            price: 57,
+            houseSpace: {
+                beds: 5
+            },
+            houseAmenities: {
+                kitchen: false,
+                wifi: true,
+                tv: false
+            }
         },
         primarySports: "Surf"
     }, {
@@ -143,7 +205,15 @@ angular.module('app').controller('searchController', function($scope, $http, pla
             cleaness: [5]
         },
         home: {
-            price: 60
+            price: 60,
+            houseSpace: {
+                beds: 2
+            },
+            houseAmenities: {
+                kitchen: true,
+                wifi: false,
+                tv: false
+            }
         },
         primarySports: "Kitesurf"
     }, {
@@ -157,17 +227,17 @@ angular.module('app').controller('searchController', function($scope, $http, pla
             cleaness: [3]
         },
         home: {
-            price: 530
+            price: 530,
+            houseSpace: {
+                beds: 2
+            },
+            houseAmenities: {
+                kitchen: true,
+                wifi: true,
+                tv: true
+            }
         },
         primarySports: "Kitesurf"
     }, ];
 
-    $scope.demo2 = {
-        range: {
-            min: 0,
-            max: 1000
-        },
-        minPrice: 0,
-        maxPrice: 1000
-    };
 });
