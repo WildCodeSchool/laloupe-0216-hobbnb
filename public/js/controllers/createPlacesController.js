@@ -1,4 +1,4 @@
-angular.module('app', ['ui-rangeSlider']).controller('createPlacesController', function($scope, $http, $routeParams, placesFactory, placesService) {
+angular.module('app').controller('createPlacesController', function($scope, $http, placesFactory, placesService) {
 
 
 });
