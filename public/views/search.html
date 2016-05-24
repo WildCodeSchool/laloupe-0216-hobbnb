@@ -17,7 +17,7 @@
               <div class="row">
                 <div class="input-field col s12 m6">
                   <i class="material-icons prefix">search</i>
-                  <input placeholder="Lieu" id="city" type="text" class="validate" ng-model="filters.place" ng-change="changePlace()">
+                  <input placeholder="Lieu" id="city" type="text" class="validate" ng-model="filters.place" ng-change="changePlace()" ng-autocomplete >
                   <label>Lieu</label>
                 </div>
                 <div class="input-field col s12 m3">
@@ -92,20 +92,10 @@
                 <!-- Formulaire pour home -->
               <div class="row" ng-show="selectHome">
                   <div class="input-field col s6 m3">
-                      <select ng-model="filters.typeOfPlace">
-                          <option value="" disabled selected>Hebergement</option>
-                          <option value="1">Maison</option>
-                          <option value="2">Appartement</option>
-                          <option value="3">Chambre</option>
-                          <option value="4">Couchage</option>
-                          <option value="5">Place de camping</option>
-                          <option value="6">Cabane dans les arbres</option>
-                          <option value="7">Camping car</option>
-                          <option value="8">Tipy</option>
-                          <option value="9">Bateau</option>
-                          <option value="10">Yourte</option>
-                      </select>
-                      <label>Hebergement</label>
+                    <select class='' material-select watch ng-model="filters.propertyType">
+                        <option ng-repeat="propertyType in propertyTypeListing">{{propertyType}}</option>
+                    </select>
+                    <label>Hebergement</label>
                   </div>
                   <div class="input-field col s6 m3">
                       <select ng-model="filters.beds">
@@ -189,7 +179,7 @@
                   <div class="input-field col s12 m6">
                     <div range-slider min="filters.priceRange.min" max="filters.priceRange.max" model-min="filters.minPrice" model-max="filters.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
                   </div>
-                  <div class="input-field col s6">
+                  <div class="input-field col s12">
                       <a class="waves-effect waves-light btn green accent-2" ng-click="moreFiltrer()" >
                           <span class="grey-text text-darken-2">Plus d'options</span></a>
                   </div>
@@ -206,6 +196,14 @@
                         <input type="checkbox" ng-model="filters.hasWifi" id="chkWifi"/>
                         <label for="chkWifi">WiFi</label>
                     </div>
+                    <div class="input-field col s6 m3">
+                        <input type="checkbox" ng-model="filters.hasEssentials" id="chkEssentials"/>
+                        <label for="chkEssentials">Essentiel</label>
+                    </div>
+                    <div class="input-field col s6 m3">
+                        <input type="checkbox" ng-model="filters.hasBbq" id="chkBbq"/>
+                        <label for="chkBbq">Barbecue</label>
+                    </div>
 
                   </div>
               </div>
@@ -219,11 +217,11 @@
                     </div>
                     <div class="card-content">
                       <p>
-                        <a href="#/place/1">
+                        <a href="#/place/{{p._id}}">
                           <img class="actpict" src="{{hobbyIco(p)}}" alt="" />
 
                           <img class="authorpict" src="../assets/widget/portrait.jpg" alt="" />
-                          <div>{{p.shortDescription}}</div>
+                          <div>{{p.name}}</div>
                           <div>
                             <i class="tiny material-icons yellow-text text-darken-2">{{calculStars(p.rating)}}</i>
                             <i class="tiny material-icons yellow-text text-lighten-2">{{calculLowerStars(p.rating)}}</i>
@@ -256,7 +254,7 @@
                         </div>
                         <div class="card-content">
                             <p>
-                                <div>{{positions[indexOfTheTruc].shortDescription}}</div>
+                                <div>{{positions[indexOfTheTruc].name}}</div>
                                 <div>
                                     <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>0'>star</i>
                                     <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>1'>star</i>
