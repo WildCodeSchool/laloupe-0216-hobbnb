@@ -29,9 +29,9 @@ angular.module('app', ['ngMap', 'ui-rangeSlider']).controller('placesController'
     placesService.getOne($scope.currentHost).then(function(e) {
         console.dir(e.data);
         $scope.host = e.data;
-        $scope.globalRating = $scope.howManyPositive($scope.host.rating.cleaness.concat($scope.host.rating.location, $scope.host.rating.valueForMoney));
+        $scope.globalRating = $scope.howManyPositive($scope.host.rating.cleanness.concat($scope.host.rating.location, $scope.host.rating.valueForMoney));
         $scope.globalLowerRating = 5 - $scope.globalRating;
-        $scope.numReviews = ~~(($scope.host.rating.cleaness.length + $scope.host.rating.location.length + $scope.host.rating.valueForMoney.length) / 3);
+        $scope.numReviews = ~~(($scope.host.rating.cleanness.length + $scope.host.rating.location.length + $scope.host.rating.valueForMoney.length) / 3);
     });
 
 });

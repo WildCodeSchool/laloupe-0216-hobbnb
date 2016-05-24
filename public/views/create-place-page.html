@@ -1,5 +1,299 @@
 <div class="container">
     <div class="row">
-        <h1>Bonjour</h1>
+        <h1>Créer une place</h1>
+    </div>
+    <div class="row">
+        isActive
+        <select material-select ng-model="obj.isActive">
+            <option value='1'>true</option>
+            <option value='0'>false</option>
+        </select>
+    </div>
+    <div class="row">
+        owner
+        <input type="text" ng-model="obj.owner" placeholder='Owner'/>
+    </div>
+    <div class="row">
+        creation
+        <input type="date" ng-model="obj.creation"/>
+    </div>
+    <div class="row">
+        modification
+        <input type="date" ng-model="obj.modification"/>
+    </div>
+    <div class="row">
+        name
+        <input type="text" ng-model="obj.name" placeholder="Titre"/>
+    </div>
+    <div class="row">
+        shortDescription
+        <textarea ng-model="obj.shortDescription" placeholder="Courte description"></textarea>
+    </div>
+    <div class="row">
+        latitude
+        <input type="number" ng-model="obj.latitude" placeholder="Latitude"/>
+    </div>
+    <div class="row">
+        longitude
+        <input type="number" ng-model="obj.longitude" placeholder="Latitude"/>
+    </div>
+    <div class="row">
+        address.state
+        <input type="text" ng-model="obj.address.state" placeholder="State"/>
+    </div>
+    <div class="row">
+        address.country
+        <input type="text" ng-model="obj.address.country" placeholder="Country"/>
+    </div>
+    <div class="row">
+        address.num
+        <input type="number" ng-model="obj.address.num" placeholder="Num"/>
+    </div>
+    <div class="row">
+        address.road
+        <input type="text" ng-model="obj.address.road" placeholder="Road"/>
+    </div>
+    <div class="row">
+        address.city
+        <input type="text" ng-model="obj.address.city" placeholder="City"/>
+    </div>
+    <div class="row">
+        address.postalCode
+        <input type="number" ng-model="obj.address.postalCode" placeholder="postalCode"/>
+    </div>
+    <div class="row">
+        address.complement
+        <input type="text" ng-model="obj.address.complement" placeholder="Complement"/>
+    </div>
+    <div class="row">
+        rating.cleanness
+        <input type="number" ng-model="obj.rating.cleanness[0]" placeholder="Note (cleanness)"/>
+    </div>
+    <div class="row">
+        rating.location
+        <input type="number" ng-model="obj.rating.location[0]" placeholder="Note (location)"/>
+    </div>
+    <div class="row">
+        rating.valueForMoney
+        <input type="number" ng-model="obj.rating.valueForMoney[0]" placeholder="Note (valueForMoney)"/>
+    </div>
+    <div class="row">
+        home.price
+        <input type="text" ng-model="obj.home.price" placeholder="Price by night"/>
+    </div>
+    <div class="row">
+        home.intro
+        <textarea ng-model="obj.home.intro" placeholder="Texte intro"></textarea>
+    </div>
+    <div class="row">
+        houseSpace.accommodates
+        <input type="number" ng-model="obj.home.houseSpace.accommodates" placeholder="Combien de accommodates"/>
+    </div>
+    <div class="row">
+        houseSpace.bathrooms
+        <input type="number" ng-model="obj.home.houseSpace.bathrooms" placeholder="Combien de bathrooms"/>
+    </div>
+    <div class="row">
+        houseSpace.bedrooms
+        <input type="number" ng-model="obj.home.houseSpace.bedrooms" placeholder="Combien de bedrooms"/>
+    </div>
+    <div class="row">
+        houseSpace.beds
+        <input type="number" ng-model="obj.home.houseSpace.beds" placeholder="Combien de beds"/>
+    </div>
+    <div class="row">
+        houseSpace.propertyType
+        <select material-select ng-model="obj.home.houseSpace.propertyType">
+            <option value="Maison">Maison</option>
+            <option value="Appartement">Appartement</option>
+            <option value="Chambre">Chambre</option>
+            <option value="Couchage">Couchage</option>
+            <option value="Place de camping">Place de camping</option>
+            <option value="Cabane dans les arbres">Cabane dans les arbres</option>
+            <option value="Camping car">Camping car</option>
+            <option value="Tipy">Tipy</option>
+            <option value="Bateau">Bateau</option>
+            <option value="Yourte">Yourte</option>
+        </select>
+    </div>
+    <div class="row">
+        houseSpace.checkIn
+        <input type='text' ng-model="obj.home.houseSpace.checkIn" placeholder="checkIn" />
+    </div>
+    <div class="row">
+        houseSpace.checkOut
+        <input type='text' ng-model="obj.home.houseSpace.checkOut" placeholder="checkOut" />
+    </div>
+    <div class="row">
+        houseSpace.houseRules
+        <input type='text' ng-model="obj.home.houseSpace.houseRules" placeholder="houseRules" />
+    </div>
+    <div class="row">
+        houseAmenities.kitchen
+        <select material-select ng-model="obj.home.houseAmenities.kitchen">
+            <option value='1'>true</option>
+            <option value='0'>false</option>
+        </select>
+    </div>
+    <div class="row">
+        houseAmenities.wifi
+        <select material-select ng-model="obj.home.houseAmenities.wifi">
+            <option value='1'>true</option>
+            <option value='0'>false</option>
+        </select>
+    </div>
+    <div class="row">
+        houseAmenities.tv
+        <select material-select ng-model="obj.home.houseAmenities.tv">
+            <option value='1'>true</option>
+            <option value='0'>false</option>
+        </select>
+    </div>
+    <div class="row">
+        houseAmenities.essentials
+        <select material-select ng-model="obj.home.houseAmenities.essentials">
+            <option value='1'>true</option>
+            <option value='0'>false</option>
+        </select>
+    </div>
+    <div class="row">
+        houseAmenities.bbq
+        <select material-select ng-model="obj.home.houseAmenities.bbq">
+            <option value='1'>true</option>
+            <option value='0'>false</option>
+        </select>
+    </div>
+    <div class="row">
+        houseAmenities.more
+        <select material-select ng-model="obj.home.houseAmenities.more">
+            <option value='1'>true</option>
+            <option value='0'>false</option>
+        </select>
+    </div>
+    <div class="row">
+        houseExtras.extraBabyBed
+        <input type="number" ng-model="obj.home.houseExtras.extraBabyBed" placeholder="extraBabyBed"/>
+    </div>
+    <div class="row">
+        houseExtras.weeklyDiscount
+        <input type="number" ng-model="obj.home.houseExtras.weeklyDiscount" placeholder="weeklyDiscount"/>
+    </div>
+    <div class="row">
+        houseExtras.cleaningFee
+        <input type="number" ng-model="obj.home.houseExtras.cleaningFee" placeholder="cleaningFee"/>
+    </div>
+    <div class="row">
+        houseExtras.monthlyDiscount
+        <input type="number" ng-model="obj.home.houseExtras.monthlyDiscount" placeholder="monthlyDiscount"/>
+    </div>
+    <div class="row">
+        houseExtras.securityDeposit
+        <input type="number" ng-model="obj.home.houseExtras.securityDeposit" placeholder="securityDeposit"/>
+    </div>
+    <div class="row">
+        houseExtras.cancellation
+        <input type="text" ng-model="obj.home.houseExtras.cancellation" placeholder="cancellation"/>
+    </div>
+    <div class="row">
+        houseSpaceDescription
+        <input type="text" ng-model="obj.houseSpaceDescription" placeholder="houseSpaceDescription"/>
+    </div>
+    <div class="row">
+        houseAvailability
+        <input type="text" ng-model="obj.houseAvailability" placeholder="houseAvailability"/>
+    </div>
+    <div class="row">
+        comments[0].owner
+        <input type="text" ng-model="obj.comments[0].owner" placeholder="comments[0].owner"/>
+    </div>
+    <div class="row">
+        comments[0].title
+        <input type="text" ng-model="obj.comments[0].title" placeholder="comments[0].title"/>
+    </div>
+    <div class="row">
+        comments[0].creation
+        <input type="date" ng-model="obj.comments[0].creation" placeholder="comments[0].creation"/>
+    </div>
+    <div class="row">
+        comments[0].comment
+        <input type="text" ng-model="obj.comments[0].comment" placeholder="comments[0].comment"/>
+    </div>
+    <div class="row">
+        comments[0].thanks
+        <input type="text" ng-model="obj.comments[0].thanks" placeholder="comments[0].thanks"/>
+    </div>
+    <div class="row">
+        primarySports
+        <select material-select ng-model="obj.home.primarySports">
+            <option value="Randonnée">Randonnée</option>
+            <option value="VTT">VTT</option>
+            <option value="Cyclisme">Cyclisme</option>
+            <option value="Equitation">Equitation</option>
+            <option value="Pêche">Pêche</option>
+            <option value="Plongée">Plongée</option>
+            <option value="Golf">Golf</option>
+            <option value="Escalade">Escalade</option>
+            <option value="Canoë Kayak">Canoë Kayak</option>
+            <option value="Surf">Surf</option>
+            <option value="Stand up Paddle">Stand up Paddle</option>
+            <option value="Kitesurf">Kitesurf</option>
+            <option value="Windsurf">Windsurf</option>
+            <option value="Ski">Ski</option>
+            <option value="Alpinisme">Alpinisme</option>
+            <option value="Parapente">Parapente</option>
+            <option value="Spéléologie">Spéléologie</option>
+            <option value="Cannoning">Cannoning</option>
+        </select>
+    </div>
+    <div class="row">
+        secondarySports
+        <select material-select ng-model="obj.home.secondarySports[0]">
+            <option value="Randonnée">Randonnée</option>
+            <option value="VTT">VTT</option>
+            <option value="Cyclisme">Cyclisme</option>
+            <option value="Equitation">Equitation</option>
+            <option value="Pêche">Pêche</option>
+            <option value="Plongée">Plongée</option>
+            <option value="Golf">Golf</option>
+            <option value="Escalade">Escalade</option>
+            <option value="Canoë Kayak">Canoë Kayak</option>
+            <option value="Surf">Surf</option>
+            <option value="Stand up Paddle">Stand up Paddle</option>
+            <option value="Kitesurf">Kitesurf</option>
+            <option value="Windsurf">Windsurf</option>
+            <option value="Ski">Ski</option>
+            <option value="Alpinisme">Alpinisme</option>
+            <option value="Parapente">Parapente</option>
+            <option value="Spéléologie">Spéléologie</option>
+            <option value="Cannoning">Cannoning</option>
+        </select>
+    </div>
+    <div class="row">
+        secondarySports
+        <select material-select ng-model="obj.home.secondarySports[1]">
+            <option value="Randonnée">Randonnée</option>
+            <option value="VTT">VTT</option>
+            <option value="Cyclisme">Cyclisme</option>
+            <option value="Equitation">Equitation</option>
+            <option value="Pêche">Pêche</option>
+            <option value="Plongée">Plongée</option>
+            <option value="Golf">Golf</option>
+            <option value="Escalade">Escalade</option>
+            <option value="Canoë Kayak">Canoë Kayak</option>
+            <option value="Surf">Surf</option>
+            <option value="Stand up Paddle">Stand up Paddle</option>
+            <option value="Kitesurf">Kitesurf</option>
+            <option value="Windsurf">Windsurf</option>
+            <option value="Ski">Ski</option>
+            <option value="Alpinisme">Alpinisme</option>
+            <option value="Parapente">Parapente</option>
+            <option value="Spéléologie">Spéléologie</option>
+            <option value="Cannoning">Cannoning</option>
+        </select>
+    </div>
+    <div class="row">
+      <button class="waves-effect waves-light blue lighten-2 white-text btn right" ng-click='send()'>
+          Ajouter
+      </button>
     </div>
 </div>

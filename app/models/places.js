@@ -1,7 +1,8 @@
 // MODEL PLACES
 var mongoose = require('mongoose');
 
-var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
+var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"],
+    propertiesType = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
 
 var placesSchema = new mongoose.Schema({
     isActive: Boolean,
@@ -36,7 +37,7 @@ var placesSchema = new mongoose.Schema({
             type: String,
             validate: {
                 validator: function(v) {
-                    return /^[0-9]{5}$/.test(v);
+                    return /^[0-9]{5}$/.test(Number(v));
                 },
                 message: '{VALUE} is not a valid postal code number!'
             },
@@ -72,7 +73,10 @@ var placesSchema = new mongoose.Schema({
             bathrooms: Number,
             bedrooms: Number,
             beds: Number,
-            propertyType: String,
+            propertyType: {
+                type: String,
+                enum: propertiesType
+            },
             checkIn: String,
             checkOut: String,
             houseRules: String
@@ -126,6 +130,7 @@ var Places = {
     model: mongoose.model('Places', placesSchema),
 
     create: function(req, res) {
+        console.log(req.body);
         Places.model.create(req.body.content, function(err) {
             if (err) {
                 res.send(err);
