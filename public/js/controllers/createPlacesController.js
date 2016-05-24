@@ -24,4 +24,9 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             resetObj();
         });
     };
+
+    $scope.places = {};
+    placesService.get().then(function(res) {
+        $scope.places = res.data;
+    });
 });

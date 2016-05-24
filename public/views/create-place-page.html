@@ -1,5 +1,13 @@
 <div class="container">
     <div class="row">
+      <h1>Liste des places</h1>
+    </div>
+    <div class="row">
+      <ul>
+          <li ng-repeat='place in places'><a href='/#/place/{{place._id}}'>{{place.name}}</a></li>
+      </ul>
+    </div>
+    <div class="row">
         <h1>Créer une place</h1>
     </div>
     <div class="row">
