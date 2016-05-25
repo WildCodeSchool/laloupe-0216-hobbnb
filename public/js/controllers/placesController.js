@@ -27,7 +27,6 @@ angular.module('app').controller('placesController', function($scope, $http, $ro
         return !!t ? (~~(t.reduce(function(a,b){return a+b;}) / t.length) || 0) : 0;
     };
     placesService.getOne($scope.currentHost).then(function(e) {
-        console.log(e.data);
         $scope.host = e.data;
         $scope.globalRating = $scope.howManyPositive($scope.host.rating.cleanness.concat($scope.host.rating.location, $scope.host.rating.valueForMoney));
         $scope.globalLowerRating = 5 - $scope.globalRating;
