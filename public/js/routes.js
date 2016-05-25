@@ -9,10 +9,9 @@ function routes($routeProvider) {
                         name: 'app',
                         files: [
                             'js/services/mainService.js',
+                            'js/factories/searchFactory.js',
                             'js/controllers/mainController.js',
-                            'js/controllers/hideController.js',
-                            'js/services/mainService.js',
-                            'js/factories/searchFactory.js'
+                            'js/controllers/hideController.js'
                         ]
                     });
                 }]

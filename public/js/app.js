@@ -1,1 +1,1 @@
-angular.module('app', ['oc.lazyLoad', 'ngRoute', 'ngMap', 'ui-rangeSlider', 'ui.materialize']).config(routes);
+angular.module('app', ['oc.lazyLoad', 'ngMap', 'ui-rangeSlider', 'ngRoute', 'ui.materialize', 'ngAutocomplete']).config(routes);

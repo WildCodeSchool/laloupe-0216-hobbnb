@@ -3,5 +3,5 @@ angular.module('app').controller('mainController', function($scope, $location, $
     $scope.search = function() {
         searchFactory.data.city = $scope.city;
         $location.path('/search');
-    }
+    };
 });
