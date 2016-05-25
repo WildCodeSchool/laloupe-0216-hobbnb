@@ -42,15 +42,15 @@
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">person</i><br/>
-                            {{host.home.intro.travellers}} travellers
+                            {{host.home.intro.travellers}} voyageurs
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">donut_small</i><br/>
-                            {{host.home.intro.rooms}} rooms
+                            {{host.home.intro.rooms}} pièces
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">hotel</i><br/>
-                            {{host.home.houseSpace.beds}} beds
+                            {{host.home.houseSpace.beds}} lits
                         </div>
                     </div>
                 </div>
@@ -65,23 +65,23 @@
                     <div class="divider"></div>
                     <div class='row'>
                         <div class="col m4 l2">
-                            The space
+                            L'hébergement
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>Accommodates : {{host.home.houseSpace.accommodates || 0}}</li>
-                                <li>Bathrooms : {{host.home.houseSpace.bathrooms || 0}}</li>
-                                <li>Bedrooms : {{host.home.houseSpace.bedrooms || 0}}</li>
-                                <li>Beds : {{host.home.houseSpace.beds || 0}}</li>
+                                <li>Capacité : {{host.home.houseSpace.accommodates || 0}}</li>
+                                <li>Salles de bain : {{host.home.houseSpace.bathrooms || 0}}</li>
+                                <li>Chambres : {{host.home.houseSpace.bedrooms || 0}}</li>
+                                <li>Lits : {{host.home.houseSpace.beds || 0}}</li>
                             </ul>
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>Property type : {{host.home.houseSpace.propertyType || "Entire house"}}</li>
-                                <li>Check In : {{host.home.houseSpace.checkIn || "09:00"}}</li>
-                                <li>Check Out : {{host.home.houseSpace.checkOut || "18:00"}}</li>
+                                <li>Type : {{host.home.houseSpace.propertyType || "Entire house"}}</li>
+                                <li>Arrivée à : {{host.home.houseSpace.checkIn || "09:00"}}</li>
+                                <li>Départ à : {{host.home.houseSpace.checkOut || "18:00"}}</li>
                                 <li>
-                                    <a href='#'>House rules{{host.home.houseSpace.houseRules || " "}}</a>
+                                    {{host.home.houseSpace.houseRules || " "}}
                                 </li>
                             </ul>
                         </div>
@@ -89,31 +89,31 @@
                     <div class="divider"></div>
                     <div class='row'>
                         <div class="col m4 l2">
-                            The hobbies
+                            Les hobbies
                         </div>
                         <div class="col m8 l5">
-                            <b class="center">Best for</b><br/>
+                            <b class="center">(+) pour</b><br/>
                             <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt="" />
-                            Sea at 1km<br/>
-                            <a href="#">Show spot nearly</a>
+                            {{host.primarySports}} à 1km<br/>
+                            <a href="#">Montrer les spots à proximité</a>
 
                         </div>
                         <div class="col m8 l5">
-                            <b class="center">Also great for</b><br/>
+                            <b class="center">Aussi pour</b><br/>
                             <img src="./assets/hobbies/{{host.secondarySports[0]}}.png" class='hobby-small' alt="" />
-                            Panorama at 0.2km<br/><br/>
+                            {{host.secondarySports[0]}} à 0.2km<br/><br/>
                             <img src="./assets/hobbies/{{host.secondarySports[1]}}.png" class='hobby-small' alt="" />
-                            Hiking at 0.8km
+                            {{host.secondarySports[1]}} à 0.8km
                         </div>
                     </div>
                     <div class="divider"></div>
                     <div class='row'>
                         <div class="col m4 l2">
-                            Amenities
+                            Equipements
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>{{host.home.houseAmenities.kitchen ? "Kitchen" : ""}}</li>
+                                <li>{{host.home.houseAmenities.kitchen ? "Cuisine" : ""}}</li>
                                 <li>{{host.home.houseAmenities.tv ? "TV" : ""}}</li>
                                 <li>{{host.home.houseAmenities.bbq ? "BBQ" : ""}}</li>
                             </ul>
@@ -121,41 +121,38 @@
                         <div class="col m8 l5">
                             <ul>
                                 <li>{{host.home.houseAmenities.wifi ? "Wifi" : ""}}</li>
-                                <li>{{host.home.houseAmenities.essentials ? "Essentials" : ""}}</li>
-                                <li>
-                                    <a href="#">More</a>
-                                </li>
+                                <li>{{host.home.houseAmenities.essentials ? "Essentiels" : ""}}</li>
                             </ul>
                         </div>
                     </div>
                     <div class="divider"></div>
                     <div class='row'>
                         <div class="col m4 l2">
-                            Prices
+                            Prix
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>Extra baby bed:
+                                <li>Lit bébé supplémentaire :
                                     <b>{{host.home.houseExtras.extraBabyBed}}</b>
                                 </li>
-                                <li>Cleaning Fee:
+                                <li>Frais de nettoyage :
                                     <b>{{host.home.houseExtras.cleaningFee}}</b>
                                 </li>
-                                <li>Security Deposit:
+                                <li>Caution :
                                     <b>{{host.home.houseExtras.securityDeposit}}</b>
                                 </li>
                             </ul>
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>Weekly discount:
+                                <li>Promotion par semaine :
                                     <b>{{host.home.houseExtras.weeklyDiscount}}%</b>
                                 </li>
-                                <li>Monthly discount:
+                                <li>Promotion par mois :
                                     <b>{{host.home.houseExtras.monthlyDiscount}}%</b>
                                 </li>
-                                <li>Cancellation:
-                                    <a href='#'>{{host.home.houseExtras.cancellation}}</a>
+                                <li>Annulation:
+                                    {{host.home.houseExtras.cancellation}}
                                 </li>
                             </ul>
                         </div>
@@ -166,20 +163,19 @@
                             Description
                         </div>
                         <div class="col m8 l10">
-                            <b class='center'>The space</b><br/>
+                            <b class='center'>L'endroit</b><br/>
                             <p>{{host.houseSpaceDescription}}</p>
-                            <a href="#">More</a>
                         </div>
                     </div>
                     <div class="divider"></div>
                     <div class='row'>
                         <div class="col m4 l2">
-                            Availibility
+                            Disponibilité
                         </div>
                         <div class="col m8 l10">
                             <b>{{host.houseAvailability}}</b>
                             <span class='right'>
-                                <a href="#">View Calendar</a>
+                                <a href="#">Voir le calendrier</a>
                             </span>
                         </div>
                     </div>
@@ -193,7 +189,7 @@
                         <br>
                         <div class="col s4">
                             <div class="center-align">
-                                <b>{{numReviews}} Reviews</b><br/>
+                                <b>{{numReviews}} Avis</b><br/>
                                 <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
                                 <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
                             </div>
@@ -201,17 +197,17 @@
                         <div class="col s8">
                             <div class="row">
                                 <div class="col s4 center">
-                                    cleanness<br/>
+                                    Propreté<br/>
                                     <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.cleanness)'>star</i>
                                     <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.cleanness))'>star</i>
                                 </div>
                                 <div class="col s4 center">
-                                    Location<br/>
+                                    Zone<br/>
                                     <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.location)'>star</i>
                                     <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.location))'>star</i>
                                 </div>
                                 <div class="col s4 center">
-                                    Value for money<br/>
+                                    Monétaire<br/>
                                     <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.valueForMoney)'>star</i>
                                     <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.valueForMoney))'>star</i>
                                 </div>
@@ -237,10 +233,10 @@
                                             <a href="#">+ more</a>
                                             <button class='waves-effect waves-light grey lighten-2 black-text btn right'>
                                                 <i class='tiny material-icons black-text text-lighten-2 left'>thumb_up</i>
-                                                Thanks
+                                                Merci
                                                 <b>{{comment.thanks}}</b>
                                             </button>
-                                            <br>March 2016
+                                            <br>Mars 2016
                                         </span>
                                     </div>
                                 </div>
@@ -280,7 +276,7 @@
                     <div class="divider"></div>
                     <div class="row">
                         <div class="col s10 offset-s1">
-                            <b>Location</b>
+                            <b>Alentours</b>
                             <br>
                               <ng-map default-style="true" center="{{host.address.city}}" zoom="8">
                                   <marker
