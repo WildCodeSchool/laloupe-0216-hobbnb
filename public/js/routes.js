@@ -11,7 +11,9 @@ function routes($routeProvider) {
                             'js/services/mainService.js',
                             'js/factories/searchFactory.js',
                             'js/controllers/mainController.js',
-                            'js/controllers/hideController.js'
+                            'js/controllers/hideController.js',
+                            'js/services/mainService.js',
+                            'js/factories/searchFactory.js'
                         ]
                     });
                 }]
