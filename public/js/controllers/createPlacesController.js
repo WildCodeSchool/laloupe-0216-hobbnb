@@ -1,4 +1,5 @@
-angular.module('app').controller('createPlacesController', function($scope, $http, placesFactory, placesService) {
+angular.module('app').controller('createPlacesController', function($scope, $http, $location, placesFactory, placesService) {
+    $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.obj = {};
     resetObj = function() {
         $scope.obj.isActive = "1";
@@ -18,10 +19,11 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     };
     resetObj();
     $scope.send = function() {
-        placesService.create({content:$scope.obj}).then(function() {
+        placesService.create({content:$scope.obj}).then(function(res) {
             console.log('Place créée');
             $scope.obj = {};
             resetObj();
+            $location.path('/picture/'+res.data._id);
         });
     };
 

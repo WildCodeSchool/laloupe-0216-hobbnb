@@ -1,5 +1,5 @@
 // PLACES CONTROLLER
-angular.module('app').controller('placesController', function($scope, $http, $routeParams, placesFactory, placesService) {
+angular.module('app').controller('placesController', function($scope, $http, $location, $routeParams, placesFactory, placesService) {
 
 
 
@@ -27,7 +27,17 @@ angular.module('app').controller('placesController', function($scope, $http, $ro
         return !!t ? (~~(t.reduce(function(a,b){return a+b;}) / t.length) || 0) : 0;
     };
     placesService.getOne($scope.currentHost).then(function(e) {
+        if(!e.data.name) $location.path('/place');
         $scope.host = e.data;
+        if($scope.host.rating.cleanness.length <= 0) {
+            $scope.host.rating.cleanness = [3];
+        }
+        if($scope.host.rating.location.length <= 0) {
+            $scope.host.rating.location = [3];
+        }
+        if($scope.host.rating.valueForMoney.length <= 0) {
+            $scope.host.rating.valueForMoney = [3];
+        }
         $scope.globalRating = $scope.howManyPositive($scope.host.rating.cleanness.concat($scope.host.rating.location, $scope.host.rating.valueForMoney));
         $scope.globalLowerRating = 5 - $scope.globalRating;
         $scope.numReviews = ~~(($scope.host.rating.cleanness.length + $scope.host.rating.location.length + $scope.host.rating.valueForMoney.length) / 3);

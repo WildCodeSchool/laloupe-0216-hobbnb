@@ -232,71 +232,20 @@
     </div>
     <div class="row">
         primarySports
-        <select material-select ng-model="obj.home.primarySports">
-            <option value="Randonnée">Randonnée</option>
-            <option value="VTT">VTT</option>
-            <option value="Cyclisme">Cyclisme</option>
-            <option value="Equitation">Equitation</option>
-            <option value="Pêche">Pêche</option>
-            <option value="Plongée">Plongée</option>
-            <option value="Golf">Golf</option>
-            <option value="Escalade">Escalade</option>
-            <option value="Canoë Kayak">Canoë Kayak</option>
-            <option value="Surf">Surf</option>
-            <option value="Stand up Paddle">Stand up Paddle</option>
-            <option value="Kitesurf">Kitesurf</option>
-            <option value="Windsurf">Windsurf</option>
-            <option value="Ski">Ski</option>
-            <option value="Alpinisme">Alpinisme</option>
-            <option value="Parapente">Parapente</option>
-            <option value="Spéléologie">Spéléologie</option>
-            <option value="Cannoning">Cannoning</option>
+        <select material-select ng-model="obj.primarySports">
+            <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
         </select>
     </div>
     <div class="row">
         secondarySports
-        <select material-select ng-model="obj.home.secondarySports[0]">
-            <option value="Randonnée">Randonnée</option>
-            <option value="VTT">VTT</option>
-            <option value="Cyclisme">Cyclisme</option>
-            <option value="Equitation">Equitation</option>
-            <option value="Pêche">Pêche</option>
-            <option value="Plongée">Plongée</option>
-            <option value="Golf">Golf</option>
-            <option value="Escalade">Escalade</option>
-            <option value="Canoë Kayak">Canoë Kayak</option>
-            <option value="Surf">Surf</option>
-            <option value="Stand up Paddle">Stand up Paddle</option>
-            <option value="Kitesurf">Kitesurf</option>
-            <option value="Windsurf">Windsurf</option>
-            <option value="Ski">Ski</option>
-            <option value="Alpinisme">Alpinisme</option>
-            <option value="Parapente">Parapente</option>
-            <option value="Spéléologie">Spéléologie</option>
-            <option value="Cannoning">Cannoning</option>
+        <select material-select ng-model="obj.secondarySports[0]">
+            <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
         </select>
     </div>
     <div class="row">
         secondarySports
-        <select material-select ng-model="obj.home.secondarySports[1]">
-            <option value="Randonnée">Randonnée</option>
-            <option value="VTT">VTT</option>
-            <option value="Cyclisme">Cyclisme</option>
-            <option value="Equitation">Equitation</option>
-            <option value="Pêche">Pêche</option>
-            <option value="Plongée">Plongée</option>
-            <option value="Golf">Golf</option>
-            <option value="Escalade">Escalade</option>
-            <option value="Canoë Kayak">Canoë Kayak</option>
-            <option value="Surf">Surf</option>
-            <option value="Stand up Paddle">Stand up Paddle</option>
-            <option value="Kitesurf">Kitesurf</option>
-            <option value="Windsurf">Windsurf</option>
-            <option value="Ski">Ski</option>
-            <option value="Alpinisme">Alpinisme</option>
-            <option value="Parapente">Parapente</option>
-            <option value="Spéléologie">Spéléologie</option>
-            <option value="Cannoning">Cannoning</option>
+        <select material-select ng-model="obj.secondarySports[1]">
+            <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
         </select>
     </div>
     <div class="row">

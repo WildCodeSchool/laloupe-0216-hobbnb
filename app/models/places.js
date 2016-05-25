@@ -131,11 +131,11 @@ var Places = {
 
     create: function(req, res) {
         console.log(req.body);
-        Places.model.create(req.body.content, function(err) {
+        Places.model.create(req.body.content, function(err, data) {
             if (err) {
                 res.send(err);
             } else {
-                res.sendStatus(200);
+                res.send(data);
             }
         });
     },
