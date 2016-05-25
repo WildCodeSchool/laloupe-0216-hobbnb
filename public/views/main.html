@@ -54,16 +54,19 @@
 			</div>
 			<div class="searchbar">
 				<div class="row">
-					<div class="col s2 offset-s3">
-						<input type="text" placeholder="Quel est votre hobby ?"></input>
+					<div class="col m3 l2 offset-l2">
+						<select class='' material-select watch ng-model="hobby"  ng-change="changeHobby()">
+								<option value="">Quel hobby ?</option>
+								<option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
+						</select>
 					</div>
-					<div class="col s2">
+					<div class="col m3 l2">
 						<input type="text" placeholder="Spot ou logement ?"></input>
 					</div>
-					<div class="col s2">
-						<input type="text" placeholder="Où voulez-vous aller ?" ng-model="city"></input>
+					<div class="col m3 l2">
+						<input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
 					</div>
-					<div class="col s2">
+					<div class="col m3 l2">
 						<a class="waves-effect waves-light btn" href="/#/search/" style="margin-top:10px;" ng-click="search()">Chercher</a>
 					</div>
 				</div>

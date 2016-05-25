@@ -1,5 +1,6 @@
 angular.module('app').controller('searchController', function($scope, $http, NgMap, placesService, searchFactory) {
 
+    var delay;
     NgMap.getMap().then(function(map) {
         $scope.map = map;
     });
@@ -16,9 +17,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                 max: 1000
             }
         };
-        //Ask from main page
-
-
 
         $scope.definitiveFilter = {};
         $scope.$watchCollection('filters', function(newCol, oldCol) {
@@ -92,29 +90,31 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
             }
             // model sur http://jsfiddle.net/Wijmo/Rqcsj/
             if (!!newCol.place) {
-                if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
-                this.geocoder.geocode({
-                    'address': newCol.place
-                }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var loc = results[0].geometry.location;
-                        //newCol.place = results[0].formatted_address;
-                        $scope.changePlace(loc.lat(), loc.lng());
-                        $scope.latitude = loc.lat;
-                        $scope.longitude = loc.lon;
-                        $scope.latitudemin = $scope.latitude - 0.5;
-                        $scope.latitudemax = $scope.latitude + 0.5;
-                        $scope.kmbydegree = (111 * Math.cos($scope.latitude));
-                        $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
-                        $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
-                        $scope.centerMap = newCol.place;
-                    } else {
-                        alert("Désolé destination introuvable.");
-                    }
-                });
+                clearTimeout(delay);
+                delay = setTimeout(function() {
+                    if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
+                    this.geocoder.geocode({
+                        'address': newCol.place
+                    }, function(results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            var loc = results[0].geometry.location;
+                            //newCol.place = results[0].formatted_address;
+                            $scope.centerMap = newCol.place;
+                            $scope.latitude = loc.lat;
+                            $scope.longitude = loc.lon;
+                            $scope.latitudemin = $scope.latitude - 0.5;
+                            $scope.latitudemax = $scope.latitude + 0.5;
+                            $scope.kmbydegree = (111 * Math.cos($scope.latitude));
+                            $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
+                            $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
+                        }
+                    });
+                }, 1000);
             }
         });
+        //Ask from main page
         $scope.filters.place = searchFactory.data.city;
+        $scope.filters.hobby = searchFactory.data.hobby;
         $scope.changeHobby = function() {
             if ($scope.selectHome === false) {
                 $scope.tile = '../assets/search/tile' + $scope.formHobby + '.png';
@@ -146,10 +146,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         // more Option
         $scope.moreFiltrer = function() {
             $scope.developOptions = !$scope.developOptions;
-        };
-        // API Google
-        $scope.changePlace = function() {
-            $scope.centerMap = $scope.filters.place;
         };
         /* Generate calendar for booking */
         var currentTime = new Date();
