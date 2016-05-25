@@ -98,6 +98,10 @@
     },
     home: {
         price: 65,
+        intro: {
+            travellers: 4,
+            rooms: 3
+        },
         houseSpace: {
             accommodates: 1,
             bathrooms: 1,
