@@ -1,8 +1,7 @@
-angular.module('app').controller('searchController', function($scope, $http, placesFactory, placesService, NgMap) {
+angular.module('app').controller('searchController', function($scope, $http, placesFactory, placesService, NgMap, searchFactory) {
     $scope.hobbiesListing = ['Peu importe', "Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.formHobby = 'Choisissez un hobby...';
     $scope.propertyTypeListing = ["Hebergement","Maison","Appartement","Chambre","Couchage","Place de camping","Cabane dans les arbres","Camping car","Tipy","Bateau","Yourte"]
-
     $scope.filters = {
         minPrice: 0,
         maxPrice: 1000,
@@ -11,6 +10,12 @@ angular.module('app').controller('searchController', function($scope, $http, pla
             max: 1000
         }
     };
+//Ask from main page
+
+    $scope.filters.place = searchFactory.data.city;
+    $scope.centerMap = searchFactory.data.city;
+
+
     $scope.definitiveFilter = {};
     $scope.$watchCollection('filters', function(newCol, oldCol) {
       if (!!newCol.hobby) {
@@ -81,22 +86,45 @@ angular.module('app').controller('searchController', function($scope, $http, pla
           if(!$scope.definitiveFilter.home.houseAmenities) $scope.definitiveFilter.home.houseAmenities = [];
           if(!!$scope.definitiveFilter.home.houseAmenities.bbq) delete $scope.definitiveFilter.home.houseAmenities.bbq;
         }
+// model sur http://jsfiddle.net/Wijmo/Rqcsj/
         if (!!newCol.place) {
-            $http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAamy-iuBFyQu-qNuihVdTQDCPyaqzrUac&address='+newCol.place).then(function(res) {
-            $scope.latitude = res.data.results[1].geometry.location.lat;
-            $scope.longitude = res.data.results[1].geometry.location.lon;
-            $scope.latitudemin = $scope.latitude - 0.5;
-            $scope.latitudemax = $scope.latitude + 0.5;
-            $scope.kmbydegree = (111 * Math.cos($scope.latitude));
-            $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
-            $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
+              if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
+              this.geocoder.geocode({ 'address': newCol.place }, function (results, status) {
+                  if (status == google.maps.GeocoderStatus.OK) {
+                      var loc = results[0].geometry.location;
+                      //newCol.place = results[0].formatted_address;
+                      $scope.gotoLocation(loc.lat(), loc.lng());
+                      $scope.latitude = loc.lat;
+                      $scope.longitude = loc.lon;
+                      $scope.latitudemin = $scope.latitude - 0.5;
+                      $scope.latitudemax = $scope.latitude + 0.5;
+                      $scope.kmbydegree = (111 * Math.cos($scope.latitude));
+                      $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
+                      $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
+                      $scope.centerMap = newCol.place;
+                  } else {
+                      alert("Désolé destination introuvable.");
+                  }
+              });
+            };
+
+/*            $http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAamy-iuBFyQu-qNuihVdTQDCPyaqzrUac&address='+newCol.place).then(function(res) {
+           if (!!res.data.results[0]){
+              $scope.latitude = res.data.results[0].geometry.location.lat;
+              $scope.longitude = res.data.results[0].geometry.location.lon;
+              $scope.latitudemin = $scope.latitude - 0.5;
+              $scope.latitudemax = $scope.latitude + 0.5;
+              $scope.kmbydegree = (111 * Math.cos($scope.latitude));
+              $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
+              $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
+            }
           })
         } else {
             if (!!$scope.longitudemin) delete $scope.longitudemin;
             if (!!$scope.longitudemax) delete $scope.longitudemax;
             if (!!$scope.latitudemin) delete $scope.latitudemin;
             if (!!$scope.latitudemax) delete $scope.latitudemax;
-        }
+        }*/
     });
     /*
     placesService.get().then(function(res) {

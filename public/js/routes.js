@@ -10,7 +10,9 @@ function routes($routeProvider) {
                         files: [
                             'js/services/mainService.js',
                             'js/controllers/mainController.js',
-                            'js/controllers/hideController.js'
+                            'js/controllers/hideController.js',
+                            'js/services/mainService.js',
+                            'js/factories/searchFactory.js'
                         ]
                     });
                 }]
@@ -26,6 +28,7 @@ function routes($routeProvider) {
                         files: [
                             'js/services/placesService.js',
                             'js/factories/placesFactory.js',
+                            'js/factories/searchFactory.js',
                             'js/filters/rangeFilter.js',
                             'js/filters/betweenFilter.js',
                             'js/controllers/searchController.js'
