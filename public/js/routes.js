@@ -8,9 +8,9 @@ function routes($routeProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            'js/services/mainService.js',
                             'js/controllers/mainController.js',
-                            'js/controllers/hideController.js',
-                            'js/services/mainService.js'
+                            'js/controllers/hideController.js'
                         ]
                     });
                 }]
@@ -24,14 +24,10 @@ function routes($routeProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/libs/ng-map.min.js',
-                            'js/libs/angular.rangeSlider.js',
-                            'js/libs/angular-locale_fr-fr.js',
-                            'js!https://maps.google.com/maps/api/js?key=AIzaSyAamy-iuBFyQu-qNuihVdTQDCPyaqzrUac',
-                            'js/controllers/searchController.js',
                             'js/services/placesService.js',
                             'js/factories/placesFactory.js',
-                            'js/filters/rangeFilter.js'
+                            'js/filters/rangeFilter.js',
+                            'js/controllers/searchController.js'
                         ]
                     });
                 }]
@@ -45,10 +41,10 @@ function routes($routeProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/controllers/createPlacesController.js',
                             'js/services/placesService.js',
                             'js/factories/placesFactory.js',
-                            'js/filters/rangeFilter.js'
+                            'js/filters/rangeFilter.js',
+                            'js/controllers/createPlacesController.js'
                         ]
                     });
                 }]
@@ -62,12 +58,10 @@ function routes($routeProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/libs/ng-map.min.js',
-                            'js!https://maps.google.com/maps/api/js?key=AIzaSyAamy-iuBFyQu-qNuihVdTQDCPyaqzrUac',
-                            'js/controllers/placesController.js',
                             'js/services/placesService.js',
                             'js/factories/placesFactory.js',
-                            'js/filters/rangeFilter.js'
+                            'js/filters/rangeFilter.js',
+                            'js/controllers/placesController.js'
                         ]
                     });
                 }]
@@ -81,9 +75,9 @@ function routes($routeProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/controllers/fileUploadController.js',
                             'js/services/fileUploadService.js',
-                            'js/directives/fileDirective.js'
+                            'js/directives/fileDirective.js',
+                            'js/controllers/fileUploadController.js'
                         ]
                     });
                 }]

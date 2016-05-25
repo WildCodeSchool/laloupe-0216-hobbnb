@@ -33,24 +33,24 @@
                             &nbsp;
                         </div>
                         <div class="col m4 l2">
-                            <i class="medium material-icons">pool</i><br/>
+                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt="" /><br/>
                             {{host.primarySports}}
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">home</i><br/>
-                            {{host.houseSpace.propertyType}}
+                            {{host.home.houseSpace.propertyType}}
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">person</i><br/>
-                            {{host.intro.travellers}} travellers
+                            {{host.home.intro.travellers}} travellers
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">donut_small</i><br/>
-                            {{host.intro.rooms}} rooms
+                            {{host.home.intro.rooms}} rooms
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons">hotel</i><br/>
-                            {{host.houseSpace.beds}} beds
+                            {{host.home.houseSpace.beds}} beds
                         </div>
                     </div>
                 </div>
@@ -93,16 +93,16 @@
                         </div>
                         <div class="col m8 l5">
                             <b class="center">Best for</b><br/>
-                            <i class="medium material-icons left">pool</i>
+                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt="" />
                             Sea at 1km<br/>
                             <a href="#">Show spot nearly</a>
 
                         </div>
                         <div class="col m8 l5">
                             <b class="center">Also great for</b><br/>
-                            <i class="small material-icons left">photo</i>
+                            <img src="./assets/hobbies/{{host.secondarySports[0]}}.png" class='hobby-small' alt="" />
                             Panorama at 0.2km<br/><br/>
-                            <i class="small material-icons left">nature_people</i>
+                            <img src="./assets/hobbies/{{host.secondarySports[1]}}.png" class='hobby-small' alt="" />
                             Hiking at 0.8km
                         </div>
                     </div>
@@ -113,15 +113,15 @@
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>{{host.houseAmenities.kitchen ? "Kitchen" : ""}}</li>
-                                <li>{{host.houseAmenities.tv ? "TV" : ""}}</li>
-                                <li>{{host.houseAmenities.bbq ? "BBQ" : ""}}</li>
+                                <li>{{host.home.houseAmenities.kitchen ? "Kitchen" : ""}}</li>
+                                <li>{{host.home.houseAmenities.tv ? "TV" : ""}}</li>
+                                <li>{{host.home.houseAmenities.bbq ? "BBQ" : ""}}</li>
                             </ul>
                         </div>
                         <div class="col m8 l5">
                             <ul>
-                                <li>{{host.houseAmenities.wifi ? "Wifi" : ""}}</li>
-                                <li>{{host.houseAmenities.essentials ? "Essentials" : ""}}</li>
+                                <li>{{host.home.houseAmenities.wifi ? "Wifi" : ""}}</li>
+                                <li>{{host.home.houseAmenities.essentials ? "Essentials" : ""}}</li>
                                 <li>
                                     <a href="#">More</a>
                                 </li>
@@ -136,26 +136,26 @@
                         <div class="col m8 l5">
                             <ul>
                                 <li>Extra baby bed:
-                                    <b>{{host.houseExtras.extraBabyBed}}</b>
+                                    <b>{{host.home.houseExtras.extraBabyBed}}</b>
                                 </li>
                                 <li>Cleaning Fee:
-                                    <b>{{host.houseExtras.cleaningFee}}</b>
+                                    <b>{{host.home.houseExtras.cleaningFee}}</b>
                                 </li>
                                 <li>Security Deposit:
-                                    <b>{{host.houseExtras.securityDeposit}}</b>
+                                    <b>{{host.home.houseExtras.securityDeposit}}</b>
                                 </li>
                             </ul>
                         </div>
                         <div class="col m8 l5">
                             <ul>
                                 <li>Weekly discount:
-                                    <b>{{host.houseExtras.weeklyDiscount}}%</b>
+                                    <b>{{host.home.houseExtras.weeklyDiscount}}%</b>
                                 </li>
                                 <li>Monthly discount:
-                                    <b>{{host.houseExtras.monthlyDiscount}}%</b>
+                                    <b>{{host.home.houseExtras.monthlyDiscount}}%</b>
                                 </li>
                                 <li>Cancellation:
-                                    <a href='#'>{{host.houseExtras.cancellation}}</a>
+                                    <a href='#'>{{host.home.houseExtras.cancellation}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -177,24 +177,15 @@
                             Availibility
                         </div>
                         <div class="col m8 l10">
-                            <b>{{host.houseAvailability || 1}} nights minimum stay</b>
+                            <b>{{host.houseAvailability}}</b>
                             <span class='right'>
                                 <a href="#">View Calendar</a>
                             </span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s6">
-                            <img materialboxed class="materialboxed responsive-img" src="assets/places/pool.gif">
-                        </div>
-                        <div class="col s6">
-                            <img materialboxed class="materialboxed responsive-img" src="assets/places/pool4.JPG">
-                        </div>
-                        <div class="col s6">
-                            <img materialboxed class="materialboxed responsive-img" src="assets/places/pool2.jpg">
-                        </div>
-                        <div class="col s6">
-                            <img materialboxed class="materialboxed responsive-img" src="assets/places/pool3.jpg">
+                        <div class="col s6" ng-repeat='cap in host.caption' ng-if='$index != 0'>
+                            <img materialboxed class="materialboxed responsive-img" src="{{cap}}">
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -210,9 +201,9 @@
                         <div class="col s8">
                             <div class="row">
                                 <div class="col s4 center">
-                                    Cleaness<br/>
-                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.cleaness)'>star</i>
-                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.cleaness))'>star</i>
+                                    cleanness<br/>
+                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.cleanness)'>star</i>
+                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.cleanness))'>star</i>
                                 </div>
                                 <div class="col s4 center">
                                     Location<br/>

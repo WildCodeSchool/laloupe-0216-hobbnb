@@ -1,5 +1,5 @@
 // PLACES CONTROLLER
-angular.module('app', ['ngMap', 'ui-rangeSlider']).controller('placesController', function($scope, $http, $routeParams, placesFactory, placesService) {
+angular.module('app').controller('placesController', function($scope, $http, $routeParams, placesFactory, placesService) {
 
 
 
@@ -25,9 +25,9 @@ angular.module('app', ['ngMap', 'ui-rangeSlider']).controller('placesController'
     $scope.currentHost = $routeParams.id;
     $scope.howManyPositive = function(t) {
         return !!t ? (~~(t.reduce(function(a,b){return a+b;}) / t.length) || 0) : 0;
-    }
+    };
     placesService.getOne($scope.currentHost).then(function(e) {
-        console.dir(e.data);
+        console.log(e.data);
         $scope.host = e.data;
         $scope.globalRating = $scope.howManyPositive($scope.host.rating.cleanness.concat($scope.host.rating.location, $scope.host.rating.valueForMoney));
         $scope.globalLowerRating = 5 - $scope.globalRating;

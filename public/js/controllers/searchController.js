@@ -1,4 +1,4 @@
-angular.module('app', ['ngMap', 'ui-rangeSlider']).controller('searchController', function($scope, $http, placesFactory, placesService, NgMap) {
+angular.module('app').controller('searchController', function($scope, $http, placesFactory, placesService, NgMap) {
     $scope.hobbiesListing = ['Peu importe', "Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.formHobby = 'Choisissez un hobby...';
     $scope.filters = {
