@@ -11,8 +11,8 @@ module.exports = function(app) {
     app.post('/picture', function(req, res) {
 
         var howManyFileProcessed = 0,
-            wdth = 0,
-            hgth = 0,
+            wdth = 200,
+            hgth = 200,
             path = 'junk',
             id = '',
             whatAmI = 'trash',
@@ -81,11 +81,14 @@ module.exports = function(app) {
                                             if (!fs.existsSync(new_location + 'thumb')) {
                                                 fs.mkdirSync(new_location + 'thumb');
                                             }
+                                            if (!fs.existsSync(new_location + 'large')) {
+                                                fs.mkdirSync(new_location + 'large');
+                                            }
                                             im.crop({
                                                 srcPath: new_location + file_name,
                                                 dstPath: new_location + 'thumb/img_' + file_name,
-                                                width: Number(wdth),
-                                                height: Number(hgth),
+                                                width: Number(wdth) / 4,
+                                                height: Number(hgth) / 4,
                                                 quality: 1,
                                                 gravity: "North"
                                             }, function(err, stdout, stderr) {
@@ -93,6 +96,20 @@ module.exports = function(app) {
                                                     console.log(err);
                                                 } else {
                                                     console.log('One file uploaded & croped with success');
+                                                    im.crop({
+                                                        srcPath: new_location + file_name,
+                                                        dstPath: new_location + 'large/img_' + file_name,
+                                                        width: Number(wdth),
+                                                        height: Number(hgth),
+                                                        quality: 1,
+                                                        gravity: "North"
+                                                    }, function(err, stdout, stderr) {
+                                                        if (err) {
+                                                            console.log(err);
+                                                        } else {
+                                                            console.log('One file uploaded & croped with success');
+                                                        }
+                                                    });
                                                 }
                                             });
                                         }
@@ -113,11 +130,11 @@ module.exports = function(app) {
 
         .on('end', function(fields, files) {
             var interValeuh = setInterval(function() {
-                fs.readdir(new_location + 'thumb', function(err, files) {
+                fs.readdir(new_location + 'large', function(err, files) {
                     if (!err) {
                         if (files.length == howManyFileProcessed) {
                             clearInterval(interValeuh);
-                            fs.stat(new_location + 'thumb', function(err, stats) {
+                            fs.stat(new_location + 'large', function(err, stats) {
                                 if (!err) {
                                     var processed = 0;
                                     fs.readdir(new_location, function(error, files) {
@@ -127,6 +144,7 @@ module.exports = function(app) {
                                                 caption.push(processed + file.substr(file.lastIndexOf('.')));
                                                 fs.renameSync(new_location + file, new_location + processed + file.substr(file.lastIndexOf('.')));
                                                 fs.renameSync(new_location + 'thumb/img_' + file, new_location + 'thumb/img_' + processed + file.substr(file.lastIndexOf('.')));
+                                                fs.renameSync(new_location + 'large/img_' + file, new_location + 'large/img_' + processed + file.substr(file.lastIndexOf('.')));
                                                 processed++;
                                             }
                                         });
