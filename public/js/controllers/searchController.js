@@ -6,6 +6,18 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     });
     placesService.get().then(function(res) {
         $scope.positions = res.data;
+        $scope.positions.map(function(e) {
+            if (e.rating.cleanness.length <= 0) {
+                e.rating.cleanness = [3];
+            }
+            if (e.rating.location.length <= 0) {
+                e.rating.location = [3];
+            }
+            if (e.rating.valueForMoney.length <= 0) {
+                e.rating.valueForMoney = [3];
+            }
+            return e;
+        });
         $scope.hobbiesListing = ['Peu importe', "Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
         $scope.formHobby = 'Choisissez un hobby...';
         $scope.propertyTypeListing = ["Hebergement", "Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
@@ -170,12 +182,15 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                 return a + b;
             }) / t.length) || 0) : 0;
         };
+        $scope.nbReview = function(widget) {
+            return ~~((widget.cleanness.length + widget.location.length + widget.valueForMoney.length) / 3);
+        };
         $scope.toggleInfoWindow = function(event, id) {
             $scope.map.showInfoWindow('popup', this);
             $scope.indexOfTheTruc = id;
             $scope.globalRating = $scope.howManyPositive($scope.positions[id].rating.valueForMoney.concat($scope.positions[id].rating.location, $scope.positions[id].rating.cleanness));
             $scope.globalLowerRating = 5 - $scope.globalRating;
-            $scope.reviewNb = ~~(($scope.positions[id].rating.cleanness.length + $scope.positions[id].rating.location.length + $scope.positions[id].rating.valueForMoney.length) / 3);
+            $scope.reviewNb = $scope.nbReview($scope.positions[id].rating);
         };
         $scope.calculStars = function(widget) {
             $scope.globalRating = $scope.howManyPositive(widget.valueForMoney.concat(widget.location, widget.cleanness));
@@ -193,15 +208,11 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
             }
             return resul;
         };
-        $scope.nbReview = function(widget) {
-            return ~~((widget.cleanness.length + widget.location.length + widget.valueForMoney.length) / 3);
-        };
         $scope.hobbyIco = function(widget) {
             return "../assets/hobbies/" + widget.primarySports + ".png";
         };
         $scope.pictPlace = function(widget) {
-            console.dir(widget);
-            return "{'background-image': 'url("+widget+")'}";
+            return "{'background-image': 'url(" + widget + ")'}";
         };
 
     });

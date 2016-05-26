@@ -27,7 +27,7 @@ angular.module('app').controller('placesController', function($scope, $http, $lo
         return !!t ? (~~(t.reduce(function(a,b){return a+b;}) / t.length) || 0) : 0;
     };
     placesService.getOne($scope.currentHost).then(function(e) {
-        if(!e.data.name) $location.path('/place');
+        if(!e.data.shortDescription) $location.path('/place');
         $scope.host = e.data;
         if($scope.host.rating.cleanness.length <= 0) {
             $scope.host.rating.cleanness = [3];
