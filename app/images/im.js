@@ -6,7 +6,6 @@ module.exports = function(app) {
     var qt = require('quickthumb'); // package for image resizing
     var im = require('imagemagick'); // package for image resizing
     var mmm = require('mmmagic').Magic;
-
     app.use(qt.static(__dirname + '/'));
     app.post('/picture', function(req, res) {
 
@@ -152,6 +151,7 @@ module.exports = function(app) {
                                         console.log(caption);
                                         var Place = require('../models/places.js');
                                         if (whatAmI == 'places') {
+                                            //var pic = '' ;
                                             var req2 = {
                                                 body: {
                                                     content: {
@@ -173,10 +173,21 @@ module.exports = function(app) {
                 });
             }, 1000);
             if (whatAmI == 'places' || whatAmI == 'user') {
-                if (!res.headersSent) res.send('<script>window.location="/#/picture";</script>');
+                if (!res.headersSent) {
+                    fs.readdir(new_location + 'large', function(err, files) {
+                        if (!err) {
+                            if (files.length == 1) {
+                                res.send('<script>window.location="/#/picture/0/' + id + '";</script>');
+                            } else {
+                                res.send('<script>window.location="/#/places/' + id + '";</script>');
+                            }
+                        }
+                    });
+                }
             } else if (!res.headersSent) {
                 res.sendStatus(403);
             }
+
             return;
         });
     });
