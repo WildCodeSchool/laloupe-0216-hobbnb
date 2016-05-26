@@ -15,7 +15,7 @@ module.exports = function(app) {
             path = 'junk',
             id = '',
             whatAmI = 'trash',
-            new_location = 'uploads/';
+            new_location = 'public/uploads/';
 
 
         new formidable.IncomingForm()
