@@ -1,6 +1,6 @@
 <div ng-controller="searchController">
     <div class="row" id="myMap">
-        <div class="grid-example col s12 m6">
+        <div class="grid-example col m12 l6">
             <div class="row">
                 <div class="input-field col s6">
                     <a class="waves-effect waves-light btn" ng-click="spotOrHome(false)" Id="btnSpot">
@@ -212,8 +212,10 @@
               <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice">
                   <div class="card hoverable">
                     <div class="card-image">
-                      <img class="placepict" src="{{p.picture}}">
-                      <span class="card-title">{{p.home.price|currency:'€'}}</span>
+  <!--                        <div class="placepict" ng-style="{'background-image': 'url(../images/userHomes/etapezen.jpg)'}"> </div>-->
+                      <div class="placepict" ng-style="{{pictPlace(p.picture)}}"> </div>
+                        <span class="card-title">{{p.home.price|currency:'€'}}</span>
+
                     </div>
                     <div class="card-content">
                       <p>
@@ -238,7 +240,7 @@
 
 
         <!-- Panneau de droite = carte -->
-        <div class="grid-example col s12 m6">
+        <div class="grid-example col m12 l6">
             <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap">
                 <marker ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice" position="[{{p.latitude}},{{p.longitude}}]" title={{p.shortDescription}} icon="{
               url:'{{tile}}',

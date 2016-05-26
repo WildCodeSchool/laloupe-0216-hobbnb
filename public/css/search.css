@@ -22,8 +22,8 @@
   z-index: 5;
 }
 #widgets .placepict{
-  height: 100%;
-  width: auto;
+  height : 210px;
+  background-size: cover;
 }
 #widgets .actpict{
   position: absolute;
@@ -34,7 +34,7 @@
   position: absolute;
   border-radius: 100%;
   width: 64px;
-  top : 190px;
+  top : 170px;
   right : 20px;
   border: 3px solid white;
   z-index: 10;

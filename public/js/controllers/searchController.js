@@ -199,6 +199,10 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         $scope.hobbyIco = function(widget) {
             return "../assets/hobbies/" + widget.primarySports + ".png";
         };
+        $scope.pictPlace = function(widget) {
+            console.dir(widget);
+            return "{'background-image': 'url("+widget+")'}";
+        };
 
     });
 });
