@@ -23,7 +23,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             console.log('Place créée');
             $scope.obj = {};
             resetObj();
-            $location.path('/picture/'+res.data._id);
+            $location.path('/picture/0/'+res.data._id);
         });
     };
 
