@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col s12">
-        <div style='background-image:url("{{host.picture}}");' class='bg-fullwidth'></div>
+        <div style='background-image:url("uploads/places/{{host._id}}/large/img_{{host.picture}}");' class='bg-fullwidth'></div>
     </div>
 </div>
 <div class="container">
@@ -179,8 +179,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s6" ng-repeat='cap in host.caption' ng-if='$index != 0'>
-                            <img materialboxed class="materialboxed responsive-img" src="{{cap}}">
+                        <div class="col s6" ng-repeat='cap in host.caption'>
+                            <img materialboxed class="materialboxed responsive-img" src="uploads/places/{{host._id}}/large/img_{{cap}}">
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -211,7 +211,7 @@
                                     <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.valueForMoney))'>star</i>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <div class="divider"></div>
                     <div class="row">

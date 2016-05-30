@@ -16,6 +16,9 @@ module.exports = function(app) {
             id = '',
             whatAmI = 'trash',
             new_location = 'public/uploads/';
+            if (!fs.existsSync(new_location)) {
+                fs.mkdirSync(new_location);
+            }
 
 
         new formidable.IncomingForm()
@@ -38,6 +41,9 @@ module.exports = function(app) {
                     if (splitMePlease.length == 2) {
                         id = splitMePlease[1];
                         whatAmI = splitMePlease[0]; //places or user
+                        if (!fs.existsSync(new_location + whatAmI)) {
+                            fs.mkdirSync(new_location + whatAmI);
+                        }
                     } else {
                         id = field;
                     }
@@ -56,7 +62,7 @@ module.exports = function(app) {
 
         .on('file', function(name, f) {
             howManyFileProcessed++;
-            if (howManyFileProcessed < 8 && (whatAmI == 'places' || whatAmI == 'user')) {
+            if (howManyFileProcessed < 8 && (whatAmI == 'places' || whatAmI == 'users' || whatAmI == 'spots')) {
                 // Temporary location of our uploaded file //
                 var temp_path = f.path;
                 // The file name of the uploaded file //
@@ -152,21 +158,20 @@ module.exports = function(app) {
                                         });
                                         console.log("File processing ended - " + processed + " files done");
                                         console.log(caption);
-                                        var Place = require('../models/places.js');
-                                        if (whatAmI == 'places') {
-                                            //var pic = '' ;
-                                            var req2 = {
-                                                body: {
-                                                    content: {
-                                                        picture: caption[0],
-                                                        caption: caption.slice(1)
-                                                    }
-                                                },
-                                                params: {
-                                                    id: id
+                                        var req2 = {
+                                            body: {
+                                                content: {
+                                                    picture: caption[0],
+                                                    caption: caption.slice(1)
                                                 }
-                                            };
-                                            Place.updateAndDontUpdate(req2, res);
+                                            },
+                                            params: {
+                                                id: id
+                                            }
+                                        };
+                                        if (whatAmI == 'places' || whatAmI == 'spots') {
+                                            var DBase = require('../models/' + whatAmI + '.js');
+                                            DBase.updateAndDontUpdate(req2, res);
                                         }
                                     });
                                 }
@@ -175,7 +180,7 @@ module.exports = function(app) {
                     }
                 });
             }, 500);
-            if (whatAmI == 'places' || whatAmI == 'user') {
+            if (whatAmI == 'places' || whatAmI == 'spots') {
                 if (!res.headersSent) {
                     var interValeuh2 = setInterval(function() {
                         fs.readdir(new_location + 'large', function(err, files) {
@@ -183,9 +188,9 @@ module.exports = function(app) {
                                 if (files.length == howManyFileProcessed) {
                                     clearInterval(interValeuh2);
                                     if (files.length == 1) {
-                                        res.redirect('/#/picture/0/' + id);
+                                        res.redirect('/#/picture/' + whatAmI + '/1/' + id);
                                     } else {
-                                        res.redirect('/#/places/' + id);
+                                        res.redirect('/#/' + whatAmI.substr(0,whatAmI.length-1) + '/' + id);
                                     }
                                     res.end();
                                 }
@@ -193,6 +198,8 @@ module.exports = function(app) {
                         });
                     }, 500);
                 }
+            } else if(whatAmI == 'users') {
+                res.send('Ah. Ah. Ah. Was a joke.');
             } else if (!res.headersSent) {
                 res.sendStatus(403);
             }
