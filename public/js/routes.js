@@ -72,23 +72,7 @@ function routes($routeProvider) {
                 }]
             }
         })
-        .when('/picture/0/:id', {
-            templateUrl: 'views/picture0.html',
-            controller: 'fileUploadController0',
-            resolve: {
-                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'app',
-                        files: [
-                            'js/controllers/fileUploadController0.js',
-                            'js/services/fileUploadService.js',
-                            'js/directives/fileDirective.js'
-                        ]
-                    });
-                }]
-            }
-        })
-        .when('/picture/:id', {
+        .when('/picture/:where/:step/:id', {
             templateUrl: 'views/picture.html',
             controller: 'fileUploadController',
             resolve: {
@@ -96,9 +80,8 @@ function routes($routeProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/services/fileUploadService.js',
+                            'js/controllers/fileUploadController.js',
                             'js/directives/fileDirective.js',
-                            'js/controllers/fileUploadController.js'
                         ]
                     });
                 }]
