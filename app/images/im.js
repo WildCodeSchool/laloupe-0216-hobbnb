@@ -177,10 +177,15 @@ module.exports = function(app) {
                     fs.readdir(new_location + 'large', function(err, files) {
                         if (!err) {
                             if (files.length == 1) {
+                                console.log('photo pri');
                                 res.send('<script>window.location="/#/picture/0/' + id + '";</script>');
                             } else {
+
                                 res.send('<script>window.location="/#/places/' + id + '";</script>');
                             }
+                        }
+                        else {
+                            console.log(err);
                         }
                     });
                 }
