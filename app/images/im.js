@@ -61,6 +61,15 @@ module.exports = function(app) {
                 var temp_path = f.path;
                 // The file name of the uploaded file //
                 var file_name = f.name;
+                if (!fs.existsSync(new_location)) {
+                    fs.mkdirSync(new_location);
+                }
+                if (!fs.existsSync(new_location + 'thumb')) {
+                    fs.mkdirSync(new_location + 'thumb');
+                }
+                if (!fs.existsSync(new_location + 'large')) {
+                    fs.mkdirSync(new_location + 'large');
+                }
                 // Location where we want to copy the uploaded file //
                 var magic = new mmm();
                 magic.detectFile(temp_path, function(err, result) {
@@ -77,12 +86,6 @@ module.exports = function(app) {
                                         if (err) {
                                             console.error(err);
                                         } else {
-                                            if (!fs.existsSync(new_location + 'thumb')) {
-                                                fs.mkdirSync(new_location + 'thumb');
-                                            }
-                                            if (!fs.existsSync(new_location + 'large')) {
-                                                fs.mkdirSync(new_location + 'large');
-                                            }
                                             im.crop({
                                                 srcPath: new_location + file_name,
                                                 dstPath: new_location + 'thumb/img_' + file_name,
@@ -171,28 +174,28 @@ module.exports = function(app) {
                         }
                     }
                 });
-            }, 1000);
+            }, 500);
             if (whatAmI == 'places' || whatAmI == 'user') {
                 if (!res.headersSent) {
-                    fs.readdir(new_location + 'large', function(err, files) {
-                        if (!err) {
-                            if (files.length == 1) {
-                                console.log('photo pri');
-                                res.send('<script>window.location="/#/picture/0/' + id + '";</script>');
-                            } else {
-
-                                res.send('<script>window.location="/#/places/' + id + '";</script>');
+                    var interValeuh2 = setInterval(function() {
+                        fs.readdir(new_location + 'large', function(err, files) {
+                            if (!err) {
+                                if (files.length == howManyFileProcessed) {
+                                    clearInterval(interValeuh2);
+                                    if (files.length == 1) {
+                                        res.redirect('/#/picture/0/' + id);
+                                    } else {
+                                        res.redirect('/#/places/' + id);
+                                    }
+                                    res.end();
+                                }
                             }
-                        }
-                        else {
-                            console.log(err);
-                        }
-                    });
+                        });
+                    }, 500);
                 }
             } else if (!res.headersSent) {
                 res.sendStatus(403);
             }
-
             return;
         });
     });
