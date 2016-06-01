@@ -2,7 +2,7 @@ angular.module('app').controller('createSpotsController', function($scope, $http
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.obj = {};
     resetObj = function() {
-        $scope.obj.spot={};
+        $scope.obj.spot = {};
         $scope.obj.rating = [];
         $scope.obj.spot.secondarySports = [];
         $scope.obj.creation = new Date();
@@ -14,11 +14,13 @@ angular.module('app').controller('createSpotsController', function($scope, $http
     resetObj();
     $scope.send = function() {
         console.dir($scope.obj);
-        spotsService.create({content:$scope.obj}).then(function(res) {
+        spotsService.create({
+            content: $scope.obj
+        }).then(function(res) {
             console.log('Spot créée');
             $scope.obj = {};
             resetObj();
-            $location.path('/picture/0/'+res.data._id);
+            $location.path('/picture/0/' + res.data._id);
         });
     };
 

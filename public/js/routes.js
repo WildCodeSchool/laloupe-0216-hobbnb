@@ -1,5 +1,5 @@
 function routes($routeProvider) {
-  $routeProvider
+    $routeProvider
         .when('/', {
             templateUrl: 'views/main.html',
             controller: 'mainController',
@@ -8,12 +8,9 @@ function routes($routeProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/services/mainService.js',
                             'js/factories/searchFactory.js',
-                            'js/controllers/mainController.js',
-                            'js/controllers/hideController.js',
-                            'js/services/mainService.js',
-                            'js/factories/searchFactory.js'
+                            'js/factories/searchFactory.js',
+                            'js/controllers/mainController.js'
                         ]
                     });
                 }]
@@ -111,8 +108,24 @@ function routes($routeProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/controllers/fileUploadController.js',
                             'js/directives/fileDirective.js',
+                            'js/controllers/fileUploadController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/user/:action', {
+            templateUrl: 'views/users.html',
+            controller: 'usersController',
+            resolve: {
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/usersService.js',
+                            'js/factories/usersFactory.js',
+                            'js/controllers/usersController.js'
                         ]
                     });
                 }]

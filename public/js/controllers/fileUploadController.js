@@ -2,7 +2,7 @@
 angular.module('app').controller('fileUploadController', function($scope, $http, $routeParams) {
 
     $scope.param = {};
-    if($routeParams.step == 0) {
+    if ($routeParams.step == 0) {
         $scope.width = 1900;
         $scope.height = 400;
         $scope.picType = 'de couverture (1900x400px)';
