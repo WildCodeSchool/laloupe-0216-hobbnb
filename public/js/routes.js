@@ -116,7 +116,25 @@ function routes($routeProvider) {
             }
         })
         .when('/user/:action', {
-            templateUrl: 'views/users.html',
+            templateUrl: function (params) {
+                switch(params.action) {
+                    case 'login':
+                    //Login then redirect to current profile page
+                        return 'views/user/login.html';
+                        break;
+                    case 'logout':
+                    //Logout and redirect to login page
+                        return 'views/user/logout.html';
+                        break;
+                    case 'create':
+                    //Create an account
+                        return 'views/user/create.html';
+                        break;
+                    default:
+                    //Action is an id, show user ; if user is current show profile
+                        return 'views/user/users.html';
+                }
+            },
             controller: 'usersController',
             resolve: {
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
