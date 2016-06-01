@@ -20,6 +20,7 @@
     "mmmagic": "^0.4.4",
     "mongoose": "^4.4.12",
     "morgan": "^1.7.0",
+    "nodemailer": "^2.4.2",
     "quickthumb": "0.0.12"
   }
 }
