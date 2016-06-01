@@ -2,15 +2,17 @@
   <nav class="navTop">
     <div class="nav-wrapper" >
       <a href="#/" class="brand-logo"><img src="../images/blud_logo.png" width="187px" /></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down" >
-        <li><a href="#/place">Magazine</a></li>
-        <li><a href="#/place">Comment ça marche</a></li>
-        <li><a href="#/place">S'inscrire</a></li>
-        <li>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" ng-controller='globalUserController'>
+        <li ng-show='{{currentUser._id}}'><a href="#/search">Rechercher</a></li>
+        <li ng-show='{{currentUser._id}}'><a href="#/place">Places</a></li>
+        <li ng-show='{{currentUser._id}}'><a href="#/spot">Spots</a></li>
+        <li ng-show='{{!currentUser._id}}'><a href="#/user/login">Login</a></li>
+        <li ng-show='{{currentUser._id}}'><a href="#/user/{{currentUser._id}}">Profile</a></li>
+        <li ng-show='{{currentUser._id}}'><a href="#/user/logout">Logout</a></li>
+        <!--<li>
           <div class="col">
             <a href='#demoModal' modal>Se connecter</a>
           </div>
-          <!-- Modal Structure -->
           <div id="demoModal" class="modal">
             <div class="modal-content">
                 <div class="row">
@@ -51,7 +53,7 @@
               </div>
           </div>
         </li>
-<!--        <li><a href="#/place">Votre listing</a></li> -->
+        <li><a href="#/place">Votre listing</a></li> -->
       </ul>
     </div>
   </nav>

@@ -148,7 +148,6 @@ function routes($routeProvider, $httpProvider) {
                         name: 'app',
                         files: [
                             'js/services/usersService.js',
-                            'js/factories/usersFactory.js',
                             'js/controllers/usersController.js'
                         ]
                     });
@@ -158,12 +157,12 @@ function routes($routeProvider, $httpProvider) {
         .otherwise({
             redirectTo: '/'
         });
-    $httpProvider.interceptors.push(function($q, $location, $rootScope) {
+    $httpProvider.interceptors.push(function($q, $location, $cookies) {
         return {
             'request': function(config) {
                 config.headers = config.headers || {};
-                if ($rootScope.token) {
-                    config.headers.authorization = $rootScope.token;
+                if ($cookies.get('token')) {
+                    config.headers.authorization = $cookies.get('token');
                 }
                 return config;
             },
@@ -176,7 +175,7 @@ function routes($routeProvider, $httpProvider) {
         };
     });
 
-    function checkIsConnected($q, $http, $rootScope, $location) {
+    function checkIsConnected($q, $http, $location) {
         var deferred = $q.defer();
 
         $http.get('/users/loggedin').success(function() {

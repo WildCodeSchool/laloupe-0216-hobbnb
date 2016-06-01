@@ -1,4 +1,4 @@
-angular.module('app').controller('usersController', function($rootScope, $scope, $route, $routeParams, $location, $http, usersFactory, usersService) {
+angular.module('app').controller('usersController', function($cookies, $scope, $route, $routeParams, $location, $http, usersFactory, usersService) {
     switch ($routeParams.action) {
         case 'login':
             //Login then redirect to current profile page
@@ -9,7 +9,7 @@ angular.module('app').controller('usersController', function($rootScope, $scope,
                 }).then(function(res) {
                     usersFactory.currentUser = res.data.user;
                     usersFactory.datas.token = res.data.token;
-                    $rootScope.token = res.data.token;
+                    $cookies.put('token',res.data.token);
                     $location.path('/user/' + usersFactory.currentUser._id);
                 }, function(res) {
                     $scope.error = res.data;
@@ -21,6 +21,7 @@ angular.module('app').controller('usersController', function($rootScope, $scope,
             break;
         case 'logout':
             //Logout and redirect to login page
+            $cookies.remove('token');
             break;
         case 'create':
             //Create an account
@@ -31,7 +32,7 @@ angular.module('app').controller('usersController', function($rootScope, $scope,
                     usersService.create($scope.hobbinaut).then(function(res) {
                         usersFactory.currentUser = res.data.user;
                         usersFactory.datas.token = res.data.token;
-                        $rootScope.token = res.data.token;
+                        $cookies.put('token',res.data.token);
                         $location.path('/user/' + res.data._id);
                     }, function(res) {
                         $scope.error = res.data;

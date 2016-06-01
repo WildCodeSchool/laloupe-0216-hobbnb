@@ -1,9 +1,8 @@
-angular.module('app')
-    .factory('usersFactory', function() {
-        return {
-            currentUser: {
-                _id: null
-            },
-            datas: {}
-        };
-    });
+function usersFactory() {
+    return {
+        currentUser: {
+            _id: null
+        },
+        datas: {}
+    };
+};
