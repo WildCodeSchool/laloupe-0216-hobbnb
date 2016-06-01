@@ -25,6 +25,7 @@ var server = http.Server(app);
 // routes ======================================================================
 require('./app/routes')(app);
 require('./app/images/im')(app);
+require('./app/emails/email')(app);
 process.on('SIGINT', function() {
     console.log('Stopping...');
     process.exit();
