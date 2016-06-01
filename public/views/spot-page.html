@@ -1,0 +1,416 @@
+<div class="row">
+    <div class="col s12">
+        <div style='background-image:url("{{host.picture}}");' class='bg-fullwidth'></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8">
+            <div class="row card-panel valign-wrapper">
+                <div class="col s4 m3">
+                    <div class='valign center-align'>
+                        <img src="assets/places/user-pic.jpg" alt="Tom" class='circle responsive-img'/>
+                        <br/>
+                        <b>Thomas</b>
+                        <p>
+                            <span class="center-align grey-text lighten-5" style='font-size:12px;'>{{globalRating}}/5 | {{numReviews}} reviews<br/>Rookie</span>
+                        </p>
+                        <img src="assets/places/shaka.png" alt="Sh" class="responsive-img" style='max-width:20px;margin:8px;'/>
+                    </div>
+                </div>
+                <div class="col s8 m9">
+                    <h4>{{host.name}}</h4>
+                    <h5>{{'host.state'}}, {{'host.country'}}</h5>
+                    <div class='row'>
+                        <div class="col s12">
+                            <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
+                            <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
+                            <sup>({{numReviews}})</sup>
+                        </div>
+                    </div>
+                    <div class="row center-align">
+                        <div class="col m2 l1">
+                            &nbsp;
+                        </div>
+                        <div class="col m4 l2">
+                            <img src="./assets/hobbies/{{host.spot.primarySports}}.png" class='hobby-main' alt="" />
+                            <img ng-repeat="sport in secondarySports" src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
+                            <br/>Hobbies
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row card-panel grey lighten-5">
+                <div class="col s12">
+                    <h5>A propos</h5>
+                    <p class='flow-text'>
+                        {{host.shortDescription}}
+                    </p>
+                    <a href="#">Contacter l'hébergeur</a>
+                    <div class="divider"></div>
+                    <div class='row'>
+                        <div class="col m4 l2">
+                            L'hébergement
+                        </div>
+                        <div class="col m8 l5">
+                            <ul>
+                                <li>Capacité : {{host.home.houseSpace.accommodates || 0}}</li>
+                                <li>Salles de bain : {{host.home.houseSpace.bathrooms || 0}}</li>
+                                <li>Chambres : {{host.home.houseSpace.bedrooms || 0}}</li>
+                                <li>Lits : {{host.home.houseSpace.beds || 0}}</li>
+                            </ul>
+                        </div>
+                        <div class="col m8 l5">
+                            <ul>
+                                <li>Type : {{host.home.houseSpace.propertyType || "Maizon"}}</li>
+                                <li>Arrivée à : {{host.home.houseSpace.checkIn || "09:00"}}</li>
+                                <li>Départ à : {{host.home.houseSpace.checkOut || "18:00"}}</li>
+                                <li>
+                                    {{host.home.houseSpace.houseRules || " "}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class='row'>
+                        <div class="col m4 l2">
+                            Les hobbies
+                        </div>
+                        <div class="col m8 l5">
+                            <b class="center">Parfait pour</b><br/>
+                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt="" />
+                            {{host.primarySports}} à 1km<br/>
+                            <a href="#">Montrer les spots à proximité</a>
+
+                        </div>
+                        <div class="col m8 l5">
+                            <b class="center">Aussi pour</b><br/>
+                            <img src="./assets/hobbies/{{host.secondarySports[0]}}.png" class='hobby-small' alt="" />
+                            {{host.secondarySports[0]}} à 0.2km<br/><br/>
+                            <img src="./assets/hobbies/{{host.secondarySports[1]}}.png" class='hobby-small' alt="" />
+                            {{host.secondarySports[1]}} à 0.8km
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class='row'>
+                        <div class="col m4 l2">
+                            Equipements
+                        </div>
+                        <div class="col m8 l5">
+                            <ul>
+                                <li>{{host.home.houseAmenities.kitchen ? "Cuisine" : ""}}</li>
+                                <li>{{host.home.houseAmenities.tv ? "TV" : ""}}</li>
+                                <li>{{host.home.houseAmenities.bbq ? "BBQ" : ""}}</li>
+                            </ul>
+                        </div>
+                        <div class="col m8 l5">
+                            <ul>
+                                <li>{{host.home.houseAmenities.wifi ? "Wifi" : ""}}</li>
+                                <li>{{host.home.houseAmenities.essentials ? "Essentiels" : ""}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class='row'>
+                        <div class="col m4 l2">
+                            Prix
+                        </div>
+                        <div class="col m8 l5">
+                            <ul>
+                                <li>Lit bébé supplémentaire :
+                                    <b>{{host.home.houseExtras.extraBabyBed}}</b>
+                                </li>
+                                <li>Frais de nettoyage :
+                                    <b>{{host.home.houseExtras.cleaningFee}}</b>
+                                </li>
+                                <li>Caution :
+                                    <b>{{host.home.houseExtras.securityDeposit}}</b>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col m8 l5">
+                            <ul>
+                                <li>Promotion par semaine :
+                                    <b>{{host.home.houseExtras.weeklyDiscount}}%</b>
+                                </li>
+                                <li>Promotion par mois :
+                                    <b>{{host.home.houseExtras.monthlyDiscount}}%</b>
+                                </li>
+                                <li>Annulation:
+                                    {{host.home.houseExtras.cancellation}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class='row'>
+                        <div class="col m4 l2">
+                            Description
+                        </div>
+                        <div class="col m8 l10">
+                            <p>{{host.houseSpaceDescription}}</p>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class='row'>
+                        <div class="col m4 l2">
+                            Disponibilité
+                        </div>
+                        <div class="col m8 l10">
+                            <b>{{host.houseAvailability}}</b>
+                            <span class='right'>
+                                <a href="#">Voir le calendrier</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6" ng-repeat='cap in host.caption' ng-if='$index != 0'>
+                            <img materialboxed class="materialboxed responsive-img" src="{{cap}}">
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+                        <br>
+                        <div class="col s4">
+                            <div class="center-align">
+                                <b>{{numReviews}} Avis</b><br/>
+                                <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
+                                <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
+                            </div>
+                        </div>
+                        <div class="col s8">
+                            <div class="row">
+                                <div class="col s4 center">
+                                    Propreté<br/>
+                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.cleanness)'>star</i>
+                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.cleanness))'>star</i>
+                                </div>
+                                <div class="col s4 center">
+                                    Zone<br/>
+                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.location)'>star</i>
+                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.location))'>star</i>
+                                </div>
+                                <div class="col s4 center">
+                                    Monétaire<br/>
+                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.valueForMoney)'>star</i>
+                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.valueForMoney))'>star</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+
+                        <div class="col s10 offset-s1" ng-repeat='comment in host.comments'>
+                            <div class="card-panel grey lighten-5 z-depth-1">
+                                <div class="row valign-wrapper">
+                                    <div class="col s2 center">
+                                        <img src="assets/places/user-pic.jpg" alt="" class="circle responsive-img">
+                                        <br>
+                                        <b>{{comment.owner}}</b>
+                                    </div>
+                                    <div class="col s10">
+                                        <span class="black-text">
+                                            <b>{{comment.title}}</b>
+                                            <br>
+                                            {{comment.comment}}<br>
+                                            <a href="#">+ more</a>
+                                            <button class='waves-effect waves-light grey lighten-2 black-text btn right'>
+                                                <i class='tiny material-icons black-text text-lighten-2 left'>thumb_up</i>
+                                                Merci
+                                                <b>{{comment.thanks}}</b>
+                                            </button>
+                                            <br>Mars 2016
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+                        <div class="col s4 center valign">
+                            <b>About this author</b>
+                            <br>
+                            <br>
+                            <img src="assets/places/user-pic.jpg" alt="Tom" class='circle responsive-img'/>
+                            <br>
+                            <p>
+                                <span class="center-align grey-text lighten-5" style='font-size:12px;'>4.6 / 12 reviews<br/>Rookie</span>
+                            </p>
+                            <img src="assets/places/shaka.png" alt="Sh" class="responsive-img" style='max-width:20px;margin:8px;'/>
+
+                        </div>
+                        <div class="col s8">
+                            <b>Thomas</b>
+                            <br>
+                            <p>Tempor culpa velit reprehenderit labore tempor minim tempor deserunt enim duis enim culpa ad nostrud laborum excepteur. Reprehenderit reprehenderit ut laborum voluptate magna et ut. Amet excepteur incididunt velit id dolore ut veniam laborum ut
+                                ullamco aliqua dolor irure irure veniam incididunt est.</p>
+                            <br>
+                            <p>
+                                Hobbies:
+                                <b>3</b>
+                                Home listings:
+                                <b>4</b>
+                                <a href="#">+ more</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <b>Alentours</b>
+                            <br>
+                              <ng-map default-style="true" center="{{host.address.city}}" zoom="8">
+                                  <marker
+                                      position="[{{host.latitude}},{{host.longitude}}]"
+                                      icon="{
+                                      url:'../assets/search/tileHome.png',
+                                      scaledSize:[42,45],
+                                      origin: [0,0],
+                                      anchor: [21,45]
+                                      }"></marker>
+                              </ng-map>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="col s12 center grey lighten-2 flow-text">{{host.home.price}}€ / nuit</div>
+                    <div class="input-field col s4">
+                        <input
+                            input-date
+                            type="text"
+                            name="arrival"
+                            id="arrival"
+                            ng-model="arrival"
+                            container="body"
+                            format="dd/mm/yyyy"
+                            months-full="{{ month }}"
+                            months-short="{{ monthShort }}"
+                            weekdays-full="{{ weekdaysFull }}"
+                            weekdays-short="{{ weekdaysShort }}"
+                            weekdays-letter="{{ weekdaysLetter }}"
+                            disable="disable"
+                            min="{{ minDate }}"
+                            max="{{ maxDate }}"
+                            today="today"
+                            clear="clear"
+                            close="close"
+                            select-years="15">
+                    </div>
+                    <div class="input-field col s4">
+                        <input
+                            input-date
+                            type="text"
+                            name="departure"
+                            id="departure"
+                            ng-model="departure"
+                            container="body"
+                            format="dd/mm/yyyy"
+                            months-full="{{ month }}"
+                            months-short="{{ monthShort }}"
+                            weekdays-full="{{ weekdaysFull }}"
+                            weekdays-short="{{ weekdaysShort }}"
+                            weekdays-letter="{{ weekdaysLetter }}"
+                            disable="disable"
+                            min="{{ minDateD }}"
+                            max="{{ maxDateD }}"
+                            today="today"
+                            clear="clear"
+                            close="close"
+                            select-years="15">
+                    </div>
+                    <div class="input-field col s4">
+                        <input placeholder="Guests" id="guests" type="number">
+                    </div>
+                    <div class="col s12 center">
+                        <button class="btn waves-effect waves-light green lighten-2">Request to book entire place</button>
+                    </div>
+                    <div class="col s12">
+                        <br><br>
+                    </div>
+                    <div class="col s12 center">
+                        Or share with other people
+                    </div>
+                    <hr>
+                    <div class="col s12">
+                        <div class="row valign-wrapper">
+                            <div class="col s2 center">
+                                <img src="assets/places/user-pic.jpg" alt="" class="circle responsive-img">
+                            </div>
+                            <div class="col s10">
+                                <span class="black-text">
+                                    <b>Benoît</b>
+                                    <span class='right'>4.7 / 52 reviews</span><br>
+                                    <span class='grey-text'>Sed fruatur sane hoc solacio atque hanc insignem ignominiam, quoniam uni
+                                        <a href="#">more...</a>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="row valign-wrapper">
+                            <div class="col s2 center">
+                                <img src="assets/places/user-pic.jpg" alt="" class="circle responsive-img">
+                            </div>
+                            <div class="col s10">
+                                <span class="black-text">
+                                    <b>Benoît</b>
+                                    <span class='right'>4.7 / 52 reviews</span><br>
+                                    <span class='grey-text'>Sed fruatur sane hoc solacio atque hanc insignem ignominiam, quoniam uni
+                                        <a href="#">more...</a>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col s2">
+                        <p class='flow-text center'>
+                            {{host.home.houseSpace.beds}}
+                            <i class='small material-icons text-grey text-lighten-2'>hotel</i>
+                        </p>
+                    </div>
+                    <div class="col s10">
+                        <p class='flow-text'>
+                            beds still available
+                        </p>
+                        <div style='margin-top:-20px;'>Take an option now and confirm only once the place is booked out
+                            <a href='#'>more...</a>
+                        </div>
+                    </div>
+                    <div class="col s12 center">
+                        <button class="btn waves-effect waves-light blue">Join in and take an option too</button>
+                    </div>
+                    <div class="col s12">
+                        <br>
+                    </div>
+                    <div class="col s12 center">
+                        <a href="#">Or find out more about options</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="col s12 center">
+                        <p class='flow-text'>
+                            <button class='btn waves-effect grey text-black lighten-1'>
+                                <i class='large material-icons text-grey text-lighten-2'>favorite</i>&nbsp; Add to Wishlist
+                            </button>
+                        </p>
+                        62 hobbinauts saved this place
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,107 @@
+<div class="container">
+    <div class="row">
+      <h1>Liste des spots</h1>
+    </div>
+    <div class="row">
+      <ul>
+          <li ng-repeat='spot in spots'><a href='/#/spot/{{spot._id}}'>{{spot.name}}</a></li>
+      </ul>
+    </div>
+    <div class="row">
+        <h1>Créer un spot</h1>
+    </div>
+    <div class="row">
+        isActive
+        <select material-select ng-model="obj.isActive">
+            <option value='1'>true</option>
+            <option value='0'>false</option>
+        </select>
+    </div>
+    <div class="row">
+        owner
+        <input type="text" ng-model="obj.owner" placeholder='Owner'/>
+    </div>
+    <div class="row">
+        creation
+        <input type="date" ng-model="obj.creation"/>
+    </div>
+    <div class="row">
+        modification
+        <input type="date" ng-model="obj.modification"/>
+    </div>
+    <div class="row">
+        name
+        <input type="text" ng-model="obj.name" placeholder="Titre"/>
+    </div>
+    <div class="row">
+        latitude
+        <input type="number" ng-model="obj.latitude" placeholder="Latitude"/>
+    </div>
+    <div class="row">
+        longitude
+        <input type="number" ng-model="obj.longitude" placeholder="Latitude"/>
+    </div>
+    <div class="row">
+        state
+        <input type="text" ng-model="obj.state" placeholder="State"/>
+    </div>
+    <div class="row">
+        country
+        <input type="text" ng-model="obj.country" placeholder="Country"/>
+    </div>
+    <div class="row">
+        rating.quality
+        <input type="number" ng-model="obj.rating.quality[0]" placeholder="Note (quality)"/>
+    </div>
+    <div class="row">
+        rating.beauty
+        <input type="number" ng-model="obj.rating.beauty[0]" placeholder="Note (beauty)"/>
+    </div>
+    <div class="row">
+        rating.accessibility
+        <input type="number" ng-model="obj.rating.accessibility[0]" placeholder="Note (accessibility)"/>
+    </div>
+    <div class="row">
+        comments[0].owner
+        <input type="text" ng-model="obj.spot.comments[0].owner" placeholder="comments[0].owner"/>
+    </div>
+    <div class="row">
+        comments[0].title
+        <input type="text" ng-model="obj.spot.comments[0].title" placeholder="comments[0].title"/>
+    </div>
+    <div class="row">
+        comments[0].creation
+        <input type="date" ng-model="obj.spot.comments[0].creation" placeholder="comments[0].creation"/>
+    </div>
+    <div class="row">
+        comments[0].comment
+        <input type="text" ng-model="obj.spot.comments[0].comment" placeholder="comments[0].comment"/>
+    </div>
+    <div class="row">
+        comments[0].thanks
+        <input type="text" ng-model="obj.spot.comments[0].thanks" placeholder="comments[0].thanks"/>
+    </div>
+    <div class="row">
+        spot.primarySports
+        <select material-select ng-model="obj.spot.primarySports">
+            <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
+        </select>
+    </div>
+    <div class="row">
+        spot.secondarySports
+        <select material-select ng-model="obj.spot.secondarySports[0]">
+            <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
+        </select>
+    </div>
+    <div class="row">
+        spot.secondarySports
+        <select material-select ng-model="obj.spot.secondarySports[1]">
+            <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
+        </select>
+    </div>
+    <div class="row">
+      <button class="waves-effect waves-light blue lighten-2 white-text btn right" ng-click='send()'>
+          Ajouter
+      </button>
+    </div>
+</div>

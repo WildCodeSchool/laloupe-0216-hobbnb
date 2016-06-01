@@ -1,5 +1,5 @@
 function routes($routeProvider) {
-    $routeProvider
+  $routeProvider
         .when('/', {
             templateUrl: 'views/main.html',
             controller: 'mainController',
@@ -67,6 +67,37 @@ function routes($routeProvider) {
                             'js/factories/placesFactory.js',
                             'js/filters/rangeFilter.js',
                             'js/controllers/placesController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/spot', {
+            templateUrl: 'views/create-spot-page.html',
+            controller: 'createSpotsController',
+            resolve: {
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/spotsService.js',
+                            'js/factories/spotsFactory.js',
+                            'js/controllers/createSpotsController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/spot/:id', {
+            templateUrl: 'views/spot-page.html',
+            controller: 'spotsController',
+            resolve: {
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/spotsService.js',
+                            'js/controllers/spotsController.js'
                         ]
                     });
                 }]
