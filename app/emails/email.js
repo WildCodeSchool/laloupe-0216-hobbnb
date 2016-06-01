@@ -1,8 +1,7 @@
 module.exports = function(app) {
     'use strict';
     var nodemailer = require('nodemailer');
-
-    var transport = nodemailer.createTransport({
+    var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
             user: "", // your email here
