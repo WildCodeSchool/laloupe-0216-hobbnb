@@ -118,6 +118,20 @@ function routes($routeProvider) {
                 }]
             }
         })
+        .when('/sendEmail/', {
+            templateUrl: 'views/sendEmail.html',
+            controller: 'sendEmailController',
+            resolve: {
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/controllers/sendEmailController.js',
+                        ]
+                    });
+                }]
+            }
+        })
         .otherwise({
             redirectTo: '/'
         });
