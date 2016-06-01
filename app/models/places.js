@@ -130,7 +130,6 @@ var Places = {
     model: mongoose.model('Places', placesSchema),
 
     create: function(req, res) {
-        console.log(req.body);
         Places.model.create(req.body.content, function(err, data) {
             if (err) {
                 res.send(err);

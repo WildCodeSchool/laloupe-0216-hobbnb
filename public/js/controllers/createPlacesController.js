@@ -20,7 +20,6 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     resetObj();
     $scope.send = function() {
         placesService.create({content:$scope.obj}).then(function(res) {
-            console.log('Place créée');
             $scope.obj = {};
             resetObj();
             $location.path('/picture/places/0/'+res.data._id);
