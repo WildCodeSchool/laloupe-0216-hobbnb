@@ -6,8 +6,17 @@ var mongoose = require('mongoose'),
 var usersSchema = new mongoose.Schema({
     creation: Date,
     modification: Date,
-    email: { type: String, required: true, index: { unique: true } },
-    password: { type: String, required: true },
+    email: {
+        type: String,
+        required: true,
+        index: {
+            unique: true
+        }
+    },
+    password: {
+        type: String,
+        required: true
+    },
     identity: {
         firstName: String,
         lastName: String,
@@ -49,63 +58,77 @@ var Users = {
     model: mongoose.model('Users', usersSchema),
 
     create: function(req, res) {
-        if(req.body.obj.password) {
+        if (req.body.obj.password) {
             var salt = bcrypt.genSaltSync(10);
             req.body.obj.password = bcrypt.hashSync(req.body.obj.password, salt);
         }
-		Users.model.create(req.body.obj, function(err, data) {
-            if(err) res.status(400).send(err);
-            else res.send(data._id);
-		});
-	},
-
-	findAll: function(req, res) {
-		Users.model.find(function (err, data) {
-			if(!err) res.send(data);
-            else res.status(400).send(err);
-		});
-	},
-
-	findOne: function(req, res) {
-		Users.model.findOne({_id: req.params.id}, function (err, data) {
-			if(!err) res.send(data);
-            else res.status(400).send(err);
-		});
-	},
-
-	login: function(req, res) {
-		Users.model.findOne({email: req.body.email}, function (err, data) {
-            if(err) res.status(400).send(err);
-            else if (!data) {
-                res.status(400).send('Utilisateur inconnu');
-            }
+        Users.model.create(req.body.obj, function(err, data) {
+            if (err) res.status(400).send(err);
             else {
-                data.comparePassword(req.body.password, function(err, isMatch) {
-                    if (err) res.status(400).send(err);
-                    else {
-                        if(isMatch) {
-                            data.password = null;
-                            res.send(data);
-                        } else {
-                            res.status(400).send('Mot de passe incorrect');
-                        }
-                    }
-                });
+                data.password = null;
+                res.send(data);
             }
-		});
-	},
+        });
+    },
 
-	update: function(req, res){
-		Users.model.findByIdAndUpdate(req.params.id, req.body.obj, function(){
-			res.sendStatus(200);
-		});
-	},
+    findAll: function(req, res) {
+        Users.model.find(function(err, data) {
+            if (!err) res.send(data);
+            else res.status(400).send(err);
+        });
+    },
 
-	delete: function(req, res){
-		Users.model.findByIdAndRemove(req.params.id, function(){
-			res.sendStatus(200);
-		});
-	}
+    findOne: function(req, res) {
+        Users.model.findOne({
+            _id: req.params.id
+        }, function(err, data) {
+            if (!err) res.send(data);
+            else res.status(400).send(err);
+        });
+    },
+
+    login: function(req, res) {
+        if (!req.body.email) {
+            res.status(400).send('Veuillez renseigner un e-mail');
+        } else if (!req.body.password) {
+            res.status(400).send('Veuillez renseigner un mot de passe');
+        } else {
+            Users.model.findOne({
+                email: req.body.email
+            }, function(err, data) {
+                if (err) {
+                    res.status(400).send(err);
+                } else if (!data) {
+                    res.status(400).send('Utilisateur inconnu');
+                } else {
+                    data.comparePassword(req.body.password, function(err, isMatch) {
+                        if (err) {
+                            res.status(400).send(err);
+                        } else {
+                            if (isMatch) {
+                                data.password = null;
+                                res.send(data);
+                            } else {
+                                res.status(400).send('Mot de passe incorrect');
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    },
+
+    update: function(req, res) {
+        Users.model.findByIdAndUpdate(req.params.id, req.body.obj, function() {
+            res.sendStatus(200);
+        });
+    },
+
+    delete: function(req, res) {
+        Users.model.findByIdAndRemove(req.params.id, function() {
+            res.sendStatus(200);
+        });
+    }
 };
 
 module.exports = Users;

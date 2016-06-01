@@ -131,8 +131,8 @@ function routes($routeProvider) {
                         return 'views/user/create.html';
                         break;
                     default:
-                    //Action is an id, show user ; if user is current show profile
-                        return 'views/user/users.html';
+                    //Show my profile
+                        return 'views/user/profile.html';
                 }
             },
             controller: 'usersController',
