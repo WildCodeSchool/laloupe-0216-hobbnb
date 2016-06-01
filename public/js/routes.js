@@ -1,4 +1,4 @@
-function routes($routeProvider) {
+function routes($routeProvider, $httpProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/main.html',
@@ -20,6 +20,7 @@ function routes($routeProvider) {
             templateUrl: 'views/search.html',
             controller: 'searchController',
             resolve: {
+                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
@@ -39,6 +40,7 @@ function routes($routeProvider) {
             templateUrl: 'views/create-place-page.html',
             controller: 'createPlacesController',
             resolve: {
+                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
@@ -56,6 +58,7 @@ function routes($routeProvider) {
             templateUrl: 'views/place-page.html',
             controller: 'placesController',
             resolve: {
+                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
@@ -73,6 +76,7 @@ function routes($routeProvider) {
             templateUrl: 'views/create-spot-page.html',
             controller: 'createSpotsController',
             resolve: {
+                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
@@ -89,6 +93,7 @@ function routes($routeProvider) {
             templateUrl: 'views/spot-page.html',
             controller: 'spotsController',
             resolve: {
+                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
@@ -104,6 +109,7 @@ function routes($routeProvider) {
             templateUrl: 'views/picture.html',
             controller: 'fileUploadController',
             resolve: {
+                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
@@ -116,22 +122,22 @@ function routes($routeProvider) {
             }
         })
         .when('/user/:action', {
-            templateUrl: function (params) {
-                switch(params.action) {
+            templateUrl: function(params) {
+                switch (params.action) {
                     case 'login':
-                    //Login then redirect to current profile page
+                        //Login then redirect to current profile page
                         return 'views/user/login.html';
                         break;
                     case 'logout':
-                    //Logout and redirect to login page
+                        //Logout and redirect to login page
                         return 'views/user/logout.html';
                         break;
                     case 'create':
-                    //Create an account
+                        //Create an account
                         return 'views/user/create.html';
                         break;
                     default:
-                    //Show my profile
+                        //Show my profile
                         return 'views/user/profile.html';
                 }
             },
@@ -152,4 +158,34 @@ function routes($routeProvider) {
         .otherwise({
             redirectTo: '/'
         });
+    $httpProvider.interceptors.push(function($q, $location, $rootScope) {
+        return {
+            'request': function(config) {
+                config.headers = config.headers || {};
+                if ($rootScope.token) {
+                    config.headers.authorization = $rootScope.token;
+                }
+                return config;
+            },
+            'responseError': function(response) {
+                if (response.status === 401 || response.status === 403) {
+                    $location.path('/');
+                }
+                return $q.reject(response);
+            }
+        };
+    });
+
+    function checkIsConnected($q, $http, $rootScope, $location) {
+        var deferred = $q.defer();
+
+        $http.get('/users/loggedin').success(function() {
+            deferred.resolve();
+        }).error(function() {
+            deferred.reject();
+            $location.url('/user/login');
+        });
+
+        return deferred.promise;
+    };
 }

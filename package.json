@@ -15,6 +15,7 @@
     "express": "^4.13.4",
     "formidable": "^1.0.17",
     "fs-extra": "^0.30.0",
+    "jsonwebtoken": "^7.0.0",
     "method-override": "^2.3.5",
     "mmmagic": "^0.4.4",
     "mongoose": "^4.4.12",

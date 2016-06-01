@@ -1,6 +1,7 @@
 // MODEL API
 var mongoose = require('mongoose'),
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcrypt')
+jwt = require('jsonwebtoken');
 
 
 var usersSchema = new mongoose.Schema({
@@ -43,7 +44,11 @@ var usersSchema = new mongoose.Schema({
         type: Number,
         max: 5,
         min: 0
-    }]
+    }],
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 usersSchema.methods.comparePassword = function(pwd, cb) {
@@ -66,7 +71,14 @@ var Users = {
             if (err) res.status(400).send(err);
             else {
                 data.password = null;
-                res.send(data);
+                var token = jwt.sign(data, 'tokenSecret', {
+                    expiresIn: '24h'
+                });
+                res.json({
+                    success: true,
+                    user: data,
+                    token: token
+                });
             }
         });
     },
@@ -107,7 +119,14 @@ var Users = {
                         } else {
                             if (isMatch) {
                                 data.password = null;
-                                res.send(data);
+                                var token = jwt.sign(data, 'tokenSecret', {
+                                    expiresIn: '24h'
+                                });
+                                res.json({
+                                    success: true,
+                                    user: data,
+                                    token: token
+                                });
                             } else {
                                 res.status(400).send('Mot de passe incorrect');
                             }

@@ -1,10 +1,12 @@
 var Spot = require('../models/spots.js');
-module.exports 	= function(app) {
+var Auth = require('../middlewares/authorization.js');
 
-	app.get('/spots/:id', Spot.findOne);
-	app.get('/spots', Spot.findAll);
-	app.post('/spots', Spot.create);
-	app.put('/spots/:id', Spot.update);
-	app.delete('/spots/:id', Spot.delete);
+module.exports = function(app) {
+
+    app.get('/spots/:id', Spot.findOne);
+    app.get('/spots', Spot.findAll);
+    app.post('/spots', Auth.user.hasAuthorization, Spot.create);
+    app.put('/spots/:id', Auth.user.hasAuthorization, Spot.update);
+    app.delete('/spots/:id', Auth.user.isAdministrator, Spot.delete);
 
 };
