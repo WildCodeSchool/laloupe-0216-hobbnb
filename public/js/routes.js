@@ -101,7 +101,9 @@ function routes($routeProvider, $httpProvider) {
                         name: 'app',
                         files: [
                             'js/services/spotsService.js',
+                            'js/filters/rangeFilter.js',
                             'js/controllers/spotsController.js'
+
                         ]
                     });
                 }]

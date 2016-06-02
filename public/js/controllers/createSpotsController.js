@@ -20,7 +20,7 @@ angular.module('app').controller('createSpotsController', function($scope, $http
             console.log('Spot créée');
             $scope.obj = {};
             resetObj();
-            $location.path('/picture/0/' + res.data._id);
+            $location.path('/picture/spots/0/'+res.data._id);
         });
     };
 
