@@ -10,12 +10,12 @@ module.exports = function(app) {
     });
 
     app.post('/sendEmail', function(req, res) {
-      console.log(req.body);
+        console.log(req.body);
         var htmlContent = '<p>Name: ' + req.body.name + '</p>' +
-                          '<p>Email: ' + req.body.email + '</p>' +
-                          '<p>Message: ' + req.body.message + '</p>';
+            '<p>Email: ' + req.body.email + '</p>' +
+            '<p>Message: ' + req.body.message + '</p>';
         var mailOptions = {
-            to: 'fmod31@gmail.com', // your email here
+            to: '', // your email here
             subject: 'New message from Hobbnb',
             from: req.body.name + ' <' + req.body.email + '>',
             sender: req.body.email,

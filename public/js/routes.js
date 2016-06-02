@@ -127,6 +127,7 @@ function routes($routeProvider) {
                         name: 'app',
                         files: [
                             'js/controllers/sendEmailController.js',
+                            'js/services/sendEmailService.js'
                         ]
                     });
                 }]
