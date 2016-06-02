@@ -159,6 +159,16 @@ var Places = {
         });
     },
 
+    findPlacesOfUser: function(req, res) {
+        Places.model.find({owner:req.params.id},function(err, data) {
+            if(err) {
+                res.send(err);
+            } else {
+                res.send(data);
+            }
+        })
+    },
+
     update: function(req, res) {
         Places.model.findByIdAndUpdate(req.params.id, req.body.content, function(err) {
             if (err) {

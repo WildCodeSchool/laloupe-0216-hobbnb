@@ -10,6 +10,9 @@ angular.module('app')
             getOne: function(id) {
                 return $http.get('/users/' + id);
             },
+            findHost: function(id) {
+                return $http.get('/places/user/' + id);
+            },
             update: function(id, data) {
                 return $http.put('/users/' + id, data);
             },

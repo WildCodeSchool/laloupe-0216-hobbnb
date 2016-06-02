@@ -70,5 +70,8 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
             $scope.globalRating = $scope.howManyPositive($scope.user.rating);
             $scope.globalLowerRating = 5 - $scope.globalRating;
             $scope.numReviews = $scope.user.rating.length;
+            usersService.findHost($scope.user._id).then(function(res) {
+                $scope.places = res.data;
+            })
     }
 });

@@ -112,3 +112,6 @@ footer {
 .ng-cloak.loader {
     display: block !important;
 }
+.username-spacer {
+    padding-left: 20%;
+}
