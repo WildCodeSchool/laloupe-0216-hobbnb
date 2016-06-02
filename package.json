@@ -20,6 +20,8 @@
     "mongoose": "^4.4.12",
     "morgan": "^1.7.0",
     "nodemailer": "^2.4.2",
+    "nodemailer-sendmail-transport": "^1.0.0",
+    "q": "^1.4.1",
     "quickthumb": "0.0.12"
   }
 }
