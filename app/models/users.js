@@ -64,6 +64,7 @@ var Users = {
     model: mongoose.model('Users', usersSchema),
 
     create: function(req, res) {
+        console.log(req.body);
         if (req.body.obj.password) {
             var salt = bcrypt.genSaltSync(10);
             req.body.obj.password = bcrypt.hashSync(req.body.obj.password, salt);
