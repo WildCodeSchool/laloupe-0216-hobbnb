@@ -26,9 +26,9 @@ var server = http.Server(app);
 require('./app/routes')(app);
 require('./app/images/im')(app);
 process.on('SIGINT', function() {
-    console.log('Stopping...');
+    console.log('Goodbye sir...');
     process.exit();
 });
 // listen (start app with node server.js) ======================================
 server.listen(port);
-console.log('App listening on port ' + port);
+console.log('hobbnb is ready at port ' + port + ' :)');
