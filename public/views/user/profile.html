@@ -2,6 +2,9 @@
     <div class="row">
         <div class="col s6 offset-s3">
             <div class="card-panel valign-wrapper">
+                <div class="right" ng-hide='canModify'>
+                    Editer mon profil
+                </div>
                 <img src="uploads/users/{{user._id}}/large/img_0.jpg" class='circle responsive-img'/>
                 <div class='valign username-spacer'>
                     <b>{{user.identity.firstName}}

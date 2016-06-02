@@ -1,6 +1,8 @@
 angular.module('app').controller('usersController', function($scope, $rootScope, $routeParams, $location, $http, $window, usersService) {
-    if($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
-    else $scope.currentUser = {_id:null};
+    if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
+    else $scope.currentUser = {
+        _id: null
+    };
     switch ($routeParams.action) {
         case 'login':
             //Login then redirect to current profile page
@@ -72,6 +74,12 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
             $scope.numReviews = $scope.user.rating.length;
             usersService.findHost($scope.user._id).then(function(res) {
                 $scope.places = res.data;
-            })
+            });
+            // usersService.findSpot($scope.user._id).then(function(res) {
+            //     $scope.spots = res.data;
+            // });
+            // usersService.findMsg($scope.user._id).then(function(res) {
+            //     $scope.msgs = res.data;
+            // });
     }
 });

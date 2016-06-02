@@ -13,6 +13,12 @@ angular.module('app')
             findHost: function(id) {
                 return $http.get('/places/user/' + id);
             },
+            findSpot: function(id) {
+                return $http.get('/spots/user/' + id);
+            },
+            findMsg: function(id) {
+                return $http.get('/msg/user/' + id);
+            },
             update: function(id, data) {
                 return $http.put('/users/' + id, data);
             },
