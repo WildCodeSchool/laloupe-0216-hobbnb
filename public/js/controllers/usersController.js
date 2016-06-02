@@ -78,8 +78,8 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
             // usersService.findSpot($scope.user._id).then(function(res) {
             //     $scope.spots = res.data;
             // });
-            // usersService.findMsg($scope.user._id).then(function(res) {
-            //     $scope.msgs = res.data;
-            // });
+            usersService.findMsg($scope.user._id).then(function(res) {
+                $scope.msgs = res.data;
+            });
     }
 });

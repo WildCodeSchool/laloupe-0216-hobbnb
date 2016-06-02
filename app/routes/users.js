@@ -1,5 +1,5 @@
-var Users = require('../models/users.js');
-var Auth = require('../middlewares/authorization.js');
+var Users = require('../models/users.js'),
+    Auth = require('../middlewares/authorization.js');
 
 module.exports = function(app) {
 

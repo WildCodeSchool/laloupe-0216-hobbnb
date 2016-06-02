@@ -17,7 +17,10 @@ angular.module('app')
                 return $http.get('/spots/user/' + id);
             },
             findMsg: function(id) {
-                return $http.get('/msg/user/' + id);
+                return $http.get('/msg/rec/' + id);
+            },
+            findMsgExp: function(id) {
+                return $http.get('/msg/exp/' + id);
             },
             update: function(id, data) {
                 return $http.put('/users/' + id, data);
