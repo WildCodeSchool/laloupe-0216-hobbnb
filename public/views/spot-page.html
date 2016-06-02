@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col s12">
-        <div style='background-image:url("{{host.picture}}");' class='bg-fullwidth'></div>
+        <div style='background-image:url("uploads/spots/{{host._id}}/{{host.picture}}");' class='bg-fullwidth'></div>
     </div>
 </div>
 <div class="container">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="col s8 m9">
                     <h4>{{host.name}}</h4>
-                    <h5>{{'host.state'}}, {{'host.country'}}</h5>
+                    <h5>{{host.country}}, {{host.state}}</h5>
                     <div class='row'>
                         <div class="col s12">
                             <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
@@ -29,12 +29,9 @@
                         </div>
                     </div>
                     <div class="row center-align">
-                        <div class="col m2 l1">
-                            &nbsp;
-                        </div>
-                        <div class="col m4 l2">
+                        <div>
                             <img src="./assets/hobbies/{{host.spot.primarySports}}.png" class='hobby-main' alt="" />
-                            <img ng-repeat="sport in secondarySports" src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
+                            <img ng-repeat="sport in host.spot.secondarySports" src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
                             <br/>Hobbies
                         </div>
                     </div>
@@ -42,166 +39,46 @@
             </div>
             <div class="row card-panel grey lighten-5">
                 <div class="col s12">
-                    <h5>A propos</h5>
-                    <p class='flow-text'>
-                        {{host.shortDescription}}
-                    </p>
-                    <a href="#">Contacter l'hébergeur</a>
+                    <a href="#">Contacter l'auteur</a>
                     <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            L'hébergement
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Capacité : {{host.home.houseSpace.accommodates || 0}}</li>
-                                <li>Salles de bain : {{host.home.houseSpace.bathrooms || 0}}</li>
-                                <li>Chambres : {{host.home.houseSpace.bedrooms || 0}}</li>
-                                <li>Lits : {{host.home.houseSpace.beds || 0}}</li>
-                            </ul>
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Type : {{host.home.houseSpace.propertyType || "Maizon"}}</li>
-                                <li>Arrivée à : {{host.home.houseSpace.checkIn || "09:00"}}</li>
-                                <li>Départ à : {{host.home.houseSpace.checkOut || "18:00"}}</li>
-                                <li>
-                                    {{host.home.houseSpace.houseRules || " "}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Les hobbies
-                        </div>
-                        <div class="col m8 l5">
-                            <b class="center">Parfait pour</b><br/>
-                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt="" />
-                            {{host.primarySports}} à 1km<br/>
-                            <a href="#">Montrer les spots à proximité</a>
-
-                        </div>
-                        <div class="col m8 l5">
-                            <b class="center">Aussi pour</b><br/>
-                            <img src="./assets/hobbies/{{host.secondarySports[0]}}.png" class='hobby-small' alt="" />
-                            {{host.secondarySports[0]}} à 0.2km<br/><br/>
-                            <img src="./assets/hobbies/{{host.secondarySports[1]}}.png" class='hobby-small' alt="" />
-                            {{host.secondarySports[1]}} à 0.8km
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Equipements
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>{{host.home.houseAmenities.kitchen ? "Cuisine" : ""}}</li>
-                                <li>{{host.home.houseAmenities.tv ? "TV" : ""}}</li>
-                                <li>{{host.home.houseAmenities.bbq ? "BBQ" : ""}}</li>
-                            </ul>
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>{{host.home.houseAmenities.wifi ? "Wifi" : ""}}</li>
-                                <li>{{host.home.houseAmenities.essentials ? "Essentiels" : ""}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Prix
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Lit bébé supplémentaire :
-                                    <b>{{host.home.houseExtras.extraBabyBed}}</b>
-                                </li>
-                                <li>Frais de nettoyage :
-                                    <b>{{host.home.houseExtras.cleaningFee}}</b>
-                                </li>
-                                <li>Caution :
-                                    <b>{{host.home.houseExtras.securityDeposit}}</b>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Promotion par semaine :
-                                    <b>{{host.home.houseExtras.weeklyDiscount}}%</b>
-                                </li>
-                                <li>Promotion par mois :
-                                    <b>{{host.home.houseExtras.monthlyDiscount}}%</b>
-                                </li>
-                                <li>Annulation:
-                                    {{host.home.houseExtras.cancellation}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Description
-                        </div>
-                        <div class="col m8 l10">
-                            <p>{{host.houseSpaceDescription}}</p>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Disponibilité
-                        </div>
-                        <div class="col m8 l10">
-                            <b>{{host.houseAvailability}}</b>
-                            <span class='right'>
-                                <a href="#">Voir le calendrier</a>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6" ng-repeat='cap in host.caption' ng-if='$index != 0'>
-                            <img materialboxed class="materialboxed responsive-img" src="{{cap}}">
-                        </div>
-                    </div>
-                    <div class="divider"></div>
+<!--rating -->
                     <div class="row">
                         <br>
                         <div class="col s4">
                             <div class="center-align">
                                 <b>{{numReviews}} Avis</b><br/>
-                                <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
-                                <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
                             </div>
                         </div>
                         <div class="col s8">
                             <div class="row">
                                 <div class="col s4 center">
-                                    Propreté<br/>
-                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.cleanness)'>star</i>
-                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.cleanness))'>star</i>
+                                    <img src="../assets/hobbies/quality.png" class='hobby-main'alt="" /><br/>
+                                    Quality<br/>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.quality)'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.quality))'>star</i>
                                 </div>
                                 <div class="col s4 center">
-                                    Zone<br/>
-                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.location)'>star</i>
-                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.location))'>star</i>
+                                    <img src="../assets/hobbies/beauty.png" class='hobby-main'alt="" /><br/>
+                                    Beauty<br/>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.beauty)'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.beauty))'>star</i>
                                 </div>
                                 <div class="col s4 center">
-                                    Monétaire<br/>
-                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.valueForMoney)'>star</i>
-                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.valueForMoney))'>star</i>
+                                    <img src="../assets/hobbies/facility.png" class='hobby-main' alt="" /><br/>
+                                    Accessibility<br/>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.accessibility)'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.accessibility))'>star</i>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="divider"></div>
+<!--comments -->
                     <div class="row">
 
-                        <div class="col s10 offset-s1" ng-repeat='comment in host.comments'>
+                        <div class="col s10 offset-s1" ng-repeat='comment in host.spot.comments'>
                             <div class="card-panel grey lighten-5 z-depth-1">
                                 <div class="row valign-wrapper">
                                     <div class="col s2 center">
@@ -228,7 +105,13 @@
                         </div>
 
                     </div>
-                    <div class="divider"></div>
+<!--gallery pictures -->
+                    <div class="row">
+                        <div class="col s12 m6 center" ng-repeat="pict in host.caption">
+                            <img class="responsive-img" src="uploads/spots/{{host._id}}/{{pict}}" alt="" />
+                        </div>
+                    </div>
+<!--About the author -->
                     <div class="row">
                         <div class="col s4 center valign">
                             <b>About this author</b>
@@ -258,15 +141,17 @@
                         </div>
                     </div>
                     <div class="divider"></div>
+<!--The map -->
                     <div class="row">
                         <div class="col s10 offset-s1">
                             <b>Alentours</b>
                             <br>
-                              <ng-map default-style="true" center="{{host.address.city}}" zoom="8">
+                              <ng-map default-style="true" center="[{{host.latitude}},{{host.longitude}}]" zoom="8">
                                   <marker
                                       position="[{{host.latitude}},{{host.longitude}}]"
+                                      title="{{host.name}}"
                                       icon="{
-                                      url:'../assets/search/tileHome.png',
+                                      url:'{{selectTile()}}',
                                       scaledSize:[42,45],
                                       origin: [0,0],
                                       anchor: [21,45]
@@ -277,7 +162,7 @@
                 </div>
             </div>
         </div>
-        <div class="col s12 m4">
+<!--        <div class="col s12 m4">
             <div class="card-panel">
                 <div class="row">
                     <div class="col s12 center grey lighten-2 flow-text">{{host.home.price}}€ / nuit</div>
@@ -410,7 +295,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 
 </div>
