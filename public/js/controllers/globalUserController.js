@@ -4,4 +4,5 @@ function globalUserController($scope, $window, $rootScope) {
     $rootScope.$on('userUpdated', function(event, user){
         $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     });
+
 };
