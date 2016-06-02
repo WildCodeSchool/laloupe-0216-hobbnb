@@ -16,9 +16,9 @@ module.exports = function(app) {
             id = '',
             whatAmI = 'trash',
             new_location = 'public/uploads/';
-            if (!fs.existsSync(new_location)) {
-                fs.mkdirSync(new_location);
-            }
+        if (!fs.existsSync(new_location)) {
+            fs.mkdirSync(new_location);
+        }
 
 
         new formidable.IncomingForm()
@@ -190,7 +190,7 @@ module.exports = function(app) {
                                     if (files.length == 1) {
                                         res.redirect('/#/picture/' + whatAmI + '/1/' + id);
                                     } else {
-                                        res.redirect('/#/' + whatAmI.substr(0,whatAmI.length-1) + '/' + id);
+                                        res.redirect('/#/' + whatAmI.substr(0, whatAmI.length - 1) + '/' + id);
                                     }
                                     res.end();
                                 }
@@ -198,8 +198,9 @@ module.exports = function(app) {
                         });
                     }, 500);
                 }
-            } else if(whatAmI == 'users') {
-                res.send('Ah. Ah. Ah. Was a joke.');
+            } else if (whatAmI == 'users') {
+                res.redirect('/#/user/' + id);
+                res.end();
             } else if (!res.headersSent) {
                 res.sendStatus(403);
             }

@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="app">
     <head>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-        <meta name="description" content="">
+
         <link rel="icon" type="image/png" href="./assets/logo.ico"/>
+
         <title>Hobbnb</title>
+        <meta name="description" content="">
+
         <!-- CSS -->
         <link rel="stylesheet" href="css/material-icons.css">
         <link rel="stylesheet" href="css/materialize.min.css">
@@ -13,21 +17,44 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/search.css">
 
+    </head>
+    <body>
+
+        <div class='ng-cloak loader'>
+            <h1><img src='assets/logo.png' style='max-width:25vw;'/></h1>
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='ng-cloak'>
+            <ng-include src="'views/static/navbar.html'"></ng-include>
+            <ng-view></ng-view>
+            <ng-include src="'views/static/footer.html'"></ng-include>
+        </div>
+
         <script src="js/libs/jquery.min.js"></script>
         <script src="js/libs/materialize.min.js"></script>
-        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAamy-iuBFyQu-qNuihVdTQDCPyaqzrUac&libraries=geometry,places"></script>
+        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAamy-iuBFyQu-qNuihVdTQDCPyaqzrUac&amp;libraries=geometry,places"></script>
 
-        <!-- AngularJS -->
         <script src="js/libs/angular.min.js"></script>
         <script src="js/libs/angular-route.min.js"></script>
+
         <script src="js/libs/angular-materialize.js"></script>
         <script src="js/libs/ng-map.min.js"></script>
         <script src="js/libs/angular.rangeSlider.js"></script>
         <script src="js/libs/angular-locale_fr-fr.js"></script>
         <script src="js/libs/ngAutocomplete.js"></script>
-        <script src="js/libs/angular.rangeSlider.js"></script>
-        <script src="js/libs/angular-locale_fr-fr.js"></script>
-        <script src="js/libs/ng-map.min.js"></script>
 
         <script src="js/libs/ocLazyLoad.min.js"></script>
 
@@ -35,10 +62,6 @@
 
         <script src="js/routes.js"></script>
         <script src="js/app.js"></script>
-    </head>
-    <body class="ng-cloak">
-        <ng-include src="'views/static/navbar.html'"></ng-include>
-        <ng-view></ng-view>
-        <ng-include src="'views/static/footer.html'"></ng-include>
+
     </body>
 </html>

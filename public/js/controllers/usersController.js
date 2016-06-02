@@ -48,12 +48,27 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
             break;
         default:
             //Action is an id, show user ; if user is current show profile
+            $scope.howManyPositive = function(t) {
+                return !!t ? (~~(t.reduce(function(a, b) {
+                    return a + b;
+                }) / t.length) || 0) : 0;
+            };
             if (!$scope.currentUser._id) {
                 $location.path('/user/login');
             } else if ($routeParams.action != $scope.currentUser._id) {
-                console.log('it\'s the profile of ' + $routeParams.action);
+                usersService.getOne($routeParams.action).then(function(res) {
+                    $scope.user = res.data;
+                    $scope.canModify = false;
+                });
             } else {
-                console.log('hello ' + $scope.currentUser.email);
+                $scope.user = $scope.currentUser;
+                $scope.canModify = true;
             }
+            if ($scope.user.rating.length <= 0) {
+                $scope.user.rating = [3];
+            }
+            $scope.globalRating = $scope.howManyPositive($scope.user.rating);
+            $scope.globalLowerRating = 5 - $scope.globalRating;
+            $scope.numReviews = $scope.user.rating.length;
     }
 });

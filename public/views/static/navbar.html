@@ -7,7 +7,7 @@
         <li ng-show='currentUser._id'><a href="#/place">Places</a></li>
         <li ng-show='currentUser._id'><a href="#/spot">Spots</a></li>
         <li ng-hide='currentUser._id'><a href="#/user/login">Login</a></li>
-        <li ng-show='currentUser._id'><a href="#/user/{{currentUser._id}}">Profile</a></li>
+        <li ng-show='currentUser._id'><a href="#/user/{{currentUser._id}}">{{currentUser.identity.firstName}}</a></li>
         <li ng-show='currentUser._id'><a href="#/user/logout">Logout</a></li>
         <!--<li>
           <div class="col">
