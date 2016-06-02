@@ -4,8 +4,8 @@ module.exports = function(app) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: "", // your email here
-            pass: "" // your password here
+            user: "fmod31@gmail.com", // your email here
+            pass: "gbwpvkegzmtegpyh" // your password here
         }
     });
 
@@ -13,11 +13,11 @@ module.exports = function(app) {
         console.log(req.body);
         var htmlContent = '<p>Name: ' + req.body.name + '</p>' +
             '<p>Email: ' + req.body.email + '</p>' +
-            '<p>Message: ' + req.body.message + '</p>';
+            '<p>Message: <b>' + req.body.message + '</b></p>';
         var mailOptions = {
-            to: '', // your email here
+            from: 'fmod31@gmail.com', // your email here
             subject: 'New message from Hobbnb',
-            from: req.body.name + ' <' + req.body.email + '>',
+            to: req.body.name + ' <' + req.body.email + '>',
             sender: req.body.email,
             html: htmlContent
         };
