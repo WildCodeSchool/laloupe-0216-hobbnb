@@ -1,20 +1,15 @@
-angular.module('app').controller('sendEmailController', function($scope, $http, $routeParams) {
+angular.module('app').controller('sendEmailController', function($scope, $http, $routeParams, sendEmailService) {
 
     $scope.contact = {};
-
     $scope.postMail = function() {
-        // Check form validation
-        // wrap all your input values in $scope.postData
-
-        $http.post('/sendEmail', $scope.contact)
+        sendEmailService.postMail($scope.contact)
             .then(function(data) {
                 // Show success message
                 $scope.contact = {};
-                console.log("message sent");
-            },function(data) {
+                console.log('Message sent');
+            }, function(data) {
                 // Show error message
-                console.log("message error");
+                console.log("Message error");
             });
     };
-
 });
