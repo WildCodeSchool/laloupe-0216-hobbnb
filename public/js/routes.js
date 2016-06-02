@@ -230,6 +230,9 @@ function routes($routeProvider, $httpProvider) {
                 }]
             }
         })
+        .when('/email/', {
+            templateUrl: 'views/static/email.html',
+        })
         .otherwise({
             redirectTo: '/'
         });
