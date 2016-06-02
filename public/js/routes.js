@@ -157,12 +157,12 @@ function routes($routeProvider, $httpProvider) {
         .otherwise({
             redirectTo: '/'
         });
-    $httpProvider.interceptors.push(function($q, $location, $cookies) {
+    $httpProvider.interceptors.push(function($q, $location, $window) {
         return {
             'request': function(config) {
                 config.headers = config.headers || {};
-                if ($cookies.get('token')) {
-                    config.headers.authorization = $cookies.get('token');
+                if ($window.localStorage.token) {
+                    config.headers.authorization = $window.localStorage.token;
                 }
                 return config;
             },

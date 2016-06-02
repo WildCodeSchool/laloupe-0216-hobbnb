@@ -3,12 +3,12 @@
     <div class="nav-wrapper" >
       <a href="#/" class="brand-logo"><img src="../images/blud_logo.png" width="187px" /></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down" ng-controller='globalUserController'>
-        <li ng-show='{{currentUser._id}}'><a href="#/search">Rechercher</a></li>
-        <li ng-show='{{currentUser._id}}'><a href="#/place">Places</a></li>
-        <li ng-show='{{currentUser._id}}'><a href="#/spot">Spots</a></li>
-        <li ng-show='{{!currentUser._id}}'><a href="#/user/login">Login</a></li>
-        <li ng-show='{{currentUser._id}}'><a href="#/user/{{currentUser._id}}">Profile</a></li>
-        <li ng-show='{{currentUser._id}}'><a href="#/user/logout">Logout</a></li>
+        <li ng-show='currentUser._id'><a href="#/search">Rechercher</a></li>
+        <li ng-show='currentUser._id'><a href="#/place">Places</a></li>
+        <li ng-show='currentUser._id'><a href="#/spot">Spots</a></li>
+        <li ng-hide='currentUser._id'><a href="#/user/login">Login</a></li>
+        <li ng-show='currentUser._id'><a href="#/user/{{currentUser._id}}">Profile</a></li>
+        <li ng-show='currentUser._id'><a href="#/user/logout">Logout</a></li>
         <!--<li>
           <div class="col">
             <a href='#demoModal' modal>Se connecter</a>

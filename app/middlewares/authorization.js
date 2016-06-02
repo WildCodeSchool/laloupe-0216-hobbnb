@@ -1,10 +1,11 @@
-var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken'),
+    secretToken = require('../../config/secretToken.js');
 
 exports.user = {
 
     hasAuthorization: function (req, res, next) {
         if (req.headers.authorization) {
-            jwt.verify(req.headers.authorization, 'tokenSecret', function (err, decoded) {
+            jwt.verify(req.headers.authorization, secretToken, function (err, decoded) {
                 if (err) {
                     return res.sendStatus(403);
                 } else
@@ -17,7 +18,7 @@ exports.user = {
 
     isAdministrator: function (req, res, next) {
          if (req.headers.authorization) {
-            jwt.verify(req.headers.authorization, 'tokenSecret', function (err, decoded) {
+            jwt.verify(req.headers.authorization, secretToken, function (err, decoded) {
                 if (decoded._doc && decoded._doc.isAdmin || !err)
                   next()
                 else

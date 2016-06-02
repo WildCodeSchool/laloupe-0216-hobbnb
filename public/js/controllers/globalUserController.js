@@ -1,6 +1,7 @@
-function globalUserController($scope, usersFactory, $cookies) {
-    if($cookies.get('token')) {
-        //TODO - Get user infos from token and put in on service
-    }
-    $scope.currentUser = usersFactory.currentUser;
+function globalUserController($scope, $window, $rootScope) {
+
+    $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
+    $rootScope.$on('userUpdated', function(event, user){
+        $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
+    });
 };

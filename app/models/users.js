@@ -1,7 +1,8 @@
 // MODEL API
 var mongoose = require('mongoose'),
     bcrypt = require('bcrypt')
-jwt = require('jsonwebtoken');
+    jwt = require('jsonwebtoken'),
+    secretToken = require('../../config/secretToken.js');
 
 
 var usersSchema = new mongoose.Schema({
@@ -71,7 +72,7 @@ var Users = {
             if (err) res.status(400).send(err);
             else {
                 data.password = null;
-                var token = jwt.sign(data, 'tokenSecret', {
+                var token = jwt.sign(data, secretToken, {
                     expiresIn: '24h'
                 });
                 res.json({
@@ -119,7 +120,7 @@ var Users = {
                         } else {
                             if (isMatch) {
                                 data.password = null;
-                                var token = jwt.sign(data, 'tokenSecret', {
+                                var token = jwt.sign(data, secretToken, {
                                     expiresIn: '24h'
                                 });
                                 res.json({
