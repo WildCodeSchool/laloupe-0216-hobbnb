@@ -30,8 +30,8 @@
                     </div>
                     <div class="row center-align">
                         <div>
-                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-main' alt="" />
-                            <img ng-repeat="sport in host.secondarySports" src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
+                            <img src="./assets/hobbies/{{host.spot.primarySports}}.png" class='hobby-main' alt="" />
+                            <img ng-repeat="sport in host.spot.secondarySports" src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
                             <br/>Hobbies
                         </div>
                     </div>
@@ -78,7 +78,7 @@
 <!--comments -->
                     <div class="row">
 
-                        <div class="col s10 offset-s1" ng-repeat='comment in host.comments'>
+                        <div class="col s10 offset-s1" ng-repeat='comment in host.spot.comments'>
                             <div class="card-panel grey lighten-5 z-depth-1">
                                 <div class="row valign-wrapper">
                                     <div class="col s2 center">
