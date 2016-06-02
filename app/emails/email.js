@@ -6,6 +6,7 @@ module.exports = function(app) {
         auth: {
             user: "", // your email here
             pass: "" // your password here
+
         }
     });
 
