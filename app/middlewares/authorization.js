@@ -3,9 +3,9 @@ var jwt = require('jsonwebtoken'),
 
 exports.user = {
 
-    hasAuthorization: function (req, res, next) {
+    hasAuthorization: function(req, res, next) {
         if (req.headers.authorization) {
-            jwt.verify(req.headers.authorization, secretToken, function (err, decoded) {
+            jwt.verify(req.headers.authorization, secretToken, function(err, decoded) {
                 if (err) {
                     return res.sendStatus(403);
                 } else
@@ -16,11 +16,24 @@ exports.user = {
         }
     },
 
-    isAdministrator: function (req, res, next) {
-         if (req.headers.authorization) {
-            jwt.verify(req.headers.authorization, secretToken, function (err, decoded) {
-                if (decoded._doc && decoded._doc.isAdmin || !err)
-                  next()
+    isOwner: function(req, res, next) {
+        if (req.headers.authorization) {
+            jwt.verify(req.headers.authorization, secretToken, function(err, decoded) {
+                if (decoded._doc && req.params.id && decoded._doc._id == req.params.id ||  !err)
+                    next();
+                else
+                    return res.sendStatus(403);
+            });
+        } else {
+            return res.sendStatus(403);
+        }
+    },
+
+    isAdministrator: function(req, res, next) {
+        if (req.headers.authorization) {
+            jwt.verify(req.headers.authorization, secretToken, function(err, decoded) {
+                if (decoded._doc && decoded._doc.isAdmin ||  !err)
+                    next();
                 else
                     return res.sendStatus(403);
             });

@@ -1,58 +1,62 @@
 <div class="container">
-    <div class="row">
-        <div class="col s6 offset-s3">
-            <div class="card-panel valign-wrapper">
-                <div class="right" ng-hide='canModify'>
-                    Editer mon profil
+    <div class=" card-panel">
+        <div class="row">
+            <div class="col s6 offset-s3">
+                <div class="card-panel">
+                    <div class='right'>
+                        <span class="right grey-text lighten-5" style='font-size:12px;'>{{globalRating}}/5 |
+                            {{numReviews}}
+                            avis</span>
+                    </div>
+                    <div class="valign-wrapper">
+                        <img src="uploads/users/{{user._id}}/large/img_0.jpg" class='circle responsive-img'/>
+                        <div class='username-spacer'>
+                            <b>{{user.identity.firstName}}
+                                {{user.identity.lastName}}</b>
+                        </div>
+                    </div>
+                    <div class='right' ng-show='canModify'>
+                        <a href='#/user/{{user._id}}'>Editer mon profil</a>
+                    </div>
                 </div>
-                <img src="uploads/users/{{user._id}}/large/img_0.jpg" class='circle responsive-img'/>
-                <div class='valign username-spacer'>
-                    <b>{{user.identity.firstName}}
-                        {{user.identity.lastName}}</b>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <h2>Messagerie</h2>
+                <div class="collection">
+                    <a ng-repeat='msg in msgs' href="#/messages/{{msg._id}}" class="collection-item">{{msg.name}}
+                        <span class="badge">{{msg.time}}</span>
+                    </a>
+                    <a ng-hide='msgs' href="#/messages" class="collection-item">Vous n'avez aucun message</a>
                 </div>
             </div>
-            <div class='right-align'>
-                <span class="right grey-text lighten-5" style='font-size:12px;'>{{globalRating}}/5 |
-                    {{numReviews}}
-                    avis</span>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <h2>Mes hébergements</h2>
+                <div class="collection">
+                    <a ng-repeat='place in places' href="#/place/{{place._id}}" class="collection-item">{{place.name}}
+                        <span class="badge">{{place.rating.cleanness.length}}
+                            avis</span>
+                    </a>
+                    <a ng-hide='places' href="#/place" class="collection-item">Vous n'avez aucun hébergement</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="divider"></div>
-    <div class="row">
-        <div class="col s8 offset-s2">
-            <h2>Messagerie</h2>
-            <div class="collection">
-                <a ng-repeat='msg in msgs' href="#/messages/{{msg._id}}" class="collection-item">{{msg.name}}
-                    <span class="badge">{{msg.time}}</span>
-                </a>
-                <a ng-hide='msgs' href="#/messages" class="collection-item">Vous n'avez aucun message</a>
-            </div>
-        </div>
-    </div>
-    <div class="divider"></div>
-    <div class="row">
-        <div class="col s8 offset-s2">
-            <h2>Mes hébergements</h2>
-            <div class="collection">
-                <a ng-repeat='place in places' href="#/place/{{place._id}}" class="collection-item">{{place.name}}
-                    <span class="badge">{{place.rating.cleanness.length}}
-                        avis</span>
-                </a>
-                <a ng-hide='places' href="#/place" class="collection-item">Vous n'avez aucun hébergement</a>
-            </div>
-        </div>
-    </div>
-    <div class="divider"></div>
-    <div class="row">
-        <div class="col s8 offset-s2">
-            <h2>Mes spots</h2>
-            <div class="collection">
-                <a ng-repeat='spot in spots' href="#/spot/{{spot._id}}" class="collection-item">{{spot.name}}
-                    <span class="badge">{{spot.rating.beauty.length}}
-                        avis</span>
-                </a>
-                <a ng-hide='spots' href="#/spot" class="collection-item">Vous n'avez aucun spot</a>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <h2>Mes spots</h2>
+                <div class="collection">
+                    <a ng-repeat='spot in spots' href="#/spot/{{spot._id}}" class="collection-item">{{spot.name}}
+                        <span class="badge">{{spot.rating.beauty.length}}
+                            avis</span>
+                    </a>
+                    <a ng-hide='spots' href="#/spot" class="collection-item">Vous n'avez aucun spot</a>
+                </div>
             </div>
         </div>
     </div>
