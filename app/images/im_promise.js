@@ -1,4 +1,4 @@
-/* DEPRECATED - Use im_promise
+/* Promise based */
 module.exports = function(app) {
     'use strict';
     var formidable = require('formidable'); // package for image resizing
@@ -16,10 +16,6 @@ module.exports = function(app) {
             id = '',
             whatAmI = 'trash',
             new_location = 'public/uploads/';
-        if (!fs.existsSync(new_location)) {
-            fs.mkdirSync(new_location);
-        }
-
 
         new formidable.IncomingForm()
             .parse(req, function(err, fields, files) {
@@ -41,6 +37,9 @@ module.exports = function(app) {
                     if (splitMePlease.length == 2) {
                         id = splitMePlease[1];
                         whatAmI = splitMePlease[0]; //places or user
+                        if (!fs.existsSync(new_location)) {
+                            fs.mkdirSync(new_location);
+                        }
                         if (!fs.existsSync(new_location + whatAmI)) {
                             fs.mkdirSync(new_location + whatAmI);
                         }
@@ -137,75 +136,78 @@ module.exports = function(app) {
         })
 
         .on('end', function(fields, files) {
-            var interValeuh = setInterval(function() {
-                fs.readdir(new_location + 'large', function(err, files) {
-                    if (!err) {
-                        if (files.length == howManyFileProcessed) {
-                            clearInterval(interValeuh);
-                            fs.stat(new_location + 'large', function(err, stats) {
-                                if (!err) {
-                                    var processed = 0;
-                                    fs.readdir(new_location, function(error, files) {
-                                        var caption = [];
-                                        files.forEach(function(file) {
-                                            if (file.indexOf('.') != -1) {
-                                                caption.push(processed + file.substr(file.lastIndexOf('.')));
-                                                fs.renameSync(new_location + file, new_location + processed + file.substr(file.lastIndexOf('.')));
-                                                fs.renameSync(new_location + 'thumb/img_' + file, new_location + 'thumb/img_' + processed + file.substr(file.lastIndexOf('.')));
-                                                fs.renameSync(new_location + 'large/img_' + file, new_location + 'large/img_' + processed + file.substr(file.lastIndexOf('.')));
-                                                processed++;
-                                            }
-                                        });
-                                        console.log("File processing ended - " + processed + " files done");
-                                        console.log(caption);
-                                        var req2 = {
-                                            body: {
-                                                content: {
-                                                    picture: caption[0],
-                                                    caption: caption.slice(1)
+            var timeBlock = new Promise(function(resolve, reject) {
+                var interValeuh = setInterval(function() {
+                    fs.readdir(new_location + 'large', function(err, files) {
+                        if (!err) {
+                            if (files.length == howManyFileProcessed) {
+                                clearInterval(interValeuh);
+                                fs.stat(new_location + 'large', function(err, stats) {
+                                    if (!err) {
+                                        var processed = 0;
+                                        fs.readdir(new_location, function(error, files) {
+                                            var caption = [];
+                                            files.forEach(function(file) {
+                                                if (file.indexOf('.') != -1) {
+                                                    caption.push(processed + file.substr(file.lastIndexOf('.')));
+                                                    fs.renameSync(new_location + file, new_location + processed + file.substr(file.lastIndexOf('.')));
+                                                    fs.renameSync(new_location + 'thumb/img_' + file, new_location + 'thumb/img_' + processed + file.substr(file.lastIndexOf('.')));
+                                                    fs.renameSync(new_location + 'large/img_' + file, new_location + 'large/img_' + processed + file.substr(file.lastIndexOf('.')));
+                                                    processed++;
                                                 }
-                                            },
-                                            params: {
-                                                id: id
+                                            });
+                                            console.log("File processing ended - " + processed + " files done");
+                                            console.log(caption);
+                                            var req2 = {
+                                                body: {
+                                                    content: {
+                                                        picture: caption[0],
+                                                        caption: caption.slice(1)
+                                                    }
+                                                },
+                                                params: {
+                                                    id: id
+                                                }
+                                            };
+                                            if (whatAmI == 'places' || whatAmI == 'spots') {
+                                                var DBase = require('../models/' + whatAmI + '.js');
+                                                DBase.updateAndDontUpdate(req2, res);
                                             }
-                                        };
-                                        if (whatAmI == 'places' || whatAmI == 'spots') {
-                                            var DBase = require('../models/' + whatAmI + '.js');
-                                            DBase.updateAndDontUpdate(req2, res);
+                                            resolve(1);
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }, 500);
+            }).then(function() {
+                if (whatAmI == 'places' || whatAmI == 'spots') {
+                    if (!res.headersSent) {
+                        var interValeuh2 = setInterval(function() {
+                            fs.readdir(new_location + 'large', function(err, files) {
+                                if (!err) {
+                                    if (files.length == howManyFileProcessed) {
+                                        clearInterval(interValeuh2);
+                                        if (files.length == 1) {
+                                            res.redirect('/#/picture/' + whatAmI + '/1/' + id);
+                                        } else {
+                                            res.redirect('/#/' + whatAmI.substr(0, whatAmI.length - 1) + '/' + id);
                                         }
-                                    });
+                                        res.end();
+                                    }
                                 }
                             });
-                        }
+                        }, 500);
                     }
-                });
-            }, 500);
-            if (whatAmI == 'places' || whatAmI == 'spots') {
-                if (!res.headersSent) {
-                    var interValeuh2 = setInterval(function() {
-                        fs.readdir(new_location + 'large', function(err, files) {
-                            if (!err) {
-                                if (files.length == howManyFileProcessed) {
-                                    clearInterval(interValeuh2);
-                                    if (files.length == 1) {
-                                        res.redirect('/#/picture/' + whatAmI + '/1/' + id);
-                                    } else {
-                                        res.redirect('/#/' + whatAmI.substr(0, whatAmI.length - 1) + '/' + id);
-                                    }
-                                    res.end();
-                                }
-                            }
-                        });
-                    }, 500);
+                } else if (whatAmI == 'users') {
+                    res.redirect('/#/user/' + id);
+                    res.end();
+                } else if (!res.headersSent) {
+                    res.sendStatus(403);
                 }
-            } else if (whatAmI == 'users') {
-                res.redirect('/#/user/' + id);
-                res.end();
-            } else if (!res.headersSent) {
-                res.sendStatus(403);
-            }
+            });
             return;
         });
     });
 };
-*/
