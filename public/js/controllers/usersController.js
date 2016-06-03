@@ -61,6 +61,8 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
                 usersService.getOne($routeParams.action).then(function(res) {
                     $scope.user = res.data;
                     $scope.canModify = false;
+                }, function() {
+                    $location.path('/');
                 });
             } else {
                 $scope.user = $scope.currentUser;

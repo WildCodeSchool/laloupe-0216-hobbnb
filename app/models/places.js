@@ -149,6 +149,16 @@ var Places = {
         });
     },
 
+    findOneAndReturn: function(req, res) {
+        Places.model.findById(req.params.id, function(err, data) {
+            if (err) {
+                return err;
+            } else {
+                return data;
+            }
+        });
+    },
+
     findAll: function(req, res) {
         Places.model.find(function(err, data) {
             if (err) {

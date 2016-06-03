@@ -18,8 +18,12 @@
                         <input name="height" type="text" ng-model="height"/>
                         <label>height:</label>
                     </div>
+                    <div class="input-field" style="display: none;">
+                        <input name="authorization" type="text" ng-model="authorization"/>
+                        <label>token:</label>
+                    </div>
                     <div class="input-field">
-                        <input multiple="multiple" name="upload" type="file" data-file="param.file"/>
+                        <input file-upload multiple name="upload" type="file" />
                     </div>
                     <div class="input-field">
                         <input type="submit" value="Upload" class="btn waves-effect waves-light"/>

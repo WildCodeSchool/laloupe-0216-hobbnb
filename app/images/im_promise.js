@@ -1,19 +1,38 @@
 /* Promise based */
 module.exports = function(app) {
     'use strict';
-    var formidable = require('formidable'); // package for image resizing
-    var fs = require('fs-extra'); // package for image resizing
-    var qt = require('quickthumb'); // package for image resizing
-    var im = require('imagemagick'); // package for image resizing
-    var mmm = require('mmmagic').Magic;
-    app.use(qt.static(__dirname + '/'));
-    app.post('/picture', function(req, res) {
 
-        var howManyFileProcessed = 0,
+    var formidable = require('formidable'),
+        fs = require('fs-extra'),
+        qt = require('quickthumb'),
+        im = require('imagemagick'),
+        mmm = require('mmmagic').Magic,
+        jwt = require('jsonwebtoken'),
+        secretToken = require('../../config/secretToken.js');
+
+    app.post('/picture', function(req, res) {
+        var deleteFolderRecursive = function(path) {
+            if (fs.existsSync(path)) {
+                fs.readdirSync(path).forEach(function(file, index) {
+                    var curPath = path + "/" + file;
+                    if (fs.lstatSync(curPath).isDirectory()) { // recurse
+                        deleteFolderRecursive(curPath);
+                    } else { // delete file
+                        fs.unlinkSync(curPath);
+                    }
+                });
+                fs.rmdirSync(path);
+            }
+        };
+
+        var isAuth = false,
+            howManyFileProcessed = 0,
+            maxFiles = 7,
             wdth = 200,
             hgth = 200,
             path = 'junk',
             id = '',
+            ownerTarget = 'nobody',
             whatAmI = 'trash',
             new_location = 'public/uploads/';
 
@@ -36,12 +55,26 @@ module.exports = function(app) {
                     var splitMePlease = field.split('/');
                     if (splitMePlease.length == 2) {
                         id = splitMePlease[1];
-                        whatAmI = splitMePlease[0]; //places or user
+                        whatAmI = splitMePlease[0]; //places, spots or users
                         if (!fs.existsSync(new_location)) {
                             fs.mkdirSync(new_location);
                         }
                         if (!fs.existsSync(new_location + whatAmI)) {
                             fs.mkdirSync(new_location + whatAmI);
+                        }
+                        if (whatAmI === 'users') {
+                            maxFiles = 1; // Only one profile pic
+                            ownerTarget = id;
+                        }
+                        if (whatAmI == 'places' || whatAmI == 'spots') {
+                            var DBase = require('../models/' + whatAmI + '.js');
+                            var req2 = {
+                                params: {
+                                    id: id
+                                }
+                            };
+                            var found = DBase.findOneAndReturn(req2, res);
+                            ownerTarget = found.owner;
                         }
                     } else {
                         id = field;
@@ -57,157 +90,174 @@ module.exports = function(app) {
                         }
                     });
                 }
+                if (name == 'authorization' && whatAmI == 'users') {
+                    jwt.verify(field, secretToken, function(err, decoded) {
+                        if (decoded._doc && ownerTarget && decoded._doc._id == ownerTarget) {
+                            console.log(ownerTarget, decoded._doc._id);
+                            isAuth = true;
+                        }
+                    });
+                }
             })
 
         .on('file', function(name, f) {
-            howManyFileProcessed++;
-            if (howManyFileProcessed < 8 && (whatAmI == 'places' || whatAmI == 'users' || whatAmI == 'spots')) {
-                // Temporary location of our uploaded file //
-                var temp_path = f.path;
-                // The file name of the uploaded file //
-                var file_name = f.name;
-                if (!fs.existsSync(new_location)) {
-                    fs.mkdirSync(new_location);
+            if (isAuth) {
+                if (howManyFileProcessed == maxFiles && whatAmI == 'users') {
+                    deleteFolderRecursive(new_location);
+                    howManyFileProcessed--;
                 }
-                if (!fs.existsSync(new_location + 'thumb')) {
-                    fs.mkdirSync(new_location + 'thumb');
-                }
-                if (!fs.existsSync(new_location + 'large')) {
-                    fs.mkdirSync(new_location + 'large');
-                }
-                // Location where we want to copy the uploaded file //
-                var magic = new mmm();
-                magic.detectFile(temp_path, function(err, result) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        if (result.indexOf('image') != -1 && path != 'junk' && wdth !== 0 && !isNaN(Number(wdth)) && hgth !== 0 && !isNaN(Number(hgth)) && path.indexOf('..') === -1 && path !== '') {
-                            fs.copy(temp_path, new_location + file_name, function(err) {
-                                if (err) {
-                                    console.error(err);
-                                } else {
-                                    // Delete the "temp" file
-                                    fs.unlink(temp_path, function(err) {
-                                        if (err) {
-                                            console.error(err);
-                                        } else {
-                                            im.crop({
-                                                srcPath: new_location + file_name,
-                                                dstPath: new_location + 'thumb/img_' + file_name,
-                                                width: Number(wdth) / 4,
-                                                height: Number(hgth) / 4,
-                                                quality: 1,
-                                                gravity: "North"
-                                            }, function(err, stdout, stderr) {
-                                                if (err) {
-                                                    console.log(err);
-                                                } else {
-                                                    console.log('One file uploaded & croped with success');
-                                                    im.crop({
-                                                        srcPath: new_location + file_name,
-                                                        dstPath: new_location + 'large/img_' + file_name,
-                                                        width: Number(wdth),
-                                                        height: Number(hgth),
-                                                        quality: 1,
-                                                        gravity: "North"
-                                                    }, function(err, stdout, stderr) {
-                                                        if (err) {
-                                                            console.log(err);
-                                                        } else {
-                                                            console.log('One file uploaded & croped with success');
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        } else {
-                            fs.unlink(temp_path);
-                            console.log('Someone try to upload ' + file_name + ' with a height of ' + hgth + ' and a width of ' + wdth + ', he want to write to ' + path + ', the server denied this');
-                        }
+                howManyFileProcessed++;
+                if (howManyFileProcessed <= maxFiles && (whatAmI == 'places' || whatAmI == 'users' || whatAmI == 'spots')) {
+                    // Temporary location of our uploaded file //
+                    var temp_path = f.path;
+                    // The file name of the uploaded file //
+                    var file_name = f.name;
+                    if (!fs.existsSync(new_location)) {
+                        fs.mkdirSync(new_location);
                     }
-                });
-            } else {
-                howManyFileProcessed--;
-                fs.unlink(f.path);
+                    if (!fs.existsSync(new_location + 'thumb')) {
+                        fs.mkdirSync(new_location + 'thumb');
+                    }
+                    if (!fs.existsSync(new_location + 'large')) {
+                        fs.mkdirSync(new_location + 'large');
+                    }
+                    // Location where we want to copy the uploaded file //
+                    var magic = new mmm();
+                    magic.detectFile(temp_path, function(err, result) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            if (result.indexOf('image') != -1 && path != 'junk' && wdth !== 0 && !isNaN(Number(wdth)) && hgth !== 0 && !isNaN(Number(hgth)) && path.indexOf('..') === -1 && path !== '') {
+                                fs.copy(temp_path, new_location + file_name, function(err) {
+                                    if (err) {
+                                        console.error(err);
+                                    } else {
+                                        // Delete the "temp" file
+                                        fs.unlink(temp_path, function(err) {
+                                            if (err) {
+                                                console.error(err);
+                                            } else {
+                                                im.crop({
+                                                    srcPath: new_location + file_name,
+                                                    dstPath: new_location + 'thumb/img_' + file_name,
+                                                    width: Number(wdth) / 4,
+                                                    height: Number(hgth) / 4,
+                                                    quality: 1,
+                                                    gravity: "North"
+                                                }, function(err, stdout, stderr) {
+                                                    if (err) {
+                                                        console.log(err);
+                                                    } else {
+                                                        console.log('One file uploaded & croped with success');
+                                                        im.crop({
+                                                            srcPath: new_location + file_name,
+                                                            dstPath: new_location + 'large/img_' + file_name,
+                                                            width: Number(wdth),
+                                                            height: Number(hgth),
+                                                            quality: 1,
+                                                            gravity: "North"
+                                                        }, function(err, stdout, stderr) {
+                                                            if (err) {
+                                                                console.log(err);
+                                                            } else {
+                                                                console.log('One file uploaded & croped with success');
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            } else {
+                                fs.unlink(temp_path);
+                                console.log('Someone try to upload ' + file_name + ' with a height of ' + hgth + ' and a width of ' + wdth + ', he want to write to ' + path + ', the server denied this');
+                            }
+                        }
+                    });
+                } else {
+                    howManyFileProcessed--;
+                    fs.unlink(f.path);
+                }
             }
         })
 
         .on('end', function(fields, files) {
-            var timeBlock = new Promise(function(resolve, reject) {
-                var interValeuh = setInterval(function() {
-                    fs.readdir(new_location + 'large', function(err, files) {
-                        if (!err) {
-                            if (files.length == howManyFileProcessed) {
-                                clearInterval(interValeuh);
-                                fs.stat(new_location + 'large', function(err, stats) {
-                                    if (!err) {
-                                        var processed = 0;
-                                        fs.readdir(new_location, function(error, files) {
-                                            var caption = [];
-                                            files.forEach(function(file) {
-                                                if (file.indexOf('.') != -1) {
-                                                    caption.push(processed + file.substr(file.lastIndexOf('.')));
-                                                    fs.renameSync(new_location + file, new_location + processed + file.substr(file.lastIndexOf('.')));
-                                                    fs.renameSync(new_location + 'thumb/img_' + file, new_location + 'thumb/img_' + processed + file.substr(file.lastIndexOf('.')));
-                                                    fs.renameSync(new_location + 'large/img_' + file, new_location + 'large/img_' + processed + file.substr(file.lastIndexOf('.')));
-                                                    processed++;
-                                                }
-                                            });
-                                            console.log("File processing ended - " + processed + " files done");
-                                            console.log(caption);
-                                            var req2 = {
-                                                body: {
-                                                    content: {
-                                                        picture: caption[0],
-                                                        caption: caption.slice(1)
+            if (isAuth) {
+                var timeBlock = new Promise(function(resolve, reject) {
+                    var interValeuh = setInterval(function() {
+                        fs.readdir(new_location + 'large', function(err, files) {
+                            if (!err) {
+                                if (files.length == howManyFileProcessed) {
+                                    clearInterval(interValeuh);
+                                    fs.stat(new_location + 'large', function(err, stats) {
+                                        if (!err) {
+                                            var processed = 0;
+                                            fs.readdir(new_location, function(error, files) {
+                                                var caption = [];
+                                                files.forEach(function(file) {
+                                                    if (file.indexOf('.') != -1) {
+                                                        caption.push(processed + file.substr(file.lastIndexOf('.')));
+                                                        fs.renameSync(new_location + file, new_location + processed + file.substr(file.lastIndexOf('.')));
+                                                        fs.renameSync(new_location + 'thumb/img_' + file, new_location + 'thumb/img_' + processed + file.substr(file.lastIndexOf('.')));
+                                                        fs.renameSync(new_location + 'large/img_' + file, new_location + 'large/img_' + processed + file.substr(file.lastIndexOf('.')));
+                                                        processed++;
                                                     }
-                                                },
-                                                params: {
-                                                    id: id
+                                                });
+                                                console.log("File processing ended - " + processed + " files done");
+                                                console.log(caption);
+                                                var req2 = {
+                                                    body: {
+                                                        content: {
+                                                            picture: caption[0],
+                                                            caption: caption.slice(1)
+                                                        }
+                                                    },
+                                                    params: {
+                                                        id: id
+                                                    }
+                                                };
+                                                if (whatAmI == 'places' || whatAmI == 'spots') {
+                                                    var DBase = require('../models/' + whatAmI + '.js');
+                                                    DBase.updateAndDontUpdate(req2, res);
                                                 }
-                                            };
-                                            if (whatAmI == 'places' || whatAmI == 'spots') {
-                                                var DBase = require('../models/' + whatAmI + '.js');
-                                                DBase.updateAndDontUpdate(req2, res);
+                                                resolve(1);
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }, 500);
+                }).then(function() {
+                    if (whatAmI == 'places' || whatAmI == 'spots' || whatAmI == 'users') {
+                        if (!res.headersSent) {
+                            var interValeuh2 = setInterval(function() {
+                                fs.readdir(new_location + 'large', function(err, files) {
+                                    if (!err) {
+                                        if (files.length == howManyFileProcessed) {
+                                            clearInterval(interValeuh2);
+                                            if (files.length == 1 && whatAmI != 'users') {
+                                                res.redirect('/#/picture/' + whatAmI + '/1/' + id);
+                                            } else {
+                                                res.redirect('/#/' + whatAmI.substr(0, whatAmI.length - 1) + '/' + id);
                                             }
-                                            resolve(1);
-                                        });
+                                            res.end();
+                                        }
                                     }
                                 });
-                            }
+                            }, 500);
                         }
-                    });
-                }, 500);
-            }).then(function() {
-                if (whatAmI == 'places' || whatAmI == 'spots') {
-                    if (!res.headersSent) {
-                        var interValeuh2 = setInterval(function() {
-                            fs.readdir(new_location + 'large', function(err, files) {
-                                if (!err) {
-                                    if (files.length == howManyFileProcessed) {
-                                        clearInterval(interValeuh2);
-                                        if (files.length == 1) {
-                                            res.redirect('/#/picture/' + whatAmI + '/1/' + id);
-                                        } else {
-                                            res.redirect('/#/' + whatAmI.substr(0, whatAmI.length - 1) + '/' + id);
-                                        }
-                                        res.end();
-                                    }
-                                }
-                            });
-                        }, 500);
+                    } else if (!res.headersSent) {
+                        res.sendStatus(403);
+                    } else {
+                        res.end();
                     }
-                } else if (whatAmI == 'users') {
-                    res.redirect('/#/user/' + id);
-                    res.end();
-                } else if (!res.headersSent) {
-                    res.sendStatus(403);
-                }
-            });
-            return;
+                });
+                return;
+            } else {
+                res.sendStatus(403);
+            }
         });
     });
 };
