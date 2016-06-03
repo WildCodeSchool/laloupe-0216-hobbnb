@@ -150,6 +150,7 @@ var Places = {
     },
 
     findOneAndReturn: function(req, res) {
+        //TODO : Budfix, do not send data
         Places.model.findById(req.params.id, function(err, data) {
             if (err) {
                 return err;
