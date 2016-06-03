@@ -6,7 +6,7 @@ angular.module('app').controller('sendEmailController', function($scope, $http, 
             .then(function(data) {
                 // Show success message
                 $scope.contact = {};
-                console.log('Message sent');
+                console.log('An e-mail has been sent successfully!!!');
             }, function(data) {
                 // Show error message
                 console.log("Message error");
