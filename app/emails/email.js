@@ -1,6 +1,7 @@
 module.exports = function(app) {
     'use strict';
     var nodemailer = require('nodemailer');
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -43,8 +44,8 @@ module.exports = function(app) {
             from: 'fmod31@gmail.com', // your email here
             subject: 'New message from Hobbnb',
             to: req.body.name + ' <' + req.body.email + '>',
-            sender: req.body.email,
-            html: htmlContent
+            sender: req.body.email
+                //html: htmlContent
         };
         transport.sendMail(mailOptions, function(err, info) {
             if (err) {
