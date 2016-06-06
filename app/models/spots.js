@@ -85,13 +85,23 @@ var Spots = {
     },
 
     findOneAndReturn: function(req, res) {
-        Places.model.findById(req.params.id, function(err, data) {
+        Spots.model.findById(req.params.id, function(err, data) {
             if (err) {
                 return err;
             } else {
                 return data;
             }
         });
+    },
+
+    findSpotsOfUser: function(req, res) {
+        Spots.model.find({owner:req.params.id},function(err, data) {
+            if(err) {
+                res.send(err);
+            } else {
+                res.send(data);
+            }
+        })
     },
 
     findAll: function(req, res) {
