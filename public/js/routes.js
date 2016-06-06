@@ -63,8 +63,10 @@ function routes($routeProvider, $httpProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            'js/services/usersService.js',
                             'js/services/placesService.js',
                             'js/factories/placesFactory.js',
+                            'js/factories/searchFactory.js',
                             'js/filters/rangeFilter.js',
                             'js/controllers/placesController.js'
                         ]

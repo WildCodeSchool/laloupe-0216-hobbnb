@@ -1,5 +1,5 @@
 // PLACES CONTROLLER
-angular.module('app').controller('placesController', function($scope, $http, $location, $routeParams, placesFactory, placesService) {
+angular.module('app').controller('placesController', function($scope, $http, $location, $routeParams, placesFactory, placesService, usersService, searchFactory) {
 
 
 
@@ -29,8 +29,26 @@ angular.module('app').controller('placesController', function($scope, $http, $lo
         }) / t.length) || 0) : 0;
     };
     placesService.getOne($scope.currentHost).then(function(e) {
+
         if (!e.data.shortDescription) $location.path('/place');
+
+        usersService.getOne(e.data.owner).then(function(res) {
+            $scope.owner = res.data;
+            if ($scope.owner.rating.length <= 0) {
+                $scope.owner.rating = [3];
+            }
+            $scope.owner.globalRating = $scope.howManyPositive($scope.owner.rating);
+            $scope.owner.globalLowerRating = 5 - $scope.owner.globalRating;
+            $scope.owner.numReviews = $scope.owner.rating.length;
+        }, function(err) {
+            $location.path('/place');
+        });
+
         $scope.host = e.data;
+
+        searchFactory.data.city = $scope.host.address.city;
+        searchFactory.data.hobby = $scope.host.primarySports;
+
         if ($scope.host.rating.cleanness.length <= 0) {
             $scope.host.rating.cleanness = [3];
         }
@@ -40,9 +58,16 @@ angular.module('app').controller('placesController', function($scope, $http, $lo
         if ($scope.host.rating.valueForMoney.length <= 0) {
             $scope.host.rating.valueForMoney = [3];
         }
+
         $scope.globalRating = $scope.howManyPositive($scope.host.rating.cleanness.concat($scope.host.rating.location, $scope.host.rating.valueForMoney));
         $scope.globalLowerRating = 5 - $scope.globalRating;
         $scope.numReviews = ~~(($scope.host.rating.cleanness.length + $scope.host.rating.location.length + $scope.host.rating.valueForMoney.length) / 3);
+
+        $scope.host.comments.forEach(function(c,i) {
+            usersService.getOne(c.owner).then(function(r) {
+                $scope.host.comments[i].owner = r.data;
+            })
+        })
     });
 
 });

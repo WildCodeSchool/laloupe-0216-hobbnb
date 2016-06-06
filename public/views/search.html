@@ -218,7 +218,7 @@
                     <a href="/#/place/{{p._id}}">
                         <div class="card hoverable">
                             <div class="card-image">
-                                <div class="placepict" ng-style="{{pictPlace(p.picture)}}"></div>
+                                <div class="placepict" ng-style="{{pictPlace(p)}}"></div>
                                 <span class="card-title">{{p.home.price|currency:'€'}}</span>
                             </div>
                             <div class="card-content">
@@ -260,7 +260,7 @@
                     <a href="/#/place/{{positions[indexOfTheTruc]._id}}">
                         <div class="card">
                             <div class="card-image">
-                                <img class="placepict" src="{{positions[indexOfTheTruc].picture}}">
+                                <img class="placepict" src="uploads/places/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}">
                                 <span class="card-title">{{positions[indexOfTheTruc].home.price}}€</span>
                             </div>
                             <div class="card-content">

@@ -212,7 +212,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
             return "../assets/hobbies/" + widget.primarySports + ".png";
         };
         $scope.pictPlace = function(widget) {
-            return "{'background-image': 'url(" + widget + ")'}";
+            return "{'background-image': 'url(uploads/places/" + widget._id + "/thumb/img_" + widget.picture + ")'}";
         };
 
     });
