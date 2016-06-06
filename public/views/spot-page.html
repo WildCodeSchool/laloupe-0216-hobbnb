@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col s12">
-        <div style='background-image:url("uploads/spots/{{host._id}}/{{host.picture}}");' class='bg-fullwidth'></div>
+        <div style='background-image:url("uploads/spots/{{host._id}}/large/img_{{host.picture}}");' class='bg-fullwidth'></div>
     </div>
 </div>
 <div class="container">
@@ -9,13 +9,16 @@
             <div class="row card-panel valign-wrapper">
                 <div class="col s4 m3">
                     <div class='valign center-align'>
-                        <img src="assets/places/user-pic.jpg" alt="Tom" class='circle responsive-img'/>
+                        <img src="../uploads/users/{{owner._id}}/large/img_0.jpg" class='circle responsive-img'/>
                         <br/>
-                        <b>Thomas</b>
+                        <b>{{owner.identity.firstName + ' ' + owner.identity.lastName}}</b>
                         <p>
-                            <span class="center-align grey-text lighten-5" style='font-size:12px;'>{{globalRating}}/5 | {{numReviews}} reviews<br/>Rookie</span>
+                            <span class="center-align grey-text lighten-5" style='font-size:12px;'>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:owner.globalRating'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:owner.globalLowerRating'>star</i>
+                                <br/>{{owner.numReviews}}
+                                reviews</span>
                         </p>
-                        <img src="assets/places/shaka.png" alt="Sh" class="responsive-img" style='max-width:20px;margin:8px;'/>
                     </div>
                 </div>
                 <div class="col s8 m9">
@@ -108,7 +111,7 @@
 <!--gallery pictures -->
                     <div class="row">
                         <div class="col s12 m6 center" ng-repeat="pict in host.caption">
-                            <img class="responsive-img" src="uploads/spots/{{host._id}}/{{pict}}" alt="" />
+                            <img  materialboxed class="materialboxed responsive-img" src="uploads/spots/{{host._id}}/{{pict}}" alt="" />
                         </div>
                     </div>
 <!--About the author -->
