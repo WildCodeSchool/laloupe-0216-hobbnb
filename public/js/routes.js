@@ -155,6 +155,7 @@ function routes($routeProvider, $httpProvider) {
                         name: 'app',
                         files: [
                             'js/services/messagingService.js',
+                            'js/services/usersService.js',
                             'js/controllers/messagingController.js'
                         ]
                     });
@@ -191,7 +192,9 @@ function routes($routeProvider, $httpProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            'js/services/messagingService.js',
                             'js/services/usersService.js',
+                            'js/filters/rangeFilter.js',
                             'js/controllers/usersController.js'
                         ]
                     });

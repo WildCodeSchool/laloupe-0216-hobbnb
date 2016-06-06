@@ -4,8 +4,10 @@
             <div class="col s6 offset-s3">
                 <div class="card-panel">
                     <div class='right'>
-                        <span class="right grey-text lighten-5" style='font-size:12px;'>{{globalRating}}/5 |
-                            {{numReviews}}
+                        <span class="center-align grey-text lighten-5" style='font-size:12px;'>
+                            <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
+                            <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
+                            <br/>{{numReviews}}
                             avis</span>
                     </div>
                     <div class="valign-wrapper">
@@ -27,7 +29,7 @@
                 <h2>Messagerie</h2>
                 <div class="collection">
                     <a ng-repeat='msg in msgs' href="#/messages/{{msg._id}}" class="collection-item">{{msg.message}}
-                        <span class="badge">{{msg.creation}}</span>
+                        <span class="badge">{{format(msg.creation)}}</span>
                     </a>
                     <a ng-hide='msgs && msgs.length > 0' href="#/messages" class="collection-item">Vous n'avez aucun message</a>
                     <a href="#/messages" class="collection-item right-align">

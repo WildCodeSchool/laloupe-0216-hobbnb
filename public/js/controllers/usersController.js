@@ -1,4 +1,4 @@
-angular.module('app').controller('usersController', function($scope, $rootScope, $routeParams, $location, $http, $window, usersService) {
+angular.module('app').controller('usersController', function($scope, $rootScope, $routeParams, $location, $http, $window, usersService, messagingService) {
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
