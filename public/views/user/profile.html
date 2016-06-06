@@ -26,8 +26,8 @@
             <div class="col s8 offset-s2">
                 <h2>Messagerie</h2>
                 <div class="collection">
-                    <a ng-repeat='msg in msgs' href="#/messages/{{msg._id}}" class="collection-item">{{msg.name}}
-                        <span class="badge">{{msg.time}}</span>
+                    <a ng-repeat='msg in msgs' href="#/messages/{{msg._id}}" class="collection-item">{{msg.message}}
+                        <span class="badge">{{msg.creation}}</span>
                     </a>
                     <a ng-hide='msgs && msgs.length > 0' href="#/messages" class="collection-item">Vous n'avez aucun message</a>
                     <a href="#/messages" class="collection-item right-align">

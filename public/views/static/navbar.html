@@ -26,6 +26,9 @@
                     <a href="#/user/{{currentUser._id}}">{{currentUser.identity.firstName}}</a>
                 </li>
                 <li ng-show='currentUser._id'>
+                    <a href="#/messages">Messagerie</a>
+                </li>
+                <li ng-show='currentUser._id'>
                     <a href="#/user/logout">Logout</a>
                 </li>
             </ul>
@@ -47,6 +50,9 @@
                 </li>
                 <li ng-show='currentUser._id'>
                     <a href="#/user/{{currentUser._id}}">{{currentUser.identity.firstName}}</a>
+                </li>
+                <li ng-show='currentUser._id'>
+                    <a href="#/messages">Messagerie</a>
                 </li>
                 <li ng-show='currentUser._id'>
                     <a href="#/user/logout">Logout</a>

@@ -14,7 +14,7 @@ angular.module('app')
             return $http.get('/msg/rec/' + id);
         },
         create: function(data) {
-            return $http.post('/msg', data);
+            return $http.post('/msg', {obj:data});
         },
         delete: function(id) {
             return $http.delete('/msg/' + id);

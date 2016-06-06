@@ -1,1 +1,47 @@
-<h1>View one msg</h1>
+<div class="container">
+    <div class=" card-panel">
+        <div class="row">
+            <h2>Message de
+                {{msg.sender}}
+                à
+                {{msg.recipient}}</h2>
+            <div class="row">
+                <div class="col s8 offset-s2">
+                    {{msg.message}}
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class='right-align'>Envoyé le
+                {{msg.creation}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <h2>Répondre</h2>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="first_name" ng-model='newMsg.sender' type="text">
+                        <label for="first_name">Id expediteur</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="dest" ng-model='newMsg.recipient' type="text">
+                        <label for="dest">Id destinataire</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">mail</i>
+                        <input id="msg" ng-model='newMsg.message' type="text">
+                        <label for="msg">Message</label>
+                    </div>
+                </div>
+                <button type="button" ng-click='sendMsg()' class='right btn btn-large blue lighten-2 waves-effect waves-light'>Envoyer</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
