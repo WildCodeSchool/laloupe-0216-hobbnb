@@ -20,11 +20,10 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     var screenSpot = function(){
         $scope.btnSpot={'backgroundColor' : '#69f0ae'};
         $scope.btnHome={'backgroundColor' : '#FFFFFF'};
-        $scope.changeHobby();
+        $scope.tile();
         $scope.definitiveFilter = {};
         spotsService.get().then(function(res) {
             $scope.positions = res.data;
-            console.dir($scope.positions);
             $scope.positions.map(function(e) {
                 if (e.rating.quality.length <= 0) {
                     e.rating.quality = [3];
@@ -50,13 +49,10 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
             }
 
         });
-        console.dir($scope.definitiveFilter);
     }
     var screenHome = function(){
         $scope.btnSpot={'backgroundColor' : '#FFFFFF'};
         $scope.btnHome={'backgroundColor' : '#69f0ae'};
-        $scope.tile = '../assets/search/tileHome.png';
-        tile = '../assets/search/tileHome.png';
         $scope.definitiveFilter = {};
         placesService.get().then(function(res) {
             $scope.positions = res.data;
@@ -156,10 +152,9 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
 
     //init google map
     $scope.centerMap = "Lorient";
-    //init color bottons and tile
+    //init color bottons
     $scope.btnSpot={'backgroundColor' : '#FFFFFF'};
     $scope.btnHome={'backgroundColor' : '#69f0ae'};
-    $scope.tile = '../assets/search/tileHome.png';
     $scope.selectHome = "place";
     $scope.developOptions = false;
     screenHome();
@@ -173,9 +168,11 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         }
     };
 
-    $scope.changeHobby = function() {
+    $scope.tile = function(activity) {
         if ($scope.selectHome === "place") {
-            $scope.tile = '../assets/search/tile' + $scope.formHobby + '.png';
+            return '../assets/search/tile/tileHome.png';
+        } else {
+            return '../assets/search/tile' + activity + '.png';
         }
     };
 
@@ -227,7 +224,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     };
     $scope.pictPlace = function(widget) {
         var url = "../uploads/" + $scope.selectHome + "s/" + widget._id + "/" + widget.picture;
-        console.log(url);
         return "{'background-image': 'url("+url+")'}";
     };
 });

@@ -23,7 +23,7 @@
                         <label>Lieu</label>
                     </div>
                     <div class="input-field col s12 m3">
-                        <select class='' material-select watch ng-model="filters.hobby" ng-change="changeHobby()">
+                        <select class='' material-select watch ng-model="filters.hobby">
                             <option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
                         </select>
                         <label>Hobby</label>
@@ -215,7 +215,7 @@
             </form>
 <!-- Widgets -->
             <div id="widgets">
-                <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter" | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice">
+                <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice">
                     <a href="/#/{{selectHome}}/{{p._id}}">
                         <div class="card hoverable">
                             <div class="card-image">
@@ -226,7 +226,7 @@
                                 <p>
                                     <img class="actpict" src="{{hobbyIco(p)}}" alt=""/>
 
-                                    <img class="authorpict" src="../assets/places/user-pic.jpg" alt=""/>
+                                    <img class="authorpict" src="../uploads/users/{{p.owner}}/large/img_0.jpg" alt=""/>
                                     <div>{{p.name}}</div>
                                     <div>
                                         <i class="tiny material-icons yellow-text text-darken-2">{{calculStars(p.rating)}}</i>
@@ -241,8 +241,7 @@
 
             </div>
         </div>
-
-        <!-- right pannel = map -->
+<!-- right pannel = map -->
         <div class="grid-example col m12 l6">
             <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap">
                 <marker
@@ -250,11 +249,11 @@
                     position="[{{p.latitude}},{{p.longitude}}]"
                     title={{p.shortDescription}}
                     icon="{
-              url:'{{tile}}',
-              scaledSize:[42,45],
-              origin: [0,0],
-              anchor: [21,45]
-              }"
+                      url:'{{tile(p.primarySports)}}',
+                      scaledSize:[42,45],
+                      origin: [0,0],
+                      anchor: [21,45]
+                      }"
                     on-click="toggleInfoWindow(event, $index)"
                     clickable="true"></marker>
                 <info-window id="popup" max-width="200">
