@@ -217,7 +217,19 @@ module.exports = function(app) {
                                                         id: id
                                                     }
                                                 };
-                                                if (whatAmI == 'places' || whatAmI == 'spots') {
+                                                if(whatAmI == 'users') {
+                                                    var req2 = {
+                                                        body: {
+                                                            content: {
+                                                                picture: caption[0]
+                                                            }
+                                                        },
+                                                        params: {
+                                                            id: id
+                                                        }
+                                                    }
+                                                }
+                                                if (whatAmI == 'places' || whatAmI == 'spots' || whatAmI == 'users') {
                                                     var DBase = require('../models/' + whatAmI + '.js');
                                                     DBase.updateAndDontUpdate(req2, res);
                                                 }

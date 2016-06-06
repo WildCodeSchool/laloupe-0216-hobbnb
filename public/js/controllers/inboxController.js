@@ -20,4 +20,7 @@ angular.module('app').controller('inboxController', function($scope, $window, $l
             $location.path('/messages/' + res.data._id);
         });
     }
+    $scope.format = function(date) {
+        return messagingService.format(date);
+    }
 });

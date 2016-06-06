@@ -1,9 +1,16 @@
 angular.module('app').controller('usersController', function($scope, $rootScope, $routeParams, $location, $http, $window, usersService) {
+
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
         _id: null
     };
+
+    $scope.format = function(date) {
+        return messagingService.format(date);
+    }
+
     switch ($routeParams.action) {
+
         case 'login':
             //Login then redirect to current profile page
             $scope.login = function() {
@@ -23,13 +30,17 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
                 $location.path('/user/create');
             }
             break;
+
         case 'logout':
+
             //Logout and redirect to login page
             $window.localStorage.removeItem('token');
             $window.localStorage.removeItem('currentUser');
             $rootScope.$emit('userUpdated', null);
             break;
+
         case 'create':
+
             //Create an account
             if (!!$scope.currentUser._id) $location.path('/user/' + $scope.currentUser._id)
             $scope.hobbinaut = {};
@@ -48,7 +59,9 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
                 }
             }
             break;
+
         case 'edit':
+
             if (!$scope.currentUser._id) {
                 $location.path('/');
             } else {
@@ -63,7 +76,9 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
                 });
             }
             break;
+
         default:
+
             //Action is an id, show user ; if user is current show profile
             $scope.howManyPositive = function(t) {
                 return !!t ? (~~(t.reduce(function(a, b) {
@@ -98,5 +113,7 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
             usersService.findMsg($scope.user._id).then(function(res) {
                 $scope.msgs = res.data;
             });
+
     }
+
 });

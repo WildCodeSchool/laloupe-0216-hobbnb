@@ -15,4 +15,7 @@ angular.module('app').controller('messagingController', function($scope, $window
             $location.path('/messages/' + res.data._id);
         });
     }
+    $scope.format = function(date) {
+        return messagingService.format(date);
+    }
 });
