@@ -94,13 +94,21 @@ module.exports = function(app) {
                     });
                 }
                 if (name == 'authorization') {
-                    promise.then(function() {
+                    if (whatAmI == 'users') {
                         jwt.verify(field, secretToken, function(err, decoded) {
                             if (decoded._doc && ownerTarget && decoded._doc._id == ownerTarget) {
                                 isAuth = true;
                             }
                         });
-                    });
+                    } else {
+                        promise.then(function() {
+                            jwt.verify(field, secretToken, function(err, decoded) {
+                                if (decoded._doc && ownerTarget && decoded._doc._id == ownerTarget) {
+                                    isAuth = true;
+                                }
+                            });
+                        });
+                    }
                 }
             })
 
@@ -217,7 +225,7 @@ module.exports = function(app) {
                                                         id: id
                                                     }
                                                 };
-                                                if(whatAmI == 'users') {
+                                                if (whatAmI == 'users') {
                                                     var req2 = {
                                                         body: {
                                                             content: {
