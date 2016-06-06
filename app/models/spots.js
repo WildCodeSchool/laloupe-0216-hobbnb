@@ -41,24 +41,22 @@ var spotsSchema = new mongoose.Schema({
             min: 0
         }]
     },
-    spot: {
-        about: String,
-        primarySports: {
-            type: String,
-            enum: hobbiesListing
-        },
-        secondarySports: [{
-            type: String,
-            enum: hobbiesListing
-        }],
-        comments: [{
-            owner: String,
-            title: String,
-            creation: Date,
-            comment: String,
-            thanks: Number
-        }]
-    }
+    about: String,
+    primarySports: {
+        type: String,
+        enum: hobbiesListing
+    },
+    secondarySports: [{
+        type: String,
+        enum: hobbiesListing
+    }],
+    comments: [{
+        owner: String,
+        title: String,
+        creation: Date,
+        comment: String,
+        thanks: Number
+    }]
 });
 
 var Spots = {

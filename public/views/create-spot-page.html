@@ -51,39 +51,39 @@
     </div>
     <div class="row">
         comments[0].owner
-        <input type="text" ng-model="obj.spot.comments[0].owner" placeholder="comments[0].owner"/>
+        <input type="text" ng-model="obj.comments[0].owner" placeholder="comments[0].owner"/>
     </div>
     <div class="row">
         comments[0].title
-        <input type="text" ng-model="obj.spot.comments[0].title" placeholder="comments[0].title"/>
+        <input type="text" ng-model="obj.comments[0].title" placeholder="comments[0].title"/>
     </div>
     <div class="row">
         comments[0].creation
-        <input type="date" ng-model="obj.spot.comments[0].creation" placeholder="comments[0].creation"/>
+        <input type="date" ng-model="obj.comments[0].creation" placeholder="comments[0].creation"/>
     </div>
     <div class="row">
         comments[0].comment
-        <input type="text" ng-model="obj.spot.comments[0].comment" placeholder="comments[0].comment"/>
+        <input type="text" ng-model="obj.comments[0].comment" placeholder="comments[0].comment"/>
     </div>
     <div class="row">
         comments[0].thanks
-        <input type="text" ng-model="obj.spot.comments[0].thanks" placeholder="comments[0].thanks"/>
+        <input type="text" ng-model="obj.comments[0].thanks" placeholder="comments[0].thanks"/>
     </div>
     <div class="row">
-        spot.primarySports
-        <select material-select ng-model="obj.spot.primarySports">
+        primarySports
+        <select material-select ng-model="obj.primarySports">
             <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
         </select>
     </div>
     <div class="row">
-        spot.secondarySports
-        <select material-select ng-model="obj.spot.secondarySports[0]">
+        secondarySports
+        <select material-select ng-model="obj.secondarySports[0]">
             <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
         </select>
     </div>
     <div class="row">
-        spot.secondarySports
-        <select material-select ng-model="obj.spot.secondarySports[1]">
+        secondarySports
+        <select material-select ng-model="obj.secondarySports[1]">
             <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
         </select>
     </div>
