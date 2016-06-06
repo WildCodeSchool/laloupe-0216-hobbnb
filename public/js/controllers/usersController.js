@@ -48,6 +48,21 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
                 }
             }
             break;
+        case 'edit':
+            if (!$scope.currentUser._id) {
+                $location.path('/');
+            } else {
+                $scope.user = $scope.currentUser;
+            }
+            $scope.save = function() {
+                usersService.update($scope.user._id, $scope.user).then(function(res) {
+                    $scope.currentUser = $scope.user;
+                    $window.localStorage.setItem('currentUser', JSON.stringify($scope.currentUser));
+                    $rootScope.$emit('userUpdated', null);
+                    $location.path('/user/'+$scope.user._id);
+                });
+            }
+            break;
         default:
             //Action is an id, show user ; if user is current show profile
             $scope.howManyPositive = function(t) {
@@ -77,9 +92,9 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
             usersService.findHost($scope.user._id).then(function(res) {
                 $scope.places = res.data;
             });
-            // usersService.findSpot($scope.user._id).then(function(res) {
-            //     $scope.spots = res.data;
-            // });
+            usersService.findSpot($scope.user._id).then(function(res) {
+                $scope.spots = res.data;
+            });
             usersService.findMsg($scope.user._id).then(function(res) {
                 $scope.msgs = res.data;
             });

@@ -34,7 +34,8 @@ module.exports = function(app) {
             id = '',
             ownerTarget = 'nobody',
             whatAmI = 'trash',
-            new_location = 'public/uploads/';
+            new_location = 'public/uploads/',
+            promise;
 
         new formidable.IncomingForm()
             .parse(req, function(err, fields, files) {
@@ -70,11 +71,13 @@ module.exports = function(app) {
                             var DBase = require('../models/' + whatAmI + '.js');
                             var req2 = {
                                 params: {
-                                    id: id
+                                    _id: id
                                 }
                             };
-                            var found = DBase.findOneAndReturn(req2, res);
-                            ownerTarget = found.owner;
+                            promise = DBase.findOneAndReturn(req2, res).then(function(doc) {
+                                var found = doc;
+                                ownerTarget = found.owner;
+                            });
                         }
                     } else {
                         id = field;
@@ -90,12 +93,14 @@ module.exports = function(app) {
                         }
                     });
                 }
-                if (name == 'authorization' && whatAmI == 'users') {
-                    jwt.verify(field, secretToken, function(err, decoded) {
-                        if (decoded._doc && ownerTarget && decoded._doc._id == ownerTarget) {
-                            console.log(ownerTarget, decoded._doc._id);
-                            isAuth = true;
-                        }
+                if (name == 'authorization') {
+                    promise.then(function() {
+                        jwt.verify(field, secretToken, function(err, decoded) {
+                            if (decoded._doc && ownerTarget && decoded._doc._id == ownerTarget) {
+                                console.log(ownerTarget, decoded._doc._id);
+                                isAuth = true;
+                            }
+                        });
                     });
                 }
             })

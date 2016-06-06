@@ -126,6 +126,38 @@ function routes($routeProvider, $httpProvider) {
                 }]
             }
         })
+        .when('/messages', {
+            templateUrl: 'views/messaging/inbox.html',
+            controller: 'inboxController',
+            resolve: {
+                connected: checkIsConnected,
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/messagingService.js',
+                            'js/controllers/inboxController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/messages/:id', {
+            templateUrl: 'views/messaging/view.html',
+            controller: 'messagingController',
+            resolve: {
+                connected: checkIsConnected,
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/messagingService.js',
+                            'js/controllers/messagingController.js'
+                        ]
+                    });
+                }]
+            }
+        })
         .when('/user/:action', {
             templateUrl: function(params) {
                 switch (params.action) {
@@ -140,6 +172,10 @@ function routes($routeProvider, $httpProvider) {
                     case 'create':
                         //Create an account
                         return 'views/user/create.html';
+                        break;
+                    case 'edit':
+                        //Create an account
+                        return 'views/user/edit.html';
                         break;
                     default:
                         //Show my profile

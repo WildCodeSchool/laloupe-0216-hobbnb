@@ -1,0 +1,77 @@
+<div class="container">
+    <div class=" card-panel">
+        <div class="row">
+            <div class="col s6 offset-s3">
+                <div class="card-panel">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="first_name" ng-model='user.identity.firstName' type="text" class="validate">
+                            <label for="first_name">Prénom</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" ng-model='user.identity.lastName' type="text" class="validate">
+                            <label for="last_name">Nom</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input id="first_name" ng-model='user.identity.phone' type="text" class="validate">
+                            <label for="first_name">Téléphone</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">email</i>
+                            <input id="first_name" ng-model='user.email' type="email" class="validate">
+                            <label for="first_name">Email</label>
+                        </div>
+                    </div>
+                    <div class="divider">
+
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">home</i>
+                            <input id="first_name" ng-model='user.address.num' type="text" class="validate">
+                            <label for="first_name">Numéro</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" ng-model='user.address.road' type="text" class="validate">
+                            <label for="last_name">Rue</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" ng-model='user.address.postalCode' type="text" class="validate">
+                            <label for="first_name">Code postal</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" ng-model='user.address.city' type="text" class="validate">
+                            <label for="last_name">Ville</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" ng-model='user.address.state' type="text" class="validate">
+                            <label for="first_name">Région</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" ng-model='user.address.country' type="text" class="validate">
+                            <label for="last_name">Pays</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="first_name" ng-model='user.address.complement' type="text" class="validate">
+                            <label for="first_name">Complément</label>
+                        </div>
+                    </div>
+                    <button type="button" ng-click='save()' class='right btn btn-large blue lighten-2 waves-effect waves-light'>Enregistrer</button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

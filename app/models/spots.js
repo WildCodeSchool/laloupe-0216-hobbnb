@@ -85,7 +85,7 @@ var Spots = {
     },
 
     findOneAndReturn: function(req, res) {
-        Spots.model.findById(req.params.id, function(err, data) {
+        Spots.model.findById(req.params._id, function(err, data) {
             if (err) {
                 return err;
             } else {
