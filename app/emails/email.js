@@ -2,11 +2,11 @@ module.exports = function(app) {
     'use strict';
     var nodemailer = require('nodemailer');
 
-    var transporter = nodemailer.createTransport({
+    var transport = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: "fmod31@gmail.com", // your email here
-            pass: "gbwpvkegzmtegpyh" // your password here
+            user: "", // your email here
+            pass: "" // your password here
         }
     });
 
@@ -41,11 +41,11 @@ module.exports = function(app) {
           '</table>';
 
         var mailOptions = {
-            from: 'fmod31@gmail.com', // your email here
+            from: '', // your email here
             subject: 'New message from Hobbnb',
             to: req.body.name + ' <' + req.body.email + '>',
-            sender: req.body.email
-                //html: htmlContent
+            sender: req.body.email,
+            html: htmlContent
         };
         transport.sendMail(mailOptions, function(err, info) {
             if (err) {
