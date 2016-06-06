@@ -146,6 +146,16 @@ var Users = {
         });
     },
 
+    updateAndDontUpdate: function(req, res) {
+        Users.model.findByIdAndUpdate(req.params.id, req.body.content, function(err) {
+            if (err) {
+                return err;
+            } else {
+                return 200;
+            }
+        });
+    },
+
     delete: function(req, res) {
         Users.model.findByIdAndRemove(req.params.id, function() {
             res.sendStatus(200);
