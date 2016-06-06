@@ -26,6 +26,7 @@ function routes($routeProvider, $httpProvider) {
                         name: 'app',
                         files: [
                             'js/services/placesService.js',
+                            'js/services/spotsService.js',
                             'js/factories/placesFactory.js',
                             'js/factories/searchFactory.js',
                             'js/filters/rangeFilter.js',

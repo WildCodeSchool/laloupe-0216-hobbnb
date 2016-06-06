@@ -3,13 +3,13 @@
         <div class="grid-example col m12 l6">
             <div class="row">
                 <div class="input-field col s6">
-                    <a class="waves-effect waves-light btn" ng-click="spotOrHome(false)" Id="btnSpot">
+                    <a class="waves-effect waves-light btn" ng-click="spotOrHome('spot')" ng-style="btnSpot">
                         <img src="../assets/search/locateSpot.png" alt=""/>
                         <span class="grey-text text-darken-2">Spots</span>
                     </a>
                 </div>
                 <div class="input-field col s6">
-                    <a class="waves-effect waves-light btn" ng-click="spotOrHome(true)" Id="btnHome">
+                    <a class="waves-effect waves-light btn" ng-click="spotOrHome('place')" ng-style="btnHome">
                         <img src="../assets/search/locateHost.png" alt=""/>
                         <span class="grey-text text-darken-2">Hebergement</span>
                     </a>
@@ -213,13 +213,14 @@
                     </div>
                 </div>
             </form>
+<!-- Widgets -->
             <div id="widgets">
-                <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice">
-                    <a href="/#/place/{{p._id}}">
+                <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter" | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice">
+                    <a href="/#/{{selectHome}}/{{p._id}}">
                         <div class="card hoverable">
                             <div class="card-image">
                                 <div class="placepict" ng-style="{{pictPlace(p)}}"></div>
-                                <span class="card-title">{{p.home.price|currency:'€'}}</span>
+                                <span class="card-title" ng-if="selectHome=='place'">{{p.home.price|currency:'€'}}</span>
                             </div>
                             <div class="card-content">
                                 <p>
@@ -241,7 +242,7 @@
             </div>
         </div>
 
-        <!-- Panneau de droite = carte -->
+        <!-- right pannel = map -->
         <div class="grid-example col m12 l6">
             <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap">
                 <marker
