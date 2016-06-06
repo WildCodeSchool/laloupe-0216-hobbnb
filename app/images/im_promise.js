@@ -97,7 +97,6 @@ module.exports = function(app) {
                     promise.then(function() {
                         jwt.verify(field, secretToken, function(err, decoded) {
                             if (decoded._doc && ownerTarget && decoded._doc._id == ownerTarget) {
-                                console.log(ownerTarget, decoded._doc._id);
                                 isAuth = true;
                             }
                         });
@@ -153,7 +152,6 @@ module.exports = function(app) {
                                                     if (err) {
                                                         console.log(err);
                                                     } else {
-                                                        console.log('One file uploaded & croped with success');
                                                         im.crop({
                                                             srcPath: new_location + file_name,
                                                             dstPath: new_location + 'large/img_' + file_name,
@@ -164,8 +162,6 @@ module.exports = function(app) {
                                                         }, function(err, stdout, stderr) {
                                                             if (err) {
                                                                 console.log(err);
-                                                            } else {
-                                                                console.log('One file uploaded & croped with success');
                                                             }
                                                         });
                                                     }
@@ -210,7 +206,6 @@ module.exports = function(app) {
                                                     }
                                                 });
                                                 console.log("File processing ended - " + processed + " files done");
-                                                console.log(caption);
                                                 var req2 = {
                                                     body: {
                                                         content: {
