@@ -4,10 +4,10 @@ angular.module('app').controller('createSpotsController', function($scope, $http
     resetObj = function() {
         $scope.obj.spot = {};
         $scope.obj.rating = [];
-        $scope.obj.spot.secondarySports = [];
+        $scope.obj.secondarySports = [];
         $scope.obj.creation = new Date();
         $scope.obj.modification = new Date();
-        $scope.obj.spot.comments = [{
+        $scope.obj.comments = [{
             creation: new Date()
         }];
     };
