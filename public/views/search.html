@@ -111,12 +111,12 @@
                         <label>Invités</label>
                     </div>
                     <div class="input-field col s6 m3">
-                        <img src="../assets/search/icoPrivate.png" class="prefix" alt=""/>
+                        <img src="../assets/search/icoPrivate.png" class="prefix" alt=""/><br />
                         <input type="checkbox" ng-model="filters.privatePlace" id="chkPrivate"/>
                         <label for="chkPrivate">Privée</label>
                     </div>
                     <div class="input-field col s6 m3">
-                        <img src="../assets/search/icoShared.png" class="prefix" alt=""/>
+                        <img src="../assets/search/icoShared.png" class="prefix" alt=""/><br />
                         <input type="checkbox" ng-model="filters.sharedPlace" id="chkShared"/>
                         <label for="chkShared">Partagé</label>
                     </div>
@@ -260,8 +260,8 @@
                     <a href="/#/place/{{positions[indexOfTheTruc]._id}}">
                         <div class="card">
                             <div class="card-image">
-                                <img class="placepict" src="uploads/places/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}">
-                                <span class="card-title">{{positions[indexOfTheTruc].home.price}}€</span>
+                                <img class="placepict" src="uploads/{{selectHome}}s/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">
+                                <span class="card-title"  ng-show="{{selectHome=='place'}}" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{positions[indexOfTheTruc].home.price}}€</span>
                             </div>
                             <div class="card-content">
                                 <p>
