@@ -23,7 +23,7 @@
 }
 #widgets .placepict{
   height : 210px;
-  background-size: cover;
+  background-repeat: no-repeat;
 }
 #widgets .actpict{
   position: absolute;

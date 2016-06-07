@@ -1,4 +1,4 @@
-angular.module('app').controller('searchController', function($scope, $http, NgMap, placesService, spotsService, searchFactory) {
+angular.module('app').controller('searchController', function($scope, $http, NgMap, placesService, spotsService, usersService, searchFactory) {
 
     var delay;
     NgMap.getMap().then(function(map) {
@@ -24,6 +24,8 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         $scope.definitiveFilter = {};
         spotsService.get().then(function(res) {
             $scope.positions = res.data;
+
+
             $scope.positions.map(function(e) {
                 if (e.rating.quality.length <= 0) {
                     e.rating.quality = [3];
@@ -34,6 +36,10 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                 if (e.rating.accessibility.length <= 0) {
                     e.rating.accessibility = [3];
                 }
+                usersService.getOne(e.owner).then(function(res) {
+                    e.owner = res.data;
+                });
+                console.dir(e);
                 return e;
             });
         });
@@ -66,6 +72,9 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                 if (e.rating.valueForMoney.length <= 0) {
                     e.rating.valueForMoney = [3];
                 }
+                usersService.getOne(e.owner).then(function(res) {
+                    e.owner = res.data;
+                });
                 return e;
             });
 
@@ -223,7 +232,8 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         return "../assets/hobbies/" + widget.primarySports + ".png";
     };
     $scope.pictPlace = function(widget) {
-        var url = "../uploads/" + $scope.selectHome + "s/" + widget._id + "/" + widget.picture;
+        var url = "uploads/" + $scope.selectHome + "s/" + widget._id + "/" + widget.picture;
+        console.log(url);
         return "{'background-image': 'url("+url+")'}";
     };
 });

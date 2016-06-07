@@ -226,7 +226,7 @@
                                 <p>
                                     <img class="actpict" src="{{hobbyIco(p)}}" alt=""/>
 
-                                    <img class="authorpict" src="../uploads/users/{{p.owner}}/large/img_0.jpg" alt=""/>
+                                    <img class="authorpict" src="uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}" />
                                     <div>{{p.name}}</div>
                                     <div>
                                         <i class="tiny material-icons yellow-text text-darken-2">{{calculStars(p.rating)}}</i>
@@ -242,7 +242,7 @@
             </div>
         </div>
 <!-- right pannel = map -->
-        <div class="grid-example col m12 l6">
+        <div class="grid-example col m12 l5">
             <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap" scrollwheel='false'>
                 <marker
                     ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"

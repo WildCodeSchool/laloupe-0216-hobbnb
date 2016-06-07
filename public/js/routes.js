@@ -25,6 +25,7 @@ function routes($routeProvider, $httpProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            'js/services/usersService.js',
                             'js/services/placesService.js',
                             'js/services/spotsService.js',
                             'js/factories/placesFactory.js',
