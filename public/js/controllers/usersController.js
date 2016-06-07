@@ -68,12 +68,18 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
                 $scope.user = $scope.currentUser;
             }
             $scope.save = function() {
-                usersService.update($scope.user._id, $scope.user).then(function(res) {
-                    $scope.currentUser = $scope.user;
-                    $window.localStorage.setItem('currentUser', JSON.stringify($scope.currentUser));
-                    $rootScope.$emit('userUpdated', null);
-                    $location.path('/user/'+$scope.user._id);
-                });
+                if ($scope.user.password === $scope.passwordConfirm) {
+                    usersService.update($scope.user._id, $scope.user).then(function(res) {
+                        $window.localStorage.setItem('currentUser', JSON.stringify(res.data.user));
+                        $window.localStorage.token = res.data.token;
+                        $rootScope.$emit('userUpdated', null);
+                        $location.path('/user/' + res.data.user._id);
+                    }, function(res) {
+                        $scope.error = res.data;
+                    });
+                } else {
+                    $scope.error = 'Mots de passes différents';
+                }
             }
             break;
 

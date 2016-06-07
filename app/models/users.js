@@ -1,7 +1,7 @@
 // MODEL API
 var mongoose = require('mongoose'),
     bcrypt = require('bcrypt')
-    jwt = require('jsonwebtoken'),
+jwt = require('jsonwebtoken'),
     secretToken = require('../../config/secretToken.js');
 
 
@@ -65,7 +65,6 @@ var Users = {
     model: mongoose.model('Users', usersSchema),
 
     create: function(req, res) {
-        console.log(req.body);
         if (req.body.obj.password) {
             var salt = bcrypt.genSaltSync(10);
             req.body.obj.password = bcrypt.hashSync(req.body.obj.password, salt);
@@ -141,8 +140,25 @@ var Users = {
     },
 
     update: function(req, res) {
-        Users.model.findByIdAndUpdate(req.params.id, req.body.obj, function() {
-            res.sendStatus(200);
+        if (req.body.obj.password) {
+            var salt = bcrypt.genSaltSync(10);
+            req.body.obj.password = bcrypt.hashSync(req.body.obj.password, salt);
+        } else {
+            return res.status(401).msg('Mot de passe incorrect');
+        }
+        Users.model.findByIdAndUpdate(req.params.id, req.body.obj, function(err, data) {
+            if (err) res.status(400).send(err);
+            else {
+                data.password = null;
+                var token = jwt.sign(data, secretToken, {
+                    expiresIn: '24h'
+                });
+                res.json({
+                    success: true,
+                    user: data,
+                    token: token
+                });
+            }
         });
     },
 

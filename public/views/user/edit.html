@@ -17,57 +17,67 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">phone</i>
-                            <input id="first_name" ng-model='user.identity.phone' type="text">
-                            <label for="first_name">Téléphone</label>
+                            <input id="phone" ng-model='user.identity.phone' type="text">
+                            <label for="phone">Téléphone</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
-                            <input id="first_name" ng-model='user.email' type="email">
-                            <label for="first_name">Email</label>
+                            <input id="email" ng-model='user.email' type="email">
+                            <label for="email">Email</label>
                         </div>
                     </div>
-                    <div class="divider">
-
-                    </div>
+                    <div class="divider"></div>
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">home</i>
-                            <input id="first_name" ng-model='user.address.num' type="text">
-                            <label for="first_name">Numéro</label>
+                            <input id="num" ng-model='user.address.num' type="text">
+                            <label for="num">Numéro</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" ng-model='user.address.road' type="text">
-                            <label for="last_name">Rue</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="first_name" ng-model='user.address.postalCode' type="text">
-                            <label for="first_name">Code postal</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" ng-model='user.address.city' type="text">
-                            <label for="last_name">Ville</label>
+                            <input id="road" ng-model='user.address.road' type="text">
+                            <label for="road">Rue</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="first_name" ng-model='user.address.state' type="text">
-                            <label for="first_name">Région</label>
+                            <input id="postalCode" ng-model='user.address.postalCode' type="text">
+                            <label for="postalCode">Code postal</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" ng-model='user.address.country' type="text">
-                            <label for="last_name">Pays</label>
+                            <input id="city" ng-model='user.address.city' type="text">
+                            <label for="city">Ville</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="state" ng-model='user.address.state' type="text">
+                            <label for="state">Région</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="country" ng-model='user.address.country' type="text">
+                            <label for="country">Pays</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="first_name" ng-model='user.address.complement' type="text">
-                            <label for="first_name">Complément</label>
+                            <input id="complement" ng-model='user.address.complement' type="text">
+                            <label for="complement">Complément</label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">lock</i>
+                            <input id="pwd" ng-model='user.password' type="password">
+                            <label for="pwd">Mot de passe...</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="pwdc" ng-model='passwordConfirm' type="password">
+                            <label for="pwdc">Confirmez...</label>
+                        </div>
+                    </div>
+                    {{error}}
                     <button type="button" ng-click='save()' class='right btn btn-large blue lighten-2 waves-effect waves-light'>Enregistrer</button>
                     <div class="clearfix"></div>
                 </div>
