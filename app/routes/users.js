@@ -1,16 +1,25 @@
-var Users = require('../models/users.js'),
+var express = require('express'),
+    usersRouter = express.Router(),
+    Users = require('../models/users.js'),
     Auth = require('../middlewares/authorization.js');
 
 module.exports = function(app) {
 
-    app.get('/users', Auth.user.isAdministrator, Users.findAll);
-    app.get('/users/loggedin', Auth.user.hasAuthorization, function(req, res) {
+    usersRouter.get('/', Auth.user.isAdministrator, Users.findAll);
+
+    usersRouter.get('/loggedin', Auth.user.hasAuthorization, function(req, res) {
         res.sendStatus(200);
     });
-    app.post('/users/login', Users.login);
-    app.get('/users/:id', Auth.user.hasAuthorization, Users.findOne);
-    app.post('/users', Users.create);
-    app.put('/users/:id', Auth.user.hasAuthorization, Users.update);
-    app.delete('/users/:id', Auth.user.isAdministrator, Users.delete);
 
+    usersRouter.post('/login', Users.login);
+
+    usersRouter.get('/:id', Auth.user.hasAuthorization, Users.findOne);
+
+    usersRouter.post('/', Users.create);
+
+    usersRouter.put('/:id', Auth.user.hasAuthorization, Users.update);
+    
+    usersRouter.delete('/:id', Auth.user.isAdministrator, Users.delete);
+
+    app.use('/users', usersRouter);
 };

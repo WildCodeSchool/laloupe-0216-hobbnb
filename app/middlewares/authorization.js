@@ -8,8 +8,9 @@ exports.user = {
             jwt.verify(req.headers.authorization, secretToken, function(err, decoded) {
                 if (err) {
                     return res.sendStatus(401);
-                } else
+                } else {
                     next();
+                }
             });
         } else {
             return res.sendStatus(401);
@@ -19,7 +20,7 @@ exports.user = {
     isOwner: function(req, res, next) {
         if (req.headers.authorization) {
             jwt.verify(req.headers.authorization, secretToken, function(err, decoded) {
-                if(err) return res.sendStatus(401);
+                if (err) return res.sendStatus(401);
                 if (decoded._doc && req.params.id && decoded._doc._id == req.params.id) {
                     next();
                 } else {
@@ -34,11 +35,12 @@ exports.user = {
     isAdministrator: function(req, res, next) {
         if (req.headers.authorization) {
             jwt.verify(req.headers.authorization, secretToken, function(err, decoded) {
-                if(err) return res.sendStatus(401);
-                if (decoded._doc && decoded._doc.isAdmin)
+                if (err) return res.sendStatus(401);
+                if (decoded._doc && decoded._doc.isAdmin) {
                     next();
-                else
+                } else {
                     return res.sendStatus(401);
+                }
             });
         } else {
             return res.sendStatus(401);

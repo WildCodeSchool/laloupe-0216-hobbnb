@@ -1,13 +1,17 @@
-var Users = require('../models/messagings.js'),
+var express = require('express'),
+    messagingsRouter = express.Router(),
+    Messagings = require('../models/messagings.js'),
     Auth = require('../middlewares/authorization.js');
 
 module.exports = function(app) {
 
-    app.get('/msg', Auth.user.isAdministrator, Users.findAll);
-    app.get('/msg/exp/:id', Auth.user.isOwner, Users.findExpOfUser);
-    app.get('/msg/rec/:id', Auth.user.isOwner, Users.findRecOfUser);
-    app.get('/msg/:id', Auth.user.hasAuthorization, Users.findOne);
-    app.post('/msg', Auth.user.hasAuthorization, Users.create);
-    app.delete('/msg/:id', Auth.user.isAdministrator, Users.delete);
+    messagingsRouter.get('/', Auth.user.isAdministrator, Messagings.findAll);
+    messagingsRouter.get('/exp/:id', Auth.user.isOwner, Messagings.findExpOfUser);
+    messagingsRouter.get('/rec/:id', Auth.user.isOwner, Messagings.findRecOfUser);
+    messagingsRouter.get('/:id', Auth.user.hasAuthorization, Messagings.findOne);
+    messagingsRouter.post('/', Auth.user.hasAuthorization, Messagings.create);
+    messagingsRouter.delete('/:id', Auth.user.isAdministrator, Messagings.delete);
+
+    app.use('/msg', messagingsRouter);
 
 };
