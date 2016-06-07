@@ -265,7 +265,10 @@ function routes($routeProvider, $httpProvider) {
             deferred.resolve();
         }).error(function() {
             deferred.reject();
-            $location.url('/user/login');
+            $window.localStorage.removeItem('token');
+            $window.localStorage.removeItem('currentUser');
+            $rootScope.$emit('userUpdated', null);
+            $location.path('/user/login');
         });
 
         return deferred.promise;
