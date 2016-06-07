@@ -101,21 +101,13 @@ module.exports = function(app) {
                             }
                         });
                     } else {
-                        if (whatAmI == 'users') {
+                        promise.then(function() {
                             jwt.verify(field, secretToken, function(err, decoded) {
                                 if (decoded._doc && ownerTarget && decoded._doc._id == ownerTarget) {
                                     isAuth = true;
                                 }
                             });
-                        } else {
-                            promise.then(function() {
-                                jwt.verify(field, secretToken, function(err, decoded) {
-                                    if (decoded._doc && ownerTarget && decoded._doc._id == ownerTarget) {
-                                        isAuth = true;
-                                    }
-                                });
-                            });
-                        }
+                        });
                     }
                 }
             })
