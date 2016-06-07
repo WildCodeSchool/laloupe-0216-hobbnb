@@ -4,7 +4,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     NgMap.getMap().then(function(map) {
         $scope.map = map;
     });
-/* initialisation */
+    /* initialisation */
     $scope.hobbiesListing = ['Peu importe', "Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.formHobby = 'Choisissez un hobby...';
     $scope.propertyTypeListing = ["Hebergement", "Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
@@ -17,10 +17,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         }
     }
 
-    var screenSpot = function(){
-        $scope.btnSpot={'backgroundColor' : '#69f0ae'};
-        $scope.btnHome={'backgroundColor' : '#FFFFFF'};
-        $scope.tile();
+    var screenSpot = function() {
         $scope.definitiveFilter = {};
         spotsService.get().then(function(res) {
             $scope.positions = res.data;
@@ -39,7 +36,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                 usersService.getOne(e.owner).then(function(res) {
                     e.owner = res.data;
                 });
-                console.dir(e);
                 return e;
             });
         });
@@ -56,9 +52,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
 
         });
     }
-    var screenHome = function(){
-        $scope.btnSpot={'backgroundColor' : '#FFFFFF'};
-        $scope.btnHome={'backgroundColor' : '#69f0ae'};
+    var screenHome = function() {
         $scope.definitiveFilter = {};
         placesService.get().then(function(res) {
             $scope.positions = res.data;
@@ -78,7 +72,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                 return e;
             });
 
-            var selectChoice = function(v, choice){ //exemple de v=[home, houseAmenities,bbq]
+            var selectChoice = function(v, choice) { //exemple de v=[home, houseAmenities,bbq]
                 if (!$scope.definitiveFilter[v[0]]) $scope.definitiveFilter[v[0]] = [];
                 if (!$scope.definitiveFilter[v[0]][v[1]]) $scope.definitiveFilter[v[0]][v[1]] = [];
                 if (!!choice) {
@@ -162,26 +156,36 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     //init google map
     $scope.centerMap = "Lorient";
     //init color bottons
-    $scope.btnSpot={'backgroundColor' : '#FFFFFF'};
-    $scope.btnHome={'backgroundColor' : '#69f0ae'};
-    $scope.selectHome = "place";
+    $scope.selectHome = searchFactory.data.selectHome || "place";
     $scope.developOptions = false;
-    screenHome();
     //Flip-flop Spot-Home
     $scope.spotOrHome = function(choice) {
         $scope.selectHome = choice;
-        if ($scope.selectHome === "place") {
+        if ($scope.selectHome == "place") {
+            $scope.btnSpot = {
+                'backgroundColor': '#FFFFFF'
+            };
+            $scope.btnHome = {
+                'backgroundColor': '#69f0ae'
+            };
             screenHome();
         } else {
+            $scope.btnSpot = {
+                'backgroundColor': '#69f0ae'
+            };
+            $scope.btnHome = {
+                'backgroundColor': '#FFFFFF'
+            };
             screenSpot();
         }
     };
+    $scope.spotOrHome($scope.selectHome);
 
     $scope.tile = function(activity) {
-        if ($scope.selectHome === "place") {
-            return '../assets/search/tile/tileHome.png';
+        if ($scope.selectHome == "place") {
+            return 'assets/search/tileHome.png';
         } else {
-            return '../assets/search/tile' + activity + '.png';
+            return 'assets/search/tile' + activity + '.png';
         }
     };
 
@@ -191,7 +195,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         }) / t.length) || 0) : 0;
     };
     $scope.nbReview = function(widget) {
-        if (!!widget.cleanness){
+        if (!!widget.cleanness) {
             return ~~((widget.cleanness.length + widget.location.length + widget.valueForMoney.length) / 3);
         } else {
             return ~~((widget.quality.length + widget.beauty.length + widget.accessibility.length) / 3);
@@ -200,7 +204,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     $scope.toggleInfoWindow = function(event, id) {
         $scope.map.showInfoWindow('popup', this);
         $scope.indexOfTheTruc = id;
-        if ($scope.selectHome === true){
+        if ($scope.selectHome === "place") {
             $scope.globalRating = $scope.howManyPositive($scope.positions[id].rating.valueForMoney.concat($scope.positions[id].rating.location, $scope.positions[id].rating.cleanness));
         } else {
             $scope.globalRating = $scope.howManyPositive($scope.positions[id].rating.quality.concat($scope.positions[id].rating.beauty, $scope.positions[id].rating.accessibility));
@@ -209,7 +213,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         $scope.reviewNb = $scope.nbReview($scope.positions[id].rating);
     };
     $scope.calculStars = function(widget) {
-        if (!!widget.cleanness){
+        if (!!widget.cleanness) {
             $scope.globalRating = $scope.howManyPositive(widget.valueForMoney.concat(widget.location, widget.cleanness));
         } else {
             $scope.globalRating = $scope.howManyPositive(widget.quality.concat(widget.beauty, widget.accessibility));
@@ -233,7 +237,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     };
     $scope.pictPlace = function(widget) {
         var url = "uploads/" + $scope.selectHome + "s/" + widget._id + "/" + widget.picture;
-        console.log(url);
-        return "{'background-image': 'url("+url+")'}";
+        return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
     };
 });

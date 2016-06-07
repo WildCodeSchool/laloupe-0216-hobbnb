@@ -55,13 +55,17 @@
 			<div class="searchbar">
 				<div class="row">
 					<div class="col m3 l2 offset-l2">
-						<select class='' material-select watch ng-model="hobby"  ng-change="changeHobby()">
+						<select class='' material-select watch ng-model="hobby">
 								<option value="">Quel hobby ?</option>
 								<option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
 						</select>
 					</div>
 					<div class="col m3 l2">
-						<input type="text" placeholder="Spot ou logement ?"></input>
+						<select class='' material-select ng-model="selectHome">
+								<option value="">Spot ou Hébergement ?</option>
+								<option value="spot">spot</option>
+								<option value="place">Hébergement</option>
+						</select>
 					</div>
 					<div class="col m3 l2">
 						<input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
