@@ -237,7 +237,7 @@ function routes($routeProvider, $httpProvider) {
         .otherwise({
             redirectTo: '/'
         });
-    $httpProvider.interceptors.push(function($q, $location, $window) {
+    $httpProvider.interceptors.push(function($q, $location, $window, $rootScope) {
         return {
             'request': function(config) {
                 config.headers = config.headers || {};
@@ -248,7 +248,10 @@ function routes($routeProvider, $httpProvider) {
             },
             'responseError': function(response) {
                 if (response.status === 401 || response.status === 403) {
-                    $location.path('/');
+                    $window.localStorage.removeItem('token');
+                    $window.localStorage.removeItem('currentUser');
+                    $rootScope.$emit('userUpdated', null);
+                    $location.path('/user/login');
                 }
                 return $q.reject(response);
             }
