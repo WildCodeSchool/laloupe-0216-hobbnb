@@ -12,7 +12,7 @@ angular.module('app').controller('inboxController', function($scope, $window, $l
     $scope.newMsg = {
         creation: new Date(),
         sender: $scope.currentUser._id,
-        recipient: $scope.currentUser._id,
+        recipient: '',
         message: ''
     };
     $scope.sendMsg = function() {

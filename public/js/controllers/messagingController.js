@@ -6,6 +6,13 @@ angular.module('app').controller('messagingController', function($scope, $window
     messagingService.getOne($routeParams.id).then(function(res) {
         $scope.msg = res.data;
 
+        $scope.newMsg = {
+            sender: res.data.recipient,
+            recipient: res.data.sender,
+            creation: new Date(),
+            message: ''
+        };
+
         usersService.getOne($scope.msg.recipient).then(function(res) {
             $scope.msg.recipient = res.data.identity.firstName + ' ' + res.data.identity.lastName
         });
@@ -13,10 +20,6 @@ angular.module('app').controller('messagingController', function($scope, $window
             $scope.msg.sender = res.data.identity.firstName + ' ' + res.data.identity.lastName
         });
 
-        $scope.newMsg = angular.copy($scope.msg);
-        $scope.newMsg.creation = new Date();
-        $scope.newMsg.message = '';
-        delete $scope.newMsg._id;
     });
     $scope.sendMsg = function() {
         messagingService.create($scope.newMsg).then(function(res) {
