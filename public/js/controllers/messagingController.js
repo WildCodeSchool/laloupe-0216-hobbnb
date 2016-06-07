@@ -1,8 +1,12 @@
 angular.module('app').controller('messagingController', function($scope, $window, $location, $routeParams, messagingService, usersService) {
-    if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
-    else $scope.currentUser = {
-        _id: null
-    };
+
+    if ($window.localStorage.currentUser)
+        $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
+    else
+        $scope.currentUser = {
+            _id: null
+        };
+
     messagingService.getOne($routeParams.id).then(function(res) {
         $scope.msg = res.data;
 
@@ -21,12 +25,15 @@ angular.module('app').controller('messagingController', function($scope, $window
         });
 
     });
+
     $scope.sendMsg = function() {
         messagingService.create($scope.newMsg).then(function(res) {
             $location.path('/messages/' + res.data._id);
         });
-    }
+    };
+
     $scope.format = function(date) {
         return messagingService.format(date);
-    }
+    };
+
 });
