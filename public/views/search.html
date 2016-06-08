@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <!-- Formulaire pour spot -->
-                <div class="row" ng-hide="selectHome">
+                <div class="row" ng-show="selectHome == 'spot'">
                     <div class="input-field col s6 m3">
                         <select ng-model="filters.quality">
                             <option value="" disabled selected>Quality</option>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <!-- Formulaire pour home -->
-                <div class="row" ng-show="selectHome">
+                <div class="row" ng-show="selectHome == 'place'">
                     <div class="input-field col s6 m3">
                         <select class='' material-select watch ng-model="filters.propertyType">
                             <option ng-repeat="propertyType in propertyTypeListing">{{propertyType}}</option>
@@ -109,76 +109,6 @@
                             <option value="6">6 personnes</option>
                         </select>
                         <label>Invités</label>
-                    </div>
-                    <div class="input-field col s6 m3">
-                        <img src="../assets/search/icoPrivate.png" class="prefix" alt=""/><br />
-                        <input type="checkbox" ng-model="filters.privatePlace" id="chkPrivate"/>
-                        <label for="chkPrivate">Privée</label>
-                    </div>
-                    <div class="input-field col s6 m3">
-                        <img src="../assets/search/icoShared.png" class="prefix" alt=""/><br />
-                        <input type="checkbox" ng-model="filters.sharedPlace" id="chkShared"/>
-                        <label for="chkShared">Partagé</label>
-                    </div>
-                </div>
-                <div class="row" ng-show="selectHome">
-                    <div class="input-field col s6 m3">
-                        <label for="arrivalDate">Arrivée</label>
-                        <input
-                            input-date
-                            type="text"
-                            name="arrivalDate"
-                            id="arrivalDate"
-                            ng-model="filters.arrivalDate"
-                            container="body"
-                            format="dd/mm/yyyy"
-                            months-full="{{ month }}"
-                            months-short="{{ monthShort }}"
-                            weekdays-full="{{ weekdaysFull }}"
-                            weekdays-short="{{ weekdaysShort }}"
-                            weekdays-letter="{{ weekdaysLetter }}"
-                            disable="disable"
-                            min="{{ minDate }}"
-                            max="{{ maxDate }}"
-                            today="today"
-                            clear="clear"
-                            close="close"
-                            select-years="15"
-                            on-start="onStart()"
-                            on-render="onRender()"
-                            on-open="onOpen()"
-                            on-close="onClose()"
-                            on-set="onSet()"
-                            on-stop="onStop()"/>
-                    </div>
-                    <div class="input-field col s6 m3">
-                        <label for="departureDate">Départ</label>
-                        <input
-                            input-date
-                            type="text"
-                            name="departureDate"
-                            id="departureDate"
-                            ng-model="filters.departureDate"
-                            container="body"
-                            format="dd/mm/yyyy"
-                            months-full="{{ month }}"
-                            months-short="{{ monthShort }}"
-                            weekdays-full="{{ weekdaysFull }}"
-                            weekdays-short="{{ weekdaysShort }}"
-                            weekdays-letter="{{ weekdaysLetter }}"
-                            disable="disable"
-                            min="{{ minDate }}"
-                            max="{{ maxDate }}"
-                            today="today"
-                            clear="clear"
-                            close="close"
-                            select-years="15"
-                            on-start="onStart()"
-                            on-render="onRender()"
-                            on-open="onOpen()"
-                            on-close="onClose()"
-                            on-set="onSet()"
-                            on-stop="onStop()"/>
                     </div>
                     <div class="input-field col s12 m6">
                         <div range-slider min="filters.priceRange.min" max="filters.priceRange.max" model-min="filters.minPrice" model-max="filters.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
