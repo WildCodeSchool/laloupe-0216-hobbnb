@@ -131,25 +131,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
             $scope.moreFiltrer = function() {
                 $scope.developOptions = !$scope.developOptions;
             };
-            /* Generate calendar for booking */
-            var currentTime = new Date();
-            $scope.arrivalDate = (new Date(currentTime.getTime() + (1000 * 60 * 60 * 24))).toISOString();
-            $scope.departureDate = (new Date(currentTime.getTime() + (1000 * 60 * 60 * 24 * 2))).toISOString();
-            $scope.month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-            $scope.monthShort = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec'];
-            $scope.weekdaysFull = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-            $scope.weekdaysLetter = ['L', 'M', 'Me', 'J', 'V', 'S', 'D'];
-            $scope.disable = [false];
-            $scope.today = 'Aujourd\'hui';
-            $scope.clear = '';
-            $scope.close = 'Fermer';
-            var days = 365;
-            $scope.minDate = $scope.arrivalDate;
-            $scope.maxDate = (new Date(currentTime.getTime() + (1000 * 60 * 60 * 24 * days))).toISOString();
-            $scope.minDateD = $scope.departureDate;
-            $scope.maxDateD = (new Date(currentTime.getTime() + (1000 * 60 * 60 * 24 * days))).toISOString();
-
-
         });
     }
 

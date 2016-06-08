@@ -11,4 +11,9 @@ angular.module('app').controller('mainController', function($scope, $location, $
         searchFactory.data.selectHome = $scope.selectHome;
         $location.path('/search');
     };
+    $scope.searchSpot = function(activity) {
+        searchFactory.data.hobby = activity;
+        $('.tooltipped').tooltip('remove');
+        $location.path('/search');
+    };
 });

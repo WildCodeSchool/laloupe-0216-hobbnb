@@ -31,15 +31,21 @@ footer {
     text-decoration: none;
     color: #7F7F7F;
 }
-.buttonR {
-    float: right;
-    margin-top: 410px;
-    margin-right: 34px;
+.activityPanel{
+  opacity: 1;
 }
-.buttonL {
-    float: left;
-    margin-top: 410px;
-    margin-left: 34px;
+.activityPanel.ng-hide {
+  opacity: 0;
+}
+.activityPanel.ng-hide-add, .activityPanel.ng-hide-remove, .activityPanel.ng-hide-add-active,
+.activityPanel.ng-hide-remove-active{
+  transition: all linear 2s;
+}
+.activityPanel img{
+    width: 100%;
+}
+.buttonPanel {
+    margin-top: 380px;
 }
 .bg-fullwidth {
     width: 100%;

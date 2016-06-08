@@ -71,7 +71,7 @@
 						<input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
 					</div>
 					<div class="col m3 l2">
-						<a class="waves-effect waves-light btn" href="/#/search/" style="margin-top:10px;" ng-click="search()">Chercher</a>
+						<a class="waves-effect waves-light btn" href="/#/search/" style="margin-top:10px;display: block; width: 100%;" ng-click="search()">Chercher</a>
 					</div>
 				</div>
 			</div>
@@ -81,45 +81,95 @@
 <div>
 	<h2>Explorez vos hobby et soyez inspirés</h2>
 	<p>Trouvez votre logement pour les vacances par hobby et rencontrez des hôtes partageant vos passions</p>
-	<div ng-hide="hideCtrl">
-		<div class="row" style="text-align:center;">
+	<div class="activityPanel container" ng-hide="hideCtrl">
+		<div class="row">
 			<div class="col l10 offset-l1">
 				<div class="row">
-					<img src="../images/miniSlide/mindiving-couple.png">
+					<div class="col l12">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Plongée" ng-click="searchSpot('Plongée')">
+							<img src="../images/miniSlide/mindiving-couple.png">
+						</a>
+					</div>
 				</div>
 				<div class="row">
-					<img src="../images/miniSlide/mincouple.png">
-					<img src="../images/miniSlide/minhobbie-cat.png">
-					<img src="../images/miniSlide/minmountains.png">
+					<div class="col l4">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Randonnée" ng-click="searchSpot('Randonnée')">
+							<img src="../images/miniSlide/mincouple.png">
+						</a>
+					</div>
+					<div class="col l4">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Alpinisme" ng-click="searchSpot('Alpinisme')">
+							<img src="../images/miniSlide/minmountains.png">
+						</a>
+					</div>
+					<div class="col l4">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Windsurf" ng-click="searchSpot('Windsurf')">
+							<img src="../images/miniSlide/minhobbie-cat.png">
+						</a>
+					</div>
 				</div>
 				<div class="row">
-					<img src="../images/miniSlide/minskifamily.png">
-					<img src="../images/miniSlide/minparagliding.png">
+					<div class="col l8">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Ski" ng-click="searchSpot('Ski')">
+							<img src="../images/miniSlide/minskifamily.png">
+						</a>
+					</div>
+					<div class="col l4">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Parapente" ng-click="searchSpot('Parapente')">
+							<img src="../images/miniSlide/minparagliding.png">
+						</a>
+					</div>
 				</div>
 			</div>
-			<div class="col l1">
-				<button ng-click="toggle()" class="buttonR">></button>
+			<div class="col l1 center-align">
+				<button ng-click="toggle()" class="btn-floating btn-large waves-effect waves-light  green accent-2 buttonPanel">
+					<i class="material-icons">skip_next</i>
+				</button>
 			</div>
 		</div>
 	</div>
-	<div ng-show="hideCtrl">
+	<div class="activityPanel container" ng-show="hideCtrl">
 		<div class="row">
-			<div class="col l1">
-				<button ng-click="toggle()" class="buttonL"><</button>
+			<div class="col l1 center-align">
+				<button ng-click="toggle()" class="btn-floating btn-large waves-effect waves-light  green accent-2 buttonPanel">
+					<i class="material-icons">skip_previous</i>
+				</button>
 			</div>
-			<div class="row" style="text-align:center;">
-				<div class="col l10">
-					<div class="row">
-						<img src="../images/miniSlide/minsurf-friends.png">
-						<img src="../images/miniSlide/minzen.png">
+			<div class="col l10">
+				<div class="row">
+					<div class="col l8">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Surf" ng-click="searchSpot('Surf')">
+							<img src="../images/miniSlide/minsurf-friends.png">
+						</a>
 					</div>
-					<div class="row">
-						<img src="../images/miniSlide/minbike-parc.png">
-						<img src="../images/miniSlide/min985.png">
-						<img src="../images/miniSlide/minalpes-dhuez.png">
+					<div class="col l4">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Equitation" ng-click="searchSpot('Equitation')">
+							<img src="../images/miniSlide/equitation.jpg">
+						</a>
 					</div>
-					<div class="row">
-						<img src="../images/miniSlide/minvtt.png">
+				</div>
+				<div class="row">
+					<div class="col l4">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Golf" ng-click="searchSpot('Golf')">
+							<img src="../images/miniSlide/golf.jpg">
+						</a>
+					</div>
+					<div class="col l4">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Kitesurf" ng-click="searchSpot('Kitesurf')">
+							<img src="../images/miniSlide/kitesurf.jpg">
+						</a>
+					</div>
+					<div class="col l4">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Cyclisme" ng-click="searchSpot('Cyclisme')">
+							<img src="../images/miniSlide/cyclisme.jpg">
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col l12">
+						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de VTT" ng-click="searchSpot('VTT')">
+							<img src="../images/miniSlide/minvtt.png">
+						</a>
 					</div>
 				</div>
 			</div>
@@ -306,5 +356,6 @@
 	$(document).ready(function(){
 		$('.slider').slider({full_width: true});
 		$('.slider').slider({indicators: false});
+		$('.tooltipped').tooltip({delay: 50});
 	});
 </script>
