@@ -26,6 +26,7 @@ footer {
 .tabs .indicator {
     background-color: #7F7F7F;
 }
+
 #widgets .card-image{
   height: 210px;
   overflow: hidden;
@@ -38,7 +39,6 @@ footer {
 }
 #widgets .actpict{
   position: absolute;
-  margin-left: 5px;
   left: 5px;
   width: 32px;
 }
@@ -170,36 +170,6 @@ footer {
 #btnSpot, #btnHome {
     display: block;
     width: 100%;
-}
-#widgets .card-image {
-    height: 210px;
-    overflow: hidden;
-    vertical-align: middle;
-    z-index: 5;
-}
-#widgets .placepict {
-    height: 210px;
-    background-repeat: no-repeat;
-}
-#widgets .actpict {
-    position: absolute;
-    left: 5px;
-    width: 32px;
-}
-#widgets .authorpict {
-    position: absolute;
-    border-radius: 100%;
-    width: 64px;
-    top: 170px;
-    right: 20px;
-    border: 3px solid white;
-    z-index: 10;
-}
-#widgets .card-content div {
-    padding-left: 60px;
-}
-#widgets .card-title {
-    background-color: rgba(100, 100, 100, 0.5);
 }
 
 /* Style popup */
