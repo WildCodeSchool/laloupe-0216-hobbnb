@@ -26,10 +26,35 @@ footer {
 .tabs .indicator {
     background-color: #7F7F7F;
 }
-.news {
-    font-size: 21px;
-    text-decoration: none;
-    color: #7F7F7F;
+#widgets .card-image{
+  height: 210px;
+  overflow: hidden;
+  vertical-align: middle;
+  z-index: 5;
+}
+#widgets .placepict{
+  height : 210px;
+  background-repeat: no-repeat;
+}
+#widgets .actpict{
+  position: absolute;
+  left: 5px;
+  width: 32px;
+}
+#widgets .authorpict{
+  position: absolute;
+  border-radius: 100%;
+  width: 64px;
+  top : 170px;
+  right : 20px;
+  border: 3px solid white;
+  z-index: 10;
+}
+#widgets .card-content div{
+  padding-left: 60px;
+}
+#widgets .card-title{
+  background-color: rgba(100,100,100,0.5);
 }
 .activityPanel{
   opacity: 1;
@@ -39,13 +64,17 @@ footer {
 }
 .activityPanel.ng-hide-add, .activityPanel.ng-hide-remove, .activityPanel.ng-hide-add-active,
 .activityPanel.ng-hide-remove-active{
-  transition: all linear 2s;
+  transition: all linear 1s;
 }
 .activityPanel img{
     width: 100%;
 }
 .buttonPanel {
     margin-top: 380px;
+}
+.raz{
+    clear: both;
+    height: 0; overflow: hidden;
 }
 .bg-fullwidth {
     width: 100%;

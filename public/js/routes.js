@@ -8,7 +8,8 @@ function routes($routeProvider, $httpProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/factories/searchFactory.js',
+                            'js/services/placesService.js',
+                            'js/services/spotsService.js',
                             'js/factories/searchFactory.js',
                             'js/controllers/mainController.js'
                         ]

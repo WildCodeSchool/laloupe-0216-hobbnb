@@ -1,5 +1,5 @@
 // MAIN CONTROLLER
-angular.module('app').controller('mainController', function($scope, $location, $http, searchFactory) {
+angular.module('app').controller('mainController', function($scope, $location, $http, placesService, spotsService, searchFactory) {
     $scope.hideCtrl = false;
     $scope.toggle = function() {
         $scope.hideCtrl = !$scope.hideCtrl;
@@ -16,4 +16,22 @@ angular.module('app').controller('mainController', function($scope, $location, $
         $('.tooltipped').tooltip('remove');
         $location.path('/search');
     };
+    spotsService.get().then(function(res) {
+        $scope.pSpots = res.data;
+    });
+    placesService.get().then(function(res) {
+        $scope.pPlaces = res.data;
+    });
+    $scope.hobbyIco = function(widget) {
+        return "../assets/hobbies/" + widget.primarySports + ".png";
+    };
+    $scope.pictPlace = function(widget) {
+        var url = "uploads/places/" + widget._id + "/" + widget.picture;
+        return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
+    };
+    $scope.pictSpot = function(widget) {
+        var url = "uploads/spots/" + widget._id + "/" + widget.picture;
+        return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
+    };
+
 });

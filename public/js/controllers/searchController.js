@@ -111,8 +111,8 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                                 var loc = results[0].geometry.location;
                                 //newCol.place = results[0].formatted_address;
                                 $scope.centerMap = newCol.place;
-                                $scope.latitude = loc.lat;
-                                $scope.longitude = loc.lon;
+                                $scope.latitude = loc.lat();
+                                $scope.longitude = loc.lon();
                                 $scope.latitudemin = $scope.latitude - 0.5;
                                 $scope.latitudemax = $scope.latitude + 0.5;
                                 $scope.kmbydegree = (111 * Math.cos($scope.latitude));

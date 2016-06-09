@@ -177,117 +177,61 @@
 	</div>
 </div>
 
-<div class="news">
-	<div id="tabs" class="row" ng-init="showTabs = true" ng-hide="true">
-		<a class="btn cyan lighten-3" ng-click="showTabs = !showTabs">Cacher la recherche</a>
+
+<div class="row container">
+	<div class="col s12">
+		<ul class="collapsible" data-collapsible="accordion">
+	    <li>
+	    	<div class="collapsible-header">Quoi de neuf</div>
+	    	<div class="collapsible-body"><p>En cours de développement.</p></div>
+	    </li>
+	    <li>
+	     	<div class="collapsible-header">Les spots les plus populaires</div>
+	      	<div class="collapsible-body">
+			  <div class="col s12 m6" ng-repeat="p in pSpots | limitTo:4">
+				  <a href="/#/spot/{{p._id}}">
+					  <div class="card hoverable small" id="widgets">
+						  <div class="card-image">
+							  <div class="placepict" ng-style="{{pictSpot(p)}}"></div>
+						  </div>
+						  <div class="card-content">
+							  <p>
+								  <img class="actpict" src="{{hobbyIco(p)}}" alt=""/>
+								  <span style="font-size:1.5em;">{{p.name}}</span>
+							  </p>
+						  </div>
+					  </div>
+				  </a>
+			  </div>
+			  <div class="raz"></div>
+		  </div>
+	    </li>
+	    <li>
+	      <div class="collapsible-header">Les hébergements les plus populaires</div>
+	      <div class="collapsible-body">
+			  <div class="col s12 m6" ng-repeat="p in pPlaces | limitTo:4">
+				  <a href="/#/place/{{p._id}}">
+					  <div class="card hoverable small" id="widgets">
+						  <div class="card-image">
+							  <div class="placepict" ng-style="{{pictPlace(p)}}"></div>
+							  <span class="card-title">{{p.home.price|currency:'€'}}</span>
+						  </div>
+						  <div class="card-content">
+							  <p>
+								  <img class="actpict" src="{{hobbyIco(p)}}" alt=""/>
+								  <span style="font-size:1.5em;">{{p.name}}</span>
+							  </p>
+						  </div>
+					  </div>
+				  </a>
+			  </div>
+			  <div class="raz"></div>
+		  </div>
+	    </li>
+	  </ul>
 	</div>
-	<div class="row" ng-if="showTabs">
-		<div class="col s12">
-				<ul class="tabs" tabs>
-						<li class="tab col s3 offset-s2"><a class="active" href="#neuf" style="color: #7F7F7F; text-decoration:none;">Quoi de neuf</a></li>
-						<li class="tab col s3"><a href="#note" style="color: #7F7F7F; text-decoration:none;">Les mieux notés</a></li>
-						<li class="tab col s3"><a href="#populaire" style="color: #7F7F7F; text-decoration:none;">Les plus populaires</a></li>
-				</ul>
-		</div>
-		<div id="neuf">
-			<div class="row" ng-if="showTabs">
-			  <div class="col s12">
-			      <ul class="tabs" tabs>
-			          <li class="tab col s3 offset-s1"><a href="#spotNeuf" style="color: #7F7F7F;">Spot</a></li>
-			          <li class="tab col s3"><a class="active" href="#logNeuf" style="color: #7F7F7F;">Logement</a></li>
-			      </ul>
-			  </div>
-			  <div id="spotNeuf" class="col s12">
-			    <div class="col s4">
-			      <img src="../images/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/activities_copyright_free/alpinisme.jpg" style="height:245px">
-			    </div>
-			  </div>
-			  <div id="logNeuf">
-			    <div class="col s4">
-			      <img src="../images/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px">
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<div id="note">
-			<div class="row" ng-if="showTabs">
-			  <div class="col s12">
-			      <ul class="tabs" tabs>
-			          <li class="tab col s3 offset-s1"><a href="#spotNote" style="color: #7F7F7F;">Spot</a></li>
-			          <li class="tab col s3"><a class="active" href="#logNote" style="color: #7F7F7F;">Logement</a></li>
-			      </ul>
-			  </div>
-			  <div id="spotNote" class="col s12">
-			    <div class="col s4">
-			      <img src="../images/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/activities_copyright_free/alpinisme.jpg" style="height:245px">
-			    </div>
-			  </div>
-			  <div id="logNote">
-			    <div class="col s4">
-			      <img src="../images/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px">
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<div id="populaire">
-			<div class="row" ng-if="showTabs">
-			  <div class="col s12">
-			      <ul class="tabs" tabs>
-			          <li class="tab col s3 offset-s1"><a href="#spotPop" style="color: #7F7F7F;">Spot</a></li>
-			          <li class="tab col s3"><a class="active" href="#logPop" style="color: #7F7F7F;">Logement</a></li>
-			      </ul>
-			  </div>
-			  <div id="spotPop" class="col s12">
-			    <div class="col s4">
-			      <img src="../images/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/activities_copyright_free/alpinisme.jpg" style="height:245px">
-			    </div>
-			  </div>
-			  <div id="logPop">
-			    <div class="col s4">
-			      <img src="../images/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="../images/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px">
-			    </div>
-			  </div>
-			</div>
-		</div>
 </div>
 
-</div>
 
 <h2>Louer par hobby change la donne</h2>
 <div class="container">
@@ -357,5 +301,7 @@
 		$('.slider').slider({full_width: true});
 		$('.slider').slider({indicators: false});
 		$('.tooltipped').tooltip({delay: 50});
+		$(".button-collapse").sideNav();
+		$(".dropdown-button").dropdown();
 	});
 </script>
