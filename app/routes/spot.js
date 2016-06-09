@@ -10,8 +10,8 @@ module.exports = function(app) {
     spotsRouter.get('/', Spot.findAll);
     spotsRouter.post('/', Auth.user.hasAuthorization, Spot.create);
     spotsRouter.put('/:id', Auth.user.hasAuthorization, Spot.update);
-    spotsRouter.delete('/:id', Auth.user.isAdministrator, Spot.delete);
+    spotsRouter.delete('/:id', Auth.user.hasAuthorization, Auth.user.isAdministrator, Spot.delete);
 
     app.use('/spots', spotsRouter);
-    
+
 };

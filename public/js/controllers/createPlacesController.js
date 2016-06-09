@@ -8,7 +8,6 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.obj = {};
     resetObj = function() {
-        //TODO: Add possibility to edit an place
         $scope.obj.isActive = "1";
         $scope.obj.owner = $scope.currentUser._id;
         $scope.obj.creation = new Date();
@@ -29,38 +28,46 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         $scope.obj.comments = [];
     };
     resetObj();
-    $scope.step = 1;
+    $scope.step = 7;
     if ($routeParams.id) {
-        $scope.creaOrModif = 'modification';
+        $scope.isAction = 'modification';
         placesService.getOne($routeParams.id).then(function(res) {
-            if(res.data.owner != $scope.currentUser._id) $location.path('/');
+            if (res.data.owner != $scope.currentUser._id) $location.path('/');
             $scope.obj = res.data;
             $scope.obj.modification = new Date();
         })
     } else {
-        $scope.creaOrModif = 'création';
+        $scope.isAction = 'création';
+    }
+
+    function gmapGeocode() {
+        var defer = $q.defer(),
+            addr = $scope.obj.address.num + ' ' + $scope.obj.address.road + ' ' + $scope.obj.address.postalCode + ' ' + $scope.obj.address.city + ' ' + $scope.obj.address.country;
+        if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
+        this.geocoder.geocode({
+            'address': addr
+        }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                debugger;
+                var loc = results[0].geometry.location;
+                $scope.obj.latitude = loc.lat();
+                $scope.obj.longitude = loc.lng();
+                defer.resolve();
+            } else {
+                defer.reject('Adresse introuvable');
+            }
+        });
+        return defer.promise;
     }
     $scope.send = function() {
-        $q(function(resolve, reject) {
-            if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
-            this.geocoder.geocode({
-                'address': $scope.obj.address.num + ' ' + $scope.obj.address.road + ' ' + $scope.obj.address.postalCode + ' ' + $scope.obj.address.city + ' ' + $scope.obj.address.country
-            }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    var loc = results[0].geometry.location;
-                    $scope.obj.latitude = loc.lat;
-                    $scope.obj.longitude = loc.lon;
-                    resolve();
-                }
-            });
-        }).then(function() {
+        gmapGeocode().then(function() {
             var act;
-            if ($scope.creaOrModif == 'création') {
+            if ($scope.isAction == 'création') {
                 act = placesService.create({
                     content: $scope.obj
                 })
             } else {
-                act = placesService.update($scope.obj._id, $scope.obj)
+                act = placesService.update($scope.obj._id, {content: $scope.obj})
             }
             act.then(function(res) {
                 $scope.obj = {};
@@ -69,6 +76,8 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             }, function(err) {
                 $scope.error = err;
             });
+        }, function(err) {
+            $scope.error = err;
         });
     };
 
