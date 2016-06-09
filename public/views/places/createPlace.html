@@ -247,49 +247,67 @@
         </div>
         <h2>Aménagements</h2>
         <div class="row">
-            <div class="input-field col s12">
-                <select material-select ng-model="obj.home.houseAmenities.essentials">
-                    <option value=''>Essentiel ?</option>
-                    <option value='1'>Dispose de l'essentiel</option>
-                    <option value='0'>Ne dispose pas de l'essentiel</option>
-                </select>
+            <div class="center col s12">
+                <div class="switch">
+                    <label>
+                        Ne dispose pas de l'essentiel
+                        <input type="checkbox" ng-model="obj.home.houseAmenities.essentials">
+                        <span class="lever"></span>
+                        Dispose de l'essentiel
+                    </label>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <select material-select ng-model="obj.home.houseAmenities.kitchen">
-                    <option value=''>Cuisine ?</option>
-                    <option value='1'>A une cuisine</option>
-                    <option value='0'>N'a pas de cuisine</option>
-                </select>
+            <div class="center col s12">
+                <div class="switch">
+                    <label>
+                        N'a pas de cuisine
+                        <input type="checkbox" ng-model="obj.home.houseAmenities.kitchen">
+                        <span class="lever"></span>
+                        A une cuisine
+                    </label>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <select material-select ng-model="obj.home.houseAmenities.wifi">
-                    <option value=''>Wifi ?</option>
-                    <option value='1'>A un accès au wifi</option>
-                    <option value='0'>N'a pas d'accès au wifi</option>
-                </select>
+            <div class="center col s12">
+                <div class="switch">
+                    <label>
+                        N'a pas d'accès au wifi
+                        <input type="checkbox" ng-model="obj.home.houseAmenities.wifi">
+                        <span class="lever"></span>
+                        A un accès au wifi
+                    </label>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <select material-select ng-model="obj.home.houseAmenities.tv">
-                    <option value=''>TV ?</option>
-                    <option value='1'>A une télévision</option>
-                    <option value='0'>N'a pas de télévision</option>
-                </select>
+            <div class="center col s12">
+                <div class="switch">
+                    <label>
+                        N'a pas de télévision
+                        <input type="checkbox" ng-model="obj.home.houseAmenities.tv">
+                        <span class="lever"></span>
+                        A une télévision
+                    </label>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <select material-select ng-model="obj.home.houseAmenities.bbq">
-                    <option value=''>Barbecue ?</option>
-                    <option value='1'>Dispose d'un barbecue</option>
-                    <option value='0'>N'a pas de barbecue</option>
-                </select>
+            <div class="center col s12">
+                <div class="switch">
+                    <label>
+                        N'a pas de barbecue
+                        <input type="checkbox" ng-model="obj.home.houseAmenities.bbq">
+                        <span class="lever"></span>
+                        Dispose d'un barbecue
+                    </label>
+                </div>
             </div>
+        </div>
+        <div class="clearfix">
+            <br><br><br>
         </div>
         <div class="row">
             <div class="input-field col s12">
