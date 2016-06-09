@@ -39,8 +39,26 @@ function routes($routeProvider, $httpProvider) {
                 }]
             }
         })
-        .when('/place', {
-            templateUrl: 'views/create-place-page.html',
+        .when('/edition/place/:id', {
+            templateUrl: 'views/places/createPlace.html',
+            controller: 'createPlacesController',
+            resolve: {
+                connected: checkIsConnected,
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/placesService.js',
+                            'js/factories/placesFactory.js',
+                            'js/filters/rangeFilter.js',
+                            'js/controllers/createPlacesController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/creation/place', {
+            templateUrl: 'views/places/createPlace.html',
             controller: 'createPlacesController',
             resolve: {
                 connected: checkIsConnected,

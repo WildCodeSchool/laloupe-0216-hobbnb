@@ -30,7 +30,7 @@ angular.module('app').controller('placesController', function($scope, $http, $lo
     };
     placesService.getOne($scope.currentHost).then(function(e) {
 
-        if (!e.data.shortDescription) $location.path('/place');
+        if (!e.data.shortDescription) $location.path('/creation/place');
 
         usersService.getOne(e.data.owner).then(function(res) {
             $scope.owner = res.data;
@@ -41,7 +41,7 @@ angular.module('app').controller('placesController', function($scope, $http, $lo
             $scope.owner.globalLowerRating = 5 - $scope.owner.globalRating;
             $scope.owner.numReviews = $scope.owner.rating.length;
         }, function(err) {
-            $location.path('/place');
+            $location.path('/creation/place');
         });
 
         $scope.host = e.data;
