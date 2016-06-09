@@ -23,7 +23,8 @@
                 </div>
                 <div class="col s8 m9">
                     <h4>{{host.name}}</h4>
-                    <h5>{{host.country}}, {{host.state}}</h5>
+                    <h5>{{host.country}},
+                        {{host.state}}</h5>
                     <div class='row'>
                         <div class="col s12">
                             <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
@@ -33,8 +34,8 @@
                     </div>
                     <div class="row center-align">
                         <div>
-                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-main' alt="" />
-                            <img ng-repeat="sport in host.secondarySports" src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
+                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-main' alt=""/>
+                            <img ng-repeat="sport in host.secondarySports" src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt=""/>
                             <br/>Hobbies
                         </div>
                     </div>
@@ -44,12 +45,13 @@
                 <div class="col s12">
                     <a href="#">Contacter l'auteur</a>
                     <div class="divider"></div>
-<!--rating -->
+                    <!--rating -->
                     <div class="row">
                         <br>
                         <div class="col s4">
                             <div class="center-align">
-                                <b>{{numReviews}} Avis</b><br/>
+                                <b>{{numReviews}}
+                                    Avis</b><br/>
                                 <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
                                 <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
                             </div>
@@ -57,19 +59,19 @@
                         <div class="col s8">
                             <div class="row">
                                 <div class="col s4 center">
-                                    <img src="../assets/hobbies/quality.png" class='hobby-main'alt="" /><br/>
+                                    <img src="../assets/hobbies/quality.png" class='hobby-main' alt=""/><br/>
                                     Quality<br/>
                                     <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.quality)'>star</i>
                                     <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.quality))'>star</i>
                                 </div>
                                 <div class="col s4 center">
-                                    <img src="../assets/hobbies/beauty.png" class='hobby-main'alt="" /><br/>
+                                    <img src="../assets/hobbies/beauty.png" class='hobby-main' alt=""/><br/>
                                     Beauty<br/>
                                     <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.beauty)'>star</i>
                                     <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.beauty))'>star</i>
                                 </div>
                                 <div class="col s4 center">
-                                    <img src="../assets/hobbies/facility.png" class='hobby-main' alt="" /><br/>
+                                    <img src="../assets/hobbies/facility.png" class='hobby-main' alt=""/><br/>
                                     Accessibility<br/>
                                     <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.accessibility)'>star</i>
                                     <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.accessibility))'>star</i>
@@ -78,7 +80,7 @@
                         </div>
                     </div>
                     <div class="divider"></div>
-<!--comments -->
+                    <!--comments -->
                     <div class="row">
 
                         <div class="col s10 offset-s1" ng-repeat='comment in host.comments'>
@@ -108,13 +110,13 @@
                         </div>
 
                     </div>
-<!--gallery pictures -->
+                    <!--gallery pictures -->
                     <div class="row">
                         <div class="col s12 m6 center" ng-repeat="pict in host.caption">
-                            <img  materialboxed class="materialboxed responsive-img" src="uploads/spots/{{host._id}}/{{pict}}" alt="" />
+                            <img materialboxed class="materialboxed responsive-img" src="uploads/spots/{{host._id}}/{{pict}}" alt=""/>
                         </div>
                     </div>
-<!--About the author -->
+                    <!--About the author -->
                     <div class="row">
                         <div class="col s4 center valign">
                             <b>About this author</b>
@@ -144,28 +146,28 @@
                         </div>
                     </div>
                     <div class="divider"></div>
-<!--The map -->
+                    <!--The map -->
                     <div class="row">
                         <div class="col s10 offset-s1">
                             <b>Alentours</b>
                             <br>
-                              <ng-map default-style="true" center="[{{host.latitude}},{{host.longitude}}]" zoom="8">
-                                  <marker
-                                      position="[{{host.latitude}},{{host.longitude}}]"
-                                      title="{{host.name}}"
-                                      icon="{
+                            <ng-map default-style="true" center="[{{host.latitude}},{{host.longitude}}]" zoom="8">
+                                <marker
+                                    position="[{{host.latitude}},{{host.longitude}}]"
+                                    title="{{host.name}}"
+                                    icon="{
                                       url:'{{selectTile()}}',
                                       scaledSize:[42,45],
                                       origin: [0,0],
                                       anchor: [21,45]
                                       }"></marker>
-                              </ng-map>
+                            </ng-map>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<!--        <div class="col s12 m4">
+        <!--        <div class="col s12 m4">
             <div class="card-panel">
                 <div class="row">
                     <div class="col s12 center grey lighten-2 flow-text">{{host.home.price}}€ / nuit</div>

@@ -1,11 +1,13 @@
 <div class="container">
     <div class="row">
-      <h1>Liste des spots</h1>
+        <h1>Liste des spots</h1>
     </div>
     <div class="row">
-      <ul>
-          <li ng-repeat='spot in spots'><a href='/#/spot/{{spot._id}}'>{{spot.name}}</a></li>
-      </ul>
+        <ul>
+            <li ng-repeat='spot in spots'>
+                <a href='/#/spot/{{spot._id}}'>{{spot.name}}</a>
+            </li>
+        </ul>
     </div>
     <div class="row">
         <h1>Créer un spot</h1>
@@ -88,8 +90,8 @@
         </select>
     </div>
     <div class="row">
-      <button class="waves-effect waves-light blue lighten-2 white-text btn right" ng-click='send()'>
-          Ajouter
-      </button>
+        <button class="waves-effect waves-light blue lighten-2 white-text btn right" ng-click='send()'>
+            Ajouter
+        </button>
     </div>
 </div>

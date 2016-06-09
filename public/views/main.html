@@ -1,310 +1,137 @@
 <header style="height:400px">
-	<div class="homecar">
-		<div class="slider" style="position:absolute; z-index:1;">
-		    <ul class="slides">
-			    <li>
-			        <img src="assets/activities_copyright_free/golf.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/kitesurf.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/biking.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/peche.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/alpinisme.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/diving.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/equitation.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/hiking.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/kayak.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/paragliding.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/ski-freeride.jpg">
-			    </li>
-			    <li>
-			        <img src="assets/activities_copyright_free/surfing.jpg">
-			    </li>
-		    </ul>
-		</div>
-		<div class="logo">
-			<div class="container">
-				<h1 style="padding-top:50px;"><B>Étendez votre aire de jeu</B></h1>
-				<div style="text-align:center;">
-					<img src="assets/icone/hobbnb-activities-off.svg" height="61px">
-				</div>
-				<div class="row">
-					<div class="col s6 offset-s3" style="text-align:center;">
-						<p style="color:white;">Réservez en quelques clics des logements entre particuliers les mieux situés pour pratiquer vos loisirs préférés.</p>
-					</div>
-				</div>
-			</div>
-			<div class="searchbar">
-				<div class="row">
-					<div class="col m3 l2 offset-l2">
-						<select class='' material-select watch ng-model="hobby">
-								<option value="">Quel hobby ?</option>
-								<option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
-						</select>
-					</div>
-					<div class="col m3 l2">
-						<select class='' material-select ng-model="selectHome">
-								<option value="">Spot ou Hébergement ?</option>
-								<option value="spot">spot</option>
-								<option value="place">Hébergement</option>
-						</select>
-					</div>
-					<div class="col m3 l2">
-						<input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
-					</div>
-					<div class="col m3 l2">
-						<a class="waves-effect waves-light btn" href="/#/search/" style="margin-top:10px;" ng-click="search()">Chercher</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="homecar">
+        <div class="slider" style="position:absolute; z-index:1;">
+            <ul class="slides">
+                <li>
+                    <img src="assets/activities_copyright_free/golf.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/kitesurf.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/biking.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/peche.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/alpinisme.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/diving.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/equitation.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/hiking.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/kayak.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/paragliding.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/ski-freeride.jpg">
+                </li>
+                <li>
+                    <img src="assets/activities_copyright_free/surfing.jpg">
+                </li>
+            </ul>
+        </div>
+        <div class="logo">
+            <div class="container">
+                <h1 style="padding-top:50px;">
+                    <B>Étendez votre aire de jeu</B>
+                </h1>
+                <div style="text-align:center;">
+                    <img src="assets/icone/hobbnb-activities-off.svg" height="61px">
+                </div>
+                <div class="row">
+                    <div class="col s6 offset-s3" style="text-align:center;">
+                        <p style="color:white;">Réservez en quelques clics des logements entre particuliers les mieux situés pour pratiquer vos loisirs préférés.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="searchbar">
+                <div class="row">
+                    <div class="col m3 l2 offset-l2">
+                        <select class='' material-select watch ng-model="hobby">
+                            <option value="">Quel hobby ?</option>
+                            <option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
+                        </select>
+                    </div>
+                    <div class="col m3 l2">
+                        <select class='' material-select ng-model="selectHome">
+                            <option value="">Spot ou Hébergement ?</option>
+                            <option value="spot">spot</option>
+                            <option value="place">Hébergement</option>
+                        </select>
+                    </div>
+                    <div class="col m3 l2">
+                        <input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
+                    </div>
+                    <div class="col m3 l2">
+                        <a class="waves-effect waves-light btn" href="/#/search/" style="margin-top:10px;" ng-click="search()">Chercher</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 <div>
-	<h2>Explorez vos hobby et soyez inspirés</h2>
-	<p>Trouvez votre logement pour les vacances par hobby et rencontrez des hôtes partageant vos passions</p>
-	<div ng-hide="hideCtrl">
-		<div class="row" style="text-align:center;">
-			<div class="col l10 offset-l1">
-				<div class="row">
-					<img src="assets/miniSlide/mindiving-couple.png">
-				</div>
-				<div class="row">
-					<img src="assets/miniSlide/mincouple.png">
-					<img src="assets/miniSlide/minhobbie-cat.png">
-					<img src="assets/miniSlide/minmountains.png">
-				</div>
-				<div class="row">
-					<img src="assets/miniSlide/minskifamily.png">
-					<img src="assets/miniSlide/minparagliding.png">
-				</div>
-			</div>
-			<div class="col l1">
-				<button ng-click="toggle()" class="buttonR">></button>
-			</div>
-		</div>
-	</div>
-	<div ng-show="hideCtrl">
-		<div class="row">
-			<div class="col l1">
-				<button ng-click="toggle()" class="buttonL"><</button>
-			</div>
-			<div class="row" style="text-align:center;">
-				<div class="col l10">
-					<div class="row">
-						<img src="assets/miniSlide/minsurf-friends.png">
-						<img src="assets/miniSlide/minzen.png">
-					</div>
-					<div class="row">
-						<img src="assets/miniSlide/minbike-parc.png">
-						<img src="assets/miniSlide/min985.png">
-						<img src="assets/miniSlide/minalpes-dhuez.png">
-					</div>
-					<div class="row">
-						<img src="assets/miniSlide/minvtt.png">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="news">
-	<div id="tabs" class="row" ng-init="showTabs = true" ng-hide="true">
-		<a class="btn cyan lighten-3" ng-click="showTabs = !showTabs">Cacher la recherche</a>
-	</div>
-	<div class="row" ng-if="showTabs">
-		<div class="col s12">
-				<ul class="tabs" tabs>
-						<li class="tab col s3 offset-s2"><a class="active" href="#neuf" style="color: #7F7F7F; text-decoration:none;">Quoi de neuf</a></li>
-						<li class="tab col s3"><a href="#note" style="color: #7F7F7F; text-decoration:none;">Les mieux notés</a></li>
-						<li class="tab col s3"><a href="#populaire" style="color: #7F7F7F; text-decoration:none;">Les plus populaires</a></li>
-				</ul>
-		</div>
-		<div id="neuf">
-			<div class="row" ng-if="showTabs">
-			  <div class="col s12">
-			      <ul class="tabs" tabs>
-			          <li class="tab col s3 offset-s1"><a href="#spotNeuf" style="color: #7F7F7F;">Spot</a></li>
-			          <li class="tab col s3"><a class="active" href="#logNeuf" style="color: #7F7F7F;">Logement</a></li>
-			      </ul>
-			  </div>
-			  <div id="spotNeuf" class="col s12">
-			    <div class="col s4">
-			      <img src="assets/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/activities_copyright_free/alpinisme.jpg" style="height:245px">
-			    </div>
-			  </div>
-			  <div id="logNeuf">
-			    <div class="col s4">
-			      <img src="assets/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px">
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<div id="note">
-			<div class="row" ng-if="showTabs">
-			  <div class="col s12">
-			      <ul class="tabs" tabs>
-			          <li class="tab col s3 offset-s1"><a href="#spotNote" style="color: #7F7F7F;">Spot</a></li>
-			          <li class="tab col s3"><a class="active" href="#logNote" style="color: #7F7F7F;">Logement</a></li>
-			      </ul>
-			  </div>
-			  <div id="spotNote" class="col s12">
-			    <div class="col s4">
-			      <img src="assets/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/activities_copyright_free/alpinisme.jpg" style="height:245px">
-			    </div>
-			  </div>
-			  <div id="logNote">
-			    <div class="col s4">
-			      <img src="assets/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px">
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<div id="populaire">
-			<div class="row" ng-if="showTabs">
-			  <div class="col s12">
-			      <ul class="tabs" tabs>
-			          <li class="tab col s3 offset-s1"><a href="#spotPop" style="color: #7F7F7F;">Spot</a></li>
-			          <li class="tab col s3"><a class="active" href="#logPop" style="color: #7F7F7F;">Logement</a></li>
-			      </ul>
-			  </div>
-			  <div id="spotPop" class="col s12">
-			    <div class="col s4">
-			      <img src="assets/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/activities_copyright_free/alpinisme.jpg" style="height:245px">
-			    </div>
-			  </div>
-			  <div id="logPop">
-			    <div class="col s4">
-			      <img src="assets/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px">
-			    </div>
-			    <div class="col s4">
-			      <img src="assets/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px">
-			    </div>
-			  </div>
-			</div>
-		</div>
-</div>
-
-</div>
-
-<h2>Louer par hobby change la donne</h2>
-<div class="container">
-	<div class="rentic">
-		<div class="row">
-			<div class="col s4">
-				<a href="#">
-					<img src="assets/carte.png" />
-					<p style="font-size:22px"><B>Logez au coeur de l'action</p>
-				</a>
-			</div>
-			<div class="col s4">
-				<a href="#">
-					<img src="assets/friends.svg" style="height:88px; margin-top:45px" />
-					<p style="font-size:22px">Recevez des conseils de votre hôte</p>
-				</a>
-			</div>
-			<div class="col s4">
-				<a href="#">
-					<img src="assets/cochon.png" style="margin-top:25px" />
-					<p style="font-size:22px">Faites vous de l'argent grâce à vos hobbys</B></p>
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
-
-<img class="responsive-img" src="assets/activities_copyright_free/riding-beach.jpg"/>
-
-<div class="think">
-	<h2>Qu'en pense-t-il</h2>
-	<div class="container">
-		<div class="valign wrapper">
-			<div class="row">
-				<div class="col s4">
-					<div class="pcenter">
-						<img src="assets/hobbynauts/images-1.jpeg" class="circle"/>
-					</div>
-					<h2 class="valign">"Super concept"</h2><br>
-					<p class="valign">Vous avez un hobby et aimez partager vos expériences, des conseils et peut être de l'équipement ? Faites-en un atout pour augmenter vos revenus en louant à 68% des voyageurs voulant découvrir ou profiter de leurs hobbys préférés durant leurs vacances.</p>
-				</div>
-				<div class="col s4">
-					<div class="pcenter">
-						<img src="assets/hobbynauts/images-5.jpeg" class="circle"/>
-					</div>
-					<h2 class="valign">"Une expérience incroyable"</h2><br>
-					<p class="valign">C'est tellement plus facile et sympa d'ouvrir sa porte aux personnes partageant vos hobbys. Les hobbys brisent la glace instantanément, font disparaitre les barrières sociales et sont le plus puissant générateur d'amitié.</p>
-				</div>
-				<div class="col s4">
-					<div class="pcenter">
-						<img src="assets/hobbynauts/images-6.jpeg" class="circle"/>
-					</div>
-					<h2 class="valign">"Le futur des voyages"</h2><br>
-					<p class="valign">Découvrez le profil de voyageurs et leur notations avant d'accepter une location. Tous les payements sont 100% sécurisés et vous bénéficiez d'une assurance supplémentaire pour couvrir votre logement.</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s6 offset-s6">
-				<p>L'aventure commence ici ! <a class="waves-effect waves-light btn">Rejoignez nous</a></p>
-			</div>
-		</div>
-	</div>
-</div>
-<script>
-	$(document).ready(function(){
-		$('.slider').slider({full_width: true});
-		$('.slider').slider({indicators: false});
-	});
-</script>
+    <h2>Explorez vos hobby et soyez inspirés</h2>
+    <p>Trouvez votre logement pour les vacances par hobby et rencontrez des hôtes partageant vos passions</p>
+    <div ng-hide="hideCtrl">
+        <div class="row" style="text-align:center;">
+            <div class="col l10 offset-l1">
+                <div class="row">
+                    <img src="assets/miniSlide/mindiving-couple.png">
+                </div>
+                <div class="row">
+                    <img src="assets/miniSlide/mincouple.png">
+                    <img src="assets/miniSlide/minhobbie-cat.png">
+                    <img src="assets/miniSlide/minmountains.png">
+                </div>
+                <div class="row">
+                    <img src="assets/miniSlide/minskifamily.png">
+                    <img src="assets/miniSlide/minparagliding.png">
+                </div>
+            </div>
+            <div class="col l1">
+                <button ng-click="toggle()" class="buttonR">></button>
+            </div>
+        </div>
+    </div>
+    <div ng-show="hideCtrl">
+        <div class="row">
+            <div class="col l1">
+                <button ng-click="toggle()" class="buttonL"><</button> </div> <div class="row" style="text-align:center;"> <div class="col l10"> <div class="row"> <img src="assets/miniSlide/minsurf-friends.png"> <img src="assets/miniSlide/minzen.png"> </div> <div
+                    class="row"> <img src="assets/miniSlide/minbike-parc.png"> <img src="assets/miniSlide/min985.png"> <img src="assets/miniSlide/minalpes-dhuez.png"> </div> <div class="row"> <img src="assets/miniSlide/minvtt.png"> </div> </div> </div> </div> </div>
+                    </div> <div class="news"> <div id="tabs" class="row" ng-init="showTabs = true" ng-hide="true"> <a class="btn cyan lighten-3" ng-click="showTabs = !showTabs">Cacher la recherche</a> </div> <div class="row" ng-if="showTabs"> <div class="col s12"> <ul
+                    class="tabs" tabs> <li class="tab col s3 offset-s2"><a class="active" href="#neuf" style="color: #7F7F7F; text-decoration:none;">Quoi de neuf</a></li> <li class="tab col s3"><a href="#note" style="color: #7F7F7F; text-decoration:none;">Les mieux
+                    notés</a></li> <li class="tab col s3"><a href="#populaire" style="color: #7F7F7F; text-decoration:none;">Les plus populaires</a></li> </ul> </div> <div id="neuf"> <div class="row" ng-if="showTabs"> <div class="col s12"> <ul class="tabs" tabs> <li
+                    class="tab col s3 offset-s1"><a href="#spotNeuf" style="color: #7F7F7F;">Spot</a></li> <li class="tab col s3"><a class="active" href="#logNeuf" style="color: #7F7F7F;">Logement</a></li> </ul> </div> <div id="spotNeuf" class="col s12"> <div class="col
+                    s4"> <img src="assets/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px"> </div> <div class="col s4"> <img src="assets/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px"> </div> <div class="col s4"> <img
+                    src="assets/activities_copyright_free/alpinisme.jpg" style="height:245px"> </div> </div> <div id="logNeuf"> <div class="col s4"> <img src="assets/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px"> </div> <div class="col s4">
+                    <img src="assets/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px"> </div> <div class="col s4"> <img src="assets/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px"> </div> </div> </div> </div> <div
+                    id="note"> <div class="row" ng-if="showTabs"> <div class="col s12"> <ul class="tabs" tabs> <li class="tab col s3 offset-s1"><a href="#spotNote" style="color: #7F7F7F;">Spot</a></li> <li class="tab col s3"><a class="active" href="#logNote"
+                    style="color: #7F7F7F;">Logement</a></li> </ul> </div> <div id="spotNote" class="col s12"> <div class="col s4"> <img src="assets/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px"> </div> <div class="col s4"> <img
+                    src="assets/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px"> </div> <div class="col s4"> <img src="assets/activities_copyright_free/alpinisme.jpg" style="height:245px"> </div> </div> <div id="logNote"> <div class="col s4">
+                    <img src="assets/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px"> </div> <div class="col s4"> <img src="assets/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px"> </div> <div class="col s4"> <img
+                    src="assets/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px"> </div> </div> </div> </div> <div id="populaire"> <div class="row" ng-if="showTabs"> <div class="col s12"> <ul class="tabs" tabs> <li class="tab col s3
+                    offset-s1"><a href="#spotPop" style="color: #7F7F7F;">Spot</a></li> <li class="tab col s3"><a class="active" href="#logPop" style="color: #7F7F7F;">Logement</a></li> </ul> </div> <div id="spotPop" class="col s12"> <div class="col s4"> <img
+                    src="assets/activities_with_copyright/MTB-French-Alps.jpg" style="height:245px"> </div> <div class="col s4"> <img src="assets/activities_with_copyright/800x600_bike-park-1980.jpg" style="height:245px"> </div> <div class="col s4"> <img
+                    src="assets/activities_copyright_free/alpinisme.jpg" style="height:245px"> </div> </div> <div id="logPop"> <div class="col s4"> <img src="assets/homes/def7c1f1-ddeb-4428-9ebe-6eacc2a093c3.1.10.jpeg" style="height:245px"> </div> <div class="col s4">
+                    <img src="assets/homes/43a96c52-f1a5-47f7-8f3d-e5b46b82454a.1.10.jpeg" style="height:245px"> </div> <div class="col s4"> <img src="assets/homes/399f0c56-831c-45b6-8470-8580ac630efd.1.10.jpeg" style="height:245px"> </div> </div> </div> </div> </div>
+                    </div> <h2>Louer par hobby change la donne</h2> <div class="container"> <div class="rentic"> <div class="row"> <div class="col s4"> <a href="#"> <img src="assets/carte.png" /> <p style="font-size:22px"><B>Logez au coeur de l'action</p> </a> </div>
+                    <div class="col s4"> <a href="#"> <img src="assets/friends.svg" style="height:88px; margin-top:45px" /> <p style="font-size:22px">Recevez des conseils de votre hôte</p> </a> </div> <div class="col s4"> <a href="#"> <img src="assets/cochon.png"
+                    style="margin-top:25px" /> <p style="font-size:22px">Faites vous de l'argent grâce à vos hobbys</B></p> </a> </div> </div> </div> </div> <img class="responsive-img" src="assets/activities_copyright_free/riding-beach.jpg"/> <div class="think">
+                    <h2>Qu'en pense-t-il</h2> <div class="container"> <div class="valign wrapper"> <div class="row"> <div class="col s4"> <div class="pcenter"> <img src="assets/hobbynauts/images-1.jpeg" class="circle"/> </div> <h2 class="valign">"Super concept"</h2><br>
+                    <p class="valign">Vous avez un hobby et aimez partager vos expériences, des conseils et peut être de l'équipement ? Faites-en un atout pour augmenter vos revenus en louant à 68% des voyageurs voulant découvrir ou profiter de leurs hobbys préférés
+                    durant leurs vacances.</p> </div> <div class="col s4"> <div class="pcenter"> <img src="assets/hobbynauts/images-5.jpeg" class="circle"/> </div> <h2 class="valign">"Une expérience incroyable"</h2><br> <p class="valign">C'est tellement plus facile et
+                    sympa d'ouvrir sa porte aux personnes partageant vos hobbys. Les hobbys brisent la glace instantanément, font disparaitre les barrières sociales et sont le plus puissant générateur d'amitié.</p> </div> <div class="col s4"> <div class="pcenter"> <img
+                    src="assets/hobbynauts/images-6.jpeg" class="circle"/> </div> <h2 class="valign">"Le futur des voyages"</h2><br> <p class="valign">Découvrez le profil de voyageurs et leur notations avant d'accepter une location. Tous les payements sont 100%
+                    sécurisés et vous bénéficiez d'une assurance supplémentaire pour couvrir votre logement.</p> </div> </div> </div> <div class="row"> <div class="col s6 offset-s6"> <p>L'aventure commence ici ! <a class="waves-effect waves-light btn">Rejoignez
+                    nous</a></p> </div> </div> </div> </div> <script> $(document).ready(function(){ $('.slider').slider({full_width: true}); $('.slider').slider({indicators: false}); }); </script>
