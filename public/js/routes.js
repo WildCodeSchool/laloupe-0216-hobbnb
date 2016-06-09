@@ -76,7 +76,7 @@ function routes($routeProvider, $httpProvider) {
             }
         })
         .when('/place/:id', {
-            templateUrl: 'views/place-page.html',
+            templateUrl: 'views/places/showPlace.html',
             controller: 'placesController',
             resolve: {
                 connected: checkIsConnected,

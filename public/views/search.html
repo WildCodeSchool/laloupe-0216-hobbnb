@@ -143,7 +143,7 @@
                     </div>
                 </div>
             </form>
-<!-- Widgets -->
+            <!-- Widgets -->
             <div id="widgets">
                 <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice">
                     <a href="/#/{{selectHome}}/{{p._id}}">
@@ -156,7 +156,7 @@
                                 <p>
                                     <img class="actpict" src="{{hobbyIco(p)}}" alt=""/>
 
-                                    <img class="authorpict" src="uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}" />
+                                    <img class="authorpict" src="uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}"/>
                                     <div>{{p.name}}</div>
                                     <div>
                                         <i class="tiny material-icons yellow-text text-darken-2">{{calculStars(p.rating)}}</i>
@@ -171,7 +171,7 @@
 
             </div>
         </div>
-<!-- right pannel = map -->
+        <!-- right pannel = map -->
         <div class="grid-example col m12 l5">
             <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap" scrollwheel='false'>
                 <marker
@@ -191,7 +191,7 @@
                         <div class="card">
                             <div class="card-image">
                                 <img class="placepict" src="uploads/{{selectHome}}s/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">
-                                <span class="card-title"  ng-show="{{selectHome=='place'}}" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{positions[indexOfTheTruc].home.price}}€</span>
+                                <span class="card-title" ng-show="{{selectHome=='place'}}" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{positions[indexOfTheTruc].home.price}}€</span>
                             </div>
                             <div class="card-content">
                                 <p>

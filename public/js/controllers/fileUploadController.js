@@ -10,7 +10,7 @@ angular.module('app').controller('fileUploadController', function($scope, $windo
         $scope.width = 600;
         $scope.height = 600;
         $scope.picType = ' 600x600, jusqu\'à 6 photos';
-        if($routeParams.where == 'users') {
+        if ($routeParams.where == 'users') {
             $scope.picType = 'Modifier votre photo de profil';
         }
     }

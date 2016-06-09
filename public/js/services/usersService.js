@@ -23,10 +23,14 @@ angular.module('app')
                 return $http.get('/msg/exp/' + id);
             },
             update: function(id, data) {
-                return $http.put('/users/' + id, {obj:data});
+                return $http.put('/users/' + id, {
+                    obj: data
+                });
             },
             create: function(data) {
-                return $http.post('/users', {obj:data});
+                return $http.post('/users', {
+                    obj: data
+                });
             },
             delete: function(id) {
                 return $http.delete('/users/' + id);

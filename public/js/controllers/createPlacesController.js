@@ -67,7 +67,9 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                     content: $scope.obj
                 })
             } else {
-                act = placesService.update($scope.obj._id, {content: $scope.obj})
+                act = placesService.update($scope.obj._id, {
+                    content: $scope.obj
+                })
             }
             act.then(function(res) {
                 $scope.obj = {};

@@ -1,8 +1,6 @@
 // PLACES CONTROLLER
 angular.module('app').controller('placesController', function($scope, $http, $location, $routeParams, placesFactory, placesService, usersService, searchFactory) {
 
-
-
     /* Generate calendar for booking */
     var currentTime = new Date();
     $scope.arrival = (new Date(currentTime.getTime() + (1000 * 60 * 60 * 24))).toISOString();
@@ -63,7 +61,7 @@ angular.module('app').controller('placesController', function($scope, $http, $lo
         $scope.globalLowerRating = 5 - $scope.globalRating;
         $scope.numReviews = ~~(($scope.host.rating.cleanness.length + $scope.host.rating.location.length + $scope.host.rating.valueForMoney.length) / 3);
 
-        $scope.host.comments.forEach(function(c,i) {
+        $scope.host.comments.forEach(function(c, i) {
             usersService.getOne(c.owner).then(function(r) {
                 $scope.host.comments[i].owner = r.data;
             })
