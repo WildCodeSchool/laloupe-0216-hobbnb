@@ -28,7 +28,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         $scope.obj.comments = [];
     };
     resetObj();
-    $scope.step = 7;
+    $scope.step = 1;
     if ($routeParams.id) {
         $scope.isAction = 'modification';
         placesService.getOne($routeParams.id).then(function(res) {
@@ -48,7 +48,6 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             'address': addr
         }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                debugger;
                 var loc = results[0].geometry.location;
                 $scope.obj.latitude = loc.lat();
                 $scope.obj.longitude = loc.lng();

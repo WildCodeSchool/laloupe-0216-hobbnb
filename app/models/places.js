@@ -178,7 +178,7 @@ var Places = {
             if (err) {
                 res.send(err);
             } else {
-                res.sendStatus(200);
+                res.send(data);
             }
         });
     },
