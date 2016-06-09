@@ -10,7 +10,7 @@ module.exports = function(app) {
     placesRouter.get('/', Place.findAll);
     placesRouter.post('/', Auth.user.hasAuthorization, Place.create);
     placesRouter.put('/:id', Auth.user.hasAuthorization, Place.update);
-    placesRouter.delete('/:id', Auth.user.isAdministrator, Place.delete);
+    placesRouter.delete('/:id', Auth.user.hasAuthorization, Auth.user.isAdministrator, Place.delete);
 
     app.use('/places', placesRouter);
 };

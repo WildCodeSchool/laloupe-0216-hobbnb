@@ -5,7 +5,7 @@ var express = require('express'),
 
 module.exports = function(app) {
 
-    usersRouter.get('/', Auth.user.isAdministrator, Users.findAll);
+    usersRouter.get('/', Auth.user.hasAuthorization, Auth.user.isAdministrator, Users.findAll);
 
     usersRouter.get('/loggedin', Auth.user.hasAuthorization, function(req, res) {
         res.sendStatus(200);
@@ -18,8 +18,8 @@ module.exports = function(app) {
     usersRouter.post('/', Users.create);
 
     usersRouter.put('/:id', Auth.user.hasAuthorization, Users.update);
-    
-    usersRouter.delete('/:id', Auth.user.isAdministrator, Users.delete);
+
+    usersRouter.delete('/:id', Auth.user.hasAuthorization, Auth.user.isAdministrator, Users.delete);
 
     app.use('/users', usersRouter);
 };

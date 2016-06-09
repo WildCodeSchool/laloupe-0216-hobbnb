@@ -175,7 +175,6 @@ var Places = {
 
     update: function(req, res) {
         Places.model.findByIdAndUpdate(req.params.id, req.body.content, function(err, data) {
-            console.log(err, data)
             if (err) {
                 res.send(err);
             } else {
