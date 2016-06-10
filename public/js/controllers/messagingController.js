@@ -36,4 +36,8 @@ angular.module('app').controller('messagingController', function($scope, $window
         return messagingService.format(date);
     };
 
+    $scope.nl2br = function(str) {
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+}
+
 });

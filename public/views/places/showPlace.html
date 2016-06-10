@@ -270,55 +270,59 @@
             <div class="card-panel">
                 <div class="row">
                     <div class="col s12 center grey lighten-2 flow-text">{{host.home.price}}€ / nuit</div>
-                    <div class="input-field col s4">
-                        <input
-                            input-date
-                            type="text"
-                            name="arrival"
-                            id="arrival"
-                            ng-model="arrival"
-                            container="body"
-                            format="dd/mm/yyyy"
-                            months-full="{{ month }}"
-                            months-short="{{ monthShort }}"
-                            weekdays-full="{{ weekdaysFull }}"
-                            weekdays-short="{{ weekdaysShort }}"
-                            weekdays-letter="{{ weekdaysLetter }}"
-                            disable="disable"
-                            min="{{ minDate }}"
-                            max="{{ maxDate }}"
-                            today="today"
-                            clear="clear"
-                            close="close"
-                            select-years="15">
-                    </div>
-                    <div class="input-field col s4">
-                        <input
-                            input-date
-                            type="text"
-                            name="departure"
-                            id="departure"
-                            ng-model="departure"
-                            container="body"
-                            format="dd/mm/yyyy"
-                            months-full="{{ month }}"
-                            months-short="{{ monthShort }}"
-                            weekdays-full="{{ weekdaysFull }}"
-                            weekdays-short="{{ weekdaysShort }}"
-                            weekdays-letter="{{ weekdaysLetter }}"
-                            disable="disable"
-                            min="{{ minDateD }}"
-                            max="{{ maxDateD }}"
-                            today="today"
-                            clear="clear"
-                            close="close"
-                            select-years="15">
-                    </div>
-                    <div class="input-field col s4">
-                        <input placeholder="Invités" id="guests" type="number">
-                    </div>
-                    <div class="col s12 center">
-                        <button class="btn waves-effect waves-light green lighten-2">Réserver</button>
+                    <div ng-controller='messageController'>
+
+                        <div class="input-field col s4">
+                            <input
+                                input-date
+                                type="text"
+                                name="arrival"
+                                id="arrival"
+                                ng-model="arrival"
+                                container="body"
+                                format="dd/mm/yyyy"
+                                months-full="{{ month }}"
+                                months-short="{{ monthShort }}"
+                                weekdays-full="{{ weekdaysFull }}"
+                                weekdays-short="{{ weekdaysShort }}"
+                                weekdays-letter="{{ weekdaysLetter }}"
+                                disable="disable"
+                                min="{{ minDate }}"
+                                max="{{ maxDate }}"
+                                today="today"
+                                clear="clear"
+                                close="close"
+                                select-years="15">
+                        </div>
+                        <div class="input-field col s4">
+                            <input
+                                input-date
+                                type="text"
+                                name="departure"
+                                id="departure"
+                                ng-model="departure"
+                                container="body"
+                                format="dd/mm/yyyy"
+                                months-full="{{ month }}"
+                                months-short="{{ monthShort }}"
+                                weekdays-full="{{ weekdaysFull }}"
+                                weekdays-short="{{ weekdaysShort }}"
+                                weekdays-letter="{{ weekdaysLetter }}"
+                                disable="disable"
+                                min="{{ minDateD }}"
+                                max="{{ maxDateD }}"
+                                today="today"
+                                clear="clear"
+                                close="close"
+                                select-years="15">
+                        </div>
+                        <div class="input-field col s4">
+                            <input placeholder="Invités" id="guests" ng-model='guests' type="number">
+                        </div>
+                        <div style="display: none">
+                            <input ng-model='newMsg.recipient' type='text' id='recipient'>
+                        </div>
+                        <ng-include src="'views/messaging/message.html'"></ng-include>
                     </div>
                 </div>
             </div>

@@ -6,9 +6,7 @@
                 à
                 {{msg.recipient}}</h2>
             <div class="row">
-                <div class="col s8 offset-s2">
-                    {{msg.message}}
-                </div>
+                <div class="col s8 offset-s2" ng-bind-html='nl2br(msg.message)'></div>
             </div>
             <div class="divider"></div>
             <div class='right-align'>Envoyé le
