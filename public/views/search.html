@@ -144,7 +144,7 @@
                 </div>
             </form>
             <div id="widgets">
-                <div class="col s12 m12 l6" dir-paginate="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice | itemsPerPage: 5">
+                <div class="col s12 m12 l6" dir-paginate="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice | itemsPerPage: 4">
                     <a href="/#/{{selectHome}}/{{p._id}}">
                         <div class="card hoverable">
                             <div class="card-image">
