@@ -1,34 +1,34 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row" id="myMap">
-        <div class="grid-example col m12 l6">
+        <div class="col s6">
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s12 m12 l6">
                     <a class="waves-effect waves-light btn" ng-click="spotOrHome('spot')" ng-style="btnSpot">
                         <img src="../assets/search/locateSpot.png" alt=""/>
                         <span class="grey-text text-darken-2">Spots</span>
                     </a>
                 </div>
-                <div class="input-field col s6">
+                <div class="input-field col s12 m12 l6">
                     <a class="waves-effect waves-light btn" ng-click="spotOrHome('place')" ng-style="btnHome">
                         <img src="../assets/search/locateHost.png" alt=""/>
-                        <span class="grey-text text-darken-2">Hebergement</span>
+                        <span class="grey-text text-darken-2">Hébergement</span>
                     </a>
                 </div>
             </div>
             <form>
                 <div class="row">
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m12 l6">
                         <i class="material-icons prefix">search</i>
                         <input placeholder="Lieu" id="city" type="text" class="validate" ng-model="filters.place" ng-autocomplete>
                         <label>Lieu</label>
                     </div>
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m12 l3">
                         <select class='' material-select watch ng-model="filters.hobby">
                             <option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
                         </select>
                         <label>Hobby</label>
                     </div>
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m12 l3">
                         <select ng-model="filters.popularity">
                             <option value="" disabled selected>Popularité</option>
                             <option value="1">+ de 100</option>
@@ -42,9 +42,9 @@
                 </div>
                 <!-- Formulaire pour spot -->
                 <div class="row" ng-show="selectHome == 'spot'">
-                    <div class="input-field col s6 m3">
+                    <div class="input-field col s12 m12 l3">
                         <select ng-model="filters.quality">
-                            <option value="" disabled selected>Quality</option>
+                            <option value="" disabled selected>Qualité</option>
                             <option value="5">5 étoiles</option>
                             <option value="4">4 étoiles</option>
                             <option value="3">3 étoiles</option>
@@ -52,11 +52,11 @@
                             <option value="1">1 étoiles</option>
                             <option value="0">aucun</option>
                         </select>
-                        <label>Quality</label>
+                        <label>Qualité</label>
                     </div>
-                    <div class="input-field col s6 m3">
+                    <div class="input-field col s12 m12 l3">
                         <select ng-model="filters.beauty">
-                            <option value="" disabled selected>Beauty</option>
+                            <option value="" disabled selected>Beauté</option>
                             <option value="5">5 étoiles</option>
                             <option value="4">4 étoiles</option>
                             <option value="3">3 étoiles</option>
@@ -64,11 +64,11 @@
                             <option value="1">1 étoiles</option>
                             <option value="0">aucun</option>
                         </select>
-                        <label>Beauty</label>
+                        <label>Beauté</label>
                     </div>
-                    <div class="input-field col s6 m3">
+                    <div class="input-field col s12 m12 l3">
                         <select ng-model="filters.facility">
-                            <option value="" disabled selected>Facility</option>
+                            <option value="" disabled selected>Facilité</option>
                             <option value="5">5 étoiles</option>
                             <option value="4">4 étoiles</option>
                             <option value="3">3 étoiles</option>
@@ -76,11 +76,11 @@
                             <option value="1">1 étoiles</option>
                             <option value="0">aucun</option>
                         </select>
-                        <label>Facility</label>
+                        <label>Facilité</label>
                     </div>
-                    <div class="input-field col s6 m3">
+                    <div class="input-field col s12 m12 l3">
                         <select ng-model="filters.overallRating">
-                            <option value="" disabled selected>Over all rating</option>
+                            <option value="" disabled selected>Note</option>
                             <option value="5">5 étoiles</option>
                             <option value="4">4 étoiles</option>
                             <option value="3">3 étoiles</option>
@@ -88,18 +88,18 @@
                             <option value="1">1 étoiles</option>
                             <option value="0">aucun</option>
                         </select>
-                        <label>Over all rating</label>
+                        <label>Note</label>
                     </div>
                 </div>
                 <!-- Formulaire pour home -->
                 <div class="row" ng-show="selectHome == 'place'">
-                    <div class="input-field col s6 m3">
+                    <div class="input-field col s12 m12 l3">
                         <select class='' material-select watch ng-model="filters.propertyType">
                             <option ng-repeat="propertyType in propertyTypeListing">{{propertyType}}</option>
                         </select>
                         <label>Hebergement</label>
                     </div>
-                    <div class="input-field col s6 m3">
+                    <div class="input-field col s12 m12 l3">
                         <select ng-model="filters.beds">
                             <option value="1" selected>1 personne</option>
                             <option value="2">2 personnes</option>
@@ -110,7 +110,7 @@
                         </select>
                         <label>Invités</label>
                     </div>
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m12 l6">
                         <div range-slider min="filters.priceRange.min" max="filters.priceRange.max" model-min="filters.minPrice" model-max="filters.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
                     </div>
                     <div class="input-field col s12">
@@ -119,23 +119,23 @@
                         </a>
                     </div>
                     <div ng-show="developOptions">
-                        <div class="input-field col s6 m3">
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasKitchen" id="chkKitchen"/>
                             <label for="chkKitchen">Cuisine</label>
                         </div>
-                        <div class="input-field col s6 m3">
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasTV" id="chkTV"/>
                             <label for="chkTV">TV</label>
                         </div>
-                        <div class="input-field col s6 m3">
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasWifi" id="chkWifi"/>
                             <label for="chkWifi">WiFi</label>
                         </div>
-                        <div class="input-field col s6 m3">
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasEssentials" id="chkEssentials"/>
                             <label for="chkEssentials">Essentiel</label>
                         </div>
-                        <div class="input-field col s6 m3">
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasBbq" id="chkBbq"/>
                             <label for="chkBbq">Barbecue</label>
                         </div>
@@ -143,9 +143,8 @@
                     </div>
                 </div>
             </form>
-            <!-- Widgets -->
             <div id="widgets">
-                <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice">
+                <div class="col s12 m12 l6" dir-paginate="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice | itemsPerPage: 5">
                     <a href="/#/{{selectHome}}/{{p._id}}">
                         <div class="card hoverable">
                             <div class="card-image">
@@ -168,55 +167,54 @@
                         </div>
                     </a>
                 </div>
-
+                <dir-pagination-controls></dir-pagination-controls>
             </div>
         </div>
-        <!-- right pannel = map -->
-        <div class="grid-example col m12 l5">
-            <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap" scrollwheel='false'>
-                <marker
-                    ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
-                    position="[{{p.latitude}},{{p.longitude}}]"
-                    title={{p.shortDescription}}
-                    icon="{
-                      url:'{{tile(p.primarySports)}}',
-                      scaledSize:[42,45],
-                      origin: [0,0],
-                      anchor: [21,45]
-                      }"
-                    on-click="toggleInfoWindow(event, $index)"
-                    clickable="true"></marker>
-                <info-window id="popup" max-width="200">
-                    <a href="/#/place/{{positions[indexOfTheTruc]._id}}">
-                        <div class="card">
-                            <div class="card-image">
-                                <img class="placepict" src="uploads/{{selectHome}}s/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">
-                                <span class="card-title" ng-show="{{selectHome=='place'}}" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{positions[indexOfTheTruc].home.price}}€</span>
-                            </div>
-                            <div class="card-content">
-                                <p>
-                                    <div>{{positions[indexOfTheTruc].name}}</div>
-                                    <div>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>0'>star</i>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>1'>star</i>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>2'>star</i>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>3'>star</i>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>4'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>0'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>1'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>2'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>3'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>4'>star</i>
-                                        <sup>({{reviewNb}})</sup>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </info-window>
-            </ng-map>
-        </div>
     </div>
+</div>
+<div class="" style='position:fixed; right: 0; top: 70px; height: 100%; width: 50%;'>
+    <ng-map default-style="false" center="current-location" geo-fallback-center="Paris" zoom="8" id="myMap" scrollwheel='true'>
+        <marker
+            ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
+            position="[{{p.latitude}},{{p.longitude}}]"
+            title={{p.shortDescription}}
+            icon="{
+              url:'{{tile(p.primarySports)}}',
+              scaledSize:[42,45],
+              origin: [0,0],
+              anchor: [21,45]
+              }"
+            on-click="toggleInfoWindow(event, $index)"
+            clickable="true"></marker>
+        <info-window id="popup" max-width="200">
+            <a href="/#/place/{{positions[indexOfTheTruc]._id}}">
+                <div class="card">
+                    <div class="card-image">
+                        <img class="placepict" src="uploads/{{selectHome}}s/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">
+                        <span class="card-title" ng-show="{{selectHome=='place'}}" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{positions[indexOfTheTruc].home.price}}€</span>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            <div>{{positions[indexOfTheTruc].name}}</div>
+                            <div>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>0'>star</i>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>1'>star</i>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>2'>star</i>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>3'>star</i>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>4'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>0'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>1'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>2'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>3'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>4'>star</i>
+                                <sup>({{reviewNb}})</sup>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </info-window>
+    </ng-map>
 </div>
 
 <script type="text/javascript">

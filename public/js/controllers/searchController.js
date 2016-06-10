@@ -109,8 +109,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                         }, function(results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
                                 var loc = results[0].geometry.location;
-                                //newCol.place = results[0].formatted_address;
-                                $scope.centerMap = newCol.place;
                                 $scope.latitude = loc.lat();
                                 $scope.longitude = loc.lon();
                                 $scope.latitudemin = $scope.latitude - 0.5;
@@ -134,8 +132,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         });
     }
 
-    //init google map
-    $scope.centerMap = "Lorient";
     //init color bottons
     $scope.selectHome = searchFactory.data.selectHome || "place";
     $scope.developOptions = false;

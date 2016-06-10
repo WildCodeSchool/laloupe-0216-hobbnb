@@ -3,7 +3,7 @@
 
         <nav class="navTop">
             <div class="nav-wrapper">
-                <a href="#/" class="brand-logo center"><img src="assets/blud_logo.png" width="187px" /></a>
+                <a href="#/" class="brand-logo center"><img src="assets/blud_logo.png" width="187px"/></a>
                 <a href="#" data-activates="nav-mobile" class="button-collapse">
                     <i class="material-icons">menu</i>
                 </a>
@@ -15,24 +15,29 @@
                     </li>
                     <li ng-show='currentUser._id'>
                         <a href="#/creation/place">
-                            <i class='material-icons left'>add</i> Hébergement
+                            <i class='material-icons left'>add</i>
+                            Hébergement
                         </a>
                     </li>
                     <li ng-show='currentUser._id'>
                         <a href="#/creation/spot">
-                            <i class='material-icons left'>add</i> Spot
+                            <i class='material-icons left'>add</i>
+                            Spot
                         </a>
                     </li>
                 </ul>
                 <ul class="right hide-on-med-and-down" ng-controller='globalUserController'>
                     <li ng-hide='currentUser._id'>
-                        <a href="#/user/login">Login</a>
+                        <a href="#/user/login">
+                            <i class="material-icons left">perm_identity</i>Login</a>
                     </li>
                     <li ng-show='currentUser._id'>
-                        <a href="#/user/{{currentUser._id}}">{{currentUser.identity.firstName}}</a>
+                        <a href="#/user/{{currentUser._id}}">
+                            <i class="material-icons left">perm_identity</i>{{currentUser.identity.firstName}}</a>
                     </li>
                     <li ng-show='currentUser._id'>
-                        <a href="#/messages">Messagerie</a>
+                        <a href="#/messages">
+                            <i class="material-icons left">mail</i>Messagerie</a>
                     </li>
                     <li ng-show='currentUser._id'>
                         <a href="#/user/logout">Logout</a>
@@ -40,29 +45,36 @@
                 </ul>
                 <ul id="nav-mobile" class="side-nav" ng-controller='globalUserController'>
                     <li>
-                        <a href="#/">hobbnb</a>
+                        <a href="#/">
+                            <i class="material-icons left">home</i>hobbnb</a>
                     </li>
                     <li ng-show='currentUser._id'>
-                        <a href="#/search">Rechercher</a>
+                        <a href="#/search">
+                            <i class="material-icons left">search</i>Rechercher</a>
                     </li>
                     <li ng-show='currentUser._id'>
                         <a href="#/creation/place">
-                            <i class='material-icons left'>add</i> Hébergement
+                            <i class='material-icons left'>add</i>
+                            Hébergement
                         </a>
                     </li>
                     <li ng-show='currentUser._id'>
                         <a href="#/creation/spot">
-                            <i class='material-icons left'>add</i> Spot
+                            <i class='material-icons left'>add</i>
+                            Spot
                         </a>
                     </li>
                     <li ng-hide='currentUser._id'>
-                        <a href="#/user/login">Login</a>
+                        <a href="#/user/login">
+                            <i class="material-icons left">perm_identity</i>Login</a>
                     </li>
                     <li ng-show='currentUser._id'>
-                        <a href="#/user/{{currentUser._id}}">{{currentUser.identity.firstName}}</a>
+                        <a href="#/user/{{currentUser._id}}">
+                            <i class="material-icons left">perm_identity</i>{{currentUser.identity.firstName}}</a>
                     </li>
                     <li ng-show='currentUser._id'>
-                        <a href="#/messages">Messagerie</a>
+                        <a href="#/messages">
+                            <i class="material-icons left">mail</i>Messagerie</a>
                     </li>
                     <li ng-show='currentUser._id'>
                         <a href="#/user/logout">Logout</a>
