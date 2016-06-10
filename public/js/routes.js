@@ -86,9 +86,11 @@ function routes($routeProvider, $httpProvider) {
                         files: [
                             'js/services/usersService.js',
                             'js/services/placesService.js',
+                            'js/services/messagingService.js',
                             'js/factories/placesFactory.js',
                             'js/factories/searchFactory.js',
                             'js/filters/rangeFilter.js',
+                            'js/controllers/messageController.js',
                             'js/controllers/placesController.js'
                         ]
                     });
@@ -160,6 +162,23 @@ function routes($routeProvider, $httpProvider) {
                         files: [
                             'js/services/messagingService.js',
                             'js/controllers/inboxController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/message/:id', {
+            templateUrl: 'views/messaging/message.html',
+            controller: 'messageController',
+            resolve: {
+                connected: checkIsConnected,
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/messagingService.js',
+                            'js/services/usersService.js',
+                            'js/controllers/messageController.js'
                         ]
                     });
                 }]

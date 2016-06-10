@@ -32,6 +32,7 @@ angular.module('app').controller('placesController', function($scope, $http, $lo
 
         usersService.getOne(e.data.owner).then(function(res) {
             $scope.owner = res.data;
+            $('#recipient').val($scope.owner._id);
             if ($scope.owner.rating.length <= 0) {
                 $scope.owner.rating = [3];
             }

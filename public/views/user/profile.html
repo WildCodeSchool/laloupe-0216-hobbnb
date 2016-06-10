@@ -30,8 +30,12 @@
             <div class="col s8 offset-s2">
                 <h2>Messagerie</h2>
                 <div class="collection">
-                    <a ng-repeat='msg in msgs' href="#/messages/{{msg._id}}" class="collection-item">{{msg.message}}
-                        <span class="badge">{{format(msg.creation)}}</span>
+                    <a ng-repeat='msg in msgs' href="#/messages/{{msg._id}}" class="collection-item">
+                        <div style='max-width:60%;' class='left'>
+                            <div class="truncate">{{msg.message}}</div>
+                        </div>
+                        <span class="badge right">{{format(msg.creation)}}</span>
+                        <div class="clearfix"></div>
                     </a>
                     <a ng-hide='msgs && msgs.length > 0' href="#/messages" class="collection-item">Vous n'avez aucun message</a>
                     <a href="#/messages" class="collection-item right-align">
