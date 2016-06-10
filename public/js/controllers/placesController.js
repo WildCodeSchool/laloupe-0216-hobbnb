@@ -1,5 +1,13 @@
 // PLACES CONTROLLER
-angular.module('app').controller('placesController', function($scope, $http, $location, $routeParams, placesFactory, placesService, usersService, searchFactory) {
+angular.module('app').controller('placesController', function($scope, $window, $http, $location, $routeParams, placesFactory, placesService, usersService, searchFactory) {
+
+
+        if ($window.localStorage.currentUser)
+            $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
+        else
+            $scope.currentUser = {
+                _id: null
+            };
 
     /* Generate calendar for booking */
     var currentTime = new Date();
