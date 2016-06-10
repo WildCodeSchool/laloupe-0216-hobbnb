@@ -95,8 +95,25 @@ function routes($routeProvider, $httpProvider) {
                 }]
             }
         })
-        .when('/spot', {
-            templateUrl: 'views/create-spot-page.html',
+        .when('/edition/spot/:id', {
+            templateUrl: 'views/spots/create-spot-page.html',
+            controller: 'createSpotsController',
+            resolve: {
+                connected: checkIsConnected,
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/spotsService.js',
+                            'js/factories/spotsFactory.js',
+                            'js/controllers/createSpotsController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/creation/spot', {
+            templateUrl: 'views/spots/create-spot-page.html',
             controller: 'createSpotsController',
             resolve: {
                 connected: checkIsConnected,
@@ -113,7 +130,7 @@ function routes($routeProvider, $httpProvider) {
             }
         })
         .when('/spot/:id', {
-            templateUrl: 'views/spot-page.html',
+            templateUrl: 'views/spots/spot-page.html',
             controller: 'spotsController',
             resolve: {
                 connected: checkIsConnected,

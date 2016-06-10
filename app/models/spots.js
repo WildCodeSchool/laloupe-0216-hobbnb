@@ -16,13 +16,22 @@ var spotsSchema = new mongoose.Schema({
     caption: [String],
     latitude: Number,
     longitude: Number,
-    state: {
-        type: String,
-        required: [true, 'state required']
-    },
-    country: {
-        type: String,
-        required: [true, 'country required']
+    address: {
+        state: String,
+        country:String,
+        num: Number,
+        road: String,
+        city: String,
+        postalCode: {
+            type: String,
+            validate: {
+                validator: function(v) {
+                    return /^[0-9]{5}$/.test(Number(v));
+                },
+                message: '{VALUE} is not a valid postal code number!'
+            }
+        },
+        complement: String
     },
     rating: {
         quality: [{
