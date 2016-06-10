@@ -49,7 +49,7 @@
             <div class="col s8 offset-s2">
                 <h2>Mes hébergements</h2>
                 <div class="collection">
-                    <a ng-repeat='place in places' href="#/place/{{place._id}}" class="collection-item">{{place.name}}
+                    <a ng-repeat='place in places' href="#/edition/place/{{place._id}}" class="collection-item">{{place.name}}
                         <span class="badge">{{place.rating.cleanness.length + ' avis'}}</span>
                     </a>
                     <a ng-hide='places && places.length > 0' href="#/place" class="collection-item">Vous n'avez aucun hébergement</a>
