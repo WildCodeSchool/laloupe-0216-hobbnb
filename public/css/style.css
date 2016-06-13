@@ -84,6 +84,9 @@ p {
 .navTop, .page-footer {
     background-color: #67C9FF !important;
 }
+.page-footer {
+    clear: both;
+}
 .brand-logo {
     margin-top: 7px;
     margin-left: 7px;
