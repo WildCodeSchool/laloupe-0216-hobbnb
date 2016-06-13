@@ -19,10 +19,6 @@ p {
     color: #7F7F7F;
     text-align: center;
 }
-footer {
-    clear: both;
-    background-color: #64737C;
-}
 .tabs .indicator {
     background-color: #7F7F7F;
 }
@@ -85,8 +81,8 @@ footer {
 .pcenter {
     text-align: center;
 }
-.navTop {
-    background-color: #67C9FF;
+.navTop, .page-footer {
+    background-color: #67C9FF !important;
 }
 .brand-logo {
     margin-top: 7px;
