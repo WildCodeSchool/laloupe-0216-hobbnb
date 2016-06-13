@@ -1,8 +1,8 @@
-angular.module('app').controller('sendEmailController', function($scope, $http, $routeParams, sendEmailService) {
+angular.module('app').controller('emailController', function($scope, $http, $routeParams, emailService) {
 
     $scope.contact = {};
-    $scope.postMail = function() {
-        sendEmailService.postMail($scope.contact)
+    $scope.send = function() {
+        emailService.send($scope.contact.email, {message:'message', title:'titre'}, false)
             .then(function(data) {
                 // Show success message
                 $scope.contact = {};

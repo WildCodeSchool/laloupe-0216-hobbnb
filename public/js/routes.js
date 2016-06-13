@@ -259,29 +259,14 @@ function routes($routeProvider, $httpProvider) {
         })
         .when('/sendEmail/', {
             templateUrl: 'views/sendEmail.html',
-            controller: 'sendEmailController',
+            controller: 'emailController',
             resolve: {
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/controllers/sendEmailController.js',
-                            'js/services/sendEmailService.js'
-                        ]
-                    });
-                }]
-            }
-        })
-        .when('/sendEmail/', {
-            templateUrl: 'views/sendEmail.html',
-            controller: 'sendEmailController',
-            resolve: {
-                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'app',
-                        files: [
-                            'js/controllers/sendEmailController.js',
-                            'js/services/sendEmailService.js'
+                            'js/controllers/emailController.js',
+                            'js/services/emailService.js'
                         ]
                     });
                 }]
@@ -289,6 +274,33 @@ function routes($routeProvider, $httpProvider) {
         })
         .when('/email/', {
             templateUrl: 'views/static/email.html',
+        })
+        .when('/faq', {
+            templateUrl: 'views/static/faq.html',
+        })
+        .when('/find-out-more', {
+            templateUrl: 'views/static/find-out-more.html',
+        })
+        .when('/how-it-work', {
+            templateUrl: 'views/static/how-it-work.html',
+        })
+        .when('/host-cancellation-policy', {
+          templateUrl: 'views/static/host-cancellation-policy.html',
+        })
+        .when('/social-connections', {
+          templateUrl: 'views/static/social-connections.html',
+        })
+        .when('/contact-us', {
+          templateUrl: 'views/static/contact-us.html',
+        })
+        .when('/terms-privacy', {
+          templateUrl: 'views/static/terms-privacy.html',
+        })
+        .when('/about', {
+          templateUrl: 'views/static/about.html',
+        })
+        .when('/press', {
+          templateUrl: 'views/static/press.html',
         })
         .otherwise({
             redirectTo: '/'
