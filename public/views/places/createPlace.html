@@ -153,7 +153,7 @@
         <h2>A propos</h2>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.price" type="text" ng-model='obj.home.price'>
+                <input id="obj.home.price" type="number" ng-model='obj.home.price'>
                 <label for="obj.home.price">Prix par nuit</label>
             </div>
         </div>
@@ -176,37 +176,37 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.intro.travellers" type="text" ng-model='obj.home.intro.travellers'>
+                <input id="obj.home.intro.travellers" type="number" ng-model='obj.home.intro.travellers'>
                 <label for="obj.home.intro.travellers">Nombre de voyageurs</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.intro.rooms" type="text" ng-model='obj.home.intro.rooms'>
+                <input id="obj.home.intro.rooms" type="number" ng-model='obj.home.intro.rooms'>
                 <label for="obj.home.intro.rooms">Nombre de pièces</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.houseSpace.accommodates" type="text" ng-model='obj.home.houseSpace.accommodates'>
+                <input id="obj.home.houseSpace.accommodates" type="number" ng-model='obj.home.houseSpace.accommodates'>
                 <label for="obj.home.houseSpace.accommodates">Nombre de places</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.houseSpace.bathrooms" type="text" ng-model='obj.home.houseSpace.bathrooms'>
+                <input id="obj.home.houseSpace.bathrooms" type="number" ng-model='obj.home.houseSpace.bathrooms'>
                 <label for="obj.home.houseSpace.bathrooms">Nombre de salles de bain</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.houseSpace.bedrooms" type="text" ng-model='obj.home.houseSpace.bedrooms'>
+                <input id="obj.home.houseSpace.bedrooms" type="number" ng-model='obj.home.houseSpace.bedrooms'>
                 <label for="obj.home.houseSpace.bedrooms">Nombre de chambres</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.houseSpace.beds" type="text" ng-model='obj.home.houseSpace.beds'>
+                <input id="obj.home.houseSpace.beds" type="number" ng-model='obj.home.houseSpace.beds'>
                 <label for="obj.home.houseSpace.beds">Nombre de lits</label>
             </div>
         </div>
@@ -343,31 +343,31 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.houseExtras.extraBabyBed" type="text" ng-model='obj.home.houseExtras.extraBabyBed'>
+                <input id="obj.home.houseExtras.extraBabyBed" type="number" ng-model='obj.home.houseExtras.extraBabyBed'>
                 <label for="obj.home.houseExtras.extraBabyBed">Coût pour lit bébé supplémentaire</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.houseExtras.weeklyDiscount" type="text" ng-model='obj.home.houseExtras.weeklyDiscount'>
+                <input id="obj.home.houseExtras.weeklyDiscount" type="number" ng-model='obj.home.houseExtras.weeklyDiscount'>
                 <label for="obj.home.houseExtras.weeklyDiscount">Remise pour 7 jours (en %)</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.houseExtras.monthlyDiscount" type="text" ng-model='obj.home.houseExtras.monthlyDiscount'>
+                <input id="obj.home.houseExtras.monthlyDiscount" type="number" ng-model='obj.home.houseExtras.monthlyDiscount'>
                 <label for="obj.home.houseExtras.monthlyDiscount">Remise pour 30 jours (en %)</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.houseExtras.cleaningFee" type="text" ng-model='obj.home.houseExtras.cleaningFee'>
+                <input id="obj.home.houseExtras.cleaningFee" type="number" ng-model='obj.home.houseExtras.cleaningFee'>
                 <label for="obj.home.houseExtras.cleaningFee">Frais nettoyage</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="obj.home.houseExtras.securityDeposit" type="text" ng-model='obj.home.houseExtras.securityDeposit'>
+                <input id="obj.home.houseExtras.securityDeposit" type="number" ng-model='obj.home.houseExtras.securityDeposit'>
                 <label for="obj.home.houseExtras.securityDeposit">Garantie</label>
             </div>
         </div>
@@ -581,7 +581,7 @@
             </button>
             <button class="waves-effect waves-light blue lighten-2 white-text btn right" ng-click='send()'>
                 Confirmer la
-                {{creaOrModif}}
+                {{isAction}}
                 de l'hébergement &amp; envoyer des photos
                 <i class='material-icons right'>add</i>
             </button>
