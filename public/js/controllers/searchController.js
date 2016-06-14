@@ -107,6 +107,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                         this.geocoder.geocode({
                             'address': newCol.place
                         }, function(results, status) {
+                            console.dir($scope.definitiveFilter);
                             if (status == google.maps.GeocoderStatus.OK) {
                                 var loc = results[0].geometry.location;
                                 $scope.latitude = loc.lat();
@@ -116,10 +117,20 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                                 $scope.kmbydegree = (111 * Math.cos($scope.latitude));
                                 $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
                                 $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
+                            } else {
+                                console.dir('trouve pas la place');
+                                delete $scope.latitude;
+                                delete $scope.longitude;
+                                delete $scope.latitudemax;
+                                delete $scope.latitudemin;
+                                delete $scope.kmbydegree;
+                                delete $scope.longitudemax;
+                                delete $scope.longitudemin;
                             }
                         });
                     }, 1000);
                 } else {
+                    console.dir($scope.definitiveFilter);
                     delete $scope.latitude;
                     delete $scope.longitude;
                     delete $scope.latitudemax;
@@ -146,6 +157,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     //Flip-flop Spot-Home
     $scope.spotOrHome = function(choice) {
         $scope.selectHome = choice;
+        searchFactory.data={};
         if ($scope.selectHome == "place") {
             $scope.btnSpot = {
                 'backgroundColor': '#FFFFFF'
