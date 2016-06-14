@@ -7,11 +7,94 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col s8 offset-s2">
-          <img src="./assets/Page_en_construction.png" alt="Page en construction" />
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s3">
+                <a class="active" style="color:#67C9FF;" href="#lookingPlace">Looking for a place</a>
+              </li>
+              <li class="tab col s3">
+                <a style="color:#67C9FF;" href="#havePlace">Have a place</a>
+              </li>
+            </ul>
+          </div>
+          <div id="lookingPlace" class="col s12">
+            <div class="col s4">
+              <p class="center-align" >
+                <img src="./assets/locate.png" alt="make money with hobbies" />
+              </p>
+              <h2>Make money with your hobbies</h2>
+              <p>
+                You have a hobby and like sharing your experience,
+                tips and even maybe some gear ? Make it an asset to increase your income
+                by renting to 68% of the travelers who want to discover or enjoy their favorite  hobby on holidays.
+              </p>
+            </div>
+            <div class="col s4">
+              <p class="center-align" >
+                <img src="./assets/friends.svg" style="height:86px; margin-top:45px" alt="make money with hobbies" />
+              </p>
+              <h2>Have more fun sharing your place</h2>
+              <p>
+                It's so much easier and fun to open the door to those who share the same hobbies as you.
+                 Hobbies instantly break the ice, make social barriers disappear and are most powerful
+                 friendship catalyst period.
+              </p>
+            </div>
+            <div class="col s4">
+              <p class="center-align" >
+                <img src="./assets/relax.png" style="margin-top: 7px;" alt="make money with hobbies" />
+              </p>
+              <h2>Rent safe and well insured</h2>
+              <p>
+                Discover the profiles of travelers and reviews before accepting a booking.
+                All payment transactions are 100% secure and you benefit of an additional
+                insurance cover for your home.
+              </p>
+            </div>
+          </div>
         </div>
-
-      </div>
+        <div class="row">
+          <div id="havePlace" class="col s12">
+            <div class="col s4">
+              <p class="center-align" >
+                <img src="./assets/cochon.png" alt="make money with hobbies" />
+              </p>
+              <h2>Live where the action happens</h2>
+              <p>
+                Hobbies are the most incredible way to get people together
+                and open doors to unique places that are ideally located to
+                enjoy your hobbies, without braking the bank.
+              </p>
+            </div>
+            <div class="col s4">
+              <p class="center-align" >
+                <img src="./assets/friends.svg" style="height:86px; margin-top:20px" alt="sharing a hobby with your host" />
+              </p>
+              <h2>Get insider tips from your host</h2>
+              <p>
+                Sharing a hobby with your host means more conviviality,
+                insider tips and possibly even some gear to use and make you feel
+                like you are in your own home spot.
+              </p>
+            </div>
+            <div class="col s4">
+              <p class="center-align" >
+                <img src="./assets/safe.png" alt="transactions are 100% secured online" />
+              </p>
+              <h2>Book your place relaxed</h2>
+              <p>
+                We make sure that each listing meets the hobbnb quality requirements .
+                Reviews of the hobbynaut community are also there to guide you.
+                Plus your bookings transactions are 100% secured online.
+              </p>
+            </div>
+          </div>
+        </div>
     </div>
+    <script type="text/javascript">
+      $(document).ready(function(){
+       $('ul.tabs').tabs();
+      });
+    </script>
   </body>
 </html>
