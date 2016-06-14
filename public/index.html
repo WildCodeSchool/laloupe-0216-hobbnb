@@ -40,7 +40,9 @@
 
         <div class='ng-cloak'>
             <ng-include src="'views/static/navbar.html'"></ng-include>
-            <ng-view autoscroll></ng-view>
+            <div class="main">
+                <ng-view autoscroll></ng-view>
+            </div>
             <ng-include src="'views/static/footer.html'"></ng-include>
         </div>
 
