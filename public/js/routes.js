@@ -86,6 +86,7 @@ function routes($routeProvider, $httpProvider) {
                         files: [
                             'js/services/usersService.js',
                             'js/services/placesService.js',
+                            'js/services/emailService.js',
                             'js/services/messagingService.js',
                             'js/factories/placesFactory.js',
                             'js/factories/searchFactory.js',
@@ -142,6 +143,7 @@ function routes($routeProvider, $httpProvider) {
                         files: [
                             'js/services/usersService.js',
                             'js/services/spotsService.js',
+                            'js/services/emailService.js',
                             'js/factories/spotsFactory.js',
                             'js/factories/searchFactory.js',
                             'js/filters/rangeFilter.js',
@@ -177,6 +179,7 @@ function routes($routeProvider, $httpProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            'js/services/emailService.js',
                             'js/services/messagingService.js',
                             'js/controllers/inboxController.js'
                         ]
@@ -193,6 +196,7 @@ function routes($routeProvider, $httpProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            'js/services/emailService.js',
                             'js/services/messagingService.js',
                             'js/services/usersService.js',
                             'js/controllers/messageController.js'
@@ -210,6 +214,7 @@ function routes($routeProvider, $httpProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            'js/services/emailService.js',
                             'js/services/messagingService.js',
                             'js/services/usersService.js',
                             'js/controllers/messagingController.js'
@@ -248,6 +253,7 @@ function routes($routeProvider, $httpProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            'js/services/emailService.js',
                             'js/services/messagingService.js',
                             'js/services/usersService.js',
                             'js/filters/rangeFilter.js',
@@ -285,22 +291,22 @@ function routes($routeProvider, $httpProvider) {
             templateUrl: 'views/static/how-it-work.html',
         })
         .when('/host-cancellation-policy', {
-          templateUrl: 'views/static/host-cancellation-policy.html',
+            templateUrl: 'views/static/host-cancellation-policy.html',
         })
         .when('/social-connections', {
-          templateUrl: 'views/static/social-connections.html',
+            templateUrl: 'views/static/social-connections.html',
         })
         .when('/contact-us', {
-          templateUrl: 'views/static/contact-us.html',
+            templateUrl: 'views/static/contact-us.html',
         })
         .when('/terms-privacy', {
-          templateUrl: 'views/static/terms-privacy.html',
+            templateUrl: 'views/static/terms-privacy.html',
         })
         .when('/about', {
-          templateUrl: 'views/static/about.html',
+            templateUrl: 'views/static/about.html',
         })
         .when('/press', {
-          templateUrl: 'views/static/press.html',
+            templateUrl: 'views/static/press.html',
         })
         .otherwise({
             redirectTo: '/'

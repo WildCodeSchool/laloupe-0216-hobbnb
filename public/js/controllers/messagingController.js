@@ -1,4 +1,4 @@
-angular.module('app').controller('messagingController', function($scope, $window, $location, $routeParams, messagingService, usersService) {
+angular.module('app').controller('messagingController', function($scope, $window, $location, $routeParams, messagingService, usersService, emailService) {
 
     if ($window.localStorage.currentUser)
         $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
@@ -14,11 +14,12 @@ angular.module('app').controller('messagingController', function($scope, $window
             sender: res.data.recipient,
             recipient: res.data.sender,
             creation: new Date(),
-            message: ''
+            message: '',
         };
 
         usersService.getOne($scope.msg.recipient).then(function(res) {
             $scope.msg.recipient = res.data.identity.firstName + ' ' + res.data.identity.lastName
+            $scope.dest = res.data.email;
         });
         usersService.getOne($scope.msg.sender).then(function(res) {
             $scope.msg.sender = res.data.identity.firstName + ' ' + res.data.identity.lastName
@@ -28,6 +29,13 @@ angular.module('app').controller('messagingController', function($scope, $window
 
     $scope.sendMsg = function() {
         messagingService.create($scope.newMsg).then(function(res) {
+            emailService.send($scope.dest, {
+                    msg: {
+                        title: 'hobbnb - Un nouveau message de ' + $scope.currentUser.firstName + ' ' + $scope.currentUser.lastName,
+                        message: $scope.newMsg.message
+                    }
+                },
+                false);
             $location.path('/messages/' + res.data._id);
         });
     };
@@ -37,7 +45,7 @@ angular.module('app').controller('messagingController', function($scope, $window
     };
 
     $scope.nl2br = function(str) {
-    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
-}
+        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+    }
 
 });

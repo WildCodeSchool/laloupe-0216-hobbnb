@@ -1,4 +1,4 @@
-angular.module('app').controller('messageController', function($scope, $window, $location, $routeParams, messagingService, usersService) {
+angular.module('app').controller('messageController', function($scope, $window, $location, $routeParams, messagingService, usersService, emailService) {
 
     if ($window.localStorage.currentUser)
         $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
@@ -17,6 +17,8 @@ angular.module('app').controller('messageController', function($scope, $window, 
                 creation: new Date(),
                 message: ''
             };
+
+            $scope.dest = res.data.email;
 
             $scope.receipt = res.data;
 
@@ -38,7 +40,13 @@ angular.module('app').controller('messageController', function($scope, $window, 
             $scope.newMsg.recipient = $('#recipient').val();
             $scope.newMsg.message += "\n" + 'L\'expediteur de ce message a indiqué qu\'il souhaiterait réserver cette place du ' + $scope.format($scope.arrival) + ' jusqu\'au ' + $scope.format($scope.departure) + " avec " + $scope.guests + ' personnes';
         }
-        console.log($scope.newMsg);
+        emailService.send($scope.dest, {
+                msg: {
+                    title: 'hobbnb - Un nouveau message de ' + $scope.currentUser.firstName + ' ' + $scope.currentUser.lastName,
+                    message: $scope.newMsg.message
+                }
+            },
+            false);
         messagingService.create($scope.newMsg).then(function(res) {
             $location.path('/messages/' + res.data._id);
         });
