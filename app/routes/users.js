@@ -13,6 +13,8 @@ module.exports = function(app) {
 
     usersRouter.post('/login', Users.login);
 
+    usersRouter.get('/:id/:token', Users.confirm);
+    
     usersRouter.get('/:id', Auth.user.hasAuthorization, Users.findOne);
 
     usersRouter.post('/', Users.create);
