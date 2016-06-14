@@ -4,10 +4,21 @@ var mongoose = require('mongoose'),
 jwt = require('jsonwebtoken'),
     secretToken = require('../../config/secretToken.js');
 
+function hashCode(s) {
+    return s.split("").reduce(function(a, b) {
+        a = ((a << 5) - a) + b.charCodeAt(0);
+        return a & a
+    }, 0);
+}
+
 
 var usersSchema = new mongoose.Schema({
     creation: Date,
     modification: Date,
+    isValidate: {
+        type: Boolean,
+        default: false
+    },
     email: {
         type: String,
         required: true,
@@ -158,6 +169,30 @@ var Users = {
                     user: data,
                     token: token
                 });
+            }
+        });
+    },
+
+    confirm: function(req, res) {
+        Users.model.findOne({
+            '_id': req.params.id
+        }, function(err, data) {
+            if (err) res.status(400).send(err);
+            else {
+                if (data.isValidate == false) {
+
+                } else {
+                    res.status(400).send('Votre email a déjà été vérifié');
+                }
+            }
+        })
+        Users.model.findByIdAndUpdate(req.params.id, {
+            isValidate: true
+        }, function(err, data) {
+            if (err) res.status(400).send(err);
+            else {
+                res.redirect('/');
+                res.end();
             }
         });
     },
