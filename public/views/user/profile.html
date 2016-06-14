@@ -64,7 +64,7 @@
             <div class="col s8 offset-s2">
                 <h2>Mes spots</h2>
                 <div class="collection">
-                    <a ng-repeat='spot in spots' href="#/spot/{{spot._id}}" class="collection-item">{{spot.name}}
+                    <a ng-repeat='spot in spots' href="#/edition/spot/{{spot._id}}" class="collection-item">{{spot.name}}
                         <span class="badge">{{spot.rating.beauty.length + ' avis'}}</span>
                     </a>
                     <a ng-hide='spots && spots.length > 0' href="#/spot" class="collection-item">Vous n'avez aucun spot</a>

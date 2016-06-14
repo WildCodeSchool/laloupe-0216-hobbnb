@@ -99,7 +99,7 @@ function routes($routeProvider, $httpProvider) {
             }
         })
         .when('/edition/spot/:id', {
-            templateUrl: 'views/spots/create-spot-page.html',
+            templateUrl: 'views/spots/createSpot.html',
             controller: 'createSpotsController',
             resolve: {
                 connected: checkIsConnected,
@@ -116,7 +116,7 @@ function routes($routeProvider, $httpProvider) {
             }
         })
         .when('/creation/spot', {
-            templateUrl: 'views/spots/create-spot-page.html',
+            templateUrl: 'views/spots/createSpot.html',
             controller: 'createSpotsController',
             resolve: {
                 connected: checkIsConnected,
@@ -133,7 +133,7 @@ function routes($routeProvider, $httpProvider) {
             }
         })
         .when('/spot/:id', {
-            templateUrl: 'views/spots/spot-page.html',
+            templateUrl: 'views/spots/showSpot.html',
             controller: 'spotsController',
             resolve: {
                 connected: checkIsConnected,
