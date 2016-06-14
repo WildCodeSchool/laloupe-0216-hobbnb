@@ -110,7 +110,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                             if (status == google.maps.GeocoderStatus.OK) {
                                 var loc = results[0].geometry.location;
                                 $scope.latitude = loc.lat();
-                                $scope.longitude = loc.lon();
+                                $scope.longitude = loc.lng();
                                 $scope.latitudemin = $scope.latitude - 0.5;
                                 $scope.latitudemax = $scope.latitude + 0.5;
                                 $scope.kmbydegree = (111 * Math.cos($scope.latitude));
