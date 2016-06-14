@@ -40,8 +40,7 @@ angular.module('app').controller('spotsController', function($scope, $http, $loc
       $scope.numReviews = ~~(($scope.host.rating.quality.length + $scope.host.rating.beauty.length + $scope.host.rating.accessibility.length) / 3);
   });
   $scope.selectTile = function() {
-      console.log ($scope.host.primarySports);
-      return '../assets/search/tile' + $scope.host.primarySports + '.png';
+      return 'assets/search/tile' + $scope.host.primarySports + '.png';
   };
 
 });

@@ -1,0 +1,190 @@
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h1>{{isAction.charAt(0).toUpperCase() + isAction.slice(1)}}
+                d'un spot</h1>
+        </div>
+    </div>
+    <div ng-show='step==1'>
+        <div class='row'>
+            <div class="range-field">
+                <input type="range" min="1" max="4" value='1' disabled id='slider' />
+                <label for="slider">Etape 1/4</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="obj.name" type="text" ng-model='obj.name'>
+                <label for="obj.name">Nom de votre spot</label>
+            </div>
+        </div>
+        <div class="row">
+            <button class="waves-effect waves-light blue lighten-2 white-text btn right" ng-click='step=2'>
+                Suivant
+                <i class='material-icons right'>keyboard_arrow_right</i>
+            </button>
+        </div>
+    </div>
+    <div ng-show='step==2'>
+        <div class='row'>
+            <div class="range-field">
+                <input type="range" min="1" max="4" value='2' disabled id='slider2' />
+                <label for="slider2">Etape 2/4</label>
+            </div>
+        </div>
+        <h2>Hobbies</h2>
+        <div class="row">
+            <select material-select ng-model="obj.primarySports">
+                <option value=''>Primaire</option>
+                <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
+            </select>
+        </div>
+        <div class="row">
+            <select material-select ng-model="obj.secondarySports[0]">
+                <option value=''>Secondaire</option>
+                <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
+            </select>
+        </div>
+        <div class="row">
+            <select material-select ng-model="obj.secondarySports[1]">
+                <option value=''>Secondaire</option>
+                <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
+            </select>
+        </div>
+        <div class="row">
+            <button class="waves-effect waves-light blue lighten-2 white-text btn left" ng-click='step=1'>
+                Précédent
+                <i class='material-icons left'>keyboard_arrow_left</i>
+            </button>
+            <button class="waves-effect waves-light blue lighten-2 white-text btn right" ng-click='step=3'>
+                Suivant
+                <i class='material-icons right'>keyboard_arrow_right</i>
+            </button>
+        </div>
+    </div>
+    <div ng-show='step==3'>
+        <div class='row'>
+            <div class="range-field">
+                <input type="range" min="1" max="4" value='3' disabled id='slider3' />
+                <label for="slider3">Etape 3/4</label>
+            </div>
+        </div>
+        <h2>Adresse</h2>
+        <div class="row">
+            <div class="input-field col s4">
+                <input id="obj.address.num" type="text" ng-model='obj.address.num'>
+                <label for="obj.address.num">Numéro</label>
+            </div>
+            <div class="input-field col s8">
+                <input id="obj.address.road" type="text" ng-model='obj.address.road'>
+                <label for="obj.address.road">Rue</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <input id="obj.address.postalCode" type="text" ng-model='obj.address.postalCode'>
+                <label for="obj.address.postalCode">Code postal</label>
+            </div>
+            <div class="input-field col s8">
+                <input id="obj.address.city" type="text" ng-model='obj.address.city'>
+                <label for="obj.address.city">Ville</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s5">
+                <select material-select ng-model='obj.address.state'>
+                    <option value=''>Région</option>
+                    <option>Alsace-Champagne-Ardenne-Lorraine</option>
+                    <option>Aquitaine-Limousin-Poitou-Charentes</option>
+                    <option>Auvergne-Rhône-Alpes</option>
+                    <option>Bourgogne-Franche-Comté</option>
+                    <option>Bretagne</option>
+                    <option>Centre-Val de Loire</option>
+                    <option>Corse</option>
+                    <option>Île-de-France</option>
+                    <option>Languedoc-Roussillon-Midi-Pyrénées</option>
+                    <option>Nord-Pas-de-Calais-Picardie</option>
+                    <option>Normandie</option>
+                    <option>Pays de la Loire</option>
+                    <option>Provence-Alpes-Côte d'Azur</option>
+                    <option>Guadeloupe</option>
+                    <option>Martinique</option>
+                    <option>Guyane</option>
+                    <option>La Réunion</option>
+                    <option>Mayotte</option>
+                    <option>Autre</option>
+                </select>
+            </div>
+            <div class="input-field col s7">
+                <input id="obj.address.country" type="text" ng-model='obj.address.country'>
+                <label for="obj.address.country">Pays</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="obj.address.complement" type="text" ng-model='obj.address.complement'>
+                <label for="obj.address.complement">Complément</label>
+            </div>
+        </div>
+        <div class="row">
+            <button class="waves-effect waves-light blue lighten-2 white-text btn left" ng-click='step=2'>
+                Précédent
+                <i class='material-icons left'>keyboard_arrow_left</i>
+            </button>
+            <button class="waves-effect waves-light blue lighten-2 white-text btn right" ng-click='step=4'>
+                Suivant
+                <i class='material-icons right'>keyboard_arrow_right</i>
+            </button>
+        </div>
+    </div>
+    <div ng-show='step==4'>
+        <div class='row'>
+            <div class="range-field">
+                <input type="range" min="1" max="4" value='4' disabled id='slider7' />
+                <label for="slider7">Etape 4/4</label>
+            </div>
+        </div>
+        <h2>Prévisualisation</h2>
+        <div class="col s12">
+            <div class="row card-panel valign-wrapper">
+                <div class="col s4 m3">
+                    <div class='valign center-align'>
+                        <img src="uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="Tom" class='circle responsive-img' />
+                        <br/>
+                        <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
+                    </div>
+                </div>
+                <div class="col s8 m9">
+                    <h4>{{obj.name}}</h4>
+                    <h5>{{obj.address.country}},
+                        {{obj.address.state}}</h5>
+                    <p class='left'>{{obj.address.num}} {{obj.address.road}} {{obj.address.postalCode}} {{obj.address.city}}</p>
+                    <div class="row center-align">
+                        <div class="col m2 l1">
+                            &nbsp;
+                        </div>
+                        <div class="col m4 l2">
+                            <img src="./assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt="" />
+                            <br/> {{obj.primarySports}}
+                        </div>
+                        <div class="col m4 l2" ng-repeat="sport in obj.secondarySports">
+                            <img src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
+                            <br/> {{sport}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button class="waves-effect waves-light blue lighten-2 white-text btn left" ng-click='step=1'>
+                Revenir &amp; modifier
+                <i class='material-icons left'>keyboard_arrow_left</i>
+            </button>
+            <button class="waves-effect waves-light blue lighten-2 white-text btn right" ng-click='send()'>
+                Confirmer la {{isAction}} de l'hébergement &amp; envoyer des photos
+                <i class='material-icons right'>add</i>
+            </button>
+            <br> {{error}}
+        </div>
+    </div>
+</div>

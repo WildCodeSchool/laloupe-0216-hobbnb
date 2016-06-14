@@ -9,7 +9,7 @@
             <div class="row card-panel valign-wrapper">
                 <div class="col s4 m3">
                     <div class='valign center-align'>
-                        <img src="../uploads/users/{{owner._id}}/large/img_{{owner.picture}}" class='circle responsive-img'/>
+                        <img src="uploads/users/{{owner._id}}/large/img_{{owner.picture}}" class='circle responsive-img'/>
                         <br/>
                         <b>{{owner.identity.firstName + ' ' + owner.identity.lastName}}</b>
                         <p>
@@ -25,6 +25,7 @@
                     <h4>{{host.name}}</h4>
                     <h5>{{host.address.country}},
                         {{host.address.state}}</h5>
+                    <p class='left'>{{host.address.num}} {{host.address.road}} {{host.address.postalCode}} {{host.address.city}}</p>
                     <div class='row'>
                         <div class="col s12">
                             <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
