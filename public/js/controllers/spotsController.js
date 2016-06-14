@@ -39,5 +39,8 @@ angular.module('app').controller('spotsController', function($scope, $http, $loc
       $scope.globalLowerRating = 5 - $scope.globalRating;
       $scope.numReviews = ~~(($scope.host.rating.quality.length + $scope.host.rating.beauty.length + $scope.host.rating.accessibility.length) / 3);
   });
+  $scope.selectTile = function() {
+      return 'assets/search/tile' + $scope.host.primarySports + '.png';
+  };
 
 });
