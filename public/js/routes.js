@@ -39,6 +39,28 @@ function routes($routeProvider, $httpProvider) {
                 }]
             }
         })
+        .when('/searchSpot', {
+            templateUrl: 'views/searchSpot.html',
+            controller: 'searchSpotController',
+            resolve: {
+                connected: checkIsConnected,
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/usersService.js',
+                            'js/services/placesService.js',
+                            'js/services/spotsService.js',
+                            'js/factories/placesFactory.js',
+                            'js/factories/searchFactory.js',
+                            'js/filters/rangeFilter.js',
+                            'js/filters/betweenFilter.js',
+                            'js/controllers/searchSpotController.js'
+                        ]
+                    });
+                }]
+            }
+        })
         .when('/edition/place/:id', {
             templateUrl: 'views/places/createPlace.html',
             controller: 'createPlacesController',
