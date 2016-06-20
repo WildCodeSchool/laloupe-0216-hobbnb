@@ -21,10 +21,13 @@ module.exports = function(app) {
             '</thead>' +
             '<tbody>' +
             '<tr>' +
-            '<td style="padding-top:15px;padding-left:10px;"><p>Bonjour <b>' + req.body.msg.title + '</b>,</p></td>' +
+            '<td style="padding-top:15px;padding-left:10px;"><p>Name: <b>' + req.body.name + '</b>,</p></td>' +
             '</tr>' +
             '<tr>' +
-            '<td align="left" style="padding-left:10px;"><p>' + req.body.msg.message + '</p></td>' +
+            '<td style="padding-top:15px;padding-left:10px;"><p>Email: <b>' + req.body.email + '</b>,</p></td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td align="left" style="padding-left:10px;"><p> Message: <b>' + req.body.msg + '</p></td>' +
             '</tr>' +
             '<tr align="center" style="background-color:#64737c;width:100%;heigth:60px;padding-top: 5px;color:#fff;">' +
             '<td colspan="4" style="padding-top:10px;">&copy; 2016 - Hobbnb </td>' +
@@ -41,10 +44,10 @@ module.exports = function(app) {
             '</table>';
 
         var mailOptions = {
-            from: 'admin@hobbnb.com', // your email here
-            subject: 'Bienvenue sur Hobbnb',
-            to: "",
-            sender: 'hobbnb <bonjour@hobbnb.com>',
+            from: '', // your email here
+            subject: 'Formulaire de contact',
+            to: req.body.email,
+            sender: req.body.name + '<' + req.body.email + '>',
             html: htmlContent
         };
         transport.sendMail(mailOptions, function(err, info) {
@@ -54,25 +57,7 @@ module.exports = function(app) {
                 console.log('Message sent: ' + info.response);
                 return res.json(201, info);
             }
-            // if (req.body.copyToAdmin) {
-            //
-            //     var mailOptions = {
-            //         from: 'bonjour@hobbnb.com', // your email here
-            //         subject: 'Hobbnb - Copie de message',
-            //         to: 'hobbnb <>',
-            //         sender: 'hobbnb <>',
-            //         html: htmlContent
-            //     };
-            //     transport.sendMail(mailOptions, function(err, info) {
-            //         if (err) {
-            //             console.log(err);
-            //         } else {
-            //             console.log('Message sent: ' + info.response);
-            //             return res.json(201, info);
-            //         }
-            //     });
-            //     transport.close();
-            // }
+
             transport.close();
         });
     });

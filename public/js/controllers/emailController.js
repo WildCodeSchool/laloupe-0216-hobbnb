@@ -2,7 +2,7 @@ angular.module('app').controller('emailController', function($scope, $http, $rou
 
     $scope.contact = {};
     $scope.send = function() {
-        emailService.send($scope.contact.email, {message:'message', title:'titre'}, false)
+        emailService.send($scope.contact.name, $scope.contact.email, $scope.contact.message)
             .then(function(data) {
                 // Show success message
                 $scope.contact = {};
