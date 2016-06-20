@@ -16,7 +16,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
             max: 1000
         }
     }
-
     $scope.definitiveFilter = {};
     placesService.get().then(function(res) {
         $scope.positions = res.data;
@@ -162,10 +161,10 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         var url = "uploads/places/" + widget._id + "/" + widget.picture;
         return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
     };
-    $scope.locationToData = function(){
+    $scope.locationToData = function() {
         searchFactory.data.city = $scope.filters.place;
     }
-    $scope.hobbyToData = function(){
+    $scope.hobbyToData = function() {
         searchFactory.data.hobby = $scope.filters.hobby;
     }
 });
