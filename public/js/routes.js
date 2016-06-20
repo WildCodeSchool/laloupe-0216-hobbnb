@@ -39,6 +39,28 @@ function routes($routeProvider, $httpProvider) {
                 }]
             }
         })
+        .when('/searchSpot', {
+            templateUrl: 'views/searchSpot.html',
+            controller: 'searchSpotController',
+            resolve: {
+                connected: checkIsConnected,
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/services/usersService.js',
+                            'js/services/placesService.js',
+                            'js/services/spotsService.js',
+                            'js/factories/placesFactory.js',
+                            'js/factories/searchFactory.js',
+                            'js/filters/rangeFilter.js',
+                            'js/filters/betweenFilter.js',
+                            'js/controllers/searchSpotController.js'
+                        ]
+                    });
+                }]
+            }
+        })
         .when('/edition/place/:id', {
             templateUrl: 'views/places/createPlace.html',
             controller: 'createPlacesController',
@@ -99,7 +121,7 @@ function routes($routeProvider, $httpProvider) {
             }
         })
         .when('/edition/spot/:id', {
-            templateUrl: 'views/spots/create-spot-page.html',
+            templateUrl: 'views/spots/createSpot.html',
             controller: 'createSpotsController',
             resolve: {
                 connected: checkIsConnected,
@@ -116,7 +138,7 @@ function routes($routeProvider, $httpProvider) {
             }
         })
         .when('/creation/spot', {
-            templateUrl: 'views/spots/create-spot-page.html',
+            templateUrl: 'views/spots/createSpot.html',
             controller: 'createSpotsController',
             resolve: {
                 connected: checkIsConnected,
@@ -133,7 +155,7 @@ function routes($routeProvider, $httpProvider) {
             }
         })
         .when('/spot/:id', {
-            templateUrl: 'views/spots/spot-page.html',
+            templateUrl: 'views/spots/showSpot.html',
             controller: 'spotsController',
             resolve: {
                 connected: checkIsConnected,

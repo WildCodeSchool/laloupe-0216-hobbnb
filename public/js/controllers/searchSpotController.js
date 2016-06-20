@@ -1,4 +1,4 @@
-angular.module('app').controller('searchController', function($scope, $http, NgMap, placesService, spotsService, usersService, searchFactory) {
+angular.module('app').controller('searchSpotController', function($scope, $http, NgMap, placesService, spotsService, usersService, searchFactory) {
 
     var delay;
     NgMap.getMap().then(function(map) {
@@ -16,53 +16,34 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
             max: 1000
         }
     }
-
     $scope.definitiveFilter = {};
-    placesService.get().then(function(res) {
+    spotsService.get().then(function(res) {
         $scope.positions = res.data;
         $scope.positions.map(function(e) {
-            if (e.rating.cleanness.length <= 0) {
-                e.rating.cleanness = [3];
+            if (e.rating.quality.length <= 0) {
+                e.rating.quality = [3];
             }
-            if (e.rating.location.length <= 0) {
-                e.rating.location = [3];
+            if (e.rating.beauty.length <= 0) {
+                e.rating.beauty = [3];
             }
-            if (e.rating.valueForMoney.length <= 0) {
-                e.rating.valueForMoney = [3];
+            if (e.rating.accessibility.length <= 0) {
+                e.rating.accessibility = [3];
             }
             usersService.getOne(e.owner).then(function(res) {
                 e.owner = res.data;
             });
             return e;
         });
-
-        var selectChoice = function(v, choice) { //exemple de v=[home, houseAmenities,bbq]
-            if (!$scope.definitiveFilter[v[0]]) $scope.definitiveFilter[v[0]] = [];
-            if (!$scope.definitiveFilter[v[0]][v[1]]) $scope.definitiveFilter[v[0]][v[1]] = [];
-            if (!!choice) {
-                $scope.definitiveFilter[v[0]][v[1]][v[2]] = choice;
-            } else {
-                if (!!$scope.definitiveFilter[v[0]][v[1]][v[2]]) delete $scope.definitiveFilter[v[0]][v[1]][v[2]];
-            }
-        }
-
         $scope.$watchCollection('filters', function(newCol, oldCol) {
             if (!!newCol.hobby) {
+                if (!$scope.definitiveFilter.spot) $scope.definitiveFilter.spot = [];
                 if (newCol.hobby == 'Peu importe') {
                     $scope.filters.hobby = '';
-                    if (!!$scope.definitiveFilter.primarySports) delete $scope.definitiveFilter.primarySports;
+                    if (!!$scope.definitiveFilter.spot.primarySports) delete $scope.definitiveFilter.spot.primarySports;
                 } else {
-                    $scope.definitiveFilter.primarySports = newCol.hobby;
+                    $scope.definitiveFilter.spot.primarySports = newCol.hobby;
                 }
             }
-            selectChoice(['home', 'houseSpace', 'propertyType'], newCol.propertyType);
-            selectChoice(['home', 'houseSpace', 'beds'], newCol.beds);
-            selectChoice(['home', 'houseSpace', 'kitchen'], newCol.hasKitchen);
-            selectChoice(['home', 'houseAmenities', 'wifi'], newCol.hasWifi);
-            selectChoice(['home', 'houseAmenities', 'tv'], newCol.hasTV);
-            selectChoice(['home', 'houseAmenities', 'essentials'], newCol.hasEssentials);
-            selectChoice(['home', 'houseAmenities', 'bbq'], newCol.hasBbq);
-
             // model sur http://jsfiddle.net/Wijmo/Rqcsj/
             if (!!newCol.place) {
                 clearTimeout(delay);
@@ -71,7 +52,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                     this.geocoder.geocode({
                         'address': newCol.place
                     }, function(results, status) {
-                        console.dir($scope.definitiveFilter);
+                        //                    console.dir($scope.definitiveFilter);
                         if (status == google.maps.GeocoderStatus.OK) {
                             var loc = results[0].geometry.location;
                             $scope.latitude = loc.lat();
@@ -82,7 +63,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                             $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
                             $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
                         } else {
-                            console.dir('trouve pas la place');
+                            //                        console.dir('trouve pas la place');
                             delete $scope.latitude;
                             delete $scope.longitude;
                             delete $scope.latitudemax;
@@ -94,7 +75,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                     });
                 }, 1000);
             } else {
-                console.dir($scope.definitiveFilter);
+                //            console.dir($scope.definitiveFilter);
                 delete $scope.latitude;
                 delete $scope.longitude;
                 delete $scope.latitudemax;
@@ -103,21 +84,16 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                 delete $scope.longitudemax;
                 delete $scope.longitudemin;
             }
-        });
-        //Ask from main page
-        $scope.filters.place = searchFactory.data.city;
-        $scope.filters.hobby = searchFactory.data.hobby;
+            //Ask from over page
+            $scope.filters.place = searchFactory.data.city;
+            $scope.filters.hobby = searchFactory.data.hobby;
 
-        // more Option
-        $scope.moreFiltrer = function() {
-            $scope.developOptions = !$scope.developOptions;
-        };
+        });
     });
 
-    $scope.developOptions = false;
 
     $scope.tile = function(activity) {
-        return 'assets/search/tileHome.png';
+        return 'assets/search/tile' + activity + '.png';
     };
 
     $scope.howManyPositive = function(t) {
@@ -135,12 +111,12 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     $scope.toggleInfoWindow = function(event, id) {
         $scope.map.showInfoWindow('popup', this);
         $scope.indexOfTheTruc = id;
-        $scope.globalRating = $scope.howManyPositive($scope.positions[id].rating.valueForMoney.concat($scope.positions[id].rating.location, $scope.positions[id].rating.cleanness));
+        $scope.globalRating = $scope.howManyPositive($scope.positions[id].rating.quality.concat($scope.positions[id].rating.beauty, $scope.positions[id].rating.accessibility));
         $scope.globalLowerRating = 5 - $scope.globalRating;
         $scope.reviewNb = $scope.nbReview($scope.positions[id].rating);
     };
     $scope.calculStars = function(widget) {
-        $scope.globalRating = $scope.howManyPositive(widget.valueForMoney.concat(widget.location, widget.cleanness));
+        $scope.globalRating = $scope.howManyPositive(widget.quality.concat(widget.beauty, widget.accessibility));
         var resul = "";
         for (var i = 0; i < $scope.globalRating; i++) {
             resul += "star ";
@@ -159,13 +135,14 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         return "../assets/hobbies/" + widget.primarySports + ".png";
     };
     $scope.pictPlace = function(widget) {
-        var url = "uploads/places/" + widget._id + "/" + widget.picture;
+        var url = "uploads/spots/" + widget._id + "/" + widget.picture;
         return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
     };
-    $scope.locationToData = function(){
+    $scope.locationToData = function() {
         searchFactory.data.city = $scope.filters.place;
     }
-    $scope.hobbyToData = function(){
+    $scope.hobbyToData = function() {
+        console.log($scope.filters.hobby);
         searchFactory.data.hobby = $scope.filters.hobby;
     }
 });

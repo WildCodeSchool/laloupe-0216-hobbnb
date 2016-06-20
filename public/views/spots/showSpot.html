@@ -9,7 +9,7 @@
             <div class="row card-panel valign-wrapper">
                 <div class="col s4 m3">
                     <div class='valign center-align'>
-                        <img src="../uploads/users/{{owner._id}}/large/img_{{owner.picture}}" class='circle responsive-img'/>
+                        <img src="uploads/users/{{owner._id}}/large/img_{{owner.picture}}" class='circle responsive-img'/>
                         <br/>
                         <b>{{owner.identity.firstName + ' ' + owner.identity.lastName}}</b>
                         <p>
@@ -25,6 +25,7 @@
                     <h4>{{host.name}}</h4>
                     <h5>{{host.address.country}},
                         {{host.address.state}}</h5>
+                    <p class='left'>{{host.address.num}} {{host.address.road}} {{host.address.postalCode}} {{host.address.city}}</p>
                     <div class='row'>
                         <div class="col s12">
                             <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
@@ -33,17 +34,19 @@
                         </div>
                     </div>
                     <div class="row center-align">
-                        <div>
-                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-main' alt=""/>
-                            <img ng-repeat="sport in host.secondarySports" src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt=""/>
-                            <br/>Hobbies
+                        <div class="col m4 l2">
+                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-main' alt=""/><br/>
+                            {{host.primarySports}}
+                        </div>
+                        <div class="col m4 l2" ng-repeat="sport in host.secondarySports">
+                            <img src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt=""/><br/>
+                            {{sport}}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row card-panel grey lighten-5">
                 <div class="col s12">
-                    <a href="#">Contacter l'auteur</a>
                     <div class="divider"></div>
                     <!--rating -->
                     <div class="row">
@@ -110,39 +113,85 @@
                         </div>
 
                     </div>
+
+<!-- ajouter commentaire -->
+                    <div class="col s12">
+                        <div class="grey lighten-5">
+                            <div class="row" ng-hide='toggleComment'>
+                                <div class="col s12 center">
+                                    <button class='btn green darken-2 waves-effect waves-light' ng-click='toggleComment = true'>Ajouter un commentaire</button>
+                                </div>
+                            </div>
+                            <div class="row valign-wrapper" ng-show='toggleComment'>
+                                <div class="col s2 center">
+                                    <img src="uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="" class="circle responsive-img">
+                                    <br>
+                                    <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
+                                </div>
+                                <div class="col s10">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="title" type="text" ng-model='newComment.title'>
+                                            <label for="title">Titre</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <textarea id="commentaire" ng-model='newComment.comment' class="materialize-textarea"></textarea>
+                                            <label for="commentaire">Commentaire</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s4">
+                                            <select material-select ng-model='newComment.rating.quality'>
+                                                <option value=''>Qualité</option>
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s4">
+                                            <select material-select ng-model='newComment.rating.beauty'>
+                                                <option value=''>Beauté</option>
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s4">
+                                            <select material-select ng-model='newComment.rating.accessibility'>
+                                                <option value=''>Accessibilité</option>
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s12">
+                                            <p class="center-align">
+                                                <button class="btn green darken-2 waves-effect waves-light" type="button" ng-click='comment()'>Ajouter un commentaire</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                     <!--gallery pictures -->
                     <div class="row">
                         <div class="col s12 m6 center" ng-repeat="pict in host.caption">
                             <img materialboxed class="materialboxed responsive-img" src="uploads/spots/{{host._id}}/{{pict}}" alt=""/>
-                        </div>
-                    </div>
-                    <!--About the author -->
-                    <div class="row">
-                        <div class="col s4 center valign">
-                            <b>About this author</b>
-                            <br>
-                            <br>
-                            <img src="assets/places/user-pic.jpg" alt="Tom" class='circle responsive-img'/>
-                            <br>
-                            <p>
-                                <span class="center-align grey-text lighten-5" style='font-size:12px;'>4.6 / 12 reviews<br/>Rookie</span>
-                            </p>
-                            <img src="assets/places/shaka.png" alt="Sh" class="responsive-img" style='max-width:20px;margin:8px;'/>
-
-                        </div>
-                        <div class="col s8">
-                            <b>Thomas</b>
-                            <br>
-                            <p>Tempor culpa velit reprehenderit labore tempor minim tempor deserunt enim duis enim culpa ad nostrud laborum excepteur. Reprehenderit reprehenderit ut laborum voluptate magna et ut. Amet excepteur incididunt velit id dolore ut veniam laborum ut
-                                ullamco aliqua dolor irure irure veniam incididunt est.</p>
-                            <br>
-                            <p>
-                                Hobbies:
-                                <b>3</b>
-                                Home listings:
-                                <b>4</b>
-                                <a href="#">+ more</a>
-                            </p>
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -156,7 +205,7 @@
                                     position="[{{host.latitude}},{{host.longitude}}]"
                                     title="{{host.name}}"
                                     icon="{
-                                      url:'{{selectTile()}}',
+                                      url:'{{'assets/search/tile' + $scope.host.primarySports + '.png'}}',
                                       scaledSize:[42,45],
                                       origin: [0,0],
                                       anchor: [21,45]

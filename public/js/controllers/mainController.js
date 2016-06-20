@@ -8,8 +8,11 @@ angular.module('app').controller('mainController', function($scope, $location, $
     $scope.search = function() {
         searchFactory.data.city = $scope.city;
         searchFactory.data.hobby = $scope.hobby;
-        searchFactory.data.selectHome = $scope.selectHome;
-        $location.path('/search');
+        if($scope.selectHome=="place"){
+            $location.path('/search');
+        }else{
+            $location.path('/searchSpot');
+        }
     };
     $scope.searchSpot = function(activity) {
         searchFactory.data.hobby = activity;

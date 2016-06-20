@@ -118,11 +118,11 @@ var Spots = {
     },
 
     update: function(req, res) {
-        Spots.model.findByIdAndUpdate(req.params.id, req.body.content, function(err) {
+        Spots.model.findByIdAndUpdate(req.params.id, req.body.content, function(err, data) {
             if (err) {
                 res.send(err);
             } else {
-                res.sendStatus(200);
+                res.send(data);
             }
         });
     },
