@@ -94,7 +94,7 @@
             </form>
             <div id="widgets">
                 <div class="col s12 m12 l6" dir-paginate="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice | itemsPerPage: 4">
-                    <a href="/#/spot/{{p._id}}">
+                    <a href="/#/spot/{{p._id}}" target="_blank">
                         <div class="card hoverable">
                             <div class="card-image">
                                 <div class="placepict" ng-style="{{pictPlace(p)}}"></div>
@@ -123,7 +123,7 @@
 <div class="" style='position:fixed; right: 0; top: 70px; height: 100%; width: 50%;'>
     <ng-map default-style="false" center="current-location || centerMe" geo-fallback-center="Paris" zoom="8" id="myMap" scrollwheel='true'>
         <marker
-            ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
+            ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax"
             position="[{{p.latitude}},{{p.longitude}}]"
             title={{p.shortDescription}}
             icon="{
@@ -135,7 +135,7 @@
             on-click="toggleInfoWindow(event, $index)"
             clickable="true"></marker>
         <info-window id="popup" max-width="200">
-            <a href="/#/spot/{{positions[indexOfTheTruc]._id}}">
+            <a href="/#/spot/{{positions[indexOfTheTruc]._id}}" target="_blank">
                 <div class="card">
                     <div class="card-image">
                         <img class="placepict" src="uploads/spots/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">
