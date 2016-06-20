@@ -9,17 +9,6 @@ angular.module('app').controller('inboxController', function($scope, $window, $l
     messagingService.getExp($scope.currentUser._id).then(function(res) {
         $scope.sndMsgs = res.data;
     });
-    $scope.newMsg = {
-        creation: new Date(),
-        sender: $scope.currentUser._id,
-        recipient: '',
-        message: ''
-    };
-    $scope.sendMsg = function() {
-        messagingService.create($scope.newMsg).then(function(res) {
-            $location.path('/messages/' + res.data._id);
-        });
-    }
     $scope.format = function(date) {
         return messagingService.format(date);
     }
