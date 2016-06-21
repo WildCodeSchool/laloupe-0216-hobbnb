@@ -1,4 +1,4 @@
-angular.module('app').controller('createPlacesController', function($scope, $http, $q, $window, $location, $routeParams, placesFactory, placesService) {
+angular.module('app').controller('createPlacesController', function($scope, $http, $q, $window, $rootScope, $location, $routeParams, placesFactory, placesService, emailService) {
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
@@ -64,13 +64,17 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             if ($scope.isAction == 'création') {
                 act = placesService.create({
                     content: $scope.obj
-                })
+                });
             } else {
                 act = placesService.update($scope.obj._id, {
                     content: $scope.obj
                 })
             }
             act.then(function(res) {
+                    $scope.isAction == 'création' && emailService.sendToAdmin(
+                        'Un hébergement à été créé sur hobbnb',
+                        'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.herokuapp.com/#/place/' + res.data._id + '">Le consulter</a>'
+                    );
                 $scope.obj = {};
                 resetObj();
                 $location.path('/picture/places/0/' + res.data._id);

@@ -2,5 +2,6 @@ node_modules/
 *.DS_Store
 config/database.js
 config/secretToken.js
+config/mail.js
 public/uploads
 .idea

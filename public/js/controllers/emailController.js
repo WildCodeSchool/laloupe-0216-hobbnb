@@ -6,10 +6,8 @@ angular.module('app').controller('emailController', function($scope, $http, $rou
             .then(function(data) {
                 // Show success message
                 $scope.contact = {};
-                console.log('An e-mail has been sent successfully!!!');
             }, function(data) {
                 // Show error message
-                console.log("Message error");
             });
     };
 });

@@ -1,4 +1,4 @@
-angular.module('app').controller('createSpotsController', function($scope, $http, $q, $window, $location, $routeParams, spotsFactory, spotsService) {
+angular.module('app').controller('createSpotsController', function($scope, $http, $q, $window, $rootScope, $location, $routeParams, spotsFactory, spotsService, emailService) {
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
@@ -33,10 +33,10 @@ angular.module('app').controller('createSpotsController', function($scope, $http
     } else {
         $scope.isAction = 'création';
     }
+
     function gmapGeocode() {
         var defer = $q.defer(),
             addr = ($scope.obj.address.num || '') + ' ' + ($scope.obj.address.road || '') + ' ' + ($scope.obj.address.postalCode || '') + ' ' + $scope.obj.address.city + ' ' + $scope.obj.address.country;
-            console.log(addr);
         if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
         this.geocoder.geocode({
             'address': addr
@@ -58,13 +58,17 @@ angular.module('app').controller('createSpotsController', function($scope, $http
             if ($scope.isAction == 'création') {
                 act = spotsService.create({
                     content: $scope.obj
-                })
+                });
             } else {
                 act = spotsService.update($scope.obj._id, {
                     content: $scope.obj
-                })
+                });
             }
             act.then(function(res) {
+                $scope.isAction == 'création' && emailService.sendToAdmin(
+                    'Un spot à été créé sur hobbnb',
+                    'Un spot a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.herokuapp.com/#/spot/' + res.data._id + '">Le consulter</a>'
+                );
                 $scope.obj = {};
                 resetObj();
                 $location.path('/picture/spots/0/' + res.data._id);
@@ -75,9 +79,4 @@ angular.module('app').controller('createSpotsController', function($scope, $http
             $scope.error = err;
         });
     };
-
-/*    spotsService.get().then(function(res) {
-        $scope.places = res.data;
-    });
-*/
 });

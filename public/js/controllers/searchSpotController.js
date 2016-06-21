@@ -142,7 +142,6 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
         searchFactory.data.city = $scope.filters.place;
     }
     $scope.hobbyToData = function() {
-        console.log($scope.filters.hobby);
         searchFactory.data.hobby = $scope.filters.hobby;
     }
 });

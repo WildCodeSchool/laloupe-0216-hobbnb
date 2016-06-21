@@ -73,7 +73,6 @@ var Spots = {
     model: mongoose.model('Spots', spotsSchema),
 
     create: function(req, res) {
-        console.log(req.body);
         Spots.model.create(req.body.content, function(err, data) {
             if (err) {
                 res.send(err);
