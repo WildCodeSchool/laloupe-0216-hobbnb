@@ -62,7 +62,7 @@ p {
     opacity: 0;
 }
 .activityPanel.ng-hide-add, .activityPanel.ng-hide-remove, .activityPanel.ng-hide-add-active, .activityPanel.ng-hide-remove-active {
-    transition: all linear 1s;
+    transition: all linear 0.3s;
 }
 .activityPanel img {
     width: 100%;

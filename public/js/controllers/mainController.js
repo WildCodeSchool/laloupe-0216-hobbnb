@@ -36,5 +36,15 @@ angular.module('app').controller('mainController', function($scope, $location, $
         var url = "uploads/spots/" + widget._id + "/" + widget.picture;
         return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
     };
-
+// dispay testimonials
+    $scope.message = {};
+    $http.get('/admin').then(function(res) {
+        if (res.data.length == 0) {
+            $scope.message.title1="En attente de témoignage";
+            $scope.message.title2="En attente de témoignage";
+            $scope.message.title3="En attente de témoignage";
+        } else {
+            $scope.message = res.data[0];
+        }
+    });
 });
