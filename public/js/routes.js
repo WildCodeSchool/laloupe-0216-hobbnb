@@ -296,9 +296,6 @@ function routes($routeProvider, $httpProvider) {
         .when('/social-connections', {
             templateUrl: 'views/static/social-connections.html',
         })
-        .when('/contact-us', {
-            templateUrl: 'views/static/contact-us.html',
-        })
         .when('/terms-privacy', {
             templateUrl: 'views/static/terms-privacy.html',
         })
