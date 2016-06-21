@@ -131,7 +131,7 @@ p {
 }
 .hobby-small {
     width: 35px;
-    margin: 10px;
+    margin: 15px;
 }
 .hobby-main {
     width: 60px;
@@ -197,4 +197,9 @@ p {
 }
 .md-scroll-mask {
     position: initial;
+}
+
+/* text icon page showPlaces*/
+.textIcon {
+  font-size: 0.7em;
 }
