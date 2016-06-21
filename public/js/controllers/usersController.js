@@ -1,4 +1,4 @@
-angular.module('app').controller('usersController', function($scope, $rootScope, $routeParams, $location, $http, $window, usersService, messagingService) {
+angular.module('app').controller('usersController', function($scope, $rootScope, $routeParams, $location, $http, $window, usersService, messagingService, emailService) {
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
@@ -47,10 +47,12 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
             $scope.create = function() {
                 if ($scope.hobbinaut.password === $scope.hobbinaut.passwordConfirm) {
                     usersService.create($scope.hobbinaut).then(function(res) {
-                        $window.localStorage.setItem('currentUser', JSON.stringify(res.data.user));
-                        $window.localStorage.token = res.data.token;
-                        $rootScope.$emit('userUpdated', null);
-                        $location.path('/user/' + res.data.user._id);
+                        emailService.send(res.data.user.identity.firstName, res.data.user.email, 'Bonjour ' + res.data.user.identity.firstName + ',<br />Vous avez créé un compte sur hobbnb, pour l\'activer cliquez sur le lien suivant : <a href="http://hobbnb.herokuapp.com/users/activate/' + res.data.user._id + '">Activer mon compte</a>');
+                        $scope.message = 'Votre compte a été créé, consultez votre boîte mail pour l\'activer ! ;-)';
+                            // $window.localStorage.setItem('currentUser', JSON.stringify(res.data.user));
+                            // $window.localStorage.token = res.data.token;
+                            // $rootScope.$emit('userUpdated', null);
+                            // $location.path('/user/' + res.data.user._id);
                     }, function(res) {
                         $scope.error = res.data;
                     });

@@ -1,6 +1,6 @@
 <div class="container">
     <h2 class="center-align">Devenez hobbinaute</h2>
-    <div class="row">
+    <div class="row" ng-hide='message'>
         <div class="col s6 offset-s3">
             <div class="row">
                 <div class="input-field col s12">
@@ -44,5 +44,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div ng-show='message'>
+        {{message}}
     </div>
 </div>

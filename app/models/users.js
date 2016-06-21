@@ -150,6 +150,38 @@ var Users = {
         }
     },
 
+    activate: function(req, res) {
+        if (!req.params.id) {
+            res.status(400).send('ID Introuvable');
+        } else {
+            Users.model.findById(req.params.id, function(err, data) {
+                if (err) {
+                    res.status(400).send(err);
+                } else if (!data) {
+                    res.status(400).send('Utilisateur inconnu');
+                } else {
+                    if (!data.isValidate) {
+                        Users.model.findByIdAndUpdate(data._id, {isValidate:true}, function(err, data) {
+                            if (err) {
+                                res.status(400).send('Utilisateur inconnu');
+                            } else {
+                                data.password = null;
+                                data.isValidate = true;
+                                var token = jwt.sign(data, secretToken, {
+                                    expiresIn: '24h'
+                                });
+                                res.send('<script>localStorage.setItem("currentUser", \'' + JSON.stringify(data) + '\');localStorage.setItem("token", \'' + token + '\');window.location="/#/";</script>');
+                            }
+                        });
+                    } else {
+                        res.status(401).send('Votre email est déjà vérifié');
+                    }
+
+                }
+            });
+        }
+    },
+
     update: function(req, res) {
         if (req.body.obj.password) {
             var salt = bcrypt.genSaltSync(10);

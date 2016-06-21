@@ -34,13 +34,6 @@ module.exports = function(app) {
 
     var send = function(mailOptions) {
         transport.sendMail(mailOptions, function(err, info) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Message sent: ' + info.response);
-                return res.json(201, info);
-            }
-
             transport.close();
         });
     }
@@ -66,6 +59,7 @@ module.exports = function(app) {
             html: htmlContent
         });
 
+        res.send(200);
 
 
     });
@@ -84,6 +78,7 @@ module.exports = function(app) {
             sender: 'hobbnb <' + userInfos.user + '>',
             html: htmlContent
         });
+        res.send(200);
     });
 
 };

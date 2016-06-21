@@ -5,6 +5,8 @@ var express = require('express'),
 
 module.exports = function(app) {
 
+    usersRouter.get('/activate/:id', Users.activate);
+
     usersRouter.get('/', Auth.user.hasAuthorization, Auth.user.isAdministrator, Users.findAll);
 
     usersRouter.get('/loggedin', Auth.user.hasAuthorization, function(req, res) {
@@ -14,7 +16,7 @@ module.exports = function(app) {
     usersRouter.post('/login', Users.login);
 
     usersRouter.get('/:id/:token', Users.confirm);
-    
+
     usersRouter.get('/:id', Auth.user.hasAuthorization, Users.findOne);
 
     usersRouter.post('/', Users.create);
