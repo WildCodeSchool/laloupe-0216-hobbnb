@@ -88,7 +88,7 @@
                         <div class="col m8 l5">
                             <ul>
                                 <li>Type :
-                                    {{host.home.houseSpace.propertyType || "Maizon"}}</li>
+                                    {{host.home.houseSpace.propertyType || "Maison"}}</li>
                                 <li>Arrivée à :
                                     {{host.home.houseSpace.checkIn || "09:00"}}</li>
                                 <li>Départ à :
@@ -387,7 +387,7 @@
                                 select-years="15">
                         </div>
                         <div class="input-field col s4">
-                            <input placeholder="Invités" id="guests" ng-model='guests' type="number">
+                            <input placeholder="Invités" id="guests" ng-model='guests' type="number" min="1">
                         </div>
                         <div style="display: none">
                             <input ng-model='newMsg.recipient' type='text' id='recipient'>
