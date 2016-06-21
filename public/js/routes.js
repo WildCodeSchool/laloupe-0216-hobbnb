@@ -21,7 +21,6 @@ function routes($routeProvider, $httpProvider) {
             templateUrl: 'views/search.html',
             controller: 'searchController',
             resolve: {
-                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
@@ -43,7 +42,6 @@ function routes($routeProvider, $httpProvider) {
             templateUrl: 'views/searchSpot.html',
             controller: 'searchSpotController',
             resolve: {
-                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
@@ -102,7 +100,6 @@ function routes($routeProvider, $httpProvider) {
             templateUrl: 'views/places/showPlace.html',
             controller: 'placesController',
             resolve: {
-                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
@@ -160,7 +157,6 @@ function routes($routeProvider, $httpProvider) {
             templateUrl: 'views/spots/showSpot.html',
             controller: 'spotsController',
             resolve: {
-                connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',

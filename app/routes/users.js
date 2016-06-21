@@ -17,7 +17,7 @@ module.exports = function(app) {
 
     usersRouter.get('/:id/:token', Users.confirm);
 
-    usersRouter.get('/:id', Auth.user.hasAuthorization, Users.findOne);
+    usersRouter.get('/:id', Users.findOne);
 
     usersRouter.post('/', Users.create);
 
