@@ -71,7 +71,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                     this.geocoder.geocode({
                         'address': newCol.place
                     }, function(results, status) {
-                        console.dir($scope.definitiveFilter);
                         if (status == google.maps.GeocoderStatus.OK) {
                             var loc = results[0].geometry.location;
                             $scope.latitude = loc.lat();
@@ -82,7 +81,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                             $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
                             $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
                         } else {
-                            console.dir('trouve pas la place');
                             delete $scope.latitude;
                             delete $scope.longitude;
                             delete $scope.latitudemax;
@@ -94,7 +92,6 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
                     });
                 }, 1000);
             } else {
-                console.dir($scope.definitiveFilter);
                 delete $scope.latitude;
                 delete $scope.longitude;
                 delete $scope.latitudemax;
