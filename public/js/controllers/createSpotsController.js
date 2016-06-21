@@ -36,7 +36,6 @@ angular.module('app').controller('createSpotsController', function($scope, $http
     function gmapGeocode() {
         var defer = $q.defer(),
             addr = ($scope.obj.address.num || '') + ' ' + ($scope.obj.address.road || '') + ' ' + ($scope.obj.address.postalCode || '') + ' ' + $scope.obj.address.city + ' ' + $scope.obj.address.country;
-            console.log(addr);
         if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
         this.geocoder.geocode({
             'address': addr

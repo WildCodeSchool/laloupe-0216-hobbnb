@@ -24,7 +24,6 @@ angular.module('app').controller('adminController', function($scope, $http) {
                 }
             })
         } else {
-            console.dir($scope.message);
             $http.put('/admin/' + $scope.message._id, {
                 content: {
                     comment1: $scope.message.comment1,
