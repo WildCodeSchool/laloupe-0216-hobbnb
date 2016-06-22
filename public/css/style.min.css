@@ -131,7 +131,8 @@ p {
 }
 .hobby-small {
     width: 35px;
-    margin: 15px;
+    margin: 18px;
+    vertical-align: middle;
 }
 .hobby-main {
     width: 60px;
@@ -202,4 +203,11 @@ p {
 /* text icon page showPlaces*/
 .textIcon {
   font-size: 0.7em;
+}
+.dropdown-content li > span {
+    font-size: 16px;
+    color: #757575 !important;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
 }
