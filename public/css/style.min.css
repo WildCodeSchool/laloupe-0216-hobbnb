@@ -62,7 +62,7 @@ p {
     opacity: 0;
 }
 .activityPanel.ng-hide-add, .activityPanel.ng-hide-remove, .activityPanel.ng-hide-add-active, .activityPanel.ng-hide-remove-active {
-    transition: all linear 1s;
+    transition: all linear 0.3s;
 }
 .activityPanel img {
     width: 100%;
@@ -202,12 +202,4 @@ p {
 /* text icon page showPlaces*/
 .textIcon {
   font-size: 0.7em;
-}
-
-.dropdown-content li > span {
-    font-size: 16px;
-    color: #757575 !important;
-    display: block;
-    line-height: 22px;
-    padding: 14px 16px;
 }

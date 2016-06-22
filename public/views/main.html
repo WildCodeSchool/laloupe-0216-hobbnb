@@ -71,7 +71,7 @@
 						<input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
 					</div>
 					<div class="col m3 l2">
-						<a class="waves-effect waves-light btn" style="margin-top:10px;display: block; width: 100%;" ng-click="search()">Chercher</a>
+						<a class="waves-effect waves-light btn green accent-2" style="margin-top:10px;display: block; width: 100%;" ng-click="search()">Chercher</a>
 					</div>
 				</div>
 			</div>
@@ -182,10 +182,6 @@
 	<div class="col s12">
 		<ul class="collapsible" data-collapsible="accordion">
 	    <li>
-	    	<div class="collapsible-header">Quoi de neuf</div>
-	    	<div class="collapsible-body"><p>En cours de développement.</p></div>
-	    </li>
-	    <li>
 	     	<div class="collapsible-header active">Les spots les plus populaires</div>
 	      	<div class="collapsible-body">
 			  <div class="col s12 m6" ng-repeat="p in pSpots | limitTo:4">
@@ -238,22 +234,16 @@
 	<div class="rentic">
 		<div class="row">
 			<div class="col s4">
-				<a href="#">
-					<img src="assets/carte.png" />
-					<p style="font-size:22px"><B>Logez au coeur de l'action</p>
-				</a>
+				<img src="assets/carte.png" />
+				<p style="font-size:22px"><B>Logez au coeur de l'action</p>
 			</div>
 			<div class="col s4">
-				<a href="#">
-					<img src="assets/friends.svg" style="height:88px; margin-top:45px" />
-					<p style="font-size:22px">Recevez des conseils de votre hôte</p>
-				</a>
+				<img src="assets/friends.svg" style="height:88px; margin-top:45px" />
+				<p style="font-size:22px">Recevez des conseils de votre hôte</p>
 			</div>
 			<div class="col s4">
-				<a href="#">
-					<img src="assets/cochon.png" style="margin-top:25px" />
-					<p style="font-size:22px">Faites vous de l'argent grâce à vos hobbys</B></p>
-				</a>
+				<img src="assets/cochon.png" style="margin-top:25px" />
+				<p style="font-size:22px">Faites vous de l'argent grâce à vos hobbys</B></p>
 			</div>
 		</div>
 	</div>
@@ -268,24 +258,24 @@
 			<div class="row">
 				<div class="col s4">
 					<div class="pcenter">
-						<img src="assets/hobbynauts/images-1.jpeg" class="circle"/>
+						<img src="{{message.photo1}}" class="circle"/>
 					</div>
-					<h2 class="valign">"Super concept"</h2><br>
-					<p class="valign">Vous avez un hobby et aimez partager vos expériences, des conseils et peut être de l'équipement ? Faites-en un atout pour augmenter vos revenus en louant à 68% des voyageurs voulant découvrir ou profiter de leurs hobbys préférés durant leurs vacances.</p>
+					<h2 class="valign">"{{message.title1}}"</h2><br>
+					<p class="valign">{{message.comment1}}</p>
 				</div>
 				<div class="col s4">
 					<div class="pcenter">
-						<img src="assets/hobbynauts/images-5.jpeg" class="circle"/>
+						<img src="{{message.photo2}}" class="circle"/>
 					</div>
-					<h2 class="valign">"Une expérience incroyable"</h2><br>
-					<p class="valign">C'est tellement plus facile et sympa d'ouvrir sa porte aux personnes partageant vos hobbys. Les hobbys brisent la glace instantanément, font disparaitre les barrières sociales et sont le plus puissant générateur d'amitié.</p>
+					<h2 class="valign">"{{message.title2}}"</h2><br>
+					<p class="valign">{{message.comment2}}</p>
 				</div>
 				<div class="col s4">
 					<div class="pcenter">
-						<img src="assets/hobbynauts/images-6.jpeg" class="circle"/>
+						<img src="{{message.photo3}}" class="circle"/>
 					</div>
-					<h2 class="valign">"Le futur des voyages"</h2><br>
-					<p class="valign">Découvrez le profil de voyageurs et leur notations avant d'accepter une location. Tous les payements sont 100% sécurisés et vous bénéficiez d'une assurance supplémentaire pour couvrir votre logement.</p>
+					<h2 class="valign">"{{message.title3}}"</h2><br>
+					<p class="valign">{{message.comment3}}</p>
 				</div>
 			</div>
 		</div>

@@ -94,7 +94,7 @@
             </form>
             <div id="widgets">
                 <div class="col s12 m12 l6" dir-paginate="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice | itemsPerPage: 8">
-                    <a href="/#/place/{{p._id}}">
+                    <a href="/#/place/{{p._id}}" target="_blank">
                         <div class="card hoverable">
                             <div class="card-image">
                                 <div class="placepict" ng-style="{{pictPlace(p)}}"></div>
@@ -136,7 +136,7 @@
             on-click="toggleInfoWindow(event, $index)"
             clickable="true"></marker>
         <info-window id="popup" max-width="200">
-            <a href="/#/place/{{positions[indexOfTheTruc]._id}}">
+            <a href="/#/place/{{positions[indexOfTheTruc]._id}}" target="_blank">
                 <div class="card">
                     <div class="card-image">
                         <img class="placepict" src="uploads/places/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">

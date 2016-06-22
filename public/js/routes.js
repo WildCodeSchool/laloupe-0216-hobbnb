@@ -17,6 +17,20 @@ function routes($routeProvider, $httpProvider) {
                 }]
             }
         })
+        .when('/admin', {
+            templateUrl: 'views/admin.html',
+            controller: 'adminController',
+            resolve: {
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            'js/controllers/adminController.js'
+                        ]
+                    });
+                }]
+            }
+        })
         .when('/search', {
             templateUrl: 'views/search.html',
             controller: 'searchController',

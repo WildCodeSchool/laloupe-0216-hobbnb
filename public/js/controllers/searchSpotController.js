@@ -9,12 +9,6 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
     $scope.formHobby = 'Choisissez un hobby...';
     $scope.propertyTypeListing = ["Hebergement", "Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
     $scope.filters = {
-        minPrice: 0,
-        maxPrice: 1000,
-        priceRange: {
-            min: 0,
-            max: 1000
-        }
     }
     $scope.definitiveFilter = {};
     spotsService.get().then(function(res) {
@@ -36,12 +30,12 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
         });
         $scope.$watchCollection('filters', function(newCol, oldCol) {
             if (!!newCol.hobby) {
-                if (!$scope.definitiveFilter.spot) $scope.definitiveFilter.spot = [];
+                if (!$scope.definitiveFilter) $scope.definitiveFilter = [];
                 if (newCol.hobby == 'Peu importe') {
                     $scope.filters.hobby = '';
-                    if (!!$scope.definitiveFilter.spot.primarySports) delete $scope.definitiveFilter.spot.primarySports;
+                    if (!!$scope.definitiveFilter.primarySports) delete $scope.definitiveFilter.primarySports;
                 } else {
-                    $scope.definitiveFilter.spot.primarySports = newCol.hobby;
+                    $scope.definitiveFilter.primarySports = newCol.hobby;
                 }
             }
             // model sur http://jsfiddle.net/Wijmo/Rqcsj/
@@ -52,7 +46,6 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
                     this.geocoder.geocode({
                         'address': newCol.place
                     }, function(results, status) {
-                        //                    console.dir($scope.definitiveFilter);
                         if (status == google.maps.GeocoderStatus.OK) {
                             var loc = results[0].geometry.location;
                             $scope.latitude = loc.lat();
@@ -63,7 +56,6 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
                             $scope.longitudemin = $scope.longitude + 35 / $scope.kmbydegree;
                             $scope.longitudemax = $scope.longitude - 35 / $scope.kmbydegree;
                         } else {
-                            //                        console.dir('trouve pas la place');
                             delete $scope.latitude;
                             delete $scope.longitude;
                             delete $scope.latitudemax;
@@ -75,7 +67,6 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
                     });
                 }, 1000);
             } else {
-                //            console.dir($scope.definitiveFilter);
                 delete $scope.latitude;
                 delete $scope.longitude;
                 delete $scope.latitudemax;
@@ -87,7 +78,6 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
             //Ask from over page
             $scope.filters.place = searchFactory.data.city;
             $scope.filters.hobby = searchFactory.data.hobby;
-
         });
     });
 
