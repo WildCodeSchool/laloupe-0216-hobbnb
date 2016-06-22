@@ -24,7 +24,13 @@ require('./config/database');
 var server = http.Server(app);
 // routes ======================================================================
 require('./app/routes')(app);
-require('./app/images/im_promise')(app);
+if (require('./config/s3').useAmazonS3) {
+    // Use Amazon S3
+    require('./app/images/im_s3')(app);
+} else {
+    // Use Local directory
+    require('./app/images/im_promise')(app);
+}
 require('./app/emails/email')(app);
 process.on('SIGINT', function() {
     console.log('Goodbye sir...');
