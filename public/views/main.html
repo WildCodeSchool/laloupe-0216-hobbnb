@@ -43,10 +43,10 @@
 		<div class="logo">
 			<div class="container">
 				<h1 style="padding-top:50px;"><B>Étendez votre aire de jeu</B></h1>
-				<div style="text-align:center;">
+				<div class=" hide-on-small-only" style="text-align:center;">
 					<img src="assets/icone/hobbnb-activities-off.svg" height="61px">
 				</div>
-				<div class="row">
+				<div class="row  hide-on-small-only">
 					<div class="col s6 offset-s3" style="text-align:center;">
 						<p style="color:white;">Réservez en quelques clics des logements entre particuliers les mieux situés pour pratiquer vos loisirs préférés.</p>
 					</div>
@@ -54,23 +54,23 @@
 			</div>
 			<div class="searchbar">
 				<div class="row">
-					<div class="col m3 l2 offset-l2">
+					<div class="col s12 m3 l2 offset-l2">
 						<select class='' material-select watch ng-model="hobby">
 								<option value="" disable selected>Quel hobby ?</option>
 								<option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
 						</select>
 					</div>
-					<div class="col m3 l2">
+					<div class="col s12 m3 l2">
 						<select class='' material-select ng-model="selectHome">
 								<option value="" disable selected>Spot ou Hébergement ?</option>
 								<option value="spot">spot</option>
 								<option value="place">Hébergement</option>
 						</select>
 					</div>
-					<div class="col m3 l2">
+					<div class="col s6 m3 l2">
 						<input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
 					</div>
-					<div class="col m3 l2">
+					<div class="col s6 m3 l2">
 						<a class="waves-effect waves-light btn green accent-2" style="margin-top:10px;display: block; width: 100%;" ng-click="search()">Chercher</a>
 					</div>
 				</div>
@@ -179,58 +179,52 @@
 
 
 <div class="row container">
-	<div class="col s12">
-		<ul class="collapsible" data-collapsible="accordion">
-	    <li>
-	     	<div class="collapsible-header active">Les spots les plus populaires</div>
-	      	<div class="collapsible-body">
-			  <div class="col s12 m6" ng-repeat="p in pSpots | limitTo:4">
-				  <a href="/#/spot/{{p._id}}">
-					  <div class="card hoverable small" id="widgets">
-						  <div class="card-image">
-							  <div class="placepict" ng-style="{{pictSpot(p)}}"></div>
-						  </div>
-						  <div>
-							  <p class="left">
-								  <img style="height:32px;width:32px;margin:10px;" src="{{hobbyIco(p)}}" alt=""/>
-								  <span style="font-size:1.5em;">{{p.name}}</span>
-							  </p>
-						  </div>
-					  </div>
-				  </a>
-			  </div>
-			  <div class="raz"></div>
-		  </div>
-	    </li>
-	    <li>
-	      <div class="collapsible-header">Les hébergements les plus populaires</div>
-	      <div class="collapsible-body">
-			  <div class="col s12 m6" ng-repeat="p in pPlaces | limitTo:4">
-				  <a href="/#/place/{{p._id}}">
-					  <div class="card hoverable small" id="widgets">
-						  <div class="card-image">
-							  <div class="placepict" ng-style="{{pictPlace(p)}}"></div>
-							  <span class="card-title">{{p.home.price|currency:'€'}}</span>
-						  </div>
-						  <div>
-							  <p class="left">
-								  <img style="height:32px;width:32px;margin:10px;" src="{{hobbyIco(p)}}" alt=""/>
-								  <span style="font-size:1.5em;">{{p.name}}</span>
-							  </p>
-						  </div>
-					  </div>
-				  </a>
-			  </div>
-			  <div class="raz"></div>
-		  </div>
-	    </li>
-	  </ul>
+	<div class="col s12 l10 offset-l1">
+		<div class="row">
+			<div class="col s12">
+				<ul class="tabs">
+					<li class="tab col s6"><a href="#" ng-click='show="spots"'>Les spots les plus populaires</a></li>
+					<li class="tab col s6"><a href="#" ng-click='show="places"'>Les hébergements les plus populaires</a></li>
+				</ul>
+			</div>
+			<div ng-show='show=="spots"' class="col s12 m4" ng-repeat="p in pSpots | limitTo:6">
+				<a href="/#/spot/{{p._id}}" ng-class='$index>1?"hide-on-small-only":""'>
+					<div class="card hoverable small" id="widgets">
+						<div class="card-image">
+							<div class="placepict" ng-style="{{pictSpot(p)}}"></div>
+						</div>
+						<div>
+							<p class="left">
+								<img style="height:32px;width:32px;margin:10px;" src="{{hobbyIco(p)}}" alt=""/>
+								<span style="font-size:1.5em;">{{p.name}}</span>
+							</p>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div ng-show='show=="places"' class="col s12 m4" ng-repeat="p in pPlaces | limitTo:6">
+				<a href="/#/place/{{p._id}}" ng-class='$index>1?"hide-on-small-only":""'>
+					<div class="card hoverable small" id="widgets">
+						<div class="card-image">
+							<div class="placepict" ng-style="{{pictPlace(p)}}"></div>
+							<span class="card-title">{{p.home.price|currency:'€'}}</span>
+						</div>
+						<div>
+							<p class="left">
+								<img style="height:32px;width:32px;margin:10px;" src="{{hobbyIco(p)}}" alt=""/>
+								<span style="font-size:1.5em;">{{p.name}}</span>
+							</p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
 	</div>
 </div>
 
 
-<h2>Louer par hobby change la donne</h2>
-<div class="container">
+<h2 class="hide-on-small-only">Louer par hobby change la donne</h2>
+<div class="container hide-on-small-only">
 	<div class="rentic">
 		<div class="row">
 			<div class="col s4">
@@ -256,21 +250,21 @@
 	<div class="container">
 		<div class="valign wrapper">
 			<div class="row">
-				<div class="col s4">
+				<div class="col s12 m4">
 					<div class="pcenter">
 						<img src="{{message.photo1}}" class="circle"/>
 					</div>
 					<h2 class="valign">"{{message.title1}}"</h2><br>
 					<p class="valign">{{message.comment1}}</p>
 				</div>
-				<div class="col s4">
+				<div class="col s12 m4">
 					<div class="pcenter">
 						<img src="{{message.photo2}}" class="circle"/>
 					</div>
 					<h2 class="valign">"{{message.title2}}"</h2><br>
 					<p class="valign">{{message.comment2}}</p>
 				</div>
-				<div class="col s4">
+				<div class="col s12 m4">
 					<div class="pcenter">
 						<img src="{{message.photo3}}" class="circle"/>
 					</div>
@@ -293,5 +287,6 @@
 		$('.tooltipped').tooltip({delay: 50});
 		$(".button-collapse").sideNav();
 		$(".dropdown-button").dropdown();
+		$('ul.tabs').tabs();
 	});
 </script>
