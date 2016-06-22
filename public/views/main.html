@@ -56,13 +56,13 @@
 				<div class="row">
 					<div class="col m3 l2 offset-l2">
 						<select class='' material-select watch ng-model="hobby">
-								<option value="">Quel hobby ?</option>
-								<option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
+								<option value="" disable selected>Quel hobby ?</option>
+								<option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
 						</select>
 					</div>
 					<div class="col m3 l2">
 						<select class='' material-select ng-model="selectHome">
-								<option value="">Spot ou Hébergement ?</option>
+								<option value="" disable selected>Spot ou Hébergement ?</option>
 								<option value="spot">spot</option>
 								<option value="place">Hébergement</option>
 						</select>
