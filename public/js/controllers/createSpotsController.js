@@ -1,8 +1,22 @@
-angular.module('app').controller('createSpotsController', function($scope, $http, $q, $window, $rootScope, $location, $routeParams, spotsFactory, spotsService, emailService) {
+angular.module('app').controller('createSpotsController', function($scope, $http, $q, $window, $rootScope, $location, $routeParams, spotsFactory, spotsService, emailService, NgMap) {
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
         _id: null
+    };
+    var marker=null;
+    $scope.placeMarker = function(e) {
+     $scope.myMap.panTo(e.latLng);
+     if(marker==null){
+         marker = new  google.maps.Marker({position: e.latLng, map: $scope.myMap});
+     }else{
+         marker.setPosition(e.latLng);
+     }
+     $scope.obj.longitude = marker.position.lng();
+     $scope.obj.latitude = marker.position.lat();
+    }
+    $scope.reloadMap = function() {
+        $scope.myMap = NgMap.initMap('myMap');
     };
 
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
@@ -34,47 +48,26 @@ angular.module('app').controller('createSpotsController', function($scope, $http
         $scope.isAction = 'création';
     }
 
-    function gmapGeocode() {
-        var defer = $q.defer(),
-            addr = ($scope.obj.address.num || '') + ' ' + ($scope.obj.address.road || '') + ' ' + ($scope.obj.address.postalCode || '') + ' ' + $scope.obj.address.city + ' ' + $scope.obj.address.country;
-        if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
-        this.geocoder.geocode({
-            'address': addr
-        }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var loc = results[0].geometry.location;
-                $scope.obj.latitude = loc.lat();
-                $scope.obj.longitude = loc.lng();
-                defer.resolve();
-            } else {
-                defer.reject('Adresse introuvable');
-            }
-        });
-        return defer.promise;
-    }
+
     $scope.send = function() {
-        gmapGeocode().then(function() {
-            var act;
-            if ($scope.isAction == 'création') {
-                act = spotsService.create({
-                    content: $scope.obj
-                });
-            } else {
-                act = spotsService.update($scope.obj._id, {
-                    content: $scope.obj
-                });
-            }
-            act.then(function(res) {
-                $scope.isAction == 'création' && emailService.sendToAdmin(
-                    'Un spot à été créé sur hobbnb',
-                    'Un spot a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.herokuapp.com/#/spot/' + res.data._id + '">Le consulter</a>'
-                );
-                $scope.obj = {};
-                resetObj();
-                $location.path('/picture/spots/0/' + res.data._id);
-            }, function(err) {
-                $scope.error = err;
+        var act;
+        if ($scope.isAction == 'création') {
+            act = spotsService.create({
+                content: $scope.obj
             });
+        } else {
+            act = spotsService.update($scope.obj._id, {
+                content: $scope.obj
+            });
+        }
+        act.then(function(res) {
+            $scope.isAction == 'création' && emailService.sendToAdmin(
+                'Un spot à été créé sur hobbnb',
+                'Un spot a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.herokuapp.com/#/spot/' + res.data._id + '">Le consulter</a>'
+            );
+            $scope.obj = {};
+            resetObj();
+            $location.path('/picture/spots/0/' + res.data._id);
         }, function(err) {
             $scope.error = err;
         });

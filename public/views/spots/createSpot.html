@@ -56,7 +56,7 @@
                 Précédent
                 <i class='material-icons left'>keyboard_arrow_left</i>
             </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=3'>
+            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=3; reloadMap()'>
                 Suivant
                 <i class='material-icons right'>keyboard_arrow_right</i>
             </button>
@@ -70,62 +70,9 @@
             </div>
         </div>
         <h2>Adresse</h2>
-        <div class="row">
-            <div class="input-field col s4">
-                <input id="obj.address.num" type="text" ng-model='obj.address.num'>
-                <label for="obj.address.num">Numéro</label>
-            </div>
-            <div class="input-field col s8">
-                <input id="obj.address.road" type="text" ng-model='obj.address.road'>
-                <label for="obj.address.road">Rue</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s4">
-                <input id="obj.address.postalCode" type="text" ng-model='obj.address.postalCode'>
-                <label for="obj.address.postalCode">Code postal</label>
-            </div>
-            <div class="input-field col s8">
-                <input id="obj.address.city" type="text" ng-model='obj.address.city'>
-                <label for="obj.address.city">Ville</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s5">
-                <select material-select ng-model='obj.address.state'>
-                    <option value=''>Région</option>
-                    <option>Alsace-Champagne-Ardenne-Lorraine</option>
-                    <option>Aquitaine-Limousin-Poitou-Charentes</option>
-                    <option>Auvergne-Rhône-Alpes</option>
-                    <option>Bourgogne-Franche-Comté</option>
-                    <option>Bretagne</option>
-                    <option>Centre-Val de Loire</option>
-                    <option>Corse</option>
-                    <option>Île-de-France</option>
-                    <option>Languedoc-Roussillon-Midi-Pyrénées</option>
-                    <option>Nord-Pas-de-Calais-Picardie</option>
-                    <option>Normandie</option>
-                    <option>Pays de la Loire</option>
-                    <option>Provence-Alpes-Côte d'Azur</option>
-                    <option>Guadeloupe</option>
-                    <option>Martinique</option>
-                    <option>Guyane</option>
-                    <option>La Réunion</option>
-                    <option>Mayotte</option>
-                    <option>Autre</option>
-                </select>
-            </div>
-            <div class="input-field col s7">
-                <input id="obj.address.country" type="text" ng-model='obj.address.country'>
-                <label for="obj.address.country">Pays</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.address.complement" type="text" ng-model='obj.address.complement'>
-                <label for="obj.address.complement">Complément</label>
-            </div>
-        </div>
+        <ng-map zoom="8" lazy-init="true" default-style="false"  on-click="placeMarker()"
+            center="current-location || centerMe" geo-fallback-center="Paris" id="myMap" scrollwheel='false'>
+        </ng-map>
         <div class="row">
             <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=2'>
                 Précédent
