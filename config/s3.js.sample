@@ -1,0 +1,14 @@
+module.exports = {
+    s3Params: {
+        Bucket: "s3 bucket name",
+        Prefix: "some/remote/dir/",
+        // other options supported by putObject, except Body and ContentLength.
+        // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
+    },
+    s3Options: {
+        accessKeyId: "your s3 key",
+        secretAccessKey: "your s3 secret",
+        // any other options are passed to new AWS.S3()
+        // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
+    }
+}

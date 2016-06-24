@@ -2,8 +2,8 @@
     <div class="navbar-fixed">
 
         <nav class="navTop">
+            <a href="#/" class="brand-logo"><img src="assets/blud_logo.png" width="187px"/></a>
             <div class="nav-wrapper">
-                <a href="#/" class="brand-logo"><img src="assets/blud_logo.png" width="187px"/></a>
                 <a href="#" data-activates="nav-mobile" class="button-collapse">
                     <i class="material-icons">menu</i>
                 </a>
@@ -27,6 +27,10 @@
                     </li>
                 </ul>
                 <ul class="right hide-on-med-and-down" ng-controller='globalUserController'>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons left">book</i>Blog</a>
+                    </li>
                     <li ng-hide='currentUser._id'>
                         <a href="#/user/login">
                             <i class="material-icons left">perm_identity</i>Login</a>
@@ -63,6 +67,10 @@
                             <i class='material-icons left'>add</i>
                             Spot
                         </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons left">book</i>Blog</a>
                     </li>
                     <li ng-hide='currentUser._id'>
                         <a href="#/user/login">

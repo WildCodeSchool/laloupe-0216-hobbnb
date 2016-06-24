@@ -22,7 +22,8 @@
     "morgan": "^1.7.0",
     "nodemailer": "^2.4.2",
     "q": "^1.4.1",
-    "quickthumb": "0.0.12"
+    "quickthumb": "0.0.12",
+    "s3": "^4.4.0"
   },
   "devDependencies": {
     "serve-static": "",
