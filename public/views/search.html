@@ -3,16 +3,22 @@
         <div class="col s6">
             <div class="row">
                 <div class="input-field col s12 m12 l6">
-                    <a class="waves-effect waves-light btn white" href="/#/searchSpot/">
-                        <img src="../assets/search/locateSpot.png" alt=""/>
-                        <span class="grey-text text-darken-2">Spots</span>
-                    </a>
+                    <input type="radio" name='labelSpot'>
+                    <label for="labelSpot" class="btn white">
+                        <a href="#/searchSpot">
+                            <img src="../assets/search/locateSpot.png" style='height:80%'/>
+                            <span class="grey-text text-darken-2">Spots</span>
+                        </a>
+                    </label>
                 </div>
                 <div class="input-field col s12 m12 l6">
-                    <a class="waves-effect waves-light btn green accent-2">
-                        <img src="../assets/search/locateHost.png" alt=""/>
-                        <span class="grey-text text-darken-2">Hébergement</span>
-                    </a>
+                    <input type="radio" checked name='labelHost'>
+                    <label for="labelHost" class="btn green accent-2">
+                        <a href="#/search">
+                            <img src="../assets/search/locateHost.png" style='height:80%'/>
+                            <span class="grey-text text-darken-2">Hébergements</span>
+                        </a>
+                    </label>
                 </div>
             </div>
             <form>
@@ -42,11 +48,19 @@
                 </div>
                 <!-- Formulaire pour home -->
                 <div class="row">
-                    <div class="input-field col s12 m12 l3">
+                    <div class="input-field col s12 m12 l3 offset-l1">
                         <select class='' material-select watch ng-model="filters.propertyType">
                             <option ng-repeat="propertyType in propertyTypeListing">{{propertyType}}</option>
                         </select>
                         <label>Hebergement</label>
+                    </div>
+                    <div class="input-field col s12 m12 l4 offset-l1 switch">
+                        <label>
+                            Partagé
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            Privé
+                        </label>
                     </div>
                     <div class="input-field col s12 m12 l3">
                         <select ng-model="filters.beds">
@@ -59,15 +73,18 @@
                         </select>
                         <label>Invités</label>
                     </div>
-                    <div class="input-field col s12 m12 l6">
+                    <div class="input-field col s12 m12 l6 offset-l1">
                         <div range-slider min="filters.priceRange.min" max="filters.priceRange.max" model-min="filters.minPrice" model-max="filters.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
                     </div>
-                    <div class="input-field col s12">
+                    <div class="input-field col s12 m12 l3 offset-l2">
                         <a class="waves-effect waves-light btn green accent-2" ng-click="moreFiltrer()">
                             <span class="grey-text text-darken-2">Plus d'options</span>
                         </a>
                     </div>
-                    <div ng-show="developOptions">
+                    <div class="clearfix">
+
+                    </div>
+                    <div ng-show="developOptions" class='row'>
                         <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasKitchen" id="chkKitchen"/>
                             <label for="chkKitchen">Cuisine</label>
@@ -122,16 +139,16 @@
     </div>
 </div>
 <div class="" style='position:fixed; right: 0; top: 70px; height: 100%; width: 50%;'>
-    <ng-map default-style="false" center="current-location || centerMe" geo-fallback-center="Paris" zoom="8" id="myMap" scrollwheel='true'>
+    <ng-map default-style="false" center="current-location || centerMe" geo-fallback-center="Paris" zoom="8" id="myMap" scrollwheel='true' style='height:100%;'>
         <marker
             ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
             position="[{{p.latitude}},{{p.longitude}}]"
             title={{p.shortDescription}}
             icon="{
               url:'{{tile(p.primarySports)}}',
-              scaledSize:[42,45],
+              scaledSize:[32,32],
               origin: [0,0],
-              anchor: [21,45]
+              anchor: [16,32]
               }"
             on-click="toggleInfoWindow(event, $index)"
             clickable="true"></marker>

@@ -201,16 +201,30 @@ p {
 }
 
 /* text icon page showPlaces*/
+
 .textIcon {
-  font-size: 0.7em;
+    font-size: 0.7em;
 }
 .imgIcons {
-  color: gray;
+    color: gray;
 }
-.dropdown-content li > span {
+.dropdown-content li> span {
     font-size: 16px;
     color: #757575 !important;
     display: block;
     line-height: 22px;
     padding: 14px 16px;
+}
+*, *:hover {
+    text-shadow: 0 !important;
+    box-shadow: 0 !important;
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0) !important;
+    -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0) !important;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0) !important;
+}
+.card {
+    background: #f2f4f3;
+}
+a.active {
+    background: #3cdf91;
 }
