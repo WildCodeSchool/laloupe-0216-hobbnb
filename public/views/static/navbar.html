@@ -27,6 +27,10 @@
                     </li>
                 </ul>
                 <ul class="right hide-on-med-and-down" ng-controller='globalUserController'>
+                    <li ng-show='currentUser.isAdmin'>
+                        <a href="#/admin">
+                            <i class="material-icons left">dashboard</i>Admin</a>
+                    </li>
                     <li>
                         <a href="#">
                             <i class="material-icons left">book</i>Blog</a>
@@ -68,6 +72,10 @@
                             Spot
                         </a>
                     </li>
+                        <li ng-show='currentUser.isAdmin'>
+                            <a href="#/admin">
+                                <i class="material-icons left">dashboard</i>Admin</a>
+                        </li>
                     <li>
                         <a href="#">
                             <i class="material-icons left">book</i>Blog</a>
