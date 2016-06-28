@@ -1,4 +1,4 @@
-<header style="height:400px">
+<header style="height:600px">
 	<div class="homecar">
 		<div class="slider" style="position:absolute; z-index:1;">
 		    <ul class="slides">
@@ -42,13 +42,13 @@
 		</div>
 		<div class="logo">
 			<div class="container">
-				<h1 style="padding-top:50px;"><B>Étendez votre aire de jeu</B></h1>
+				<h1 style="padding-top:50px;font-size: 48px;"><B>Étendez votre aire de jeu</B></h1>
 				<div class=" hide-on-small-only" style="text-align:center;">
 					<img src="assets/icone/hobbnb-activities-off.svg" height="61px">
 				</div>
 				<div class="row  hide-on-small-only">
-					<div class="col s6 offset-s3" style="text-align:center;">
-						<p style="color:white;">Réservez en quelques clics des logements entre particuliers les mieux situés pour pratiquer vos loisirs préférés.</p>
+					<div class="col s8 offset-s2" style="text-align:center;">
+						<p style="color:white; font-size: 18px;">Réservez en quelques clics des logements entre particuliers les mieux situés pour pratiquer vos loisirs préférés.</p>
 					</div>
 				</div>
 			</div>
@@ -81,97 +81,111 @@
 <div>
 	<h2>Explorez vos hobby et soyez inspirés</h2>
 	<p>Trouvez votre logement pour les vacances par hobby et rencontrez des hôtes partageant vos passions</p>
-	<div class="activityPanel container" ng-hide="hideCtrl">
+	<div class="activityPanel container hide-on-small-only" ng-hide="hideCtrl">
 		<div class="row">
-			<div class="col l10 offset-l1">
+			<div class="col m10 offset-m1">
+				<a ng-click="searchSpot('Plongée')">
+					<img src="assets/miniSlide/mindiving-couple.png">
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col m1 center-align">
+				<a ng-click="toggle()" style="cursor:pointer">
+					<i class="material-icons medium grey-text text-darken-1">add</i>
+				</a>
+			</div>
+			<div class="col m10">
 				<div class="row">
-					<div class="col l12">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Plongée" ng-click="searchSpot('Plongée')">
-							<img src="assets/miniSlide/mindiving-couple.png">
-						</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col l4">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Randonnée" ng-click="searchSpot('Randonnée')">
+					<div class="col m4">
+						<a ng-click="searchSpot('Randonnée')">
 							<img src="assets/miniSlide/mincouple.png">
 						</a>
 					</div>
-					<div class="col l4">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Alpinisme" ng-click="searchSpot('Alpinisme')">
+					<div class="col m4">
+						<a ng-click="searchSpot('Alpinisme')">
 							<img src="assets/miniSlide/minmountains.png">
 						</a>
 					</div>
-					<div class="col l4">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Windsurf" ng-click="searchSpot('Windsurf')">
+					<div class="col m4">
+						<a ng-click="searchSpot('Windsurf')">
 							<img src="assets/miniSlide/minhobbie-cat.png">
 						</a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col l8">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Ski" ng-click="searchSpot('Ski')">
+					<div class="col m8">
+						<a ng-click="searchSpot('Ski')">
 							<img src="assets/miniSlide/minskifamily.png">
 						</a>
 					</div>
-					<div class="col l4">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Parapente" ng-click="searchSpot('Parapente')">
+					<div class="col m4">
+						<a ng-click="searchSpot('Parapente')">
 							<img src="assets/miniSlide/minparagliding.png">
 						</a>
 					</div>
 				</div>
 			</div>
-			<div class="col l1 center-align">
-				<button ng-click="toggle()" class="btn-floating btn-large waves-effect waves-light  green accent-2 buttonPanel">
-					<i class="material-icons">skip_next</i>
-				</button>
+			<div class="col m1 center-align">
+				<a ng-click="toggle()" style="cursor:pointer;margin-left:-30px;">
+					<i class="material-icons medium grey-text text-darken-1">add</i>
+				</a>
 			</div>
 		</div>
 	</div>
-	<div class="activityPanel container" ng-show="hideCtrl">
+	<div class="activityPanel container hide-on-small-only" ng-show="hideCtrl">
 		<div class="row">
-			<div class="col l1 center-align">
-				<button ng-click="toggle()" class="btn-floating btn-large waves-effect waves-light  green accent-2 buttonPanel">
-					<i class="material-icons">skip_previous</i>
-				</button>
-			</div>
-			<div class="col l10">
+			<div class="col m10 offset-m1">
 				<div class="row">
-					<div class="col l8">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Surf" ng-click="searchSpot('Surf')">
+					<div class="col m8">
+						<a ng-click="searchSpot('Surf')">
 							<img src="assets/miniSlide/minsurf-friends.png">
 						</a>
 					</div>
-					<div class="col l4">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Equitation" ng-click="searchSpot('Equitation')">
+					<div class="col m4">
+						<a ng-click="searchSpot('Equitation')">
 							<img src="assets/miniSlide/equitation.jpg">
 						</a>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col m1 center-align">
+				<a ng-click="toggle()" style="cursor:pointer">
+					<i class="material-icons medium grey-text text-darken-1">add</i>
+				</a>
+			</div>
+			<div class="col m10">
 				<div class="row">
-					<div class="col l4">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Golf" ng-click="searchSpot('Golf')">
+					<div class="col m4">
+						<a ng-click="searchSpot('Golf')">
 							<img src="assets/miniSlide/golf.jpg">
 						</a>
 					</div>
-					<div class="col l4">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Kitesurf" ng-click="searchSpot('Kitesurf')">
+					<div class="col m4">
+						<a ng-click="searchSpot('Kitesurf')">
 							<img src="assets/miniSlide/kitesurf.jpg">
 						</a>
 					</div>
-					<div class="col l4">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de Cyclisme" ng-click="searchSpot('Cyclisme')">
+					<div class="col m4">
+						<a ng-click="searchSpot('Cyclisme')">
 							<img src="assets/miniSlide/cyclisme.jpg">
 						</a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col l12">
-						<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Activités de VTT" ng-click="searchSpot('VTT')">
+					<div class="col m12">
+						<a ng-click="searchSpot('VTT')">
 							<img src="assets/miniSlide/minvtt.png">
 						</a>
 					</div>
 				</div>
+			</div>
+			<div class="col m1 center-align">
+				<a ng-click="toggle()" style="cursor:pointer;margin-left:-30px;">
+					<i class="material-icons medium grey-text text-darken-1">add</i>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -196,7 +210,7 @@
 						<div>
 							<p class="left">
 								<img style="height:32px;width:32px;margin:10px;" src="{{hobbyIco(p)}}" alt=""/>
-								<span style="font-size:1.5em;">{{p.name}}</span>
+								<span style="font-size:1.2em;">{{p.name}}</span>
 							</p>
 						</div>
 					</div>
@@ -212,7 +226,7 @@
 						<div>
 							<p class="left">
 								<img style="height:32px;width:32px;margin:10px;" src="{{hobbyIco(p)}}" alt=""/>
-								<span style="font-size:1.5em;">{{p.name}}</span>
+								<span style="font-size:1.2em;">{{p.name}}</span>
 							</p>
 						</div>
 					</div>
@@ -282,8 +296,7 @@
 </div>
 <script>
 	$(document).ready(function(){
-		$('.slider').slider({full_width: true});
-		$('.slider').slider({indicators: false});
+		$('.slider').slider({full_width: true,height: 600,indicators: false});
 		$('.tooltipped').tooltip({delay: 50});
 		$(".button-collapse").sideNav();
 		$(".dropdown-button").dropdown();
