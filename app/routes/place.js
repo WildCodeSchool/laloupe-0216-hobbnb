@@ -1,10 +1,16 @@
-var Place = require('../models/places.js');
-module.exports 	= function(app) {
+var express = require('express'),
+    placesRouter = express.Router(),
+    Place = require('../models/places.js'),
+    Auth = require('../middlewares/authorization.js');
 
-	app.get('/places/:id', Place.findOne);
-	app.get('/places', Place.findAll);
-	app.post('/places', Place.create);
-	app.put('/places/:id', Place.update);
-	app.delete('/places/:id', Place.delete);
+module.exports = function(app) {
 
+    placesRouter.get('/user/:id', Auth.user.hasAuthorization, Place.findPlacesOfUser);
+    placesRouter.get('/:id', Place.findOne);
+    placesRouter.get('/', Place.findAll);
+    placesRouter.post('/', Auth.user.hasAuthorization, Place.create);
+    placesRouter.put('/:id', Auth.user.hasAuthorization, Place.update);
+    placesRouter.delete('/:id', Auth.user.hasAuthorization, Auth.user.isAdministrator, Place.delete);
+
+    app.use('/places', placesRouter);
 };

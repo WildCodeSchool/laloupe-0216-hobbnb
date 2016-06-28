@@ -12,7 +12,7 @@ app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.urlencoded({
     'extended': 'true'
 })); // parse application/x-www-form-urlencoded
-app.use(bodyParser.json()); // parse application/json
+app.use(bodyParser.json());
 app.use(bodyParser.json({
     type: 'application/vnd.api+json'
 })); // parse application/vnd.api+json as json
@@ -24,11 +24,18 @@ require('./config/database');
 var server = http.Server(app);
 // routes ======================================================================
 require('./app/routes')(app);
-require('./app/images/im')(app);
+if (require('./config/s3').useAmazonS3) {
+    // Use Amazon S3
+    require('./app/images/im_s3')(app);
+} else {
+    // Use Local directory
+    require('./app/images/im_promise')(app);
+}
+require('./app/emails/email')(app);
 process.on('SIGINT', function() {
-    console.log('Stopping...');
+    console.log('Goodbye sir...');
     process.exit();
 });
 // listen (start app with node server.js) ======================================
 server.listen(port);
-console.log('App listening on port ' + port);
+console.log('hobbnb is ready at port ' + port + ' :)');

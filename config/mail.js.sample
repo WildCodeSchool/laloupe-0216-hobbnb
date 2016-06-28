@@ -1,0 +1,5 @@
+module.exports = {
+    user: "", // email account here (Sender)
+    pass: "", // your password here (Sender)
+    ADMIN_EMAIL: "" // Who will receive admin notifications
+}

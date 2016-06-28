@@ -1,38 +1,35 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Picture Upload</title>
-    </head>
-    <body>
-        <h1>Picture Upload</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col s8 offset-s2">
-                    <form action="/picture" enctype="multipart/form-data" method="post">
-                        <fieldset>
-                          <div class="input-field">
-                              <input name="title" type="text" ng-model="title" />
-                              <label>Add a title:</label>
-                          </div>
-                          <div class="input-field">
-                              <input name="width" type="text" ng-model="width" />
-                              <label>width:</label>
-                          </div>
-                          <div class="input-field">
-                              <input name="height" type="text" ng-model="height"/>
-                              <label>height:</label>
-                          </div>
-                          <div class="input-field">
-                            <input multiple="multiple" name="upload" type="file" data-file="param.file"/>
-                          </div>
-                          <div class="input-field">
-                              <input type="submit" value="Upload" class="btn waves-effect waves-light"/>
-                          </div>
-                       </fieldset>
-                      </form>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col s8 offset-s2 center">
+
+            <form action="/picture" enctype="multipart/form-data" method="post">
+                <fieldset>
+                    <h1>Ajoutez une photo</h1>
+                    {{picType}}
+                    <div class="input-field" style="display: none;">
+                        <input name="title" type="text" ng-model="title"/>
+                        <label>Add a title:</label>
+                    </div>
+                    <div class="input-field" style="display: none;">
+                        <input name="width" type="text" ng-model="width"/>
+                        <label>width:</label>
+                    </div>
+                    <div class="input-field" style="display: none;">
+                        <input name="height" type="text" ng-model="height"/>
+                        <label>height:</label>
+                    </div>
+                    <div class="input-field" style="display: none;">
+                        <input name="authorization" type="text" ng-model="authorization"/>
+                        <label>token:</label>
+                    </div>
+                    <div class="input-field">
+                        <input file-upload multiple name="upload" type="file"/>
+                    </div>
+                    <div class="input-field">
+                        <input type="submit" value="Upload" class="btn waves-effect waves-light"/>
+                    </div>
+                </fieldset>
+            </form>
         </div>
-    </body>
-</html>
+    </div>
+</div>

@@ -1,58 +1,105 @@
 <header>
-  <nav class="navTop">
-    <div class="nav-wrapper" >
-      <a href="#/" class="brand-logo"><img src="../images/blud_logo.png" width="187px" /></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down" >
-        <li><a href="#/place">Magazine</a></li>
-        <li><a href="#/place">Comment ça marche</a></li>
-        <li><a href="#/place">S'inscrire</a></li>
-        <li>
-          <div class="col">
-            <a href='#demoModal' modal>Se connecter</a>
-          </div>
-          <!-- Modal Structure -->
-          <div id="demoModal" class="modal">
-            <div class="modal-content">
-                <div class="row">
-                  <div class="col s12">
-                    <a class="waves-effect waves-light btn indigo darken-2" style="width:100%;">Connexion avec Facebook</a>
-                  </div>
-                  <div class="col s12">
-                    <a class="waves-effect waves-light btn grey lighten-5" style="color:black; width:100%;">Connexion avec Google</a>
-                  </div>
-                  <div class="col s12">
-                    <p>Ou</p>
-                  </div>
-                </div>
-                <input placeholder="Adresse mail" style="color:black;"></input>
-                <input placeholder="Mot de Passe" style="color:black;"></input>
-                <p>
-                  <div class="row">
-                    <div class="col s6">
-                      <input type="checkbox" id="test5" />
-                      <label for="test5">Se souvenir de moi</label>
-                    </div>
-                    <div class="col s6">
-                      <a href="#" style="color:red;">Mot de passe oublié</a>
-                    </div>
-                  </div>
-                </p>
-                <div class="row">
-                  <div class="col s12">
-                    <a class="waves-effect waves-light btn light-blue darken-1" style="width:100%;">Connexion</a>
-                  </div>
-                  <div class="col s6">
-                    <p>Vous n'avez pas de compte ?</p>
-                  </div>
-                  <div class="col s6">
-                    <a class="waves-effect waves-light btn light-blue darken-1">Inscription</a>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </li>
-<!--        <li><a href="#/place">Votre listing</a></li> -->
-      </ul>
+    <div class="navbar-fixed">
+
+        <nav class="navTop">
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo"><img src="/assets/blud_logo.png" width="187px"/></a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="left hide-on-med-and-down" ng-controller='globalUserController' style='padding-left: 200px;'>
+                    <li>
+                        <a href="/search">
+                            <i class="material-icons">search</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/creation/place">
+                            <i class='material-icons left'>add</i>
+                            Hébergement
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/creation/spot">
+                            <i class='material-icons left'>add</i>
+                            Spot
+                        </a>
+                    </li>
+                </ul>
+                <ul class="right hide-on-med-and-down" ng-controller='globalUserController'>
+                    <li ng-show='currentUser.isAdmin'>
+                        <a href="/admin">
+                            <i class="material-icons left">dashboard</i>Admin</a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="material-icons left">book</i>Blog</a>
+                    </li>
+                    <li ng-hide='currentUser._id'>
+                        <a href="/user/login">
+                            <i class="material-icons left">perm_identity</i>Login</a>
+                    </li>
+                    <li ng-show='currentUser._id'>
+                        <a href="/user/{{currentUser._id}}">
+                            <i class="material-icons left">perm_identity</i>{{currentUser.identity.firstName}}</a>
+                    </li>
+                    <li ng-show='currentUser._id'>
+                        <a href="/messages">
+                            <i class="material-icons left">mail</i>Messagerie</a>
+                    </li>
+                    <li ng-show='currentUser._id'>
+                        <a href="/user/logout">Logout</a>
+                    </li>
+                </ul>
+                <ul id="nav-mobile" class="side-nav" ng-controller='globalUserController'>
+                    <li>
+                        <a href="/">
+                            <i class="material-icons left">home</i>hobbnb</a>
+                    </li>
+                    <li>
+                        <a href="/search">
+                            <i class="material-icons left">search</i>Rechercher</a>
+                    </li>
+                    <li>
+                        <a href="/creation/place">
+                            <i class='material-icons left'>add</i>
+                            Hébergement
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/creation/spot">
+                            <i class='material-icons left'>add</i>
+                            Spot
+                        </a>
+                    </li>
+                        <li ng-show='currentUser.isAdmin'>
+                            <a href="/admin">
+                                <i class="material-icons left">dashboard</i>Admin</a>
+                        </li>
+                    <li>
+                        <a href="">
+                            <i class="material-icons left">book</i>Blog</a>
+                    </li>
+                    <li ng-hide='currentUser._id'>
+                        <a href="/user/login">
+                            <i class="material-icons left">perm_identity</i>Login</a>
+                    </li>
+                    <li ng-show='currentUser._id'>
+                        <a href="/user/{{currentUser._id}}">
+                            <i class="material-icons left">perm_identity</i>{{currentUser.identity.firstName}}</a>
+                    </li>
+                    <li ng-show='currentUser._id'>
+                        <a href="/messages">
+                            <i class="material-icons left">mail</i>Messagerie</a>
+                    </li>
+                    <li ng-show='currentUser._id'>
+                        <a href="/user/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <script type="text/javascript">
+                $(".button-collapse").sideNav();
+            </script>
+        </nav>
     </div>
-  </nav>
 </header>

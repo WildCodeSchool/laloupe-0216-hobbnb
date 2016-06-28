@@ -1,57 +1,92 @@
-<footer>
-	<div class="container">
-		<div class="row">
-			<div class="col s3">
-				<h3><B>Language setting</B></h3>
-				<div class="divider"></div>
-					<select class="browser-default">
-						<option value="english">English</option>
-						<option value="français" selected>Français</option>
-						<option value="deutsch">Deutsch</option>
-						<option value="espagnol">Espagnol</option>
-					</select><br>
-					<select class="browser-default">
-						<option value="€ EUR">€ EUR</option>
-						<option value="$ USD">$ USD</option>
-						<option value="£ GBP">£ GBP</option>
-					</select>
-			</div>
-			<div class="col s3 offset-s1">
-				<h3><B>Découvrez</B></h3>
-				<div class="divider"></div>
-				<a href="#"><font color="white">Comment ça marche</font></a><br>
-				<a href="#"><font color="white">Connections sociales</font></a><br>
-				<a href="#"><font color="white">Pourquoi héberger ?</font></a><br>
-				<a href="#"><font color="white">Politique d'annulation de réservation</font></a>
-			</div>
-			<div class="col s3 offset-s1">
-				<h3><B>Compagnie</B></h3>
-				<div class="divider"></div>
-				<a href="#"><font color="white">Nous contacter</font></a><br>
-				<a href="http://demohobbnb.businesscatalyst.com/faq.html"><font color="white">FAQ</font></a><br>
-				<a href="#"><font color="white">Termes & vie privée</font></a><br>
-				<a href="#"><font color="white">À propos</font></a><br>
-				<a href="#"><font color="white">Presse</font></a>
-			</div>
-		</div>
-		<div class="divider"></div>
-		<h3>Rejoignez nous sur</h3>
-		<div class="row">
-			<div class="col s4 offset-s4">
-				<div class="pcenter">
-					<a href="#/"><img src="../images/icone/facebook-logo.png" onmouseover="javascript:this.src='../images/icone/facebook-logo-n.png';" onmouseout="javascript:this.src='../images/icone/facebook-logo.png';" style="height:38px"></a>
-					<a href="#/"><img src="../images/icone/twitter-logo.png" onmouseover="javascript:this.src='../images/icone/twitter-logo-n.png';" onmouseout="javascript:this.src='../images/icone/twitter-logo.png';" style="height:38px"></a>
-					<a href="#/"><img src="../images/icone/youtube-logo.png" onmouseover="javascript:this.src='../images/icone/youtube-logo-n.png';" onmouseout="javascript:this.src='../images/icone/youtube-logo.png';" style="height:38px"></a>
-					<a href="#/"><img src="../images/icone/instagram-logo.png" onmouseover="javascript:this.src='../images/icone/instagram-logo-n.png';" onmouseout="javascript:this.src='../images/icone/instagram-logo.png';" style="height:38px"></a>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s4 offset-s4">
-				<div class="pcenter">
-					<p style="color:white;">L'aventure commence sur Hobbnb | 2016</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l4 s12">
+                <h5 class="white-text">L'aventure commence sur hobbnb.</h5>
+                <h3>Rejoignez nous sur</h3>
+                <div class="center">
+                    <a ng-href="https://www.facebook.com" target="_blank"><img src="/assets/icone/facebook-logo.png" onmouseover="javascript:this.src='/assets/icone/facebook-logo-n.png';" onmouseout="javascript:this.src='/assets/icone/facebook-logo.png';" style="height:38px"></a>
+                    <a ng-href="https://www.twitter.com" target="_blank"><img src="/assets/icone/twitter-logo.png" onmouseover="javascript:this.src='/assets/icone/twitter-logo-n.png';" onmouseout="javascript:this.src='/assets/icone/twitter-logo.png';" style="height:38px"></a>
+                    <a ng-href="https://www.youtube.com" target="_blank"><img src="/assets/icone/youtube-logo.png" onmouseover="javascript:this.src='/assets/icone/youtube-logo-n.png';" onmouseout="javascript:this.src='/assets/icone/youtube-logo.png';" style="height:38px"></a>
+                    <a ng-href="https://www.instagram.com" target="_blank"><img src="/assets/icone/instagram-logo.png" onmouseover="javascript:this.src='/assets/icone/instagram-logo-n.png';" onmouseout="javascript:this.src='/assets/icone/instagram-logo.png';" style="height:38px"></a>
+                </div>
+            </div>
+            <div class="col l7 offset-l1 s12">
+                <div class="col s5">
+                    <h3>
+                        Découvrez
+                    </h3>
+                    <div class="divider"></div>
+                    <ul>
+                        <li>
+                            <a href="/how-it-work" class="grey-text text-lighten-3">
+                                Comment ça marche
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/social-connections" class="grey-text text-lighten-3">
+                                Connections sociales
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/find-out-more" class="grey-text text-lighten-3">
+                                Pourquoi héberger ?
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/host-cancellation-policy" class="grey-text text-lighten-3">
+                                Politique d'annulation de réservation
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s5 offset-s1">
+                    <h3>
+                        Compagnie
+                    </h3>
+                    <div class="divider"></div>
+                    <ul>
+                        <li>
+                            <a href="/sendEmail" class="grey-text text-lighten-3">
+                                Nous contacter
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/faq" class="grey-text text-lighten-3">
+                                FAQ
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/terms-privacy" class="grey-text text-lighten-3">
+                                Termes &amp; vie privée
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/about" class="grey-text text-lighten-3">
+                                À propos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/press" class="grey-text text-lighten-3">
+                                Presse
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col m6">
+                  <span>© 2016 hobbnb</span>
+            </div>
+            <div class="col m6">
+              <span style="margin-left:150px;">Realisé par les élèves de la Wild Code School <a href="http://www.wildcodeschool.fr" target="_blank"><img src="/assets/icone/logo_fondblanc.svg" alt="" style="height:38px; padding-top:5px;vertical-align: middle;"/></a></span>
+            </div>
+          </div>
+        </div>
+
+    </div>
 </footer>

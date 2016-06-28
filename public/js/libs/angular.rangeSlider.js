@@ -289,7 +289,7 @@
                     // GetterSetters for model values
 
                     function modelMin(newValue) {
-                        if(scope.getterSetter) {
+                        if (scope.getterSetter) {
                             return arguments.length ? scope.modelMin(newValue) : scope.modelMin();
                         } else {
                             return arguments.length ? (scope.modelMin = newValue) : scope.modelMin;
@@ -297,7 +297,7 @@
                     }
 
                     function modelMax(newValue) {
-                        if(scope.getterSetter) {
+                        if (scope.getterSetter) {
                             return arguments.length ? scope.modelMax(newValue) : scope.modelMax();
                         } else {
                             return arguments.length ? (scope.modelMax = newValue) : scope.modelMax;
@@ -308,10 +308,10 @@
                     scope.$watch('min', setMinMax);
                     scope.$watch('max', setMinMax);
 
-                    scope.$watch(function () {
+                    scope.$watch(function() {
                         return modelMin();
                     }, setModelMinMax);
-                    scope.$watch(function () {
+                    scope.$watch(function() {
                         return modelMax();
                     }, setModelMinMax);
 
@@ -422,10 +422,10 @@
                                     modelMaxOptions;
 
                                 // properly parse string and number args
-                                filterOptions = filterOptions.map(function (arg) {
+                                filterOptions = filterOptions.map(function(arg) {
                                     if (isNumber(arg)) {
                                         return +arg;
-                                    } else if ((arg[0] == "\"" && arg[arg.length-1] == "\"") || (arg[0] == "\'" && arg[arg.length-1] == "\'")) {
+                                    } else if ((arg[0] == "\"" && arg[arg.length - 1] == "\"") || (arg[0] == "\'" && arg[arg.length - 1] == "\'")) {
                                         return arg.slice(1, -1);
                                     }
                                 });
@@ -632,9 +632,9 @@
                                 });
                             }
 
-                        }).on(overEvent, function () {
+                        }).on(overEvent, function() {
                             $handle.addClass('ngrs-over');
-                        }).on(outEvent, function () {
+                        }).on(outEvent, function() {
                             if (!down) {
                                 $handle.removeClass('ngrs-over');
                             }

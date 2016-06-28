@@ -1,34 +1,40 @@
-<div ng-controller="searchController">
+<div class="container-fluid">
     <div class="row" id="myMap">
-        <div class="grid-example col m12 l6">
+        <div class="col s6">
             <div class="row">
-                <div class="input-field col s6">
-                    <a class="waves-effect waves-light btn" ng-click="spotOrHome(false)" Id="btnSpot">
-                        <img src="../assets/search/locateSpot.png" alt=""/>
-                        <span class="grey-text text-darken-2">Spots</span>
-                    </a>
+                <div class="input-field col s12 m12 l6">
+                    <input type="radio" name='labelSpot'>
+                    <label for="labelSpot" class="btn white">
+                        <a href="/searchSpot">
+                            <img src="/assets/search/locateSpot.png" style='height:80%'/>
+                            <span class="grey-text text-darken-2">Spots</span>
+                        </a>
+                    </label>
                 </div>
-                <div class="input-field col s6">
-                    <a class="waves-effect waves-light btn" ng-click="spotOrHome(true)" Id="btnHome">
-                        <img src="../assets/search/locateHost.png" alt=""/>
-                        <span class="grey-text text-darken-2">Hebergement</span>
-                    </a>
+                <div class="input-field col s12 m12 l6">
+                    <input type="radio" checked name='labelHost'>
+                    <label for="labelHost" class="btn green accent-2">
+                        <a href="/search">
+                            <img src="/assets/search/locateHost.png" style='height:80%'/>
+                            <span class="grey-text text-darken-2">Hébergements</span>
+                        </a>
+                    </label>
                 </div>
             </div>
             <form>
                 <div class="row">
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m12 l6">
                         <i class="material-icons prefix">search</i>
-                        <input placeholder="Lieu" id="city" type="text" class="validate" ng-model="filters.place" ng-autocomplete>
+                        <input placeholder="Lieu" id="city" type="text" class="validate" ng-change="locationToData()" ng-model="filters.place" ng-autocomplete>
                         <label>Lieu</label>
                     </div>
-                    <div class="input-field col s12 m3">
-                        <select class='' material-select watch ng-model="filters.hobby" ng-change="changeHobby()">
+                    <div class="input-field col s12 m12 l3">
+                        <select class='' material-select watch ng-change="hobbyToData()" ng-model="filters.hobby">
                             <option ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
                         </select>
                         <label>Hobby</label>
                     </div>
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m12 l3">
                         <select ng-model="filters.popularity">
                             <option value="" disabled selected>Popularité</option>
                             <option value="1">+ de 100</option>
@@ -40,66 +46,23 @@
                         <label>Popularité</label>
                     </div>
                 </div>
-                <!-- Formulaire pour spot -->
-                <div class="row" ng-hide="selectHome">
-                    <div class="input-field col s6 m3">
-                        <select ng-model="filters.quality">
-                            <option value="" disabled selected>Quality</option>
-                            <option value="5">5 étoiles</option>
-                            <option value="4">4 étoiles</option>
-                            <option value="3">3 étoiles</option>
-                            <option value="2">2 étoiles</option>
-                            <option value="1">1 étoiles</option>
-                            <option value="0">aucun</option>
-                        </select>
-                        <label>Quality</label>
-                    </div>
-                    <div class="input-field col s6 m3">
-                        <select ng-model="filters.beauty">
-                            <option value="" disabled selected>Beauty</option>
-                            <option value="5">5 étoiles</option>
-                            <option value="4">4 étoiles</option>
-                            <option value="3">3 étoiles</option>
-                            <option value="2">2 étoiles</option>
-                            <option value="1">1 étoiles</option>
-                            <option value="0">aucun</option>
-                        </select>
-                        <label>Beauty</label>
-                    </div>
-                    <div class="input-field col s6 m3">
-                        <select ng-model="filters.facility">
-                            <option value="" disabled selected>Facility</option>
-                            <option value="5">5 étoiles</option>
-                            <option value="4">4 étoiles</option>
-                            <option value="3">3 étoiles</option>
-                            <option value="2">2 étoiles</option>
-                            <option value="1">1 étoiles</option>
-                            <option value="0">aucun</option>
-                        </select>
-                        <label>Facility</label>
-                    </div>
-                    <div class="input-field col s6 m3">
-                        <select ng-model="filters.overallRating">
-                            <option value="" disabled selected>Over all rating</option>
-                            <option value="5">5 étoiles</option>
-                            <option value="4">4 étoiles</option>
-                            <option value="3">3 étoiles</option>
-                            <option value="2">2 étoiles</option>
-                            <option value="1">1 étoiles</option>
-                            <option value="0">aucun</option>
-                        </select>
-                        <label>Over all rating</label>
-                    </div>
-                </div>
                 <!-- Formulaire pour home -->
-                <div class="row" ng-show="selectHome">
-                    <div class="input-field col s6 m3">
+                <div class="row">
+                    <div class="input-field col s12 m12 l3 offset-l1">
                         <select class='' material-select watch ng-model="filters.propertyType">
                             <option ng-repeat="propertyType in propertyTypeListing">{{propertyType}}</option>
                         </select>
                         <label>Hebergement</label>
                     </div>
-                    <div class="input-field col s6 m3">
+                    <div class="input-field col s12 m12 l4 offset-l1 switch">
+                        <label>
+                            Partagé
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            Privé
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 l3">
                         <select ng-model="filters.beds">
                             <option value="1" selected>1 personne</option>
                             <option value="2">2 personnes</option>
@@ -110,102 +73,35 @@
                         </select>
                         <label>Invités</label>
                     </div>
-                    <div class="input-field col s6 m3">
-                        <img src="../assets/search/icoPrivate.png" class="prefix" alt=""/>
-                        <input type="checkbox" ng-model="filters.privatePlace" id="chkPrivate"/>
-                        <label for="chkPrivate">Privée</label>
-                    </div>
-                    <div class="input-field col s6 m3">
-                        <img src="../assets/search/icoShared.png" class="prefix" alt=""/>
-                        <input type="checkbox" ng-model="filters.sharedPlace" id="chkShared"/>
-                        <label for="chkShared">Partagé</label>
-                    </div>
-                </div>
-                <div class="row" ng-show="selectHome">
-                    <div class="input-field col s6 m3">
-                        <label for="arrivalDate">Arrivée</label>
-                        <input
-                            input-date
-                            type="text"
-                            name="arrivalDate"
-                            id="arrivalDate"
-                            ng-model="filters.arrivalDate"
-                            container="body"
-                            format="dd/mm/yyyy"
-                            months-full="{{ month }}"
-                            months-short="{{ monthShort }}"
-                            weekdays-full="{{ weekdaysFull }}"
-                            weekdays-short="{{ weekdaysShort }}"
-                            weekdays-letter="{{ weekdaysLetter }}"
-                            disable="disable"
-                            min="{{ minDate }}"
-                            max="{{ maxDate }}"
-                            today="today"
-                            clear="clear"
-                            close="close"
-                            select-years="15"
-                            on-start="onStart()"
-                            on-render="onRender()"
-                            on-open="onOpen()"
-                            on-close="onClose()"
-                            on-set="onSet()"
-                            on-stop="onStop()"/>
-                    </div>
-                    <div class="input-field col s6 m3">
-                        <label for="departureDate">Départ</label>
-                        <input
-                            input-date
-                            type="text"
-                            name="departureDate"
-                            id="departureDate"
-                            ng-model="filters.departureDate"
-                            container="body"
-                            format="dd/mm/yyyy"
-                            months-full="{{ month }}"
-                            months-short="{{ monthShort }}"
-                            weekdays-full="{{ weekdaysFull }}"
-                            weekdays-short="{{ weekdaysShort }}"
-                            weekdays-letter="{{ weekdaysLetter }}"
-                            disable="disable"
-                            min="{{ minDate }}"
-                            max="{{ maxDate }}"
-                            today="today"
-                            clear="clear"
-                            close="close"
-                            select-years="15"
-                            on-start="onStart()"
-                            on-render="onRender()"
-                            on-open="onOpen()"
-                            on-close="onClose()"
-                            on-set="onSet()"
-                            on-stop="onStop()"/>
-                    </div>
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m12 l6 offset-l1">
                         <div range-slider min="filters.priceRange.min" max="filters.priceRange.max" model-min="filters.minPrice" model-max="filters.maxPrice" show-values="true" filter="currency:'€'" step="10"></div>
                     </div>
-                    <div class="input-field col s12">
+                    <div class="input-field col s12 m12 l3 offset-l2">
                         <a class="waves-effect waves-light btn green accent-2" ng-click="moreFiltrer()">
                             <span class="grey-text text-darken-2">Plus d'options</span>
                         </a>
                     </div>
-                    <div ng-show="developOptions">
-                        <div class="input-field col s6 m3">
+                    <div class="clearfix">
+
+                    </div>
+                    <div ng-show="developOptions" class='row'>
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasKitchen" id="chkKitchen"/>
                             <label for="chkKitchen">Cuisine</label>
                         </div>
-                        <div class="input-field col s6 m3">
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasTV" id="chkTV"/>
                             <label for="chkTV">TV</label>
                         </div>
-                        <div class="input-field col s6 m3">
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasWifi" id="chkWifi"/>
                             <label for="chkWifi">WiFi</label>
                         </div>
-                        <div class="input-field col s6 m3">
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasEssentials" id="chkEssentials"/>
                             <label for="chkEssentials">Essentiel</label>
                         </div>
-                        <div class="input-field col s6 m3">
+                        <div class="input-field col s12 m12 l3">
                             <input type="checkbox" ng-model="filters.hasBbq" id="chkBbq"/>
                             <label for="chkBbq">Barbecue</label>
                         </div>
@@ -214,18 +110,18 @@
                 </div>
             </form>
             <div id="widgets">
-                <div class="col s12 m6" ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice">
-                    <a href="/#/place/{{p._id}}">
+                <div class="col s12 m12 l6" dir-paginate="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice | itemsPerPage: 8">
+                    <a href="/place/{{p._id}}" target="_blank">
                         <div class="card hoverable">
                             <div class="card-image">
-                                <div class="placepict" ng-style="{{pictPlace(p.picture)}}"></div>
+                                <div class="placepict" ng-style="{{pictPlace(p)}}"></div>
                                 <span class="card-title">{{p.home.price|currency:'€'}}</span>
                             </div>
                             <div class="card-content">
                                 <p>
-                                    <img class="actpict" src="{{hobbyIco(p)}}" alt=""/>
+                                    <img class="actpict" src="/{{hobbyIco(p)}}" alt=""/>
 
-                                    <img class="authorpict" src="../assets/places/user-pic.jpg" alt=""/>
+                                    <img class="authorpict" src="/uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}"/>
                                     <div>{{p.name}}</div>
                                     <div>
                                         <i class="tiny material-icons yellow-text text-darken-2">{{calculStars(p.rating)}}</i>
@@ -237,59 +133,58 @@
                         </div>
                     </a>
                 </div>
-
+                <dir-pagination-controls></dir-pagination-controls>
             </div>
         </div>
-
-        <!-- Panneau de droite = carte -->
-        <div class="grid-example col m12 l6">
-            <ng-map default-style="false" center="{{centerMap}}" zoom="8" id="myMap">
-                <marker
-                    ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
-                    position="[{{p.latitude}},{{p.longitude}}]"
-                    title={{p.shortDescription}}
-                    icon="{
-              url:'{{tile}}',
-              scaledSize:[42,45],
-              origin: [0,0],
-              anchor: [21,45]
-              }"
-                    on-click="toggleInfoWindow(event, $index)"
-                    clickable="true"></marker>
-                <info-window id="popup" max-width="200">
-                    <a href="/#/place/{{positions[indexOfTheTruc]._id}}">
-                        <div class="card">
-                            <div class="card-image">
-                                <img class="placepict" src="{{positions[indexOfTheTruc].picture}}">
-                                <span class="card-title">{{positions[indexOfTheTruc].home.price}}€</span>
-                            </div>
-                            <div class="card-content">
-                                <p>
-                                    <div>{{positions[indexOfTheTruc].name}}</div>
-                                    <div>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>0'>star</i>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>1'>star</i>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>2'>star</i>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>3'>star</i>
-                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>4'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>0'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>1'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>2'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>3'>star</i>
-                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>4'>star</i>
-                                        <sup>({{reviewNb}})</sup>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </info-window>
-            </ng-map>
-        </div>
     </div>
+</div>
+<div class="" style='position:fixed; right: 0; top: 70px; height: 100%; width: 50%;'>
+    <ng-map default-style="false" center="current-location || centerMe" geo-fallback-center="Paris" zoom="8" id="myMap" scrollwheel='true' style='height:100%;'>
+        <marker
+            ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
+            position="[{{p.latitude}},{{p.longitude}}]"
+            title={{p.shortDescription}}
+            icon="{
+              url:'{{tile(p.primarySports)}}',
+              scaledSize:[32,32],
+              origin: [0,0],
+              anchor: [16,32]
+              }"
+            on-click="toggleInfoWindow(event, $index)"
+            clickable="true"></marker>
+        <info-window id="popup" max-width="200">
+            <a href="/place/{{positions[indexOfTheTruc]._id}}" target="_blank">
+                <div class="card">
+                    <div class="card-image">
+                        <img class="placepict" src="/uploads/places/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">
+                        <span class="card-title" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{positions[indexOfTheTruc].home.price}}€</span>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            <div>{{positions[indexOfTheTruc].name}}</div>
+                            <div>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>0'>star</i>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>1'>star</i>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>2'>star</i>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>3'>star</i>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>4'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>0'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>1'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>2'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>3'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>4'>star</i>
+                                <sup>({{reviewNb}})</sup>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </info-window>
+    </ng-map>
+</div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('select').material_select();
-        });
-    </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>

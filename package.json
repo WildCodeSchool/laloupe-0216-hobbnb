@@ -10,14 +10,30 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.6",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "formidable": "^1.0.17",
     "fs-extra": "^0.30.0",
+    "jsonwebtoken": "^7.0.0",
     "method-override": "^2.3.5",
     "mmmagic": "^0.4.4",
     "mongoose": "^4.4.12",
     "morgan": "^1.7.0",
-    "quickthumb": "0.0.12"
+    "nodemailer": "^2.4.2",
+    "q": "^1.4.1",
+    "quickthumb": "0.0.12",
+    "s3": "^4.4.0"
+  },
+  "devDependencies": {
+    "serve-static": "",
+    "grunt": "",
+    "grunt-autoprefixer": "",
+    "grunt-concurrent": "",
+    "grunt-connect-proxy": "",
+    "grunt-contrib-connect": "",
+    "grunt-contrib-watch": "",
+    "load-grunt-tasks": "",
+    "time-grunt": ""
   }
 }

@@ -1,0 +1,215 @@
+<div class="row">
+    <div class="col s12">
+        <div style='background-image:url("uploads/spots/{{host._id}}/large/img_{{host.picture}}");' class='bg-fullwidth'></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="row card-panel valign-wrapper">
+                <div class="col s4 m3">
+                    <div class='valign center-align'>
+                        <img src="/uploads/users/{{owner._id}}/large/img_{{owner.picture}}" class='circle responsive-img'/>
+                        <br/>
+                        <b>{{owner.identity.firstName + ' ' + owner.identity.lastName}}</b>
+                        <p>
+                            <span class="center-align grey-text lighten-5" style='font-size:12px;'>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:owner.globalRating'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:owner.globalLowerRating'>star</i>
+                                <br/>{{owner.numReviews}}
+                                reviews</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col s8 m9">
+                    <h4>{{host.name}}</h4>
+                    <h5>{{host.address.country}},
+                        {{host.address.state}}</h5>
+                    <p class='left'>{{host.address.num}} {{host.address.road}} {{host.address.postalCode}} {{host.address.city}}</p>
+                    <div class='row'>
+                        <div class="col s12">
+                            <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
+                            <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
+                            <sup>({{numReviews}})</sup>
+                        </div>
+                    </div>
+                    <div class="row center-align">
+                        <div class="col m4 l2">
+                            <img src="/assets/hobbies/{{host.primarySports}}.png" class='hobby-main' alt=""/><br/>
+                            {{host.primarySports}}
+                        </div>
+                        <div class="col m4 l2" ng-repeat="sport in host.secondarySports">
+                            <img src="/assets/hobbies/{{sport}}.png" class='hobby-small' alt=""/><br/>
+                            {{sport}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row card-panel grey lighten-5">
+                <div class="col s12">
+                    <div class="divider"></div>
+                    <!--rating -->
+                    <div class="row">
+                        <br>
+                        <div class="col s4">
+                            <div class="center-align">
+                                <b>{{numReviews}}
+                                    Avis</b><br/>
+                                <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
+                                <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
+                            </div>
+                        </div>
+                        <div class="col s8">
+                            <div class="row">
+                                <div class="col s4 center">
+                                    <img src="/assets/hobbies/quality.png" class='hobby-main' alt=""/><br/>
+                                    Quality<br/>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.quality)'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.quality))'>star</i>
+                                </div>
+                                <div class="col s4 center">
+                                    <img src="/assets/hobbies/beauty.png" class='hobby-main' alt=""/><br/>
+                                    Beauty<br/>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.beauty)'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.beauty))'>star</i>
+                                </div>
+                                <div class="col s4 center">
+                                    <img src="/assets/hobbies/facility.png" class='hobby-main' alt=""/><br/>
+                                    Accessibility<br/>
+                                    <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.accessibility)'>star</i>
+                                    <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.accessibility))'>star</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <!--comments -->
+                    <div class="row">
+
+                        <div class="col s10 offset-s1" ng-repeat='comment in host.comments'>
+                            <div class="card-panel grey lighten-5 z-depth-1">
+                                <div class="row valign-wrapper">
+                                    <div class="col s2 center">
+                                        <img src="/assets/places/user-pic.jpg" alt="" class="circle responsive-img">
+                                        <br>
+                                        <b>{{comment.owner}}</b>
+                                    </div>
+                                    <div class="col s10">
+                                        <span class="black-text">
+                                            <b>{{comment.title}}</b>
+                                            <br>
+                                            {{comment.comment}}<br>
+                                            <br>{{comment.creation.substring(0,10)}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+<!-- ajouter commentaire -->
+                    <div class="col s12">
+                        <div class="grey lighten-5">
+                            <div class="row" ng-hide='toggleComment'>
+                                <div class="col s12 center">
+                                    <button class='btn green accent-2 waves-effect waves-light' ng-click='toggleComment = true'>Ajouter un commentaire</button>
+                                </div>
+                            </div>
+                            <div class="row valign-wrapper" ng-show='toggleComment'>
+                                <div class="col s2 center">
+                                    <img src="/uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="" class="circle responsive-img">
+                                    <br>
+                                    <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
+                                </div>
+                                <div class="col s10">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="title" type="text" ng-model='newComment.title'>
+                                            <label for="title">Titre</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <textarea id="commentaire" ng-model='newComment.comment' class="materialize-textarea"></textarea>
+                                            <label for="commentaire">Commentaire</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s4">
+                                            <select material-select ng-model='newComment.rating.quality'>
+                                                <option value=''>Qualité</option>
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s4">
+                                            <select material-select ng-model='newComment.rating.beauty'>
+                                                <option value=''>Beauté</option>
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s4">
+                                            <select material-select ng-model='newComment.rating.accessibility'>
+                                                <option value=''>Accessibilité</option>
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s12">
+                                            <p class="center-align">
+                                                <button class="btn green accent-2 waves-effect waves-light" type="button" ng-click='comment()'>Ajouter un commentaire</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--gallery pictures -->
+                    <div class="row">
+                        <div class="col s12 m6 center" ng-repeat="pict in host.caption">
+                            <img materialboxed class="materialboxed responsive-img" src="/uploads/spots/{{host._id}}/{{pict}}" alt=""/>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <!--The map -->
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <b>Alentours</b>
+                            <br>
+                            <ng-map default-style="true" center="[{{host.latitude}},{{host.longitude}}]" zoom="8">
+                                <marker
+                                    position="[{{host.latitude}},{{host.longitude}}]"
+                                    title="{{host.name}}"
+                                    icon="{
+                                      url:'{{'/assets/search/tile' + $scope.host.primarySports + '.png'}}',
+                                      scaledSize:[42,45],
+                                      origin: [0,0],
+                                      anchor: [21,45]
+                                      }"></marker>
+                            </ng-map>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
