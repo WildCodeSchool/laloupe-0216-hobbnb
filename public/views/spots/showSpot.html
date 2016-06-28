@@ -22,6 +22,9 @@
                     </div>
                 </div>
                 <div class="col s8 m9">
+                    <div class="right">
+                        <a facebook class="facebookShare" data-picture='http://hobbnb.herokuapp.com/uploads/places/{{host._id}}/large/img_{{host.picture}}' data-url='http://hobbnb.herokuapp.com/place/{{host._id}}' data-shares='shares'>{{ shares }}</a>
+                    </div>
                     <h4>{{host.name}}</h4>
                     <h5>{{host.address.country}},
                         {{host.address.state}}</h5>
