@@ -1,305 +1,311 @@
 <header style="height:600px">
-	<div class="homecar">
-		<div class="slider" style="position:absolute; z-index:1;">
-		    <ul class="slides">
-			    <li>
-			        <img src="/assets/activities_copyright_free/golf.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/kitesurf.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/biking.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/peche.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/alpinisme.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/diving.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/equitation.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/hiking.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/kayak.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/paragliding.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/ski-freeride.jpg">
-			    </li>
-			    <li>
-			        <img src="/assets/activities_copyright_free/surfing.jpg">
-			    </li>
-		    </ul>
-		</div>
-		<div class="logo">
-			<div class="container">
-				<h1 style="padding-top:50px;font-size: 48px;"><B>Étendez votre aire de jeu</B></h1>
-				<div class=" hide-on-small-only" style="text-align:center;">
-					<img src="/assets/icone/hobbnb-activities-off.svg" height="61px">
-				</div>
-				<div class="row  hide-on-small-only">
-					<div class="col s8 offset-s2" style="text-align:center;">
-						<p style="color:white; font-size: 18px;">Réservez en quelques clics des logements entre particuliers les mieux situés pour pratiquer vos loisirs préférés.</p>
-					</div>
-				</div>
-			</div>
-			<div class="searchbar">
-				<div class="row">
-					<div class="col s12 m3 l2 offset-l2">
-						<select class='' material-select watch ng-model="hobby">
-								<option value="" disable selected>Quel hobby ?</option>
-								<option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
-						</select>
-					</div>
-					<div class="col s12 m3 l2">
-						<select class='' material-select ng-model="selectHome">
-								<option value="" disable selected>Spot ou Hébergement ?</option>
-								<option value="spot">spot</option>
-								<option value="place">Hébergement</option>
-						</select>
-					</div>
-					<div class="col s6 m3 l2">
-						<input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
-					</div>
-					<div class="col s6 m3 l2">
-						<a class="waves-effect waves-light btn green accent-2" style="margin-top:10px;display: block; width: 100%;" ng-click="search()">Chercher</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="homecar">
+        <div class="slider" style="position:absolute; z-index:1;">
+            <ul class="slides">
+                <li>
+                    <img src="/assets/activities_copyright_free/golf.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/kitesurf.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/biking.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/peche.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/alpinisme.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/diving.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/equitation.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/hiking.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/kayak.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/paragliding.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/ski-freeride.jpg">
+                </li>
+                <li>
+                    <img src="/assets/activities_copyright_free/surfing.jpg">
+                </li>
+            </ul>
+        </div>
+        <div class="logo">
+            <div class="container">
+                <h1 style="padding-top:50px;font-size: 48px;">
+                    <B>Étendez votre aire de jeu</B>
+                </h1>
+                <div class=" hide-on-small-only" style="text-align:center;">
+                    <img src="/assets/icone/hobbnb-activities-off.svg" height="61px">
+                </div>
+                <div class="row  hide-on-small-only">
+                    <div class="col s8 offset-s2" style="text-align:center;">
+                        <p style="color:white; font-size: 18px;">Réservez en quelques clics des logements entre particuliers les mieux situés pour pratiquer vos loisirs préférés.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="searchbar">
+                <div class="row">
+                    <div class="col s12 m3 l2 offset-l2">
+                        <select class='' material-select watch ng-model="hobby">
+                            <option value="" disable selected>Quel hobby ?</option>
+                            <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
+                        </select>
+                    </div>
+                    <div class="col s12 m3 l2">
+                        <select class='' material-select ng-model="selectHome">
+                            <option value="" disable selected>Spot ou Hébergement ?</option>
+                            <option value="spot">spot</option>
+                            <option value="place">Hébergement</option>
+                        </select>
+                    </div>
+                    <div class="col s6 m3 l2">
+                        <input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
+                    </div>
+                    <div class="col s6 m3 l2">
+                        <a class="waves-effect waves-light btn green accent-2" style="margin-top:10px;display: block; width: 100%;" ng-click="search()">Chercher</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 <div>
-	<h2>Explorez vos hobby et soyez inspirés</h2>
-	<p>Trouvez votre logement pour les vacances par hobby et rencontrez des hôtes partageant vos passions</p>
-	<div class="activityPanel container hide-on-small-only" ng-hide="hideCtrl">
-		<div class="row">
-			<div class="col m10 offset-m1">
-				<a ng-click="searchSpot('Plongée')">
-					<img src="assets/miniSlide/mindiving-couple.png">
-				</a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col m1 center-align">
-				<a ng-click="toggle()" style="cursor:pointer">
-					<i class="material-icons medium grey-text text-darken-1">add</i>
-				</a>
-			</div>
-			<div class="col m10">
-				<div class="row">
-					<div class="col m4">
-						<a ng-click="searchSpot('Randonnée')">
-							<img src="assets/miniSlide/mincouple.png">
-						</a>
-					</div>
-					<div class="col m4">
-						<a ng-click="searchSpot('Alpinisme')">
-							<img src="assets/miniSlide/minmountains.png">
-						</a>
-					</div>
-					<div class="col m4">
-						<a ng-click="searchSpot('Windsurf')">
-							<img src="assets/miniSlide/minhobbie-cat.png">
-						</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col m8">
-						<a ng-click="searchSpot('Ski')">
-							<img src="assets/miniSlide/minskifamily.png">
-						</a>
-					</div>
-					<div class="col m4">
-						<a ng-click="searchSpot('Parapente')">
-							<img src="assets/miniSlide/minparagliding.png">
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="col m1 center-align">
-				<a ng-click="toggle()" style="cursor:pointer;margin-left:-30px;">
-					<i class="material-icons medium grey-text text-darken-1">add</i>
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="activityPanel container hide-on-small-only" ng-show="hideCtrl">
-		<div class="row">
-			<div class="col m10 offset-m1">
-				<div class="row">
-					<div class="col m8">
-						<a ng-click="searchSpot('Surf')">
-							<img src="assets/miniSlide/minsurf-friends.png">
-						</a>
-					</div>
-					<div class="col m4">
-						<a ng-click="searchSpot('Equitation')">
-							<img src="assets/miniSlide/equitation.jpg">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col m1 center-align">
-				<a ng-click="toggle()" style="cursor:pointer">
-					<i class="material-icons medium grey-text text-darken-1">add</i>
-				</a>
-			</div>
-			<div class="col m10">
-				<div class="row">
-					<div class="col m4">
-						<a ng-click="searchSpot('Golf')">
-							<img src="assets/miniSlide/golf.jpg">
-						</a>
-					</div>
-					<div class="col m4">
-						<a ng-click="searchSpot('Kitesurf')">
-							<img src="assets/miniSlide/kitesurf.jpg">
-						</a>
-					</div>
-					<div class="col m4">
-						<a ng-click="searchSpot('Cyclisme')">
-							<img src="assets/miniSlide/cyclisme.jpg">
-						</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col m12">
-						<a ng-click="searchSpot('VTT')">
-							<img src="assets/miniSlide/minvtt.png">
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="col m1 center-align">
-				<a ng-click="toggle()" style="cursor:pointer;margin-left:-30px;">
-					<i class="material-icons medium grey-text text-darken-1">add</i>
-				</a>
-			</div>
-		</div>
-	</div>
+    <h2>Explorez vos hobby et soyez inspirés</h2>
+    <p>Trouvez votre logement pour les vacances par hobby et rencontrez des hôtes partageant vos passions</p>
+    <div class="activityPanel container hide-on-small-only" ng-hide="hideCtrl">
+        <div class="row">
+            <div class="col m10 offset-m1">
+                <a ng-click="searchSpot('Plongée')">
+                    <img src="assets/miniSlide/mindiving-couple.png">
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m1 center-align">
+                <a ng-click="toggle()" style="cursor:pointer">
+                    <i class="material-icons medium grey-text text-darken-1">add</i>
+                </a>
+            </div>
+            <div class="col m10">
+                <div class="row">
+                    <div class="col m4">
+                        <a ng-click="searchSpot('Randonnée')">
+                            <img src="assets/miniSlide/mincouple.png">
+                        </a>
+                    </div>
+                    <div class="col m4">
+                        <a ng-click="searchSpot('Alpinisme')">
+                            <img src="assets/miniSlide/minmountains.png">
+                        </a>
+                    </div>
+                    <div class="col m4">
+                        <a ng-click="searchSpot('Windsurf')">
+                            <img src="assets/miniSlide/minhobbie-cat.png">
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m8">
+                        <a ng-click="searchSpot('Ski')">
+                            <img src="assets/miniSlide/minskifamily.png">
+                        </a>
+                    </div>
+                    <div class="col m4">
+                        <a ng-click="searchSpot('Parapente')">
+                            <img src="assets/miniSlide/minparagliding.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col m1 center-align">
+                <a ng-click="toggle()" style="cursor:pointer;margin-left:-30px;">
+                    <i class="material-icons medium grey-text text-darken-1">add</i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="activityPanel container hide-on-small-only" ng-show="hideCtrl">
+        <div class="row">
+            <div class="col m10 offset-m1">
+                <div class="row">
+                    <div class="col m8">
+                        <a ng-click="searchSpot('Surf')">
+                            <img src="assets/miniSlide/minsurf-friends.png">
+                        </a>
+                    </div>
+                    <div class="col m4">
+                        <a ng-click="searchSpot('Equitation')">
+                            <img src="assets/miniSlide/equitation.jpg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m1 center-align">
+                <a ng-click="toggle()" style="cursor:pointer">
+                    <i class="material-icons medium grey-text text-darken-1">add</i>
+                </a>
+            </div>
+            <div class="col m10">
+                <div class="row">
+                    <div class="col m4">
+                        <a ng-click="searchSpot('Golf')">
+                            <img src="assets/miniSlide/golf.jpg">
+                        </a>
+                    </div>
+                    <div class="col m4">
+                        <a ng-click="searchSpot('Kitesurf')">
+                            <img src="assets/miniSlide/kitesurf.jpg">
+                        </a>
+                    </div>
+                    <div class="col m4">
+                        <a ng-click="searchSpot('Cyclisme')">
+                            <img src="assets/miniSlide/cyclisme.jpg">
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m12">
+                        <a ng-click="searchSpot('VTT')">
+                            <img src="assets/miniSlide/minvtt.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col m1 center-align">
+                <a ng-click="toggle()" style="cursor:pointer;margin-left:-30px;">
+                    <i class="material-icons medium grey-text text-darken-1">add</i>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 <div class="row container">
-	<div class="col s12 l10 offset-l1">
-		<div class="row">
-			<div class="col s12">
-				<ul class="tabs">
-					<li class="tab col s6"><a href="#" ng-click='show="spots"'>Les spots les plus populaires</a></li>
-					<li class="tab col s6"><a href="#" ng-click='show="places"'>Les hébergements les plus populaires</a></li>
-				</ul>
-			</div>
-			<div ng-show='show=="spots"' class="col s12 m4" ng-repeat="p in pSpots | limitTo:6">
-				<a href="/spot/{{p._id}}" ng-class='$index>1?"hide-on-small-only":""'>
-					<div class="card hoverable small" id="widgets">
-						<div class="card-image">
-							<div class="placepict" ng-style="{{pictSpot(p)}}"></div>
-						</div>
-						<div>
-							<p class="left">
-								<img style="height:32px;width:32px;margin:10px;" src="/{{hobbyIco(p)}}" alt=""/>
-								<span style="font-size:1.5em;">{{p.name}}</span>
-							</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			<div ng-show='show=="places"' class="col s12 m4" ng-repeat="p in pPlaces | limitTo:6">
-				<a href="/place/{{p._id}}" ng-class='$index>1?"hide-on-small-only":""'>
-					<div class="card hoverable small" id="widgets">
-						<div class="card-image">
-							<div class="placepict" ng-style="{{pictPlace(p)}}"></div>
-							<span class="card-title">{{p.home.price|currency:'€'}}</span>
-						</div>
-						<div>
-							<p class="left">
-								<img style="height:32px;width:32px;margin:10px;" src="/{{hobbyIco(p)}}" alt=""/>
-								<span style="font-size:1.5em;">{{p.name}}</span>
-							</p>
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
-	</div>
+    <div class="col s12 l10 offset-l1">
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s6">
+                        <a href="#" ng-click='show="spots"'>Les spots les plus populaires</a>
+                    </li>
+                    <li class="tab col s6">
+                        <a href="#" ng-click='show="places"'>Les hébergements les plus populaires</a>
+                    </li>
+                </ul>
+            </div>
+            <div ng-show='show=="spots"' class="col s12 m4" ng-repeat="p in pSpots | limitTo:6">
+                <a href="/spot/{{p._id}}" ng-class='$index>1?"hide-on-small-only":""'>
+                    <div class="card hoverable small" id="widgets">
+                        <div class="card-image">
+                            <div class="placepict" ng-style="{{pictSpot(p)}}"></div>
+                        </div>
+                        <div>
+                            <p class="left">
+                                <img style="height:32px;width:32px;margin:10px;" src="/{{hobbyIco(p)}}" alt=""/>
+                                <span style="font-size:1.5em;">{{p.name}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div ng-show='show=="places"' class="col s12 m4" ng-repeat="p in pPlaces | limitTo:6">
+                <a href="/place/{{p._id}}" ng-class='$index>1?"hide-on-small-only":""'>
+                    <div class="card hoverable small" id="widgets">
+                        <div class="card-image">
+                            <div class="placepict" ng-style="{{pictPlace(p)}}"></div>
+                            <span class="card-title">{{p.home.price|currency:'€'}}</span>
+                        </div>
+                        <div>
+                            <p class="left">
+                                <img style="height:32px;width:32px;margin:10px;" src="/{{hobbyIco(p)}}" alt=""/>
+                                <span style="font-size:1.5em;">{{p.name}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 <h2 class="hide-on-small-only">Louer par hobby change la donne</h2>
 <div class="container hide-on-small-only">
-	<div class="rentic">
-		<div class="row">
-			<div class="col s4">
-				<img src="/assets/carte.png" />
-				<p style="font-size:22px"><B>Logez au coeur de l'action</p>
-			</div>
-			<div class="col s4">
-				<img src="/assets/friends.svg" style="height:88px; margin-top:45px" />
-				<p style="font-size:22px">Recevez des conseils de votre hôte</p>
-			</div>
-			<div class="col s4">
-				<img src="/assets/cochon.png" style="margin-top:25px" />
-				<p style="font-size:22px">Faites vous de l'argent grâce à vos hobbys</B></p>
-			</div>
-		</div>
-	</div>
+    <div class="rentic">
+        <div class="row">
+            <div class="col s4">
+                <img src="/assets/carte.png"/>
+                <p style="font-size:22px">
+                    <B>Logez au coeur de l'action</p>
+                </div>
+                <div class="col s4">
+                    <img src="/assets/friends.svg" style="height:88px; margin-top:45px"/>
+                    <p style="font-size:22px">Recevez des conseils de votre hôte</p>
+                </div>
+                <div class="col s4">
+                    <img src="/assets/cochon.png" style="margin-top:25px"/>
+                    <p style="font-size:22px">Faites vous de l'argent grâce à vos hobbys</B>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <img class="responsive-img" src="/assets/activities_copyright_free/riding-beach.jpg"/>
 
 <div class="think">
-	<h2>Qu'en pensent-t-ils ?</h2>
-	<div class="container">
-		<div class="valign wrapper">
-			<div class="row">
-				<div class="col s12 m4">
-					<div class="pcenter">
-						<img src="{{message.photo1}}" class="circle"/>
-					</div>
-					<h2 class="valign">"{{message.title1}}"</h2><br>
-					<p class="valign">{{message.comment1}}</p>
-				</div>
-				<div class="col s12 m4">
-					<div class="pcenter">
-						<img src="{{message.photo2}}" class="circle"/>
-					</div>
-					<h2 class="valign">"{{message.title2}}"</h2><br>
-					<p class="valign">{{message.comment2}}</p>
-				</div>
-				<div class="col s12 m4">
-					<div class="pcenter">
-						<img src="{{message.photo3}}" class="circle"/>
-					</div>
-					<h2 class="valign">"{{message.title3}}"</h2><br>
-					<p class="valign">{{message.comment3}}</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s6 offset-s6">
-				<p>L'aventure commence ici !</p>
-			</div>
-		</div>
-	</div>
+    <h2>Qu'en pensent-t-ils ?</h2>
+    <div class="container">
+        <div class="valign wrapper">
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="pcenter">
+                        <img src="{{message.photo1}}" class="circle"/>
+                    </div>
+                    <h2 class="valign">"{{message.title1}}"</h2><br>
+                    <p class="valign">{{message.comment1}}</p>
+                </div>
+                <div class="col s12 m4">
+                    <div class="pcenter">
+                        <img src="{{message.photo2}}" class="circle"/>
+                    </div>
+                    <h2 class="valign">"{{message.title2}}"</h2><br>
+                    <p class="valign">{{message.comment2}}</p>
+                </div>
+                <div class="col s12 m4">
+                    <div class="pcenter">
+                        <img src="{{message.photo3}}" class="circle"/>
+                    </div>
+                    <h2 class="valign">"{{message.title3}}"</h2><br>
+                    <p class="valign">{{message.comment3}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6 offset-s6">
+                <p>L'aventure commence ici !</p>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
-	$(document).ready(function(){
-		$('.slider').slider({full_width: true,height: 600,indicators: false});
-		$('.tooltipped').tooltip({delay: 50});
-		$(".button-collapse").sideNav();
-		$(".dropdown-button").dropdown();
-		$('ul.tabs').tabs();
-	});
+    $(document).ready(function() {
+        $('.slider').slider({full_width: true, height: 600, indicators: false});
+        $('.tooltipped').tooltip({delay: 50});
+        $(".button-collapse").sideNav();
+        $(".dropdown-button").dropdown();
+        $('ul.tabs').tabs();
+    });
 </script>
