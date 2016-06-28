@@ -1,3 +1,6 @@
+html{
+    background-color: #f2f4f3;
+}
 .main {
     min-height: 75vh;
 }
@@ -67,9 +70,6 @@ p {
 .activityPanel img {
     width: 100%;
 }
-.buttonPanel {
-    margin-top: 380px;
-}
 .raz {
     clear: both;
     height: 0;
@@ -96,6 +96,7 @@ p {
 }
 .logo {
     position: relative;
+    height : 600px;
     z-index: 2;
     color: #ffffff;
 }
@@ -124,7 +125,13 @@ p {
 }
 .searchbar {
     background-color: rgba(0, 0, 0, 0.5);
-    margin-top: 82px;
+    position : absolute;
+    bottom : 0;
+    width: 100%;
+}
+.tabs .tab a{
+    color:#7F7F7F;
+    background-color: #F2F4F3;
 }
 .modal {
     width: 40%;
