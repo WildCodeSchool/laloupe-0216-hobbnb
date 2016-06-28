@@ -23,7 +23,7 @@ exports.user = {
         if (req.headers.authorization) {
             jwt.verify(req.headers.authorization, secretToken, function(err, decoded) {
                 if (err) return res.sendStatus(401);
-                if (decoded._doc && req.params.id && decoded._doc._id == req.params.id && decoded._doc.isValidate) {
+                if (decoded._doc && ((req.params.id && decoded._doc._id == req.params.id && decoded._doc.isValidate) || decoded._doc.isAdmin)) {
                     next();
                 } else {
                     return res.sendStatus(401);

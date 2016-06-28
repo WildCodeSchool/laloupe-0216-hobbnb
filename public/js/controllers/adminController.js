@@ -1,4 +1,4 @@
-angular.module('app').controller('adminController', function($scope, $http) {
+angular.module('app').controller('adminController', function($scope, $http, placesService, spotsService, messagingService) {
     var creation = false;
     $scope.message = {};
     $http.get('/admin').then(function(res) {
@@ -39,4 +39,13 @@ angular.module('app').controller('adminController', function($scope, $http) {
             })
         }
     };
+    placesService.get().then(function(res) {
+        $scope.places = res.data;
+    })
+    spotsService.get().then(function(res) {
+        $scope.spots = res.data;
+    })
+    messagingService.get().then(function(res) {
+        $scope.messages = res.data;
+    })
 });

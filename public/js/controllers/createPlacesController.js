@@ -32,7 +32,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     if ($routeParams.id) {
         $scope.isAction = 'modification';
         placesService.getOne($routeParams.id).then(function(res) {
-            if (res.data.owner != $scope.currentUser._id) $location.path('/');
+            if (res.data.owner != $scope.currentUser._id || !$scope.currentUser.isAdmin) $location.path('/');
             $scope.obj = res.data;
             $scope.obj.modification = new Date();
         })

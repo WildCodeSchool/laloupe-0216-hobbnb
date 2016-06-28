@@ -40,7 +40,7 @@ angular.module('app').controller('createSpotsController', function($scope, $http
     if ($routeParams.id) {
         $scope.isAction = 'modification';
         spotsService.getOne($routeParams.id).then(function(res) {
-            if (res.data.owner != $scope.currentUser._id) $location.path('/');
+            if (res.data.owner != $scope.currentUser._id || !$scope.currentUser.isAdmin) $location.path('/');
             $scope.obj = res.data;
             $scope.obj.modification = new Date();
         })
