@@ -9,7 +9,7 @@
             <div class="row card-panel valign-wrapper">
                 <div class="col s4 m3">
                     <div class='valign center-align'>
-                        <img src="uploads/users/{{owner._id}}/large/img_{{owner.picture}}" class='circle responsive-img'/>
+                        <img src="/uploads/users/{{owner._id}}/large/img_{{owner.picture}}" class='circle responsive-img'/>
                         <br/>
                         <b>{{owner.identity.firstName + ' ' + owner.identity.lastName}}</b>
                         <p>
@@ -35,11 +35,11 @@
                     </div>
                     <div class="row center-align">
                         <div class="col m4 l2">
-                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-main' alt=""/><br/>
+                            <img src="/assets/hobbies/{{host.primarySports}}.png" class='hobby-main' alt=""/><br/>
                             {{host.primarySports}}
                         </div>
                         <div class="col m4 l2" ng-repeat="sport in host.secondarySports">
-                            <img src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt=""/><br/>
+                            <img src="/assets/hobbies/{{sport}}.png" class='hobby-small' alt=""/><br/>
                             {{sport}}
                         </div>
                     </div>
@@ -62,19 +62,19 @@
                         <div class="col s8">
                             <div class="row">
                                 <div class="col s4 center">
-                                    <img src="../assets/hobbies/quality.png" class='hobby-main' alt=""/><br/>
+                                    <img src="/assets/hobbies/quality.png" class='hobby-main' alt=""/><br/>
                                     Quality<br/>
                                     <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.quality)'>star</i>
                                     <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.quality))'>star</i>
                                 </div>
                                 <div class="col s4 center">
-                                    <img src="../assets/hobbies/beauty.png" class='hobby-main' alt=""/><br/>
+                                    <img src="/assets/hobbies/beauty.png" class='hobby-main' alt=""/><br/>
                                     Beauty<br/>
                                     <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.beauty)'>star</i>
                                     <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.beauty))'>star</i>
                                 </div>
                                 <div class="col s4 center">
-                                    <img src="../assets/hobbies/facility.png" class='hobby-main' alt=""/><br/>
+                                    <img src="/assets/hobbies/facility.png" class='hobby-main' alt=""/><br/>
                                     Accessibility<br/>
                                     <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.accessibility)'>star</i>
                                     <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.accessibility))'>star</i>
@@ -90,7 +90,7 @@
                             <div class="card-panel grey lighten-5 z-depth-1">
                                 <div class="row valign-wrapper">
                                     <div class="col s2 center">
-                                        <img src="assets/places/user-pic.jpg" alt="" class="circle responsive-img">
+                                        <img src="/assets/places/user-pic.jpg" alt="" class="circle responsive-img">
                                         <br>
                                         <b>{{comment.owner}}</b>
                                     </div>
@@ -118,7 +118,7 @@
                             </div>
                             <div class="row valign-wrapper" ng-show='toggleComment'>
                                 <div class="col s2 center">
-                                    <img src="uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="" class="circle responsive-img">
+                                    <img src="/uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="" class="circle responsive-img">
                                     <br>
                                     <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
                                 </div>
@@ -185,7 +185,7 @@
                     <!--gallery pictures -->
                     <div class="row">
                         <div class="col s12 m6 center" ng-repeat="pict in host.caption">
-                            <img materialboxed class="materialboxed responsive-img" src="uploads/spots/{{host._id}}/{{pict}}" alt=""/>
+                            <img materialboxed class="materialboxed responsive-img" src="/uploads/spots/{{host._id}}/{{pict}}" alt=""/>
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -199,7 +199,7 @@
                                     position="[{{host.latitude}},{{host.longitude}}]"
                                     title="{{host.name}}"
                                     icon="{
-                                      url:'{{'assets/search/tile' + $scope.host.primarySports + '.png'}}',
+                                      url:'{{'/assets/search/tile' + $scope.host.primarySports + '.png'}}',
                                       scaledSize:[42,45],
                                       origin: [0,0],
                                       anchor: [21,45]

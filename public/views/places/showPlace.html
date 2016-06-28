@@ -9,7 +9,7 @@
             <div class="row card-panel valign-wrapper">
                 <div class="col s4 m3">
                     <div class='valign center-align'>
-                        <img src="uploads/users/{{owner._id}}/large/img_{{owner.picture}}" alt="Tom" class='circle responsive-img'/>
+                        <img src="/uploads/users/{{owner._id}}/large/img_{{owner.picture}}" alt="Tom" class='circle responsive-img'/>
                         <br/>
                         <b>{{owner.identity.firstName + ' ' + owner.identity.lastName}}</b>
                         <p>
@@ -37,7 +37,7 @@
                             &nbsp;
                         </div>
                         <div class="col m4 l2">
-                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt=""/><br/>
+                            <img src="/assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt=""/><br/>
                             <span class="textIcon">{{host.primarySports}}</span>
                         </div>
                         <div class="col m4 l2">
@@ -103,16 +103,16 @@
                         </div>
                         <div class="col m8 l5">
                             <b class="center">Parfait pour</b><br/>
-                            <img src="./assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt=""/>
+                            <img src="/assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt=""/>
                             {{host.primarySports}}<br/>
-                            <a href="#/search">Montrer les spots à proximité</a>
+                            <a href="/search">Montrer les spots à proximité</a>
 
                         </div>
                         <div class="col m8 l5">
                             <b class="center">Aussi pour</b><br/>
-                            <img src="./assets/hobbies/{{host.secondarySports[0]}}.png" class='hobby-small' alt=""/>
+                            <img src="/assets/hobbies/{{host.secondarySports[0]}}.png" class='hobby-small' alt=""/>
                             {{host.secondarySports[0]}}<br/><br/>
-                            <img src="./assets/hobbies/{{host.secondarySports[1]}}.png" class='hobby-small' alt=""/>
+                            <img src="/assets/hobbies/{{host.secondarySports[1]}}.png" class='hobby-small' alt=""/>
                             {{host.secondarySports[1]}}
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                     </div>
                     <div class="row">
                         <div class="col s6" ng-repeat='cap in host.caption'>
-                            <img materialboxed class="materialboxed responsive-img" src="uploads/places/{{host._id}}/large/img_{{cap}}">
+                            <img materialboxed class="materialboxed responsive-img" src="/uploads/places/{{host._id}}/large/img_{{cap}}">
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -227,7 +227,7 @@
                             <div class="card-panel grey lighten-5 z-depth-1">
                                 <div class="row valign-wrapper">
                                     <div class="col s2 center">
-                                        <img src="uploads/users/{{comment.owner._id}}/large/img_{{comment.owner.picture}}" alt="" class="circle responsive-img">
+                                        <img src="/uploads/users/{{comment.owner._id}}/large/img_{{comment.owner.picture}}" alt="" class="circle responsive-img">
                                         <br>
                                         <b>{{comment.owner.identity.firstName + ' ' + comment.owner.identity.lastName}}</b>
                                     </div>
@@ -250,7 +250,7 @@
                                 </div>
                                 <div class="row valign-wrapper" ng-show='toggleComment'>
                                     <div class="col s2 center">
-                                        <img src="uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="" class="circle responsive-img">
+                                        <img src="/uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="" class="circle responsive-img">
                                         <br>
                                         <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
                                     </div>
@@ -389,7 +389,7 @@
                         <div style="display: none">
                             <input ng-model='newMsg.recipient' type='text' id='recipient'>
                         </div>
-                        <ng-include src="'views/messaging/message.html'"></ng-include>
+                        <ng-include src="'/views/messaging/message.html'"></ng-include>
                     </div>
                 </div>
             </div>

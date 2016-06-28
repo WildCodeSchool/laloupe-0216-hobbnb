@@ -19,7 +19,7 @@ module.exports = function(app) {
             s3Options: require('../../config/s3.js').s3Options,
         });;
 
-    app.post('/picture', function(req, res) {
+    app.post('/api/picture', function(req, res) {
         var deleteFolderRecursive = function(path) {
             if (fs.existsSync(path)) {
                 fs.readdirSync(path).forEach(function(file, index) {

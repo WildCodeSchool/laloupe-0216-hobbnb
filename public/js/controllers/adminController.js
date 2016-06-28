@@ -1,7 +1,7 @@
 angular.module('app').controller('adminController', function($scope, $http, placesService, spotsService, messagingService) {
     var creation = false;
     $scope.message = {};
-    $http.get('/admin').then(function(res) {
+    $http.get('/api/admin').then(function(res) {
         if (res.data.length == 0) {
             creation = true;
         } else {
@@ -10,7 +10,7 @@ angular.module('app').controller('adminController', function($scope, $http, plac
     });
     $scope.send = function() {
         if (creation == true) {
-            $http.post('/admin', {
+            $http.post('/api/admin', {
                 content: {
                     comment1: $scope.message.comment1,
                     comment2: $scope.message.comment2,
@@ -24,7 +24,7 @@ angular.module('app').controller('adminController', function($scope, $http, plac
                 }
             })
         } else {
-            $http.put('/admin/' + $scope.message._id, {
+            $http.put('/api/admin/' + $scope.message._id, {
                 content: {
                     comment1: $scope.message.comment1,
                     comment2: $scope.message.comment2,

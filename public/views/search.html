@@ -5,8 +5,8 @@
                 <div class="input-field col s12 m12 l6">
                     <input type="radio" name='labelSpot'>
                     <label for="labelSpot" class="btn white">
-                        <a href="#/searchSpot">
-                            <img src="../assets/search/locateSpot.png" style='height:80%'/>
+                        <a href="/searchSpot">
+                            <img src="/assets/search/locateSpot.png" style='height:80%'/>
                             <span class="grey-text text-darken-2">Spots</span>
                         </a>
                     </label>
@@ -14,8 +14,8 @@
                 <div class="input-field col s12 m12 l6">
                     <input type="radio" checked name='labelHost'>
                     <label for="labelHost" class="btn green accent-2">
-                        <a href="#/search">
-                            <img src="../assets/search/locateHost.png" style='height:80%'/>
+                        <a href="/search">
+                            <img src="/assets/search/locateHost.png" style='height:80%'/>
                             <span class="grey-text text-darken-2">Hébergements</span>
                         </a>
                     </label>
@@ -111,7 +111,7 @@
             </form>
             <div id="widgets">
                 <div class="col s12 m12 l6" dir-paginate="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice | itemsPerPage: 8">
-                    <a href="/#/place/{{p._id}}" target="_blank">
+                    <a href="/place/{{p._id}}" target="_blank">
                         <div class="card hoverable">
                             <div class="card-image">
                                 <div class="placepict" ng-style="{{pictPlace(p)}}"></div>
@@ -119,9 +119,9 @@
                             </div>
                             <div class="card-content">
                                 <p>
-                                    <img class="actpict" src="{{hobbyIco(p)}}" alt=""/>
+                                    <img class="actpict" src="/{{hobbyIco(p)}}" alt=""/>
 
-                                    <img class="authorpict" src="uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}"/>
+                                    <img class="authorpict" src="/uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}"/>
                                     <div>{{p.name}}</div>
                                     <div>
                                         <i class="tiny material-icons yellow-text text-darken-2">{{calculStars(p.rating)}}</i>
@@ -153,10 +153,10 @@
             on-click="toggleInfoWindow(event, $index)"
             clickable="true"></marker>
         <info-window id="popup" max-width="200">
-            <a href="/#/place/{{positions[indexOfTheTruc]._id}}" target="_blank">
+            <a href="/place/{{positions[indexOfTheTruc]._id}}" target="_blank">
                 <div class="card">
                     <div class="card-image">
-                        <img class="placepict" src="uploads/places/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">
+                        <img class="placepict" src="/uploads/places/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">
                         <span class="card-title" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{positions[indexOfTheTruc].home.price}}€</span>
                     </div>
                     <div class="card-content">

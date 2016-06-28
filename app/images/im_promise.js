@@ -10,7 +10,7 @@ module.exports = function(app) {
         jwt = require('jsonwebtoken'),
         secretToken = require('../../config/secretToken.js');
 
-    app.post('/picture', function(req, res) {
+    app.post('/api/picture', function(req, res) {
         var deleteFolderRecursive = function(path) {
             if (fs.existsSync(path)) {
                 fs.readdirSync(path).forEach(function(file, index) {

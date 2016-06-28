@@ -406,7 +406,7 @@
             <div class="row card-panel valign-wrapper">
                 <div class="col s4 m3">
                     <div class='valign center-align'>
-                        <img src="uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="Tom" class='circle responsive-img'/>
+                        <img src="/uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="Tom" class='circle responsive-img'/>
                         <br/>
                         <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
                     </div>
@@ -420,7 +420,7 @@
                             &nbsp;
                         </div>
                         <div class="col m4 l2">
-                            <img src="./assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt=""/><br/>
+                            <img src="/assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt=""/><br/>
                             {{obj.primarySports}}
                         </div>
                         <div class="col m4 l2">
@@ -489,16 +489,16 @@
                         </div>
                         <div class="col m8 l5">
                             <b class="center">Parfait pour</b><br/>
-                            <img src="./assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt=""/>
+                            <img src="/assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt=""/>
                             {{obj.primarySports}}<br/>
-                            <a href="#/search">Montrer les spots à proximité</a>
+                            <a href="/search">Montrer les spots à proximité</a>
 
                         </div>
                         <div class="col m8 l5">
                             <b class="center">Aussi pour</b><br/>
-                            <img src="assets/hobbies/{{obj.secondarySports[0]}}.png" class='hobby-small' alt=""/>
+                            <img src="/assets/hobbies/{{obj.secondarySports[0]}}.png" class='hobby-small' alt=""/>
                             {{obj.secondarySports[0]}}<br/><br/>
-                            <img src="assets/hobbies/{{obj.secondarySports[1]}}.png" class='hobby-small' alt=""/>
+                            <img src="/assets/hobbies/{{obj.secondarySports[1]}}.png" class='hobby-small' alt=""/>
                             {{obj.secondarySports[1]}}
                         </div>
                     </div>

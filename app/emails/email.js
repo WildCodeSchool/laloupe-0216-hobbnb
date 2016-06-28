@@ -38,7 +38,7 @@ module.exports = function(app) {
         });
     }
 
-    app.post('/sendEmail', function(req, res) {
+    app.post('/api/sendEmail', function(req, res) {
 
         var htmlContent =
             header +
@@ -64,7 +64,7 @@ module.exports = function(app) {
 
     });
 
-    app.post('/sendToAdmin', function(req, res) {
+    app.post('/api/sendToAdmin', function(req, res) {
 
         var htmlContent =
             header +

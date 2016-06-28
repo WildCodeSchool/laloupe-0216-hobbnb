@@ -38,7 +38,7 @@ angular.module('app').controller('mainController', function($scope, $location, $
     };
 // dispay testimonials
     $scope.message = {};
-    $http.get('/admin').then(function(res) {
+    $http.get('/api/admin').then(function(res) {
         if (res.data.length == 0) {
             $scope.message.title1="En attente de témoignage";
             $scope.message.title2="En attente de témoignage";

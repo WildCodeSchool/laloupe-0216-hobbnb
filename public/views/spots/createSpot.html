@@ -96,7 +96,7 @@
             <div class="row card-panel valign-wrapper">
                 <div class="col s4 m3">
                     <div class='valign center-align'>
-                        <img src="uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="Tom" class='circle responsive-img' />
+                        <img src="/uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="Tom" class='circle responsive-img' />
                         <br/>
                         <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
                     </div>
@@ -111,11 +111,11 @@
                             &nbsp;
                         </div>
                         <div class="col m4 l2">
-                            <img src="./assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt="" />
+                            <img src="/assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt="" />
                             <br/> {{obj.primarySports}}
                         </div>
                         <div class="col m4 l2" ng-repeat="sport in obj.secondarySports">
-                            <img src="./assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
+                            <img src="/assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
                             <br/> {{sport}}
                         </div>
                     </div>

@@ -5,22 +5,24 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-        <link rel="icon" type="image/png" href="./assets/logo.ico"/>
+        <link rel="icon" type="image/png" href="/assets/logo.ico"/>
 
         <title>Hobbnb</title>
         <meta name="description" content="">
 
-        <link rel="stylesheet" href="css/material-icons.min.css">
-        <link rel="stylesheet" href="css/materialize.min.css">
-        <link rel="stylesheet" href="css/angular.rangeSlider.min.css">
-        <link rel="stylesheet" href="css/style.min.css">
+        <base href="/">
+
+        <link rel="stylesheet" href="/css/material-icons.min.css">
+        <link rel="stylesheet" href="/css/materialize.min.css">
+        <link rel="stylesheet" href="/css/angular.rangeSlider.min.css">
+        <link rel="stylesheet" href="/css/style.min.css">
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
 
     </head>
     <body>
 
         <div class='ng-cloak loader'>
-            <h1><img src='assets/logo.png' style='max-width:25vw;'/></h1>
+            <h1><img src='/assets/logo.png' style='max-width:25vw;'/></h1>
             <div class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue">
                     <div class="circle-clipper left">
@@ -34,41 +36,39 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <img src="assets/loading.gif" alt="" /> -->
         </div>
 
         <div class='ng-cloak'>
-            <ng-include src="'views/static/navbar.html'"></ng-include>
+            <ng-include src="'/views/static/navbar.html'"></ng-include>
             <div class="main">
                 <ng-view autoscroll></ng-view>
             </div>
-            <ng-include src="'views/static/footer.html'"></ng-include>
+            <ng-include src="'/views/static/footer.html'"></ng-include>
         </div>
 
         <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAamy-iuBFyQu-qNuihVdTQDCPyaqzrUac&amp;libraries=geometry,places"></script>
 
-        <script src="js/libs/jquery.min.js"></script>
-        <script src="js/libs/materialize.min.js"></script>
+        <script src="/js/libs/jquery.min.js"></script>
+        <script src="/js/libs/materialize.min.js"></script>
 
-        <script src="js/libs/angular.min.js"></script>
-        <script src="js/libs/angular-route.min.js"></script>
+        <script src="/js/libs/angular.min.js"></script>
+        <script src="/js/libs/angular-route.min.js"></script>
 
-        <script src="js/libs/angular-materialize.js"></script>
-        <script src="js/libs/angular-animate.js"></script>
-        <script src="js/libs/ng-map.min.js"></script>
-        <script src="js/libs/angular.rangeSlider.js"></script>
-        <script src="js/libs/angular-locale_fr-fr.js"></script>
-        <script src="js/libs/ngAutocomplete.js"></script>
-        <script src="js/libs/angular-sanitize.min.js"></script>
-        <script src="js/directives/paginationDirective.js"></script>
+        <script src="/js/libs/angular-materialize.js"></script>
+        <script src="/js/libs/angular-animate.js"></script>
+        <script src="/js/libs/ng-map.min.js"></script>
+        <script src="/js/libs/angular.rangeSlider.js"></script>
+        <script src="/js/libs/angular-locale_fr-fr.js"></script>
+        <script src="/js/libs/ngAutocomplete.js"></script>
+        <script src="/js/libs/angular-sanitize.min.js"></script>
+        <script src="/js/directives/paginationDirective.js"></script>
 
-        <script src="js/libs/ocLazyLoad.min.js"></script>
+        <script src="/js/libs/ocLazyLoad.min.js"></script>
 
-        <script src="js/controllers/globalUserController.js"></script>
+        <script src="/js/controllers/globalUserController.js"></script>
 
-        <script src="js/routes.js"></script>
-        <script src="js/app.js"></script>
+        <script src="/js/routes.js"></script>
+        <script src="/js/app.js"></script>
 
     </body>
 </html>
