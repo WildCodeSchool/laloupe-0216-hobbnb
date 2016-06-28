@@ -3,5 +3,5 @@ angular.module('app', ['oc.lazyLoad', 'ngSanitize', 'ngMap', 'ngAnimate', 'ui-ra
     .config(routes)
     .run(function($rootScope, $FB) {
         $FB.init('YOUR_APPID');
-        $rootScope.ADMIN_EMAIL = 'contact@jbpasquier.eu';
+        $rootScope.ADMIN_EMAIL = 'hobbnbadmin@hobbnb.com';
     });
