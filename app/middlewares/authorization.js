@@ -6,7 +6,6 @@ exports.user = {
     hasAuthorization: function(req, res, next) {
         if (req.headers.authorization) {
             jwt.verify(req.headers.authorization, secretToken, function(err, decoded) {
-                console.log(decoded);
                 if (err) return res.sendStatus(401);
                 if (decoded._doc && decoded._doc.isValidate) {
                     next();

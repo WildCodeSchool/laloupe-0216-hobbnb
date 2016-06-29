@@ -1,7 +1,8 @@
 module.exports = function(app) {
     'use strict';
     var nodemailer = require('nodemailer'),
-        userInfos = require('../../config/mail.js');
+        userInfos = require('../../config/mail.js'),
+        social = require('../../config/social.js');
 
     var transport = nodemailer.createTransport({
         service: 'gmail',
@@ -25,10 +26,10 @@ module.exports = function(app) {
     '</table>' +
     '<table style="width:70%; margin-left: 15%;text-align:center;">' +
     '<tr style="padding-top:5px;">' +
-    '<td><a href="https://www.facebook.com/"><img src="https://lh5.googleusercontent.com/-x-Hmsu_OW5Q/V1XXAqCuWrI/AAAAAAAAAZc/0VFBChKUDNk1jmcXAdQwUsG_Srlk89xPACL0B/s44-no/facebook.png"/></a></td>' +
-    '<td><a href="https://www.youtube.com/"><img src="https://lh4.googleusercontent.com/-JgyrqdMsgRw/V1XXAus8PdI/AAAAAAAAAZY/Wi9LtQ8alwQKj_ap6QLfyJ-zhVW9M6GgQCL0B/s50-no/ico-youtube-v.gif"/></a></td>' +
-    '<td><a href="https://twitter.com/?lang=fr"><img src="https://lh4.googleusercontent.com/-gspJsJCP6uw/V1XXAcXxw5I/AAAAAAAAAZU/MZ4sWbN-cPcRH0kmluTrw5LPaG51FLgKACL0B/s50-no/Twitterl1.png"/></a></td>' +
-    '<td><a href="https://www.instagram.com/"><img src="https://lh6.googleusercontent.com/-CgQX1L3tp7Y/V1XXA8h1qGI/AAAAAAAAAZk/eOY1JAdEYVYekmKEtBamWYYNPu-xgJ6lgCL0B/s50-no/instagram.jpg"/></a></td>' +
+    '<td><a href="'+social.facebook+'"><img src="https://lh5.googleusercontent.com/-x-Hmsu_OW5Q/V1XXAqCuWrI/AAAAAAAAAZc/0VFBChKUDNk1jmcXAdQwUsG_Srlk89xPACL0B/s44-no/facebook.png"/></a></td>' +
+    '<td><a href="'+social.youtube+'"><img src="https://lh4.googleusercontent.com/-JgyrqdMsgRw/V1XXAus8PdI/AAAAAAAAAZY/Wi9LtQ8alwQKj_ap6QLfyJ-zhVW9M6GgQCL0B/s50-no/ico-youtube-v.gif"/></a></td>' +
+    '<td><a href="'+social.twitter+'"><img src="https://lh4.googleusercontent.com/-gspJsJCP6uw/V1XXAcXxw5I/AAAAAAAAAZU/MZ4sWbN-cPcRH0kmluTrw5LPaG51FLgKACL0B/s50-no/Twitterl1.png"/></a></td>' +
+    '<td><a href="'+social.instagram+'"><img src="https://lh6.googleusercontent.com/-CgQX1L3tp7Y/V1XXA8h1qGI/AAAAAAAAAZk/eOY1JAdEYVYekmKEtBamWYYNPu-xgJ6lgCL0B/s50-no/instagram.jpg"/></a></td>' +
     '</tr>' +
     '</table>';
 
