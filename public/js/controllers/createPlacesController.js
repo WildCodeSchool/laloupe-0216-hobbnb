@@ -73,7 +73,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             act.then(function(res) {
                     $scope.isAction == 'création' && emailService.sendToAdmin(
                         'Un hébergement à été créé sur hobbnb',
-                        'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.herokuapp.com/#/place/' + res.data._id + '">Le consulter</a>'
+                        'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
                     );
                 $scope.obj = {};
                 resetObj();

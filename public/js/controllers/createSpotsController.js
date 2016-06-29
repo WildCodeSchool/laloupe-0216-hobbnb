@@ -63,7 +63,7 @@ angular.module('app').controller('createSpotsController', function($scope, $http
         act.then(function(res) {
             $scope.isAction == 'création' && emailService.sendToAdmin(
                 'Un spot à été créé sur hobbnb',
-                'Un spot a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.herokuapp.com/#/spot/' + res.data._id + '">Le consulter</a>'
+                'Un spot a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/spot/' + res.data._id + '">Le consulter</a>'
             );
             $scope.obj = {};
             resetObj();
