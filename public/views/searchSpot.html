@@ -127,7 +127,7 @@
     </div>
 </div>
 <div class="" style='position:fixed; right: 0; top: 70px; height: 100%; width: 50%;'>
-    <ng-map default-style="false" center="current-location || 'Paris'" geo-fallback-center="Paris" zoom="8" id="myMap" scrollwheel='true' style='height:100%'>
+    <ng-map default-style="false" center="48.8534100 2.3488000" geo-fallback-center="Paris" zoom="8" id="myMap" scrollwheel='true' style='height:100%'>
         <marker
             ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax"
             position="[{{p.latitude}},{{p.longitude}}]"
