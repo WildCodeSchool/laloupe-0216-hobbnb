@@ -5,7 +5,7 @@ module.exports = function(app) {
         social = require('../../config/social.js');
 
     var transport = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.hobbnb.com',
         auth: userInfos
     });
 
