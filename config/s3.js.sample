@@ -1,4 +1,5 @@
 module.exports = {
+    useAmazonS3: false,
     s3Params: {
         Bucket: "s3 bucket name",
         Prefix: "some/remote/dir/",
