@@ -5,9 +5,14 @@ module.exports = function(app) {
         social = require('../../config/social.js');
 
     var transport = nodemailer.createTransport({
-        host: 'smtp.hobbnb.com',
-        auth: userInfos
-    });
+		host: "mail.hobbnb.com",
+		port: 465,
+		secure: true,
+		auth: {
+			user: userInfos.user,
+			pass: userInfos.pass
+		}
+	});
 
     var header = '<table style="width:70%; margin-left: 15%;">' +
     '<thead align="center">' +
@@ -35,6 +40,8 @@ module.exports = function(app) {
 
     var send = function(mailOptions) {
         transport.sendMail(mailOptions, function(err, info) {
+	    if (err)
+		console.log(err);
             transport.close();
         });
     }
