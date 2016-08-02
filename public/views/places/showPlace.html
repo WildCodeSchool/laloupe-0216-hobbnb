@@ -321,7 +321,7 @@
                             <div class="col s10 offset-s1">
                                 <b>Alentours</b>
                                 <br>
-                                <ng-map default-style="true" center="current-location" zoom="8" scrollwheel='false'>
+                                <ng-map default-style="true" center="{{host.address.city}}" zoom="8" scrollwheel='false'>
                                     <marker
                                         position="[{{host.latitude}},{{host.longitude}}]"
                                         icon="{
