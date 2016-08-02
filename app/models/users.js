@@ -170,6 +170,7 @@ var Users = {
                                 var token = jwt.sign(data, secretToken, {
                                     expiresIn: '24h'
                                 });
+                                console.log('ok');
                                 res.send('<script>localStorage.setItem("currentUser", \'' + JSON.stringify(data) + '\');localStorage.setItem("token", \'' + token + '\');window.location="/#/";</script>');
                             }
                         });
