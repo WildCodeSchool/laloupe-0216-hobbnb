@@ -5,15 +5,17 @@ module.exports = function(app) {
         social = require('../../config/social.js');
 
     var transport = nodemailer.createTransport({
-		host: "mail.hobbnb.com",
+//		host: "mail.hobbnb.com",
+		host: "vps630.fr.ns.planethoster.net",
 		port: 465,
 		secure: true,
+//		debug: true,
 		auth: {
 			user: userInfos.user,
 			pass: userInfos.pass
 		}
 	});
-
+//	transport.on('log', console.log);
     var header = '<table style="width:70%; margin-left: 15%;">' +
     '<thead align="center">' +
     '<tr>' +
