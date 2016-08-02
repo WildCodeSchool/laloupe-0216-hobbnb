@@ -156,6 +156,7 @@ var Users = {
         } else {
             Users.model.findById(req.params.id, function(err, data) {
                 if (err) {
+                    console.log(err);
                     res.status(400).send(err);
                 } else if (!data) {
                     res.status(400).send('Utilisateur inconnu');
@@ -163,6 +164,7 @@ var Users = {
                     if (!data.isValidate) {
                         Users.model.findByIdAndUpdate(data._id, {isValidate:true}, function(err, data) {
                             if (err) {
+                                console.log(err);
                                 res.status(400).send('Utilisateur inconnu');
                             } else {
                                 data.password = null;
@@ -175,6 +177,7 @@ var Users = {
                             }
                         });
                     } else {
+                        console.log('Votre email est déjà vérifié');
                         res.status(401).send('Votre email est déjà vérifié');
                     }
 
