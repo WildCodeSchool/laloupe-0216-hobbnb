@@ -88,7 +88,7 @@ module.exports = function(app) {
             sender: 'hobbnb <' + userInfos.user + '>',
             html: htmlContent
         });
-        res.send(200);
+        res.sendStatus(200);
     });
 
 };
