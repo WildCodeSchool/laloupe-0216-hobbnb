@@ -258,9 +258,9 @@ module.exports = function(app) {
                                         if (files.length == howManyFileProcessed) {
                                             clearInterval(interValeuh2);
                                             if (files.length == 1 && whatAmI != 'users') {
-                                                res.redirect('/#/picture/' + whatAmI + '/1/' + id);
+                                                res.redirect('/picture/' + whatAmI + '/1/' + id);
                                             } else {
-                                                res.redirect('/#/' + whatAmI.substr(0, whatAmI.length - 1) + '/' + id);
+                                                res.redirect('/' + whatAmI.substr(0, whatAmI.length - 1) + '/' + id);
                                             }
                                             res.end();
                                         }
