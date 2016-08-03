@@ -1,5 +1,7 @@
 angular.module('app').controller('createSpotsController', function($scope, $http, $q, $window, $rootScope, $location, $routeParams, spotsFactory, spotsService, emailService, NgMap) {
 
+    $scope.centerMap = 'current-location';
+    
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
         _id: null
