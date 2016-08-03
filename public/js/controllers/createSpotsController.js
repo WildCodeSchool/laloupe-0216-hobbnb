@@ -4,6 +4,8 @@ angular.module('app').controller('createSpotsController', function($scope, $http
     else $scope.currentUser = {
         _id: null
     };
+    $scope.centerMap = 'current-location';
+
     var marker=null;
     $scope.placeMarker = function(e) {
      $scope.myMap.panTo(e.latLng);
