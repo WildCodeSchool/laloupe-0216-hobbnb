@@ -17,7 +17,7 @@ var spotsSchema = new mongoose.Schema({
     latitude: Number,
     longitude: Number,
     address: {
-        state: String,
+        administrative_area_level_1: String,
         country:String,
         street_number: Number,
         route: String,

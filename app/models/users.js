@@ -37,7 +37,7 @@ var usersSchema = new mongoose.Schema({
         phone: String
     },
     address: {
-        state: String,
+        administrative_area_level_1: String,
         country: String,
         num: Number,
         route: String,

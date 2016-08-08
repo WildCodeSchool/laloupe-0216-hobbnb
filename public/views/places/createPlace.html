@@ -104,31 +104,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s5">
-                <select material-select ng-model='obj.address.state'>
-                    <option value=''>Région</option>
-                    <option>Alsace-Champagne-Ardenne-Lorraine</option>
-                    <option>Aquitaine-Limousin-Poitou-Charentes</option>
-                    <option>Auvergne-Rhône-Alpes</option>
-                    <option>Bourgogne-Franche-Comté</option>
-                    <option>Bretagne</option>
-                    <option>Centre-Val de Loire</option>
-                    <option>Corse</option>
-                    <option>Île-de-France</option>
-                    <option>Languedoc-Roussillon-Midi-Pyrénées</option>
-                    <option>Nord-Pas-de-Calais-Picardie</option>
-                    <option>Normandie</option>
-                    <option>Pays de la Loire</option>
-                    <option>Provence-Alpes-Côte d'Azur</option>
-                    <option>Guadeloupe</option>
-                    <option>Martinique</option>
-                    <option>Guyane</option>
-                    <option>La Réunion</option>
-                    <option>Mayotte</option>
-                    <option>Autre</option>
-                </select>
+            <div class="input-field col s8">
+                <input id="obj.address.administrative_area_level_1" type="text" ng-model='obj.address.administrative_area_level_1'>
+                <label for="obj.address.administrative_area_level_1">Région</label>
             </div>
-            <div class="input-field col s7">
+            <div class="input-field col s4">
                 <input id="obj.address.country" type="text" ng-model='obj.address.country'>
                 <label for="obj.address.country">Pays</label>
             </div>
@@ -420,7 +400,7 @@
                 </div>
                 <div class="col s8 m9">
                     <h4>{{obj.name}}</h4>
-                    <h5>{{obj.address.state}},
+                    <h5>{{obj.address.administrative_area_level_1}},
                         {{obj.address.country}}</h5>
                     <div class="row center-align">
                         <div class="col m2 l1">

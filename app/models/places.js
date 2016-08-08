@@ -22,7 +22,7 @@ var placesSchema = new mongoose.Schema({
     latitude: Number,
     longitude: Number,
     address: {
-        state: {
+        administrative_area_level_1: {
             type: String,
             required: [true, 'state required']
         },
