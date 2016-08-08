@@ -23,7 +23,11 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             for (var i = 0; i < $scope.details.address_components.length; i++) {
                 var addressType = $scope.details.address_components[i].types[0];
                 if (componentForm[addressType]) {
-                    $scope.obj.address[addressType] = Number($scope.details.address_components[i][componentForm[addressType]]);
+                    if (isNaN($scope.details.address_components[i][componentForm[addressType]])) {
+                      $scope.obj.address[addressType] = $scope.details.address_components[i][componentForm[addressType]];
+                    } else {
+                      $scope.obj.address[addressType] = +$scope.details.address_components[i][componentForm[addressType]];
+                    }
                     console.log(addressType);
                     console.log($scope.obj.address[addressType]);
                 }
