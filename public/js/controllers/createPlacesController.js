@@ -6,7 +6,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     };
 
     var componentForm = {
-        street_number: 'obj.address.num'
+        street_number: obj.address.num
     };
 
     $scope.$watch(function() {
