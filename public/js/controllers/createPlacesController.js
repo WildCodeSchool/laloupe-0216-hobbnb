@@ -68,7 +68,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
     function gmapGeocode() {
         var defer = $q.defer(),
-            addr = $scope.obj.address.num + ' ' + $scope.obj.address.road + ' ' + $scope.obj.address.postalCode + ' ' + $scope.obj.address.city + ' ' + $scope.obj.address.country;
+            addr = $scope.obj.adress.street_number + ' ' + $scope.obj.address.road + ' ' + $scope.obj.address.postalCode + ' ' + $scope.obj.address.city + ' ' + $scope.obj.address.country;
         if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
         this.geocoder.geocode({
             'address': addr
