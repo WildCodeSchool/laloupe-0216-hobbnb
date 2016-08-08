@@ -8,7 +8,7 @@ angular.module('app').controller('mainController', function($scope, $location, $
     $scope.search = function() {
         searchFactory.data.city = $scope.city;
         searchFactory.data.hobby = $scope.hobby;
-        if($scope.selectHome=="Spot"){
+        if($scope.selectHome=="spot"){
             $location.path('/searchSpot');
         }else{
             $location.path('/search');
