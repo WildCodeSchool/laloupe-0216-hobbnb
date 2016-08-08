@@ -53,6 +53,8 @@ angular.module('app').controller('placesController', function($scope, $window, $
 
         $scope.host = e.data;
 
+
+        console.log($scope.host.address);
         searchFactory.data.city = $scope.host.address.city;
         searchFactory.data.hobby = $scope.host.primarySports;
 
