@@ -24,9 +24,12 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                 var addressType = $scope.details.address_components[i].types[0];
                 if (componentForm[addressType]) {
                     $scope.obj.address[addressType] = Number($scope.details.address_components[i][componentForm[addressType]]);
+                    console.log(addressType);
                     console.log($scope.obj.address[addressType]);
                 }
             }
+            console.log('scope:');
+            console.log($scope);
         }
     });
 
