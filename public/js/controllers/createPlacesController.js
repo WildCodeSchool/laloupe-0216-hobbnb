@@ -6,7 +6,12 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     };
 
     var componentForm = {
-        street_number: 'obj.address.num'
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
     };
 
     $scope.$watch(function() {
@@ -18,7 +23,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             for (var i = 0; i < $scope.details.address_components.length; i++) {
                 var addressType = $scope.details.address_components[i].types[0];
                 if (componentForm[addressType]) {
-                    $scope[componentForm[addressType]] = $scope.details.address_components[i].long_name;
+                    $scope.obj.address[addressType] = $scope.details.address_components[i][componentForm[addressType]];
                 }
             }
         }
