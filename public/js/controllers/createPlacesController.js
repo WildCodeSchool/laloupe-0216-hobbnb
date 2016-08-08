@@ -5,6 +5,24 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         _id: null
     };
 
+    var componentForm = {
+        street_number: 'obj.address.num'
+    };
+
+    $scope.$watch(function() {
+        return $scope.details;
+    }, function() {
+        if ($scope.details) {
+            console.log('changed!');
+            console.log($scope.details);
+            for (var i = 0; i < $scope.details.address_components.length; i++) {
+                var addressType = $scope.details.address_components[i].types[0];
+                if (componentForm[addressType]) {
+                    $scope[componentForm[addressType]] = $scope.details.address_components[i].long_name;
+                }
+            }
+        }
+    });
 
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.obj = {};
@@ -29,27 +47,6 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         $scope.obj.comments = [];
     };
     resetObj();
-
-
-    var componentForm = {
-        street_number: $scope.obj.address.num
-    };
-
-    $scope.$watch(function() {
-        return $scope.details;
-    }, function() {
-        if ($scope.details) {
-            console.log('changed!');
-            console.log($scope.details);
-            for (var i = 0; i < $scope.details.address_components.length; i++) {
-                var addressType = $scope.details.address_components[i].types[0];
-                if (componentForm[addressType]) {
-                    $scope.componentForm[addressType] = $scope.details.address_components[i].long_name;
-                }
-            }
-        }
-    });
-
     $scope.step = 1;
     if ($routeParams.id) {
         $scope.isAction = 'modification';
