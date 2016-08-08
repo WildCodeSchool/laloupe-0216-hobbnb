@@ -15,10 +15,10 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         if ($scope.details) {
             console.log('changed!');
             console.log($scope.details);
-            for (var i = 0; i < $scope.address.address_components.length; i++) {
-                var addressType = $scope.address.address_components[i].types[0];
+            for (var i = 0; i < $scope.details.address_components.length; i++) {
+                var addressType = $scope.details.address_components[i].types[0];
                 if (componentForm[addressType]) {
-                    $scope.componentForm[addressType] = $scope.address.address_components[i].long_name;
+                    $scope.componentForm[addressType] = $scope.details.address_components[i].long_name;
                 }
             }
         }
