@@ -55,7 +55,7 @@ angular.module('app').controller('placesController', function($scope, $window, $
 
 
         console.log($scope.host.address);
-        searchFactory.data.city = $scope.host.address.city;
+        searchFactory.data.city = $scope.host.address.locality;
         searchFactory.data.hobby = $scope.host.primarySports;
 
         if ($scope.host.rating.cleanness.length <= 0) {

@@ -21,8 +21,8 @@ var spotsSchema = new mongoose.Schema({
         country:String,
         street_number: Number,
         route: String,
-        city: String,
-        postalCode: {
+        locality: String,
+        postal_code: {
             type: String,
             validate: {
                 validator: function(v) {
