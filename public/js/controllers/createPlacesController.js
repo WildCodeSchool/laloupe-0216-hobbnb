@@ -5,6 +5,19 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         _id: null
     };
 
+    var componentForm = {
+        street_number: 'obj.address.num'
+    };
+
+    $scope.fillInAddress = function() {
+        for (var i = 0; i < address.formattedAddress.address_components.length; i++) {
+            var addressType = address.formattedAddress.address_components[i].types[0];
+            if (componentForm[addressType]) {
+                $scope.componentForm[addressType] = address.formattedAddress.address_components[i].long_name;
+            }
+        }
+    };
+
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.obj = {};
     resetObj = function() {
@@ -40,6 +53,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         $scope.isAction = 'création';
     }
 
+
     function gmapGeocode() {
         var defer = $q.defer(),
             addr = $scope.obj.address.num + ' ' + $scope.obj.address.road + ' ' + $scope.obj.address.postalCode + ' ' + $scope.obj.address.city + ' ' + $scope.obj.address.country;
@@ -71,10 +85,10 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                 })
             }
             act.then(function(res) {
-                    $scope.isAction == 'création' && emailService.sendToAdmin(
-                        'Un hébergement à été créé sur hobbnb',
-                        'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
-                    );
+                $scope.isAction == 'création' && emailService.sendToAdmin(
+                    'Un hébergement à été créé sur hobbnb',
+                    'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
+                );
                 $scope.obj = {};
                 resetObj();
                 $location.path('/picture/places/0/' + res.data._id);

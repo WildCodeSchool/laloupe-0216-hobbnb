@@ -80,7 +80,7 @@
         <div class="row">
 
             <div class="input-field">
-                <input type="text" id="shop" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="address">
+                <input type="text" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="address" ng-change="fillInAddress()">
                 <label for="shop">Adresse:</label>
             </div>
             {{address.formattedAddress | json}} <br>
