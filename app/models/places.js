@@ -141,7 +141,6 @@ var Places = {
 
     findOne: function(req, res) {
         Places.model.findById(req.params.id, function(err, data) {
-          console.log(data);
             if (err) {
                 res.send(err);
             } else {
