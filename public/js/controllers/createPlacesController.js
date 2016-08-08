@@ -9,16 +9,12 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         street_number: 'obj.address.num'
     };
 
-    $scope.fillInAddress = function() {
-      console.log('changed!');
-      console.log($scope.details);
-        // for (var i = 0; i < $scope.address.address_components.length; i++) {
-        //     var addressType = $scope.address.address_components[i].types[0];
-        //     if (componentForm[addressType]) {
-        //         $scope.componentForm[addressType] = $scope.address.address_components[i].long_name;
-        //     }
-        // }
-    };
+    $scope.$watch(function() {
+        return $scope.details;
+    }, function() {
+        console.log('changed!');
+        console.log($scope.details);
+    });
 
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.obj = {};
