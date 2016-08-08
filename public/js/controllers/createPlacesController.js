@@ -11,10 +11,10 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
     $scope.fillInAddress = function() {
       console.log('changed!');
-        for (var i = 0; i < address.formattedAddress.address_components.length; i++) {
-            var addressType = address.formattedAddress.address_components[i].types[0];
+        for (var i = 0; i < $scope.address.formattedAddress.address_components.length; i++) {
+            var addressType = $scope.address.formattedAddress.address_components[i].types[0];
             if (componentForm[addressType]) {
-                $scope.componentForm[addressType] = address.formattedAddress.address_components[i].long_name;
+                $scope.componentForm[addressType] = $scope.address.formattedAddress.address_components[i].long_name;
             }
         }
     };
