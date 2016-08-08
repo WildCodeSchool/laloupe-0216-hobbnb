@@ -11,6 +11,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
     $scope.fillInAddress = function() {
       console.log('changed!');
+      console.log($scope.address);
         for (var i = 0; i < $scope.address.address_components.length; i++) {
             var addressType = $scope.address.address_components[i].types[0];
             if (componentForm[addressType]) {
