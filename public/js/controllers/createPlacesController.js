@@ -11,13 +11,13 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
     $scope.fillInAddress = function() {
       console.log('changed!');
-      console.log($scope.address);
-        for (var i = 0; i < $scope.address.address_components.length; i++) {
-            var addressType = $scope.address.address_components[i].types[0];
-            if (componentForm[addressType]) {
-                $scope.componentForm[addressType] = $scope.address.address_components[i].long_name;
-            }
-        }
+      console.log($scope.details);
+        // for (var i = 0; i < $scope.address.address_components.length; i++) {
+        //     var addressType = $scope.address.address_components[i].types[0];
+        //     if (componentForm[addressType]) {
+        //         $scope.componentForm[addressType] = $scope.address.address_components[i].long_name;
+        //     }
+        // }
     };
 
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
