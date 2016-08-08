@@ -80,11 +80,11 @@
         <div class="row">
 
             <div class="input-field">
-                <input type="text" id="shop" ng-model="address" ng-autocomplete options="{types: 'geocode'}" details="details">
+                <input type="text" id="shop" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="address">
                 <label for="shop">Adresse:</label>
             </div>
-            {{address}}
-            {{details}}
+            {{address.formattedAddress | json}} <br>
+            {{address | json}}
 
             <div class="input-field col s4">
                 <input id="obj.address.num" type="number" ng-model='obj.address.num'>
