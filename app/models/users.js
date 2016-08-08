@@ -40,7 +40,7 @@ var usersSchema = new mongoose.Schema({
         state: String,
         country: String,
         num: Number,
-        road: String,
+        route: String,
         city: String,
         postalCode: {
             type: String,

@@ -31,7 +31,7 @@ var placesSchema = new mongoose.Schema({
             required: [true, 'country required']
         },
         street_number: Number,
-        road: String,
+        route: String,
         city: String,
         postalCode: {
             type: String,

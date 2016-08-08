@@ -20,7 +20,7 @@ var spotsSchema = new mongoose.Schema({
         state: String,
         country:String,
         street_number: Number,
-        road: String,
+        route: String,
         city: String,
         postalCode: {
             type: String,
