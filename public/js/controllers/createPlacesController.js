@@ -1,7 +1,5 @@
 angular.module('app').controller('createPlacesController', function($scope, $http, $q, $window, $rootScope, $location, $routeParams, placesFactory, placesService, emailService) {
 
-    angular.element('#createPlaceModal').openModal();
-
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
         _id: null
