@@ -76,6 +76,8 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     $scope.$watch('photo', function() {
         if ($scope.photo !== null) {
             $scope.photos = $scope.photos.concat($scope.photo);
+            console.log(iep);
+            console.log($scope.photos);
         }
     });
 
