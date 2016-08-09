@@ -73,6 +73,11 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     });
 
     $scope.photos = [];
+    $scope.maxReached = false;
+
+    if ($scope.photos.length >= 6) {
+        $scope.maxReached = true;
+    }
 
     $scope.$watch('photo', function() {
         if ($scope.photo !== null) {
