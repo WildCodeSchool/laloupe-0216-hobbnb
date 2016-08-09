@@ -9,7 +9,6 @@ html{
     border: 5px dashed #DDD;
     width: 100%;
     height: 150px;
-    text-align: center;
     margin: 10px;
 }
 .dragover {
