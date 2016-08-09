@@ -126,7 +126,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                             width: 600,
                             height: 600,
                             authorization: $window.localStorage.token,
-                            file: file
+                            upload: photo
                         }
                     }).then(function(resp) {
                         $timeout(function() {
