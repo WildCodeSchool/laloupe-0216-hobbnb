@@ -6,67 +6,69 @@
                     d'un hébergement</h1>
             </div>
         </div>
-        <div ng-show='step==1'>
-            <div class='row'>
-                <div class="range-field">
-                    <input type="range" min="1" max="2" value='1' disabled id='slider'/>
-                    <label for="slider">Etape 1/2</label>
+        <div class="container">
+            <div ng-show='step==1'>
+                <div class='row'>
+                    <div class="range-field">
+                        <input type="range" min="1" max="2" value='1' disabled id='slider'/>
+                        <label for="slider">Etape 1/2</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="obj.name" type="text" ng-model='obj.name'>
-                    <label for="obj.name">Nom de votre hébergement</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="obj.name" type="text" ng-model='obj.name'>
+                        <label for="obj.name">Nom de votre hébergement</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select material-select ng-model="obj.primarySports">
+                            <option value="" disable selected>Séléctionnez les hobbies alentours par ordre de préférence</option>
+                            <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <select material-select ng-model="obj.primarySports">
-                        <option value="" disable selected>Séléctionnez les hobbies alentours par ordre de préférence</option>
-                        <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
-                    </select>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="obj.shortDescription" class="materialize-textarea" ng-model='obj.shortDescription'></textarea>
+                        <label for="obj.shortDescription">Introduction, décrivez l'espace</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <textarea id="obj.shortDescription" class="materialize-textarea" ng-model='obj.shortDescription'></textarea>
-                    <label for="obj.shortDescription">Introduction, décrivez l'espace</label>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input type="text" class="autocomplete" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="">
+                        <label>Adresse:</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select material-select ng-model="obj.home.houseSpace.propertyType">
+                            <option value=''>Type de propriété</option>
+                            <option value="Maison">Maison</option>
+                            <option value="Appartement">Appartement</option>
+                            <option value="Chambre">Chambre</option>
+                            <option value="Couchage">Couchage</option>
+                            <option value="Place de camping">Place de camping</option>
+                            <option value="Cabane dans les arbres">Cabane dans les arbres</option>
+                            <option value="Camping car">Camping car</option>
+                            <option value="Tipy">Tipy</option>
+                            <option value="Bateau">Bateau</option>
+                            <option value="Yourte">Yourte</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s8">
-                    <input type="text" class="autocomplete" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="">
-                    <label>Adresse:</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="obj.home.price" type="number" ng-model='obj.home.price'>
+                        <label for="obj.home.price">Prix par nuit</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="obj.home.intro.travellers" type="number" ng-model='obj.home.intro.travellers'>
+                        <label for="obj.home.intro.travellers">Nombre de voyageurs</label>
+                    </div>
                 </div>
-                <div class="input-field col s4">
-                    <select material-select ng-model="obj.home.houseSpace.propertyType">
-                        <option value=''>Type de propriété</option>
-                        <option value="Maison">Maison</option>
-                        <option value="Appartement">Appartement</option>
-                        <option value="Chambre">Chambre</option>
-                        <option value="Couchage">Couchage</option>
-                        <option value="Place de camping">Place de camping</option>
-                        <option value="Cabane dans les arbres">Cabane dans les arbres</option>
-                        <option value="Camping car">Camping car</option>
-                        <option value="Tipy">Tipy</option>
-                        <option value="Bateau">Bateau</option>
-                        <option value="Yourte">Yourte</option>
-                    </select>
+                <div class="row">
+                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2'>
+                        Suivant
+                        <i class='material-icons right'>keyboard_arrow_right</i>
+                    </button>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="obj.home.price" type="number" ng-model='obj.home.price'>
-                    <label for="obj.home.price">Prix par nuit</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="obj.home.intro.travellers" type="number" ng-model='obj.home.intro.travellers'>
-                    <label for="obj.home.intro.travellers">Nombre de voyageurs</label>
-                </div>
-            </div>
-            <div class="row">
-                <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2'>
-                    Suivant
-                    <i class='material-icons right'>keyboard_arrow_right</i>
-                </button>
             </div>
         </div>
     </div>
