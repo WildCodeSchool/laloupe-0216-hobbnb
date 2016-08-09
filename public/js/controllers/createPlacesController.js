@@ -67,8 +67,8 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                     console.log($scope.obj.address[addressType]);
                 }
             }
-            console.log('scope:');
-            console.log($scope);
+            $scope.obj.latitude = $scope.details.geometry.location.lat();
+            $scope.obj.longitude = $scope.details.geometry.location.lng();
         }
     });
 
@@ -95,47 +95,78 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         }
     });
 
-    function gmapGeocode() {
-        var defer = $q.defer(),
-            addr = $scope.obj.address.street_number + ' ' + $scope.obj.address.route + ' ' + $scope.obj.address.postal_code + ' ' + $scope.obj.address.locality + ' ' + $scope.obj.address.country;
-        if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
-        this.geocoder.geocode({
-            'address': addr
-        }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var loc = results[0].geometry.location;
-                $scope.obj.latitude = loc.lat();
-                $scope.obj.longitude = loc.lng();
-                defer.resolve();
-            } else {
-                defer.reject('Adresse introuvable');
+    // function gmapGeocode() {
+    //     var defer = $q.defer(),
+    //         addr = $scope.obj.address.street_number + ' ' + $scope.obj.address.route + ' ' + $scope.obj.address.postal_code + ' ' + $scope.obj.address.locality + ' ' + $scope.obj.address.country;
+    //     if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
+    //     this.geocoder.geocode({
+    //         'address': addr
+    //     }, function(results, status) {
+    //         if (status == google.maps.GeocoderStatus.OK) {
+    //             var loc = results[0].geometry.location;
+    //             $scope.obj.latitude = loc.lat();
+    //             $scope.obj.longitude = loc.lng();
+    //             defer.resolve();
+    //         } else {
+    //             defer.reject('Adresse introuvable');
+    //         }
+    //     });
+    //     return defer.promise;
+    // }
+
+    $scope.upload = function(photos) {
+        if (photos && photos.length) {
+            for (var i = 0; i < files.length; i++) {
+                var photo = photos[i];
+                if (!photo.$error) {
+                    Upload.upload({
+                        url: '/api/picture',
+                        data: {
+                            title: 'places/' + $scope.addedPlaceID,
+                            width: 600,
+                            height: 600,
+                            authorization: $window.localStorage.token,
+                            file: file
+                        }
+                    }).then(function(resp) {
+                        $timeout(function() {
+                            $scope.log = 'file: ' +
+                                resp.config.data.file.name +
+                                ', Response: ' + JSON.stringify(resp.data) +
+                                '\n' + $scope.log;
+                        });
+                    }, null, function(evt) {
+                        var progressPercentage = parseInt(100.0 *
+                            evt.loaded / evt.total);
+                        $scope.log = 'progress: ' + progressPercentage +
+                            '% ' + evt.config.data.file.name + '\n' +
+                            $scope.log;
+                    });
+                }
             }
-        });
-        return defer.promise;
-    }
+        }
+    };
+
     $scope.send = function() {
-        gmapGeocode().then(function() {
-            var act;
-            if ($scope.isAction == 'création') {
-                act = placesService.create({
-                    content: $scope.obj
-                });
-            } else {
-                act = placesService.update($scope.obj._id, {
-                    content: $scope.obj
-                })
-            }
-            act.then(function(res) {
-                $scope.isAction == 'création' && emailService.sendToAdmin(
-                    'Un hébergement à été créé sur hobbnb',
-                    'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
-                );
-                $scope.obj = {};
-                resetObj();
-                $location.path('/picture/places/0/' + res.data._id);
-            }, function(err) {
-                $scope.error = err;
+        var act;
+        if ($scope.isAction == 'création') {
+            act = placesService.create({
+                content: $scope.obj
             });
+        } else {
+            act = placesService.update($scope.obj._id, {
+                content: $scope.obj
+            });
+        }
+        act.then(function(res) {
+            $scope.isAction == 'création' && emailService.sendToAdmin(
+                'Un hébergement à été créé sur hobbnb',
+                'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
+            );
+            // $scope.obj = {};
+            // resetObj();
+            // $location.path('/picture/places/0/' + res.data._id);
+            $scope.addedPlaceID = res.data._id;
         }, function(err) {
             $scope.error = err;
         });

@@ -64,8 +64,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2'>
-                        Suivant
+                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2; send()'>
+                        Confirmer
                         <i class='material-icons right'>keyboard_arrow_right</i>
                     </button>
                 </div>
@@ -90,6 +90,12 @@
                     <div class="col s2" ng-repeat="photo in photos">
                         <img class="responsive-img" ngf-thumbnail="photo">
                     </div>
+                </div>
+                <div class="row">
+                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=3; upload(photos)'>
+                        Confirmer
+                        <i class='material-icons right'>keyboard_arrow_right</i>
+                    </button>
                 </div>
             </div>
         </div>
