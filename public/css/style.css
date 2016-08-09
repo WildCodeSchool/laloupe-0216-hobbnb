@@ -4,12 +4,6 @@ html{
 .main {
     min-height: 75vh;
 }
-.pac-container {
-  z-index: 100000;
-}
-.modal {
-  overflow-y: visible;
-}
 h1 {
     font-size: 41px;
     text-align: center;
