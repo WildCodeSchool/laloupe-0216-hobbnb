@@ -78,9 +78,8 @@
                     </div>
                 </div>
                 <div class="row valign-wrapper">
-                    Drop File:
-                    <div ngf-drop ngf-select ng-model="photos" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">Glisser les photos ici</div>
-                    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                    <div ngf-drop ngf-select ng-model="photos" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">Glisser les photos ou cliquer ici<br/> pour uploader une photo</div>
+                    <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
                 </div>
                 <div class="row valign-wrapper">
                     <div class="col s2" ng-repeat="photo in photos">
