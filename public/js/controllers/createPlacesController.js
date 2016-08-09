@@ -74,8 +74,8 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
 
     $scope.$watch('photo', function() {
-        if ($scope.photo != null) {
-            $scope.photos = [$scope.file];
+        if ($scope.photo !== null) {
+            $scope.photos = [$scope.photo];
         }
     });
 
