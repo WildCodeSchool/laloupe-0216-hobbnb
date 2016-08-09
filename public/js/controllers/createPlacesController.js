@@ -5,38 +5,6 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         _id: null
     };
 
-    var componentForm = {
-        street_number: 'short_name',
-        route: 'long_name',
-        locality: 'long_name',
-        administrative_area_level_1: 'short_name',
-        country: 'long_name',
-        postal_code: 'short_name'
-    };
-
-    $scope.$watch(function() {
-        return $scope.details;
-    }, function() {
-        if ($scope.details) {
-            console.log('changed!');
-            console.log($scope.details);
-            for (var i = 0; i < $scope.details.address_components.length; i++) {
-                var addressType = $scope.details.address_components[i].types[0];
-                if (componentForm[addressType]) {
-                    if (isNaN($scope.details.address_components[i][componentForm[addressType]])) {
-                      $scope.obj.address[addressType] = $scope.details.address_components[i][componentForm[addressType]];
-                    } else {
-                      $scope.obj.address[addressType] = +$scope.details.address_components[i][componentForm[addressType]];
-                    }
-                    console.log(addressType);
-                    console.log($scope.obj.address[addressType]);
-                }
-            }
-            console.log('scope:');
-            console.log($scope);
-        }
-    });
-
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.obj = {};
     resetObj = function() {
@@ -71,6 +39,38 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     } else {
         $scope.isAction = 'création';
     }
+
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    $scope.$watch(function() {
+        return $scope.details;
+    }, function() {
+        if ($scope.details) {
+            console.log('changed!');
+            console.log($scope.details);
+            for (var i = 0; i < $scope.details.address_components.length; i++) {
+                var addressType = $scope.details.address_components[i].types[0];
+                if (componentForm[addressType]) {
+                    if (isNaN($scope.details.address_components[i][componentForm[addressType]])) {
+                      $scope.obj.address[addressType] = $scope.details.address_components[i][componentForm[addressType]];
+                    } else {
+                      $scope.obj.address[addressType] = +$scope.details.address_components[i][componentForm[addressType]];
+                    }
+                    console.log(addressType);
+                    console.log($scope.obj.address[addressType]);
+                }
+            }
+            console.log('scope:');
+            console.log($scope);
+        }
+    });
 
 
     function gmapGeocode() {

@@ -1,0 +1,33 @@
+<div id="createPlaceModal" class="modal">
+    <div class="modal-content center">
+        <form name="createPlaceForm">
+            <h4>{{isAction.charAt(0).toUpperCase() + isAction.slice(1)}}
+                d'un hébergement</h4>
+            <div class='row'>
+                <div class="range-field">
+                    <input type="range" min="1" max="3" value='1' disabled id='slider'/>
+                    <label for="slider">Etape 1/3</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="obj.name" type="text" ng-model='obj.name'>
+                    <label for="obj.name">Nom de votre hébergement</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="obj.shortDescription" class="materialize-textarea" ng-model='obj.shortDescription'></textarea>
+                    <label for="obj.shortDescription">Introduction, décrivez l'espace</label>
+                </div>
+            </div>
+            <div class="input-field">
+                <input type="text" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details">
+                <label>Adresse:</label>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a ng-click="" class="modal-action modal-close waves-effect waves-green btn-flat" message="test" duration="2000" toast='click'>Suivant</a>
+    </div>
+</div>
