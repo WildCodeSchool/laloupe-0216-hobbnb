@@ -77,12 +77,15 @@
                         <label for="slider">Etape 2/3</label>
                     </div>
                 </div>
-                <div class="row" ng-show="photos.length <= 6">
+                <div class="row" ng-hide="photos.length >= 6">
                     <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
                     <div ngf-drop ngf-select ng-model="photo" class="drop-box valign-wrapper center" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
                         <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
                     </div>
                 </div>
+                <p class="center-align" ng-show="photos.length = 6">
+                  Vous avez attend le maximum de 6 photos autorisées au maximum
+                </p>
                 <div class="row valign-wrapper">
                     <div class="col s2" ng-repeat="photo in photos">
                         <img class="responsive-img" ngf-thumbnail="photo">
