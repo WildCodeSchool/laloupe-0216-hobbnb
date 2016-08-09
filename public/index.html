@@ -10,7 +10,7 @@
         <title>Hobbnb</title>
         <meta name="description" content="">
 
-        <meta property="og:image" content="http://hobbnb.com/assets/logo.png"/>
+        <meta property="og:image" content="http://hobbnb.com/assets/logo.png" />
 
         <base href="/">
 
@@ -74,44 +74,5 @@
         <script src="/js/routes.js"></script>
         <script src="/js/app.js"></script>
 
-        <div id="createPlaceModal" class="modal">
-            <div class="modal-content center">
-                <form name="createPlaceForm">
-                    <h4>Boutique</h4>
-                    <div class="row valign-wrapper">
-                        <div class="col s8">
-                            <div class="input-field">
-                                <input type="text" id="shop" ng-model="addedShop.shop" ng-autocomplete options="{types: 'establishment'}" details="details">
-                                <label for="shop">Magasin:</label>
-                            </div>
-                            <div class="input-field">
-                                <select id="shopBrand" ng-model="addedShop.brand" ng-options="brand.name for brand in brands" material-select watch></select>
-                                <label for="shopBrand">Enseigne:</label>
-                            </div>
-                            <div class="file-field input-field">
-                                <div class="btn">
-                                    <span>Logo</span>
-                                    <input type="file" ngf-select ng-model="addedShop.logo" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text">
-                                </div>
-                            </div>
-                            <div class="input-field">
-                                <input type="number" id="shopCatchment_area_radius" ng-model="addedShop.catchment_area_radius">
-                                <label for="shopCatchment_area_radius">Area radius:</label>
-                            </div>
-                        </div>
-                        <div class="col s4 valign">
-                            <img ng-show="addShopForm.addedShop.logo.$valid" ngf-thumbnail="addedShop.logo" class="responsive-img"/>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a ng-click="add()" class="modal-action modal-close waves-effect waves-light btn-flat" message="La boutique: {{addedShop.name}}, à bien été ajoutée" duration="2000" toast='click'>
-                    <i class="material-icons left">add</i>Ajouter</a>
-            </div>
-        </div>
     </body>
 </html>
