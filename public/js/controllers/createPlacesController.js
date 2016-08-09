@@ -77,7 +77,9 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
     $scope.$watch('photo', function() {
         if ($scope.photo !== null) {
-            if ($scope.photos.length < 6) {
+            if ($scope.photos === undefined || $scope.photos.length === 0) {
+              $scope.photos.push($scope.photo);
+            } else if ($scope.photos.length < 6) {
                 var concatenedPhotos = $scope.photos.concat($scope.photo);
                   console.log(concatenedPhotos);
                 if (concatenedPhotos.length < 6) {
