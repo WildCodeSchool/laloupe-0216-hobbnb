@@ -77,14 +77,12 @@
                         <label for="slider">Etape 2/3</label>
                     </div>
                 </div>
-                <div class="row" ng-show="dropSupported" ngf-drop-available="dropSupported">
+                <div class="row">
+                    <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
                     <div ngf-drop ngf-select ng-model="photo" class="drop-box valign-wrapper" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
-                        <span class="valign">Glisser les photos ou cliquer ici<br/>
+                        <span class="valign center-align">Glisser les photos ou cliquer ici<br/>
                             pour uploader une photo</span>
                     </div>
-                </div>
-                <div class="row" ng-show="!dropSupported">
-                    Le Drag/Drop n'est pas suporté par votre navigateur
                 </div>
                 <div class="row valign-wrapper">
                     <div class="col s2" ng-repeat="photo in photos">
