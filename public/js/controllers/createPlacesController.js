@@ -116,7 +116,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
     $scope.upload = function(photos) {
         if (photos && photos.length) {
-            for (var i = 0; i < files.length; i++) {
+            for (var i = 0; i < photos.length; i++) {
                 var photo = photos[i];
                 if (!photo.$error) {
                     Upload.upload({
