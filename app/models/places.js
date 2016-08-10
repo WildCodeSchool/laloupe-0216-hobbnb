@@ -144,11 +144,12 @@ var Places = {
 
 
     uploadImages: function(req, res) {
+        var currentFile = null;
         var form = new formidable.IncomingForm();
         form.parse(req, function(err, fields, files) {
-            var file = files.file;
-            var tempPath = file.path;
-            var targetPath = path.resolve('./public/uploads/places/' + fields.placeId + '/' + file.name);
+            var file = files.currentFile;
+            var tempPath = currentFile.path;
+            var targetPath = path.resolve('./public/uploads/places/' + fields.placeId + '/' + currentFile.name);
             if (!fs.existsSync('./public/uploads/places/')) {
                 fs.mkdirSync('./public/uploads/places/');
             }
@@ -159,15 +160,15 @@ var Places = {
                 if (err) {
                     throw err;
                 }
-                console.log("Upload complete for place ID: " + fields.placeId + ' an for image:' + file.name);
+                console.log("Upload complete for place ID: " + fields.placeId + ' an for image:' + currentFile.name);
                 return res.json({
-                    name: file.name,
-                    path: '/uploads/places/' + fields.placeId + '/' + file.name
+                    name: currentFile.name,
+                    path: '/uploads/places/' + fields.placeId + '/' + currentFile.name
                 });
             });
         });
         form.on('progress', function(bytesReceived, bytesExpected) {
-            console.log('>' + file + ' uploaded ' + (bytesReceived / 1000000).toFixed(2) + " / " + (bytesExpected / 1000000).toFixed(2) + " MB.");
+            console.log('>' + currentFile + ' uploaded ' + (bytesReceived / 1000000).toFixed(2) + " / " + (bytesExpected / 1000000).toFixed(2) + " MB.");
         });
     },
 
