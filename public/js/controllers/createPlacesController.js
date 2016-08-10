@@ -120,13 +120,10 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                 var photo = photos[i];
                 if (!photo.$error) {
                     Upload.upload({
-                        url: '/api/picture',
+                        url: '/api/places/uploadImages',
                         data: {
-                            title: 'places/' + $scope.addedPlaceID,
-                            width: 600,
-                            height: 600,
-                            authorization: $window.localStorage.token,
-                            upload: photo
+                            placeId: $scope.addedPlaceID,
+                            file: photo
                         }
                     }).then(function(resp) {
                         $timeout(function() {
@@ -134,6 +131,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                                 resp.config.data.file.name +
                                 ', Response: ' + JSON.stringify(resp.data) +
                                 '\n' + $scope.log;
+                            console.log($scope.log);
                         });
                     }, null, function(evt) {
                         var progressPercentage = parseInt(100.0 *
@@ -141,6 +139,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                         $scope.log = 'progress: ' + progressPercentage +
                             '% ' + evt.config.data.file.name + '\n' +
                             $scope.log;
+                        console.log($scope.log);
                     });
                 }
             }
