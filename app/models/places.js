@@ -166,9 +166,9 @@ var Places = {
         });
 
         form.on('field', function(name, field) {
-            targetPath = path.resolve('./public/uploads/places/' + fields.placeId + '/' + currentFile.name);
-            if (!fs.existsSync('./public/uploads/places/' + fields.placeId + '/')) {
-                fs.mkdirSync('./public/uploads/places/' + fields.placeId + '/');
+            targetPath = path.resolve('./public/uploads/places/' + field.placeId + '/' + currentFile.name);
+            if (!fs.existsSync('./public/uploads/places/' + field.placeId + '/')) {
+                fs.mkdirSync('./public/uploads/places/' + field.placeId + '/');
             }
         });
 
