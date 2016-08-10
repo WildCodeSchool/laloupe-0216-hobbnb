@@ -161,6 +161,7 @@ var Places = {
                 }
                 console.log("Upload complete for place ID: " + fields.placeId + ' an for image:' + file.name);
                 return res.json({
+                    name: file.name,
                     path: '/uploads/places/' + fields.placeId + '/' + file.name
                 });
             });

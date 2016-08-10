@@ -130,7 +130,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                         console.log('progress: ' + progressPercentage + '% ' + event.config.file.name);
                     }).success(function(data, status, headers, config) {
                         console.log('file: ' +
-                            data.file.name +
+                            data.name + 'path: ' + data.path +
                             ', Response: ' + JSON.stringify(data) +
                             '\n');
                     });
