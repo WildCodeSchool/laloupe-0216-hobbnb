@@ -166,7 +166,7 @@ var Places = {
         });
 
         form.on('field', function(name, field) {
-            targetPath = path.resolve('./public/uploads/places/' + field.placeId + '/' + currentFile.name);
+            targetPath = path.resolve('./public/uploads/places/' + field.placeId + '/' + currentFile);
             if (!fs.existsSync('./public/uploads/places/' + field.placeId + '/')) {
                 fs.mkdirSync('./public/uploads/places/' + field.placeId + '/');
             }
@@ -181,9 +181,9 @@ var Places = {
         });
 
         form.on('end', function() {
-            console.log("upload complete for image: " + currentFile.name);
+            console.log("upload complete for image: " + currentFile);
             return res.json({
-                name: currentFile.name,
+                name: currentFile,
                 path: targetPath
             });
         });
