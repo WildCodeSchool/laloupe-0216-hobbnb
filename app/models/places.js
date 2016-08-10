@@ -149,6 +149,12 @@ var Places = {
             var file = files.file;
             var tempPath = file.path;
             var targetPath = path.resolve('./public/uploads/places/' + fields.placeId + '/' + file.name);
+            if (!fs.existsSync('./public/uploads/places/')) {
+                fs.mkdirSync('./public/uploads/places/');
+            }
+            if (!fs.existsSync('./public/uploads/places/' + fields.placeId + '/')) {
+                fs.mkdirSync('./public/uploads/places/' + fields.placeId + '/');
+            }
             fs.rename(tempPath, targetPath, function(err) {
                 if (err) {
                     throw err;
