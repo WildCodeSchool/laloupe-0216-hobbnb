@@ -166,6 +166,9 @@ var Places = {
                 });
             });
         });
+        form.on('progress', function(bytesReceived, bytesExpected) {
+            console.log('>' + file + ' uploaded ' + (bytesReceived / 1000000).toFixed(2) + " / " + (bytesExpected / 1000000).toFixed(2) + " MB.");
+        });
     },
 
     findOne: function(req, res) {
