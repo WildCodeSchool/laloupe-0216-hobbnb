@@ -97,8 +97,7 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
             }
         })
         .when('/creation/place', {
-            // templateUrl: '/views/places/createPlace.html',
-            templateUrl: '/views/places/createPlaceModal.html',
+            templateUrl: '/views/places/createPlace.html',
             controller: 'createPlacesController',
             resolve: {
                 connected: checkIsConnected,
