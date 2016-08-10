@@ -121,17 +121,17 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                 if (!photo.$error) {
                     Upload.upload({
                         url: '/api/places/uploadImages',
-                        placeId: $scope.addedPlaceID,
-                        file: photo
+                        data: {
+                            placeId: $scope.addedPlaceID,
+                            file: photo
+                        }
                     }).progress(function(event) {
-                        $scope.$emit('LOAD');
                         var progressPercentage = parseInt(100.0 * event.loaded / event.total);
                         console.log('progress: ' + progressPercentage + '% ' + event.config.file.name);
                     }).success(function(data, status, headers, config) {
-                        $scope.$emit('UNLOAD');
                         console.log('file: ' +
-                            resp.config.data.file.name +
-                            ', Response: ' + JSON.stringify(resp.data) +
+                            data.file.name +
+                            ', Response: ' + JSON.stringify(data) +
                             '\n');
                     });
                 }
