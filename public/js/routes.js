@@ -106,7 +106,6 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            'js/libs/ng-file-upload.min.js',
                             '/js/services/placesService.js',
                             '/js/services/emailService.js',
                             '/js/factories/placesFactory.js',
