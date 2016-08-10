@@ -1,5 +1,8 @@
 // MODEL PLACES
 var mongoose = require('mongoose');
+var formidable = require('formidable');
+var path = require('path');
+var fs = require('fs');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"],
     propertiesType = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
@@ -139,6 +142,25 @@ var Places = {
         });
     },
 
+
+    uploadImages: function(req, res) {
+        var form = new formidable.IncomingForm();
+        form.parse(req, function(err, fields, files) {
+            var file = files.file;
+            var tempPath = file.path;
+            var targetPath = path.resolve('./public/uploads/places/' + fields.placeId + '/' + file.name);
+            fs.rename(tempPath, targetPath, function(err) {
+                if (err) {
+                    throw err;
+                }
+                console.log("Upload complete for place ID: " + fields.placeId + ' an for image:' + file.name);
+                return res.json({
+                    path: '/uploads/places/' + fields.placeId + '/' + file.name
+                });
+            });
+        });
+    },
+
     findOne: function(req, res) {
         Places.model.findById(req.params.id, function(err, data) {
             if (err) {
@@ -164,8 +186,10 @@ var Places = {
     },
 
     findPlacesOfUser: function(req, res) {
-        Places.model.find({owner:req.params.id},function(err, data) {
-            if(err) {
+        Places.model.find({
+            owner: req.params.id
+        }, function(err, data) {
+            if (err) {
                 res.send(err);
             } else {
                 res.send(data);
