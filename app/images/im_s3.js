@@ -244,7 +244,7 @@ module.exports = function(app) {
                                                         params: {
                                                             id: id
                                                         }
-                                                    }
+                                                    };
                                                 }
                                                 if (whatAmI == 'places' || whatAmI == 'spots' || whatAmI == 'users') {
                                                     var DBase = require('../models/' + whatAmI + '.js');
@@ -252,9 +252,13 @@ module.exports = function(app) {
                                                 }
                                                 resolve(1);
                                             });
+                                        } else {
+                                          console.log(err);
                                         }
                                     });
                                 }
+                            } else {
+                              console.log(err);
                             }
                         });
                     }, 500);
