@@ -191,6 +191,7 @@ var Places = {
             res.sendStatus(200);
         });
         form.parse(req, function(err, fields, files) {
+          console.log(files);
           totalFiles = files.length;
           console.log('totalFiles: ' + totalFiles);
         });
