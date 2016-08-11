@@ -95,7 +95,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         }
     });
 
-    $scope.removePicture = function(removePicture) {
+    $scope.removePicture = function(index) {
       $scope.photos.splice(index, 1);
     };
 
