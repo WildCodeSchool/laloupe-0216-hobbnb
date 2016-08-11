@@ -159,6 +159,7 @@ var Places = {
         var form = new formidable.IncomingForm();
         form.multiples = true;
         form.on('fileBegin', function(name, file) {
+            totalFiles ++;
             console.log(totalFiles);
             if (totalFiles > 6) {
                 // res.sendStatus(400);
