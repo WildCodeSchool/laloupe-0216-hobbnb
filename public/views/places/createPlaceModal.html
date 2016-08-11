@@ -87,7 +87,7 @@
                     Vous avez attend le maximum de 6 photos autorisées au maximum
                 </p>
 
-                <ul ui-sortable="{ 'ui-floating': true }" ng-model="photos" style="list-style: none;">
+                <ul>
                     <li class="col s2 left" ng-repeat="photo in photos" style="position: relative;">
                         <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating blue">
                             <i class="material-icons">remove</i>
