@@ -144,47 +144,26 @@ var Places = {
 
 
     uploadImages: function(req, res) {
-
         if (!fs.existsSync('./public/uploads/places/')) {
             fs.mkdirSync('./public/uploads/places/');
         }
-
-        var currentFile = null,
-            targetPath = null,
-            tempPath = null;
         var form = new formidable.IncomingForm();
-
-        form.parse(req);
-
-        form.on('fileBegin', function(name, file) {
-            currentFile = file.name;
-            tempPath = file.path;
-        });
-
-        form.on('progress', function(bytesReceived, bytesExpected) {
-            console.log('>' + currentFile + ' uploaded ' + (bytesReceived / 1000000).toFixed(2) + " / " + (bytesExpected / 1000000).toFixed(2) + " MB.");
-        });
-
-        form.on('field', function(name, field) {
-            targetPath = path.resolve('./public/uploads/places/' + field.placeId + '/' + currentFile);
-            if (!fs.existsSync('./public/uploads/places/' + field.placeId + '/')) {
-                fs.mkdirSync('./public/uploads/places/' + field.placeId + '/');
+        form.parse(req, function(err, fields, files) {
+            var file = files.file;
+            var tempPath = file.path;
+            var targetPath = path.resolve('./public/uploads/places/' + fields.placeId + '/' + file.name);
+            if (!fs.existsSync('./public/uploads/places/' + fields.placeId + '/')) {
+                fs.mkdirSync('./public/uploads/places/' + fields.placeId + '/');
             }
-        });
-
-        form.on('file', function(name, file) {
             fs.rename(tempPath, targetPath, function(err) {
                 if (err) {
                     throw err;
                 }
-            });
-        });
-
-        form.on('end', function() {
-            console.log("upload complete for image: " + currentFile);
-            return res.json({
-                name: currentFile,
-                path: targetPath
+                console.log("Upload complete for place ID: " + fields.placeId + ' an for image:' + file.name);
+                return res.json({
+                    name: file.name,
+                    path: '/uploads/places/' + fields.placeId + '/' + file.name
+                });
             });
         });
     },
