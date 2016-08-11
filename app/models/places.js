@@ -165,10 +165,6 @@ var Places = {
         });
 
         form.on('end', function() {
-            return res.json({
-                name: file.name,
-                path: '/uploads/places/' + req.params.placeId + '/' + file.name
-            });
         });
 
         // parse the incoming request containing the form data
