@@ -200,7 +200,7 @@ var Places = {
                 });
             } else {
                 console.log('too many');
-                deleteFolderRecursive(new_location);
+                deleteFolderRecursive(targetPath);
                 res.sendStatus(400);
                 req.connection.destroy();
             }
