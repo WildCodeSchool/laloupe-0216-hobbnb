@@ -159,13 +159,13 @@ var Places = {
             var tmpPath = file.path;
             im.resize({
                 srcPath: tmpPath,
-                dstPath: targetPath + 'large/img_' + file_name,
+                dstPath: targetPath + 'large/img_' + file.name,
                 width: width
             }, function(err) {
                 if (err) throw err;
                 im.resize({
                     srcPath: tmpPath,
-                    dstPath: targetPath + 'thumb/img_' + file_name,
+                    dstPath: targetPath + 'thumb/img_' + file.name,
                     width: width / 4
                 }, function(err) {
                     if (err) throw err;
