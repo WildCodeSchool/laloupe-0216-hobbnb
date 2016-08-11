@@ -158,6 +158,13 @@ var Places = {
 
         var form = new formidable.IncomingForm();
         form.multiples = true;
+        form.on('fileBegin', function(name, file) {
+            console.log(totalFiles);
+            if (totalFiles > 6) {
+                // res.sendStatus(400);
+                req.connection.destroy();
+            }
+        });
         form.on('file', function(field, file) {
             processedFileCount++;
             // if (processedFileCount <= 6) {
@@ -194,10 +201,6 @@ var Places = {
         });
         form.parse(req, function(err, fields, files) {
             totalFiles = Object.keys(files).length;
-            if (totalFiles > 6) {
-                res.sendStatus(400);
-                req.connection.destroy();
-            }
         });
     },
 
