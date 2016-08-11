@@ -116,13 +116,12 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
     $scope.upload = function(photos) {
         if (photos && photos.length) {
-            for (var i = 0; i < photos.length; i++) {
-                var photo = photos[i];
-                if (!photo.$error) {
+            // for (var i = 0; i < photos.length; i++) {
+            //     var photo = photos[i];
+            //     if (!photo.$error) {
                     Upload.upload({
-                        url: '/api/places/uploadImages',
+                        url: '/api/places/uploadImages/' + $scope.addedPlaceID,
                         data: {
-                            placeId: $scope.addedPlaceID,
                             file: photo
                         }
                     }).progress(function(event) {
@@ -135,8 +134,8 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                             '\n');
                     });
                 }
-            }
-        }
+        //     }
+        // }
     };
 
     $scope.send = function() {

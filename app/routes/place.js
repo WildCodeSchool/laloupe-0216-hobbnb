@@ -9,7 +9,7 @@ module.exports = function(app) {
     placesRouter.get('/:id', Place.findOne);
     placesRouter.get('/', Place.findAll);
     placesRouter.post('/', Auth.user.hasAuthorization, Place.create);
-    placesRouter.post('/uploadImages', Auth.user.hasAuthorization, Place.uploadImages);
+    placesRouter.post('/uploadImages/:placeId', Auth.user.hasAuthorization, Place.uploadImages);
     placesRouter.put('/:id', Auth.user.hasAuthorization, Place.update);
     placesRouter.delete('/:id', Auth.user.hasAuthorization, Auth.user.isAdministrator, Place.delete);
 

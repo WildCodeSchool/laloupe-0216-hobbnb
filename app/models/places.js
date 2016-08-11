@@ -142,31 +142,73 @@ var Places = {
         });
     },
 
-
     uploadImages: function(req, res) {
-        if (!fs.existsSync('./public/uploads/places/')) {
-            fs.mkdirSync('./public/uploads/places/');
-        }
+        if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
+
         var form = new formidable.IncomingForm();
-        form.parse(req, function(err, fields, files) {
-            var file = files.file;
-            var tempPath = file.path;
-            var targetPath = path.resolve('./public/uploads/places/' + fields.placeId + '/' + file.name);
-            if (!fs.existsSync('./public/uploads/places/' + fields.placeId + '/')) {
-                fs.mkdirSync('./public/uploads/places/' + fields.placeId + '/');
-            }
-            fs.rename(tempPath, targetPath, function(err) {
+
+        form.multiples = true;
+
+        form.on('file', function(field, file) {
+            if (!fs.existsSync('./public/uploads/places/' + fields.placeId + '/')) fs.mkdirSync('./public/uploads/places/' + fields.placeId + '/');
+            var targetPath = path.resolve('./public/uploads/places/' + req.params.placeId + '/');
+            fs.rename(file.path, targetPath + file.name, function(err) {
                 if (err) {
                     throw err;
                 }
                 console.log("Upload complete for place ID: " + fields.placeId + ' an for image:' + file.name);
-                return res.json({
-                    name: file.name,
-                    path: '/uploads/places/' + fields.placeId + '/' + file.name
-                });
             });
         });
+
+        form.on('error', function(err) {
+            console.log('An error has occured: \n' + err);
+        });
+
+        form.on('end', function() {
+            return res.json({
+                name: file.name,
+                path: '/uploads/places/' + req.params.placeId + '/' + file.name
+            });
+        });
+
+        // parse the incoming request containing the form data
+        form.parse(req, function(err, fields, files) {
+            res.writeHead(200, {
+                'content-type': 'text/plain'
+            });
+            res.write('received upload:\n\n');
+            res.end(util.inspect({
+                fields: fields,
+                files: files
+            }));
+        });
     },
+
+
+    // uploadImages: function(req, res) {
+    //     if (!fs.existsSync('./public/uploads/places/')) {
+    //         fs.mkdirSync('./public/uploads/places/');
+    //     }
+    //     var form = new formidable.IncomingForm();
+    //     form.parse(req, function(err, fields, files) {
+    //         var file = files.file;
+    //         var tempPath = file.path;
+    //         var targetPath = path.resolve('./public/uploads/places/' + fields.placeId + '/' + file.name);
+    //         if (!fs.existsSync('./public/uploads/places/' + fields.placeId + '/')) {
+    //             fs.mkdirSync('./public/uploads/places/' + fields.placeId + '/');
+    //         }
+    //         fs.rename(tempPath, targetPath, function(err) {
+    //             if (err) {
+    //                 throw err;
+    //             }
+    //             console.log("Upload complete for place ID: " + fields.placeId + ' an for image:' + file.name);
+    //             return res.json({
+    //                 name: file.name,
+    //                 path: '/uploads/places/' + fields.placeId + '/' + file.name
+    //             });
+    //         });
+    //     });
+    // },
 
     findOne: function(req, res) {
         Places.model.findById(req.params.id, function(err, data) {
