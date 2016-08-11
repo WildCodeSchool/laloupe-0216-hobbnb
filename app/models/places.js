@@ -192,7 +192,7 @@ var Places = {
         });
         form.parse(req, function(err, fields, files) {
           console.log(files);
-          totalFiles = files.file.length;
+          totalFiles = Object.keys(files).length;
           console.log('totalFiles: ' + totalFiles);
         });
     },
