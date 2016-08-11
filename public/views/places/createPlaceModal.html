@@ -86,6 +86,16 @@
                 <p class="center-align" ng-show="maxReached">
                     Vous avez attend le maximum de 6 photos autorisées au maximum
                 </p>
+
+                <ul ui-sortable="{ 'ui-floating': true }" ng-model="photos" class="isHorizontal" style="list-style: none outside none;">
+                    <li class="col s2 left" ng-repeat="photo in photos track" style="position: relative;">
+                        <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating blue">
+                            <i class="material-icons">remove</i>
+                        </a>
+                        <img class="responsive-img" ngf-thumbnail="photo">
+                    </li>
+                </ul>
+
                 <div class="row valign-wrapper">
                     <div class="col s2" ng-repeat="photo in photos track by $index" style="position: relative;">
                         <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating blue">
