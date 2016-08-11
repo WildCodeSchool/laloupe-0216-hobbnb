@@ -195,9 +195,8 @@ var Places = {
         form.parse(req, function(err, fields, files) {
             totalFiles = Object.keys(files).length;
             if (totalFiles > 6) {
-                req.pause();
-                res.status = 400;
-                res.end('something went wrong...');
+                res.sendStatus(400);
+                req.connection.destroy();
             }
         });
     },
