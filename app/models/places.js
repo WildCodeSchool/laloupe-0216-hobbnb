@@ -1,11 +1,14 @@
 // MODEL PLACES
 var mongoose = require('mongoose');
 var formidable = require('formidable');
+var im = require('imagemagick');
 var path = require('path');
 var fs = require('fs');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"],
-    propertiesType = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
+    propertiesType = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"],
+    width = 600,
+    height = 600;
 
 var placesSchema = new mongoose.Schema({
     isActive: Boolean,
@@ -144,19 +147,33 @@ var Places = {
 
     uploadImages: function(req, res) {
         if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
+        var targetPath = path.resolve('./public/uploads/places/' + req.params.placeId + '/');
+        if (!fs.existsSync(targetPath)) fs.mkdirSync(targetPath);
+        if (!fs.existsSync(targetPath + 'thumb')) fs.mkdirSync(targetPath + 'thumb');
+        if (!fs.existsSync(targetPath + 'large')) fs.mkdirSync(targetPath + 'large');
 
         var form = new formidable.IncomingForm();
-
         form.multiples = true;
 
         form.on('file', function(field, file) {
-            if (!fs.existsSync('./public/uploads/places/' + req.params.placeId + '/')) fs.mkdirSync('./public/uploads/places/' + req.params.placeId + '/');
-            var targetPath = path.resolve('./public/uploads/places/' + req.params.placeId + '/');
-            fs.rename(file.path, targetPath + file.name, function(err) {
-                if (err) {
-                    throw err;
-                }
-                console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
+            var tmpPath = file.path;
+            im.resize({
+                srcPath: tmpPath,
+                dstPath: targetPath + 'large/img_' + file_name,
+                width: width
+            }, function(err) {
+                if (err) throw err;
+                im.resize({
+                    srcPath: tmpPath,
+                    dstPath: targetPath + 'thumb/img_' + file_name,
+                    width: width / 4
+                }, function(err) {
+                    if (err) throw err;
+                    fs.unlink(tmpPath, function(err) {
+                        if (err) throw err;
+                        console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
+                    });
+                });
             });
         });
 
@@ -168,11 +185,7 @@ var Places = {
             res.sendStatus(200);
         });
 
-        // parse the incoming request containing the form data
-        form.parse(req, function(err, fields, files) {
-            console.log(fields);
-            console.log(files);
-        });
+        form.parse(req);
     },
 
 
