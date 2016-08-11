@@ -161,26 +161,26 @@ var Places = {
         form.on('file', function(field, file) {
             processedFileCount++;
             // if (processedFileCount <= 6) {
-                console.log('processing file nb: ' + processedFileCount);
-                var tmpPath = file.path;
+            console.log('processing file nb: ' + processedFileCount);
+            var tmpPath = file.path;
+            im.resize({
+                srcPath: tmpPath,
+                dstPath: targetPath + 'large/img_' + file.name,
+                width: width
+            }, function(err) {
+                if (err) throw err;
                 im.resize({
                     srcPath: tmpPath,
-                    dstPath: targetPath + 'large/img_' + file.name,
-                    width: width
+                    dstPath: targetPath + 'thumb/img_' + file.name,
+                    width: width / 4
                 }, function(err) {
                     if (err) throw err;
-                    im.resize({
-                        srcPath: tmpPath,
-                        dstPath: targetPath + 'thumb/img_' + file.name,
-                        width: width / 4
-                    }, function(err) {
+                    fs.unlink(tmpPath, function(err) {
                         if (err) throw err;
-                        fs.unlink(tmpPath, function(err) {
-                            if (err) throw err;
-                            console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
-                        });
+                        console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
                     });
                 });
+            });
             // } else {
             //     processedFileCount--;
             //     fs.unlink(f.path);
@@ -195,8 +195,9 @@ var Places = {
         form.parse(req, function(err, fields, files) {
             totalFiles = Object.keys(files).length;
             if (totalFiles > 6) {
-              req.abort();
-              res.sendStatus(400);
+                request.pause();
+                response.status = 400;
+                response.end('something went wrong...');
             }
         });
     },
