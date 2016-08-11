@@ -174,11 +174,12 @@ var Places = {
         form.multiples = true;
         form.on('fileBegin', function(name, file) {
             processedFileCount++;
+            console.log(file.path);
+            file.path = '/tmp/' + processedFileCount + file.name.substr(file.name.lastIndexOf('.')));
+            console.log(file.path);
             console.log(processedFileCount);
         });
         form.on('file', function(field, file) {
-            if (processedFileCount <= 6) {
-                console.log('processing file nb: ' + processedFileCount);
                 var tmpPath = file.path;
                 im.resize({
                     srcPath: tmpPath,
@@ -198,12 +199,6 @@ var Places = {
                         });
                     });
                 });
-            } else {
-                console.log('too many');
-                deleteFolderRecursive(targetPath);
-                res.sendStatus(400);
-                req.connection.destroy();
-            }
         });
         form.on('error', function(err) {
             console.log('An error has occured: \n' + err);
