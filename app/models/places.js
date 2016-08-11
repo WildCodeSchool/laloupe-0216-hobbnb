@@ -161,8 +161,7 @@ var Places = {
 
     uploadImages: function(req, res) {
 
-        var processedFileCount = 0,
-            totalFiles = 0;
+        var processedFileCount = 0;
         var targetPath = './public/uploads/places/' + req.params.placeId + '/';
 
         if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
@@ -175,8 +174,6 @@ var Places = {
         form.on('fileBegin', function(name, file) {
             processedFileCount++;
             file.name =  processedFileCount + file.name.substr(file.name.lastIndexOf('.'));
-            console.log(file.name);
-            console.log(processedFileCount);
         });
         form.on('file', function(field, file) {
                 var tmpPath = file.path;
@@ -205,9 +202,7 @@ var Places = {
         form.on('end', function() {
             res.sendStatus(200);
         });
-        form.parse(req, function(err, fields, files) {
-            totalFiles = Object.keys(files).length;
-        });
+        form.parse(req);
     },
 
 
