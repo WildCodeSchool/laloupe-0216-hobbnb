@@ -122,7 +122,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                     Upload.upload({
                         url: '/api/places/uploadImages/' + $scope.addedPlaceID,
                         data: {
-                            file: photo
+                            file: photos
                         }
                     }).progress(function(event) {
                         var progressPercentage = parseInt(100.0 * event.loaded / event.total);
