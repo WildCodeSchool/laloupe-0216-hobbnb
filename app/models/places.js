@@ -165,18 +165,13 @@ var Places = {
         });
 
         form.on('end', function() {
+            res.sendStatus(200);
         });
 
         // parse the incoming request containing the form data
         form.parse(req, function(err, fields, files) {
-            res.writeHead(200, {
-                'content-type': 'text/plain'
-            });
-            res.write('received upload:\n\n');
-            res.end(util.inspect({
-                fields: fields,
-                files: files
-            }));
+            console.log(fields);
+            console.log(files);
         });
     },
 
