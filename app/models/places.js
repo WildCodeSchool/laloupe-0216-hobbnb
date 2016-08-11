@@ -159,40 +159,34 @@ var Places = {
         var form = new formidable.IncomingForm();
         form.multiples = true;
         form.on('fileBegin', function(name, file) {
-            totalFiles ++;
-            console.log(totalFiles);
-            if (totalFiles > 6) {
-                // res.sendStatus(400);
-                req.connection.destroy();
-            }
+            processedFileCount++;
+            console.log(processedFileCount);
         });
         form.on('file', function(field, file) {
-            processedFileCount++;
-            // if (processedFileCount <= 6) {
-            console.log('processing file nb: ' + processedFileCount);
-            var tmpPath = file.path;
-            im.resize({
-                srcPath: tmpPath,
-                dstPath: targetPath + 'large/img_' + file.name,
-                width: width
-            }, function(err) {
-                if (err) throw err;
+            if (processedFileCount <= 6) {
+                console.log('processing file nb: ' + processedFileCount);
+                var tmpPath = file.path;
                 im.resize({
                     srcPath: tmpPath,
-                    dstPath: targetPath + 'thumb/img_' + file.name,
-                    width: width / 4
+                    dstPath: targetPath + 'large/img_' + file.name,
+                    width: width
                 }, function(err) {
                     if (err) throw err;
-                    fs.unlink(tmpPath, function(err) {
+                    im.resize({
+                        srcPath: tmpPath,
+                        dstPath: targetPath + 'thumb/img_' + file.name,
+                        width: width / 4
+                    }, function(err) {
                         if (err) throw err;
-                        console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
+                        fs.unlink(tmpPath, function(err) {
+                            if (err) throw err;
+                            console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
+                        });
                     });
                 });
-            });
-            // } else {
-            //     processedFileCount--;
-            //     fs.unlink(f.path);
-            // }
+            } else {
+                req.connection.destroy();
+            }
         });
         form.on('error', function(err) {
             console.log('An error has occured: \n' + err);
