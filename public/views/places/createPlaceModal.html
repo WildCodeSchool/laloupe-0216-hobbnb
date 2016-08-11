@@ -87,9 +87,8 @@
                     Vous avez attend le maximum de 6 photos autorisées au maximum
                 </p>
                 <div class="row valign-wrapper">
-                    {{photos}}
                     <div class="col s2" ng-repeat="photo in photos track by $index">
-                        <i class="material-icons" ng-click="removePicture($index)" class="rigth">remove</i>
+                        <i class="material-icons" ng-click="removePicture($index)" style="position: absolute;top: 2px;right: 2px;z-index: 100;">remove</i>
                         <img class="responsive-img" ngf-thumbnail="photo">
                     </div>
                 </div>
