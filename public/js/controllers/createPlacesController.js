@@ -95,6 +95,10 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         }
     });
 
+    $scope.removePicture = function(removePicture) {
+      $scope.photos.splice(index, 1);
+    };
+
     // function gmapGeocode() {
     //     var defer = $q.defer(),
     //         addr = $scope.obj.address.street_number + ' ' + $scope.obj.address.route + ' ' + $scope.obj.address.postal_code + ' ' + $scope.obj.address.locality + ' ' + $scope.obj.address.country;

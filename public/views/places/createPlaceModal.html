@@ -84,11 +84,14 @@
                     </div>
                 </div>
                 <p class="center-align" ng-show="maxReached">
-                  Vous avez attend le maximum de 6 photos autorisées au maximum
+                    Vous avez attend le maximum de 6 photos autorisées au maximum
                 </p>
                 <div class="row valign-wrapper">
-                  {{photos}}
-                    <div class="col s2" ng-repeat="photo in photos">
+                    {{photos}}
+                    <div class="col s2" ng-repeat="photo in photos track by $index">
+                        <a ng-click="removePicture($index)" class="rigth">
+                            <i class="material-icons">remove</i>
+                        </a>
                         <img class="responsive-img" ngf-thumbnail="photo">
                     </div>
                 </div>
