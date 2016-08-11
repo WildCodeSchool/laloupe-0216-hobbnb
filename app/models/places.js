@@ -160,8 +160,8 @@ var Places = {
         form.multiples = true;
         form.on('file', function(field, file) {
             processedFileCount++;
-            if (processedFileCount <= 6) {
-                console.log(processedFileCount);
+            // if (processedFileCount <= 6) {
+                console.log('processing file nb: ' + processedFileCount);
                 var tmpPath = file.path;
                 im.resize({
                     srcPath: tmpPath,
@@ -177,14 +177,14 @@ var Places = {
                         if (err) throw err;
                         fs.unlink(tmpPath, function(err) {
                             if (err) throw err;
-                            console.log("Upload complete for place ID: " + req.params.placeId + ' an for image ' + processedFileCount + '/' + totalFiles + ' :' + file.name);
+                            console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
                         });
                     });
                 });
-            } else {
-                processedFileCount--;
-                fs.unlink(f.path);
-            }
+            // } else {
+            //     processedFileCount--;
+            //     fs.unlink(f.path);
+            // }
         });
         form.on('error', function(err) {
             console.log('An error has occured: \n' + err);
@@ -194,6 +194,10 @@ var Places = {
         });
         form.parse(req, function(err, fields, files) {
             totalFiles = Object.keys(files).length;
+            if (totalFiles > 6) {
+              req.abort();
+              res.sendStatus(400);
+            }
         });
     },
 

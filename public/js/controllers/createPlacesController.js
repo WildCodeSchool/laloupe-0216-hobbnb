@@ -78,17 +78,17 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
 
     $scope.$watch('photo', function() {
         if ($scope.photo !== null) {
-            if ($scope.photos.length < 6) {
+            if ($scope.photos.length < 12) {
                 var concatenedPhotos = $scope.photos.concat($scope.photo);
                 console.log(concatenedPhotos);
-                if (concatenedPhotos.length < 6) {
+                if (concatenedPhotos.length < 12) {
                     $scope.photos = concatenedPhotos;
-                } else if (concatenedPhotos.length == 6) {
+                } else if (concatenedPhotos.length == 12) {
                     $scope.photos = concatenedPhotos;
-                    $scope.error = "Vous avez attend la limite de 6 photos par hébergement";
+                    $scope.error = "Vous avez attend la limite de 12 photos par hébergement";
                     $scope.maxReached = true;
                 } else {
-                    $scope.error = "Vous dépasserez la limite de 6 photos par hébergement";
+                    $scope.error = "Vous dépasserez la limite de 12 photos par hébergement";
                     console.log($scope.error);
                 }
             }
