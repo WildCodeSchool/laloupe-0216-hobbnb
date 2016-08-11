@@ -89,9 +89,7 @@
                 <div class="row valign-wrapper">
                     {{photos}}
                     <div class="col s2" ng-repeat="photo in photos track by $index">
-                        <a ng-click="removePicture($index)" class="rigth">
-                            <i class="material-icons">remove</i>
-                        </a>
+                        <i class="material-icons" ng-click="removePicture($index)" class="rigth">remove</i>
                         <img class="responsive-img" ngf-thumbnail="photo">
                     </div>
                 </div>
