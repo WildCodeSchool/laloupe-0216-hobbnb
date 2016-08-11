@@ -174,9 +174,8 @@ var Places = {
         form.multiples = true;
         form.on('fileBegin', function(name, file) {
             processedFileCount++;
-            console.log(file.path);
-            file.path = '/tmp/' + processedFileCount + file.name.substr(file.name.lastIndexOf('.'));
-            console.log(file.path);
+            file.name =  processedFileCount + file.name.substr(file.name.lastIndexOf('.'));
+            console.log(file.name);
             console.log(processedFileCount);
         });
         form.on('file', function(field, file) {
