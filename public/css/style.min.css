@@ -17,6 +17,7 @@ html {
 }
 .thumbnail {
   position: relative;
+  width: auto;
   /*width: 200px;
   height: 200px;*/
   overflow: hidden;
