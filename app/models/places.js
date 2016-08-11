@@ -147,7 +147,7 @@ var Places = {
 
     uploadImages: function(req, res) {
         if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
-        var targetPath = path.resolve('./public/uploads/places/' + req.params.placeId + '/');
+        var targetPath = './public/uploads/places/' + req.params.placeId + '/';
         if (!fs.existsSync(targetPath)) fs.mkdirSync(targetPath);
         if (!fs.existsSync(targetPath + 'thumb')) fs.mkdirSync(targetPath + 'thumb');
         if (!fs.existsSync(targetPath + 'large')) fs.mkdirSync(targetPath + 'large');
