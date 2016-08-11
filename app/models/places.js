@@ -146,46 +146,54 @@ var Places = {
     },
 
     uploadImages: function(req, res) {
-        if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
+
+        var processedFileCount = 0, totalFiles = 0;
         var targetPath = './public/uploads/places/' + req.params.placeId + '/';
+
+        if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
         if (!fs.existsSync(targetPath)) fs.mkdirSync(targetPath);
         if (!fs.existsSync(targetPath + 'thumb')) fs.mkdirSync(targetPath + 'thumb');
         if (!fs.existsSync(targetPath + 'large')) fs.mkdirSync(targetPath + 'large');
 
         var form = new formidable.IncomingForm();
         form.multiples = true;
-
         form.on('file', function(field, file) {
-            var tmpPath = file.path;
-            im.resize({
-                srcPath: tmpPath,
-                dstPath: targetPath + 'large/img_' + file.name,
-                width: width
-            }, function(err) {
-                if (err) throw err;
+            processedFileCount++;
+            if (processedFileCount <= 6) {
+                var tmpPath = file.path;
                 im.resize({
                     srcPath: tmpPath,
-                    dstPath: targetPath + 'thumb/img_' + file.name,
-                    width: width / 4
+                    dstPath: targetPath + 'large/img_' + file.name,
+                    width: width
                 }, function(err) {
                     if (err) throw err;
-                    fs.unlink(tmpPath, function(err) {
+                    im.resize({
+                        srcPath: tmpPath,
+                        dstPath: targetPath + 'thumb/img_' + file.name,
+                        width: width / 4
+                    }, function(err) {
                         if (err) throw err;
-                        console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
+                        fs.unlink(tmpPath, function(err) {
+                            if (err) throw err;
+                            console.log("Upload complete for place ID: " + req.params.placeId + ' an for image ' + processedFileCount + '/' + totalFiles + ' :' + file.name);
+                        });
                     });
                 });
-            });
+            } else {
+                processedFileCount--;
+                fs.unlink(f.path);
+            }
         });
-
         form.on('error', function(err) {
             console.log('An error has occured: \n' + err);
         });
-
         form.on('end', function() {
             res.sendStatus(200);
         });
-
-        form.parse(req);
+        form.parse(req, function(err, fields, files) {
+          totalFiles = files.length;
+          console.log('totalFiles: ' + totalFiles);
+        });
     },
 
 
