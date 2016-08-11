@@ -150,13 +150,13 @@ var Places = {
         form.multiples = true;
 
         form.on('file', function(field, file) {
-            if (!fs.existsSync('./public/uploads/places/' + fields.placeId + '/')) fs.mkdirSync('./public/uploads/places/' + fields.placeId + '/');
+            if (!fs.existsSync('./public/uploads/places/' + req.params.placeId + '/')) fs.mkdirSync('./public/uploads/places/' + req.params.placeId + '/');
             var targetPath = path.resolve('./public/uploads/places/' + req.params.placeId + '/');
             fs.rename(file.path, targetPath + file.name, function(err) {
                 if (err) {
                     throw err;
                 }
-                console.log("Upload complete for place ID: " + fields.placeId + ' an for image:' + file.name);
+                console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
             });
         });
 
