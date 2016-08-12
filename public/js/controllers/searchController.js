@@ -4,10 +4,6 @@ angular.module('app').controller('searchController', function($scope, NgMap, pla
     NgMap.getMap().then(function(map) {
         $scope.map = map;
     });
-    
-    placesService.get().then(function(res) {
-        console.log(res.data);
-    });
 
     /* initialisation */
     $scope.hobbiesListing = ['Peu importe', "Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
@@ -114,6 +110,9 @@ angular.module('app').controller('searchController', function($scope, NgMap, pla
         $scope.moreFiltrer = function() {
             $scope.developOptions = !$scope.developOptions;
         };
+
+        console.log($scope.definitiveFilter);
+        console.log(filters);
     });
 
     $scope.developOptions = false;
