@@ -23,6 +23,7 @@ html {
 
 .list {
 	list-style: none outside none;
+  width: 100%;
 }
 
 .thumbnail {
