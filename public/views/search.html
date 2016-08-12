@@ -1,6 +1,6 @@
 <!-- <div class="container-fluid"> -->
 <div style="display: table; width: 100%;">
-    <div style="display: inline-table; width: 50%;">
+    <div style="display: table-cell; width: 50%;">
         <div class="row">
             <div class="input-field col s12 m12 l6">
                 <input type="radio" name='labelSpot'>
@@ -135,7 +135,7 @@
         </div>
     </div>
 
-    <div style="display: inline-table; width: 50%;">
+    <div style="display: table-cell; width: 50%;">
         <ng-map default-style="false" center="current-location" geo-fallback-center="48.8534100, 2.3488000" zoom="8" id="myMap" style='height:100%;'>
             <marker
                 ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
