@@ -180,6 +180,8 @@ var Places = {
                         if (err) throw err;
                         caption.push(file.name);
                         console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
+                        console.log("caption: ");
+                        console.log(caption);
                     });
                 });
             });
@@ -250,7 +252,7 @@ var Places = {
                 res.send(err);
             } else {
                 console.log('DB updates with caption!');
-                res.send(data);
+                res.sendStatus(200);
             }
         });
     },
