@@ -180,7 +180,6 @@ var Places = {
                         if (err) throw err;
                         caption.push(file.name);
                         console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
-                        console.log("caption: ");
                         console.log(caption);
                     });
                 });
@@ -189,8 +188,8 @@ var Places = {
         form.on('error', function(err) {
             console.log('An error has occured: \n' + err);
         });
-        form.on('end', function() {
-            Places.updateAndDontUpdate(req.params.placeId, caption, res);
+        form.on('end', function(fields, files) {
+            if (files.length == caption.length) Places.updateAndDontUpdate(req.params.placeId, caption, res);
         });
         form.parse(req);
     },
