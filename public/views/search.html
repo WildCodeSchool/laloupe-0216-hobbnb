@@ -137,7 +137,7 @@
             </div>
         </div>
 
-        <div class="col s6" style='height:100%;'>
+        <div class="col s6" style='position: absolut; right: 0; top: 0; height: 100%;'>
             <ng-map default-style="false" center="current-location" geo-fallback-center="48.8534100, 2.3488000" zoom="8" id="myMap" style='height:100%;'>
                 <marker
                     ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
