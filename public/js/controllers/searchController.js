@@ -1,10 +1,10 @@
-angular.module('app').controller('searchController', function($scope, $http, NgMap, placesService, spotsService, usersService, searchFactory) {
+angular.module('app').controller('searchController', function($scope, NgMap, placesService, spotsService, usersService, searchFactory) {
 
     var delay;
     NgMap.getMap().then(function(map) {
         $scope.map = map;
     });
-
+    
     placesService.get().then(function(res) {
         console.log(res.data);
     });
