@@ -214,6 +214,7 @@ var Places = {
             if (err) {
                 res.send(err);
             } else {
+              console.log('sending');
                 res.send(data);
             }
         });
