@@ -72,6 +72,9 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         }
     });
 
+    $scope.sortableOptions = {
+    };
+
     $scope.photos = [];
     $scope.photo = null;
     $scope.maxReached = false;
@@ -98,25 +101,6 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     $scope.removePicture = function(index) {
       $scope.photos.splice(index, 1);
     };
-
-    // function gmapGeocode() {
-    //     var defer = $q.defer(),
-    //         addr = $scope.obj.address.street_number + ' ' + $scope.obj.address.route + ' ' + $scope.obj.address.postal_code + ' ' + $scope.obj.address.locality + ' ' + $scope.obj.address.country;
-    //     if (!this.geocoder) this.geocoder = new google.maps.Geocoder();
-    //     this.geocoder.geocode({
-    //         'address': addr
-    //     }, function(results, status) {
-    //         if (status == google.maps.GeocoderStatus.OK) {
-    //             var loc = results[0].geometry.location;
-    //             $scope.obj.latitude = loc.lat();
-    //             $scope.obj.longitude = loc.lng();
-    //             defer.resolve();
-    //         } else {
-    //             defer.reject('Adresse introuvable');
-    //         }
-    //     });
-    //     return defer.promise;
-    // }
 
     $scope.upload = function(photos) {
         if (photos && photos.length) {

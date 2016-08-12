@@ -15,7 +15,15 @@ html {
 .dragover {
     border: 5px dashed blue;
 }
+
+
+.list {
+	list-style: none outside none;
+	margin: 10px 0 30px;
+}
+
 .thumbnail {
+	float: left;
   position: relative;
   width: 200px;
   height: 200px;
@@ -31,10 +39,8 @@ html {
       -ms-transform: translate(-50%,-50%);
           transform: translate(-50%,-50%);
 }
-.thumbnail img.portrait {
-  width: 100%;
-  height: auto;
-}
+
+
 h1 {
     font-size: 41px
 }
