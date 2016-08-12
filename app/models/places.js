@@ -160,8 +160,6 @@ var Places = {
         var form = new formidable.IncomingForm();
         form.multiples = true;
         form.on('field', function(field, value) {
-            console.log(field);
-            console.log(value);
             totalFiles = value;
         });
         form.on('fileBegin', function(name, file) {
@@ -185,9 +183,7 @@ var Places = {
                     fs.unlink(tmpPath, function(err) {
                         if (err) throw err;
                         caption.push(file.name);
-                        console.log(caption.length + ' / ' + totalFiles);
-                        console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
-                        console.log(caption);
+                        console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name + ' ' + caption.length + ' / ' + totalFiles);
                         if (totalFiles == caption.length) Places.updateAndDontUpdate(req.params.placeId, caption, res);
                     });
                 });
@@ -195,9 +191,6 @@ var Places = {
         });
         form.on('error', function(err) {
             console.log('An error has occured: \n' + err);
-        });
-        form.on('end', function() {
-            res.sendStatus(200);
         });
         form.parse(req);
     },

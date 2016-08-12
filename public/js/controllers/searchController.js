@@ -19,6 +19,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     $scope.definitiveFilter = {};
     placesService.get().then(function(res) {
         $scope.positions = res.data;
+        console.log($scope.positions);
         $scope.positions.map(function(e) {
             if (e.rating.cleanness.length <= 0) {
                 e.rating.cleanness = [3];
