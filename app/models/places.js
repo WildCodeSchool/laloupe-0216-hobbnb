@@ -5,20 +5,6 @@ var im = require('imagemagick');
 var path = require('path');
 var fs = require('fs');
 
-var deleteFolderRecursive = function(path) {
-    if (fs.existsSync(path)) {
-        fs.readdirSync(path).forEach(function(file, index) {
-            var curPath = path + "/" + file;
-            if (fs.lstatSync(curPath).isDirectory()) { // recurse
-                deleteFolderRecursive(curPath);
-            } else { // delete file
-                fs.unlinkSync(curPath);
-            }
-        });
-        fs.rmdirSync(path);
-    }
-};
-
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"],
     propertiesType = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"],
     width = 600,
@@ -161,7 +147,8 @@ var Places = {
 
     uploadImages: function(req, res) {
 
-        var processedFileCount = 0;
+        var processedFileCount = 0,
+            caption = [];
         var targetPath = './public/uploads/places/' + req.params.placeId + '/';
 
         if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
@@ -173,63 +160,38 @@ var Places = {
         form.multiples = true;
         form.on('fileBegin', function(name, file) {
             processedFileCount++;
-            file.name =  processedFileCount + file.name.substr(file.name.lastIndexOf('.'));
+            file.name = processedFileCount + file.name.substr(file.name.lastIndexOf('.'));
         });
         form.on('file', function(field, file) {
-                var tmpPath = file.path;
+            var tmpPath = file.path;
+            im.resize({
+                srcPath: tmpPath,
+                dstPath: targetPath + 'large/img_' + file.name,
+                width: width
+            }, function(err) {
+                if (err) throw err;
                 im.resize({
                     srcPath: tmpPath,
-                    dstPath: targetPath + 'large/img_' + file.name,
-                    width: width
+                    dstPath: targetPath + 'thumb/img_' + file.name,
+                    width: width / 4
                 }, function(err) {
                     if (err) throw err;
-                    im.resize({
-                        srcPath: tmpPath,
-                        dstPath: targetPath + 'thumb/img_' + file.name,
-                        width: width / 4
-                    }, function(err) {
+                    fs.unlink(tmpPath, function(err) {
                         if (err) throw err;
-                        fs.unlink(tmpPath, function(err) {
-                            if (err) throw err;
-                            console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
-                        });
+                        caption.push(file.name);
+                        console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
                     });
                 });
+            });
         });
         form.on('error', function(err) {
             console.log('An error has occured: \n' + err);
         });
         form.on('end', function() {
-            res.sendStatus(200);
+            Places.updateAndDontUpdate(req.params.placeId, caption);
         });
         form.parse(req);
     },
-
-
-    // uploadImages: function(req, res) {
-    //     if (!fs.existsSync('./public/uploads/places/')) {
-    //         fs.mkdirSync('./public/uploads/places/');
-    //     }
-    //     var form = new formidable.IncomingForm();
-    //     form.parse(req, function(err, fields, files) {
-    //         var file = files.file;
-    //         var tempPath = file.path;
-    //         var targetPath = path.resolve('./public/uploads/places/' + fields.placeId + '/' + file.name);
-    //         if (!fs.existsSync('./public/uploads/places/' + fields.placeId + '/')) {
-    //             fs.mkdirSync('./public/uploads/places/' + fields.placeId + '/');
-    //         }
-    //         fs.rename(tempPath, targetPath, function(err) {
-    //             if (err) {
-    //                 throw err;
-    //             }
-    //             console.log("Upload complete for place ID: " + fields.placeId + ' an for image:' + file.name);
-    //             return res.json({
-    //                 name: file.name,
-    //                 path: '/uploads/places/' + fields.placeId + '/' + file.name
-    //             });
-    //         });
-    //     });
-    // },
 
     findOne: function(req, res) {
         Places.model.findById(req.params.id, function(err, data) {
@@ -277,12 +239,18 @@ var Places = {
         });
     },
 
-    updateAndDontUpdate: function(req, res) {
-        Places.model.findByIdAndUpdate(req.params.id, req.body.content, function(err) {
+    updateAndDontUpdate: function(placeId, caption, res) {
+        Places.model.findByIdAndUpdate(placeId, {
+            $set: {
+                caption: caption
+            }
+        }, function(err) {
             if (err) {
-                return err;
+                console.log(err);
+                res.send(err);
             } else {
-                return 200;
+                console.log('DB updates with caption!');
+                res.send(data);
             }
         });
     },
