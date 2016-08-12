@@ -159,11 +159,16 @@ var Places = {
 
         var form = new formidable.IncomingForm();
         form.multiples = true;
+        form.on('field', function(field, value) {
+            console.log(field);
+            console.log(value);
+            totalFiles = value;
+        });
         form.on('fileBegin', function(name, file) {
             processedFileCount++;
             file.name = processedFileCount + file.name.substr(file.name.lastIndexOf('.'));
         });
-        form.on('file', function(field, file) {
+        form.on('file', function(name, file) {
             var tmpPath = file.path;
             im.resize({
                 srcPath: tmpPath,
@@ -193,10 +198,7 @@ var Places = {
         });
         // form.on('end', function(fields, files) {
         // });
-        form.parse(req, function(err, fields, files) {
-            if (err) throw err;
-            totalFiles = files.length;
-        });
+        form.parse(req);
     },
 
     findOne: function(req, res) {
