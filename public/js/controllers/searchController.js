@@ -157,7 +157,7 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         return "../assets/hobbies/" + widget.primarySports + ".png";
     };
     $scope.pictPlace = function(widget) {
-        var url = "uploads/places/" + widget._id + "/" + widget.picture;
+        var url = "uploads/places/" + widget._id + "/thumb/" + widget.picture;
         return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
     };
     $scope.locationToData = function() {
