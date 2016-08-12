@@ -26,9 +26,8 @@ html {
     margin-bottom: 10px !important;
     border: 3px solid #999;
     height: 150px;
-    /* for ie < 8
     position: relative;
-    overflow: hidden;*/
+    overflow: hidden;
 }
 .thumbnail img {
     width: 100%;
