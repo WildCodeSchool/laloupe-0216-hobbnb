@@ -44,7 +44,11 @@ html {
           transform: translate(-50%,-50%);
 }
 
-
+.btn-small {
+    height: 20px;
+    line-height: 20px;
+    padding: 0 0.5rem;
+}
 h1 {
     font-size: 41px
 }
