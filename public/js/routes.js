@@ -387,5 +387,5 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
         });
 
         return deferred.promise;
-    };
+    }
 }
