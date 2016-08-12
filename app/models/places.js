@@ -188,7 +188,7 @@ var Places = {
             console.log('An error has occured: \n' + err);
         });
         form.on('end', function() {
-            Places.updateAndDontUpdate(req.params.placeId, caption);
+            Places.updateAndDontUpdate(req.params.placeId, caption, res);
         });
         form.parse(req);
     },
