@@ -72,12 +72,6 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         }
     });
 
-    $scope.sortableOptions = {
-        stop: function(e, ui) {
-            console.log($scope.photos);
-        }
-    };
-
     $scope.photos = [];
     $scope.photo = null;
     $scope.maxReached = false;
@@ -102,7 +96,14 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     });
 
     $scope.removePicture = function(index) {
-      $scope.photos.splice(index, 1);
+        $scope.photos.splice(index, 1);
+        console.log($scope.photos);
+    };
+
+    $scope.sortableOptions = {
+        stop: function(e, ui) {
+            console.log($scope.photos);
+        }
     };
 
     $scope.upload = function(photos) {
@@ -110,21 +111,21 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             // for (var i = 0; i < photos.length; i++) {
             //     var photo = photos[i];
             //     if (!photo.$error) {
-                    Upload.upload({
-                        url: '/api/places/uploadImages/' + $scope.addedPlaceID,
-                        data: {
-                            file: photos
-                        }
-                    }).progress(function(event) {
-                        var progressPercentage = parseInt(100.0 * event.loaded / event.total);
-                        console.log('progress: ' + progressPercentage + '% ' + event.config.data.file.name);
-                    }).success(function(data, status, headers, config) {
-                        console.log('file: ' +
-                            data.name + 'path: ' + data.path +
-                            ', Response: ' + JSON.stringify(data) +
-                            '\n');
-                    });
+            Upload.upload({
+                url: '/api/places/uploadImages/' + $scope.addedPlaceID,
+                data: {
+                    file: photos
                 }
+            }).progress(function(event) {
+                var progressPercentage = parseInt(100.0 * event.loaded / event.total);
+                console.log('progress: ' + progressPercentage + '% ' + event.config.data.file.name);
+            }).success(function(data, status, headers, config) {
+                console.log('file: ' +
+                    data.name + 'path: ' + data.path +
+                    ', Response: ' + JSON.stringify(data) +
+                    '\n');
+            });
+        }
         //     }
         // }
     };
