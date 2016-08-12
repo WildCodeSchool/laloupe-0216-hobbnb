@@ -191,7 +191,9 @@ var Places = {
         form.on('end', function(fields, files) {
             if (files.length == caption.length) Places.updateAndDontUpdate(req.params.placeId, caption, res);
         });
-        form.parse(req);
+        form.parse(req, function(err, fields, files) {
+            if (err) throw err;
+        });
     },
 
     findOne: function(req, res) {
