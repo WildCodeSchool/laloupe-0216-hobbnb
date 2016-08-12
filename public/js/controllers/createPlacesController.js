@@ -73,6 +73,9 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
     });
 
     $scope.sortableOptions = {
+        stop: function(e, ui) {
+            console.log($scope.photos);
+        }
     };
 
     $scope.photos = [];
