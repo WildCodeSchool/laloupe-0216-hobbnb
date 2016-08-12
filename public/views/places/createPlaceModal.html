@@ -89,7 +89,7 @@
 
                 <div class="row">
                     <ul ui-sortable="sortableOptions" ng-model="photos" class="list left">
-                        <li class="col s3 offset-s1 thumbnail" ng-repeat="photo in photos track by $index">
+                        <li class="col s3 thumbnail" ng-repeat="photo in photos track by $index">
                             <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating blue">
                                 <i class="material-icons">remove</i>
                             </a>
