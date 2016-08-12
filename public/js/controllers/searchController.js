@@ -112,7 +112,7 @@ angular.module('app').controller('searchController', function($scope, NgMap, pla
         };
 
         console.log($scope.definitiveFilter);
-        console.log(filters);
+        console.log($scope.filters);
     });
 
     $scope.developOptions = false;
