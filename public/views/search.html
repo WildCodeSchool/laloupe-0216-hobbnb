@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row" id="myMap">
+    <div class="row">
         <div class="col s6">
             <div class="row">
                 <div class="input-field col s12 m12 l6">
@@ -136,9 +136,54 @@
                 <dir-pagination-controls></dir-pagination-controls>
             </div>
         </div>
+
+        <div class="col s6">
+            <ng-map default-style="false" center="current-location" geo-fallback-center="48.8534100, 2.3488000" zoom="8" id="myMap" style='height:100%;'>
+                <marker
+                    ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
+                    position="[{{p.latitude}},{{p.longitude}}]"
+                    title={{p.shortDescription}}
+                    icon="{
+                      url:'{{tile(p.primarySports)}}',
+                      scaledSize:[32,32],
+                      origin: [0,0],
+                      anchor: [16,32]
+                      }"
+                    on-click="toggleInfoWindow(event, $index)"
+                    clickable="true"></marker>
+                <info-window id="popup" max-width="200">
+                    <a href="/place/{{positions[indexOfTheTruc]._id}}" target="_blank">
+                        <div class="card">
+                            <div class="card-image">
+                                <img class="placepict" src="/uploads/places/{{positions[indexOfTheTruc]._id}}/thumb/img_{{positions[indexOfTheTruc].picture}}" style="height:80px;">
+                                <span class="card-title" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{positions[indexOfTheTruc].home.price}}€</span>
+                            </div>
+                            <div class="card-content">
+                                <p>
+                                    <div>{{positions[indexOfTheTruc].name}}</div>
+                                    <div>
+                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>0'>star</i>
+                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>1'>star</i>
+                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>2'>star</i>
+                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>3'>star</i>
+                                        <i class="tiny material-icons yellow-text text-darken-2" ng-show='globalRating>4'>star</i>
+                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>0'>star</i>
+                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>1'>star</i>
+                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>2'>star</i>
+                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>3'>star</i>
+                                        <i class="tiny material-icons yellow-text text-lighten-2" ng-show='globalLowerRating>4'>star</i>
+                                        <sup>({{reviewNb}})</sup>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </info-window>
+            </ng-map>
+        </div>
     </div>
 </div>
-<div class="" style='position:fixed; right: 0; top: 70px; height: 100%; width: 50%; z-index:-1'>
+<!-- <div class="" style='position:fixed; right: 0; top: 70px; height: 100%; width: 50%; z-index:-1'>
     <ng-map default-style="false" center="current-location" geo-fallback-center="48.8534100, 2.3488000" zoom="8" id="myMap" style='height:100%;'>
         <marker
             ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
@@ -181,7 +226,7 @@
             </a>
         </info-window>
     </ng-map>
-</div>
+</div> -->
 
 <script type="text/javascript">
     $(document).ready(function() {
