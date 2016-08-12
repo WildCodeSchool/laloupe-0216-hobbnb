@@ -5,6 +5,10 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
         $scope.map = map;
     });
 
+    placesService.get().then(function(res) {
+        console.log(res.data);
+    });
+
     /* initialisation */
     $scope.hobbiesListing = ['Peu importe', "Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.formHobby = 'Choisissez un hobby...';
