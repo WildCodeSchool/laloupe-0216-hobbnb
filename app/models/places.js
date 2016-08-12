@@ -182,6 +182,7 @@ var Places = {
                         caption.push(file.name);
                         console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
                         console.log(caption);
+                        if (totalFiles == caption.length) Places.updateAndDontUpdate(req.params.placeId, caption, res);
                     });
                 });
             });
@@ -189,11 +190,8 @@ var Places = {
         form.on('error', function(err) {
             console.log('An error has occured: \n' + err);
         });
-        form.on('end', function(fields, files) {
-            console.log(totalFiles);
-                console.log(caption);
-            if (totalFiles == caption.length) Places.updateAndDontUpdate(req.params.placeId, caption, res);
-        });
+        // form.on('end', function(fields, files) {
+        // });
         form.parse(req, function(err, fields, files) {
             if (err) throw err;
             totalFiles = files.length;
