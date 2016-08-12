@@ -262,6 +262,7 @@ li.active {
     background: #3cdf91!important
 }
 .page-footer {
+    margin: 0 !important;
     background: #64737b!important
 }
 .dropdown-content li>span {
