@@ -21,21 +21,21 @@ angular.module('app').controller('searchController', function($scope, $http, NgM
     placesService.get().then(function(res) {
         console.log(res.data);
         $scope.positions = res.data;
-        // $scope.positions.map(function(e) {
-        //     if (e.rating.cleanness.length <= 0) {
-        //         e.rating.cleanness = [3];
-        //     }
-        //     if (e.rating.location.length <= 0) {
-        //         e.rating.location = [3];
-        //     }
-        //     if (e.rating.valueForMoney.length <= 0) {
-        //         e.rating.valueForMoney = [3];
-        //     }
-        //     usersService.getOne(e.owner).then(function(res) {
-        //         e.owner = res.data;
-        //     });
-        //     return e;
-        // });
+        $scope.positions.map(function(e) {
+            if (e.rating.cleanness.length <= 0) {
+                e.rating.cleanness = [3];
+            }
+            if (e.rating.location.length <= 0) {
+                e.rating.location = [3];
+            }
+            if (e.rating.valueForMoney.length <= 0) {
+                e.rating.valueForMoney = [3];
+            }
+            usersService.getOne(e.owner).then(function(res) {
+                e.owner = res.data;
+            });
+            return e;
+        });
 
         var selectChoice = function(v, choice) { //exemple de v=[home, houseAmenities,bbq]
             if (!$scope.definitiveFilter[v[0]]) $scope.definitiveFilter[v[0]] = [];
