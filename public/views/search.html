@@ -139,7 +139,7 @@
     </div>
 </div>
 <div class="" style='position:fixed; right: 0; top: 70px; height: 100%; width: 50%; z-index:-1'>
-    <ng-map default-style="false" center="current-location" geo-fallback-center="48.8534100, 2.3488000" zoom="8" id="myMap" lazy-init="true" style='height:100%;'>
+    <ng-map default-style="false" center="current-location" geo-fallback-center="48.8534100, 2.3488000" zoom="8" id="myMap" style='height:100%;'>
         <marker
             ng-repeat="p in positions | filter : definitiveFilter | betweenLat:latitudemin:latitudemax | betweenLon:longitudemin:longitudemax | betweenPrice:filters.minPrice:filters.maxPrice"
             position="[{{p.latitude}},{{p.longitude}}]"
