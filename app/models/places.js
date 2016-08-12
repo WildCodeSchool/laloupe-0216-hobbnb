@@ -148,7 +148,8 @@ var Places = {
     uploadImages: function(req, res) {
 
         var processedFileCount = 0,
-            caption = [];
+            caption = [],
+            totalFiles = 0;
         var targetPath = './public/uploads/places/' + req.params.placeId + '/';
 
         if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
@@ -189,10 +190,13 @@ var Places = {
             console.log('An error has occured: \n' + err);
         });
         form.on('end', function(fields, files) {
-            if (files.length == caption.length) Places.updateAndDontUpdate(req.params.placeId, caption, res);
+            console.log(totalFiles);
+                console.log(caption);
+            if (totalFiles == caption.length) Places.updateAndDontUpdate(req.params.placeId, caption, res);
         });
         form.parse(req, function(err, fields, files) {
             if (err) throw err;
+            totalFiles = files.length;
         });
     },
 
