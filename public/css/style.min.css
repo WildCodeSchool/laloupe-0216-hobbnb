@@ -4,7 +4,6 @@ html {
 .main {
     min-height: 75vh
 }
-
 .drop-box {
     background: #F8F8F8;
     border: 5px dashed #DDD;
@@ -13,37 +12,34 @@ html {
     height: 150px;
     margin: 10px;
 }
-.drop-box h5{
+.drop-box h5 {
     margin: auto;
 }
 .dragover {
     border: 5px dashed blue;
 }
-
-
 .list {
-	list-style: none outside none;
-  width: 100%;
+    list-style: none outside none;
+    width: 100%;
 }
-
 .thumbnail {
-  margin-bottom: 10px !important;
-	border: 3px solid #999;
-  position: relative;
-  height: 150px;
-  overflow: hidden;
+    margin-bottom: 10px !important;
+    border: 3px solid #999;
+    position: relative;
+    height: 150px;
+    overflow: hidden;
 }
 .thumbnail img {
-  position: absolute;
-  left: 50%;
+    position: absolute;
+    /*left: 50%;
   top: 50%;
   min-height: 100%;
   width: auto;
   -webkit-transform: translate(-50%,-50%);
       -ms-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);*/
+    object-fit: cover;
 }
-
 h1 {
     font-size: 41px
 }
