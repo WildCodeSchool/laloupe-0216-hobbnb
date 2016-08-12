@@ -180,6 +180,7 @@ var Places = {
                     fs.unlink(tmpPath, function(err) {
                         if (err) throw err;
                         caption.push(file.name);
+                        console.log(caption.length + ' / ' + totalFiles);
                         console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name);
                         console.log(caption);
                         if (totalFiles == caption.length) Places.updateAndDontUpdate(req.params.placeId, caption, res);
