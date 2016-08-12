@@ -87,14 +87,16 @@
                     Vous avez attend le maximum de 6 photos autorisées au maximum
                 </p>
 
-                <ul ui-sortable="sortableOptions" ng-model="photos" class="row list left">
-                    <li class="thumbnail" ng-repeat="photo in photos track by $index">
-                        <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating blue">
-                            <i class="material-icons">remove</i>
-                        </a>
-                        <img ngf-thumbnail="photo">
-                    </li>
-                </ul>
+                <div class="row">
+                    <ul ui-sortable="sortableOptions" ng-model="photos" class="list left">
+                        <li class="thumbnail" ng-repeat="photo in photos track by $index">
+                            <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating blue">
+                                <i class="material-icons">remove</i>
+                            </a>
+                            <img ngf-thumbnail="photo">
+                        </li>
+                    </ul>
+                </div>
                 <div class="row">
                     <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=3; upload(photos)'>
                         Confirmer
