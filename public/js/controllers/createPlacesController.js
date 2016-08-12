@@ -114,7 +114,7 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
             Upload.upload({
                 url: '/api/places/uploadImages/' + $scope.addedPlaceID,
                 data: {
-                    totalFiles: $scope.photos,
+                    totalFiles: photos.length,
                     file: photos
                 }
             }).progress(function(event) {

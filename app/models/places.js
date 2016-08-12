@@ -196,8 +196,9 @@ var Places = {
         form.on('error', function(err) {
             console.log('An error has occured: \n' + err);
         });
-        // form.on('end', function(fields, files) {
-        // });
+        form.on('end', function() {
+            res.sendStatus(200);
+        });
         form.parse(req);
     },
 
