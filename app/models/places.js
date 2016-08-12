@@ -212,6 +212,7 @@ var Places = {
     findAll: function(req, res) {
         Places.model.find(function(err, data) {
             if (err) {
+              console.log(err);
                 res.send(err);
             } else {
               console.log('sending');
@@ -229,7 +230,7 @@ var Places = {
             } else {
                 res.send(data);
             }
-        })
+        });
     },
 
     update: function(req, res) {
