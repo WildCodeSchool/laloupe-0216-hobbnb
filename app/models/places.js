@@ -6,9 +6,7 @@ var path = require('path');
 var fs = require('fs');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"],
-    propertiesType = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"],
-    width = 600,
-    height = 600;
+    propertiesType = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
 
 var placesSchema = new mongoose.Schema({
     isActive: Boolean,
@@ -147,9 +145,11 @@ var Places = {
 
     uploadImages: function(req, res) {
 
-        var processedFileCount = 0,
+        var fileCount = 0,
+            processedFileCount = 0,
             caption = [],
-            totalFiles = 0;
+            totalFiles = 0,
+            width = 1200;
         var targetPath = './public/uploads/places/' + req.params.placeId + '/';
 
         if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
@@ -163,8 +163,9 @@ var Places = {
             totalFiles = value;
         });
         form.on('fileBegin', function(name, file) {
-            processedFileCount++;
-            file.name = processedFileCount + file.name.substr(file.name.lastIndexOf('.'));
+            fileCount++;
+            file.name = fileCount + file.name.substr(file.name.lastIndexOf('.'));
+            caption.push(file.name);
         });
         form.on('file', function(name, file) {
             var tmpPath = file.path;
@@ -182,9 +183,9 @@ var Places = {
                     if (err) throw err;
                     fs.unlink(tmpPath, function(err) {
                         if (err) throw err;
-                        caption.push(file.name);
+                        processedFileCount++;
                         console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name + ' ' + caption.length + ' / ' + totalFiles);
-                        if (totalFiles == caption.length) Places.updateAndDontUpdate(req.params.placeId, caption, res);
+                        if (totalFiles == processedFileCount) Places.updateAndDontUpdate(req.params.placeId, caption, res);
                     });
                 });
             });
@@ -212,10 +213,10 @@ var Places = {
     findAll: function(req, res) {
         Places.model.find(function(err, data) {
             if (err) {
-              console.log(err);
+                console.log(err);
                 res.send(err);
             } else {
-              console.log('sending');
+                console.log('sending');
                 res.send(data);
             }
         });

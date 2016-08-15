@@ -1,4 +1,4 @@
-angular.module('app').controller('createPlacesController', function($scope, $http, $q, $window, $rootScope, $location, $routeParams, Upload, placesFactory, placesService, emailService) {
+angular.module('app').controller('createPlacesController', function($scope, $q, $window, $http, $location, $routeParams, Upload, placesFactory, placesService, emailService) {
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
@@ -53,8 +53,6 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         return $scope.details;
     }, function() {
         if ($scope.details) {
-            console.log('changed!');
-            console.log($scope.details);
             for (var i = 0; i < $scope.details.address_components.length; i++) {
                 var addressType = $scope.details.address_components[i].types[0];
                 if (componentForm[addressType]) {
@@ -100,17 +98,8 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
         console.log($scope.photos);
     };
 
-    $scope.sortableOptions = {
-        stop: function(e, ui) {
-            console.log($scope.photos);
-        }
-    };
-
     $scope.upload = function(photos) {
         if (photos && photos.length) {
-            // for (var i = 0; i < photos.length; i++) {
-            //     var photo = photos[i];
-            //     if (!photo.$error) {
             Upload.upload({
                 url: '/api/places/uploadImages/' + $scope.addedPlaceID,
                 data: {
@@ -127,8 +116,6 @@ angular.module('app').controller('createPlacesController', function($scope, $htt
                     '\n');
             });
         }
-        //     }
-        // }
     };
 
     $scope.send = function() {

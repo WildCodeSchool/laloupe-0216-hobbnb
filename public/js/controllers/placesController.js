@@ -75,8 +75,8 @@ angular.module('app').controller('placesController', function($scope, $window, $
         $scope.host.comments.forEach(function(c, i) {
             usersService.getOne(c.owner).then(function(r) {
                 $scope.host.comments[i].owner = r.data;
-            })
-        })
+            });
+        });
     });
 
 });

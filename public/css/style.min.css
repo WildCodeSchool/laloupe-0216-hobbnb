@@ -22,6 +22,80 @@ html {
     list-style: none outside none;
     width: 100%;
 }
+.star-rating {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+.star-rating .star {
+    padding: 1px;
+    color: #ddd;
+    font-size: 20px;
+    text-shadow: .05em .05em #aaa;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.star-rating .star.filled {
+    color: #fd0;
+}
+
+/*.star-rating.readonly .star.filled {
+  color: #666;
+}*/
+
+.search-left-col {
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.search-left-col form {
+    margin: 1rem 2rem;
+}
+.search-rigth-col {
+    padding: 0 !important;
+    position: absolute;
+    right: 0 !important;
+    width: 50%;
+    height: 100%;
+}
+.no-margin {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.table-wrapper {
+    width: 100%;
+    display: table;
+}
+.custom-btn {
+    padding: 0.2em 2rem;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border: 1px #7f7f7f solid;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+.custom-btn:focus, .custom-btn:active:focus, .custom-btn.active:focus {
+    outline: 0 none;
+}
+.custom-btn:hover, .custom-btn:focus, .custom-btn:active {
+    background: #b3e5fc;
+}
+.custom-btn.active {
+    background: #67C9FF;
+    box-shadow: none;
+}
+.custom-btn.sharp {
+    border-radius: 0;
+}
+.custom-btn img {
+    vertical-align: middle;
+}
 .thumbnail {
     margin-bottom: 10px !important;
     border: 3px solid #999;
@@ -66,8 +140,18 @@ p {
     font-size: 14px;
     color: #7f7f7f
 }
+.hobbnb-font {
+    font-size: 14px;
+    color: #7f7f7f;
+    font-family: Roboto, 'sans-serif'
+}
 .tabs .indicator {
     background-color: #7f7f7f
+}
+#widgets {
+    background-color: #e0e0e0;
+    margin: 0 !important;
+    padding: 1rem 2rem !important;
 }
 #widgets .card-image {
     height: 210px;
@@ -81,7 +165,7 @@ p {
 }
 #widgets .actpict {
     position: absolute;
-    left: 5px;
+    left: 15px;
     width: 32px
 }
 #widgets .authorpict {
@@ -217,18 +301,11 @@ p {
     line-height: 30px;
     padding-left: 10px
 }
-#btnHome, #btnSpot {
-    display: block;
-    width: 100%
-}
 #popup .card-image {
     height: 80px;
     overflow: hidden;
     vertical-align: middle;
     z-index: 1
-}
-#popup .placepict {
-    width: 120px
 }
 #popup .card-content div {
     width: 150px

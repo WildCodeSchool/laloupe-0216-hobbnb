@@ -186,10 +186,6 @@ p {
     line-height: 30px;
     padding-left: 10px;
 }
-#btnSpot, #btnHome {
-    display: block;
-    width: 100%;
-}
 
 /* Style popup */
 

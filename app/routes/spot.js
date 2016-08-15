@@ -9,6 +9,7 @@ module.exports = function(app) {
     spotsRouter.get('/:id', Spot.findOne);
     spotsRouter.get('/', Spot.findAll);
     spotsRouter.post('/', Auth.user.hasAuthorization, Spot.create);
+    spotsRouter.post('/uploadImages/:spotId', Auth.user.hasAuthorization, Spot.uploadImages);
     spotsRouter.put('/:id', Auth.user.hasAuthorization, Spot.update);
     spotsRouter.delete('/:id', Auth.user.hasAuthorization, Auth.user.isAdministrator, Spot.delete);
 

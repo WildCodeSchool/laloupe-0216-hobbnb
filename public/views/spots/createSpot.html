@@ -1,137 +1,123 @@
 <div class="container">
-    <div class="row">
-        <div class="col s12">
-            <h1>{{isAction.charAt(0).toUpperCase() + isAction.slice(1)}}
-                d'un spot</h1>
-        </div>
-    </div>
-    <div ng-show='step==1'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="4" value='1' disabled id='slider' />
-                <label for="slider">Etape 1/4</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.name" type="text" ng-model='obj.name'>
-                <label for="obj.name">Nom de votre spot</label>
-            </div>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2'>
-                Suivant
-                <i class='material-icons right'>keyboard_arrow_right</i>
-            </button>
-        </div>
-    </div>
-    <div ng-show='step==2'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="4" value='2' disabled id='slider2' />
-                <label for="slider2">Etape 2/4</label>
-            </div>
-        </div>
-        <h2>Hobbies</h2>
-        <div class="row">
-            <select material-select ng-model="obj.primarySports">
-                <option value=''>Primaire</option>
-                <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
-            </select>
-        </div>
-        <div class="row">
-            <select material-select ng-model="obj.secondarySports[0]">
-                <option value=''>Secondaire</option>
-                <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
-            </select>
-        </div>
-        <div class="row">
-            <select material-select ng-model="obj.secondarySports[1]">
-                <option value=''>Secondaire</option>
-                <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
-            </select>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=1'>
-                Précédent
-                <i class='material-icons left'>keyboard_arrow_left</i>
-            </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=3; reloadMap()'>
-                Suivant
-                <i class='material-icons right'>keyboard_arrow_right</i>
-            </button>
-        </div>
-    </div>
-    <div ng-show='step==3'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="4" value='3' disabled id='slider3' />
-                <label for="slider3">Etape 3/4</label>
-            </div>
-        </div>
-        <h2>Adresse</h2>
-        <ng-map zoom="8" lazy-init="true" default-style="false"  on-click="placeMarker()"
-             center="current-location" geo-fallback-center="48.8534100, 2.3488000" id="myMap" scrollwheel='false'>
-        </ng-map>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=2'>
-                Précédent
-                <i class='material-icons left'>keyboard_arrow_left</i>
-            </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=4'>
-                Suivant
-                <i class='material-icons right'>keyboard_arrow_right</i>
-            </button>
-        </div>
-    </div>
-    <div ng-show='step==4'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="4" value='4' disabled id='slider7' />
-                <label for="slider7">Etape 4/4</label>
-            </div>
-        </div>
-        <h2>Prévisualisation</h2>
-        <div class="col s12">
-            <div class="row card-panel valign-wrapper">
-                <div class="col s4 m3">
-                    <div class='valign center-align'>
-                        <img src="/uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="Tom" class='circle responsive-img' />
-                        <br/>
-                        <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
-                    </div>
-                </div>
-                <div class="col s8 m9">
-                    <h4>{{obj.name}}</h4>
-                    <h5>{{obj.address.country}},
-                        {{obj.address.administrative_area_level_1}}</h5>
-                    <p class='left'>{{obj.address.street_number}} {{obj.address.route}} {{obj.address.postal_code}} {{obj.address.locality}}</p>
-                    <div class="row center-align">
-                        <div class="col m2 l1">
-                            &nbsp;
-                        </div>
-                        <div class="col m4 l2">
-                            <img src="/assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt="" />
-                            <br/> {{obj.primarySports}}
-                        </div>
-                        <div class="col m4 l2" ng-repeat="sport in obj.secondarySports">
-                            <img src="/assets/hobbies/{{sport}}.png" class='hobby-small' alt="" />
-                            <br/> {{sport}}
-                        </div>
-                    </div>
+    <div class="card-panel">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h1>{{isAction.charAt(0).toUpperCase() + isAction.slice(1)}}
+                        d'un spot</h1>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=1'>
-                Revenir &amp; modifier
-                <i class='material-icons left'>keyboard_arrow_left</i>
-            </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='send()'>
-                Confirmer la {{isAction}} de l'hébergement &amp; envoyer des photos
-                <i class='material-icons right'>add</i>
-            </button>
-            <br> {{error}}
+            <div ng-show='step==1'>
+                <div class='row'>
+                    <div class="range-field">
+                        <input type="range" min="1" max="2" value='1' disabled id='slider'/>
+                        <label for="slider">Etape 1/2</label>
+                    </div>
+                </div>
+                <div class='row no-margin hobbnb-font'>
+                    <div class="col s12 m12 l6">
+                        <div class="row no-margin">
+                            <div class="input-field col s12">
+                                <input id="obj.name" type="text" ng-model='obj.name'>
+                                <label for="obj.name">Nom du spot</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <select material-select ng-model="obj.primarySports">
+                                    <option value=''>Spot de</option>
+                                    <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
+                                </select>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" class="autocomplete" ng-model="refAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="" allow-only-results="true" name="address">
+                                <label>Adresse:</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" ng-model='spotMarkerPos' disabled>
+                                <label for="address">Coordonées GPS:</label>
+                            </div>
+                        </div>
+                        <!-- <table>
+                        <tbody>
+                            <tr>
+                                <td>Latitude / longitude:</td>
+                                <td>{{obj.latitude}},{{obj.longitude}}</td>
+                            </tr>
+                            <tr>
+                                <td>n° de rue:</td>
+                                <td>{{obj.address.street_number}}</td>
+                            </tr>
+                            <tr>
+                                <td>Route:</td>
+                                <td>{{obj.address.route}}</td>
+                            </tr>
+                            <tr>
+                                <td>Ville:</td>
+                                <td>{{obj.address.locality}}</td>
+                            </tr>
+                            <tr>
+                                <td>Code postal:</td>
+                                <td>{{obj.address.postal_code}}</td>
+                            </tr>
+                            <tr>
+                                <td>Région:</td>
+                                <td>{{obj.address.administrative_area_level_1}}</td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+                    </div>
+                    <div class="col s12 m12 l6">
+                        <ng-map zoom="8" center="{{spotMarkerPos}}" default-style="false" id="myMap" style="height: 100%">
+                            <marker position="{{spotMarkerPos}}" draggable="true" on-dragend="getCurrentMarkerLocation()"></marker>
+                        </ng-map>
+                    </div>
+                </div>
+                <div class="row center hobbnb-font">
+                    Vous pouvez déplacer le marqueur sur la map pour une localisation plus précise du spot.<br/>
+                    Une adresse connue a proximité des coordonnées est donnée en référence.
+                </div>
+                <div class="row">
+                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2; send();'>
+                        Suivant
+                        <i class='material-icons right'>keyboard_arrow_right</i>
+                    </button>
+                </div>
+            </div>
+            <div ng-show='step==2'>
+                <div class='row'>
+                    <div class="range-field">
+                        <input type="range" min="1" max="2" value='2' disabled id='slider2'/>
+                        <label for="slider2">Etape 2/2</label>
+                    </div>
+                </div>
+                <h2>Photos</h2>
+                <div class="row" ng-hide="maxReached">
+                    <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
+                    <div ngf-drop ngf-select ng-model="photo" class="drop-box valign-wrapper" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
+                        <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
+                    </div>
+                </div>
+                <p class="center-align" ng-show="maxReached">
+                    Vous avez attend le maximum de 12 photos autorisées au maximum
+                </p>
+                <div class="row">
+                    <ul ui-sortable="sortableOptions" ng-model="photos" class="list left">
+                        <div class="col s3" ng-repeat="photo in photos track by $index">
+                            <li class="thumbnail">
+                                <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating red">
+                                    <i class="material-icons">remove</i>
+                                </a>
+                                <img ngf-thumbnail="photo">
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="row">
+                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='upload(photos)'>
+                        Envoyer les photos
+                        <i class='material-icons right'>keyboard_arrow_right</i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

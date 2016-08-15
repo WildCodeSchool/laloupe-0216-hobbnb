@@ -35,7 +35,7 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                 }]
             }
         })
-        .when('/search', {
+        .when('/search/', {
             templateUrl: '/views/search.html',
             controller: 'searchController',
             resolve: {
@@ -43,10 +43,9 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            '/js/directives/starRatingDirective.js',
                             '/js/services/usersService.js',
                             '/js/services/placesService.js',
-                            '/js/services/spotsService.js',
-                            '/js/factories/placesFactory.js',
                             '/js/factories/searchFactory.js',
                             '/js/filters/rangeFilter.js',
                             '/js/filters/betweenFilter.js',
@@ -64,10 +63,9 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            '/js/directives/starRatingDirective.js',
                             '/js/services/usersService.js',
-                            '/js/services/placesService.js',
                             '/js/services/spotsService.js',
-                            '/js/factories/placesFactory.js',
                             '/js/factories/searchFactory.js',
                             '/js/filters/rangeFilter.js',
                             '/js/filters/betweenFilter.js',
@@ -168,6 +166,9 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            '/js/libs/jquery-ui.min.js',
+                            '/js/libs/sortable.js',
+                            '/js/libs/ng-file-upload.min.js',
                             '/js/services/spotsService.js',
                             '/js/services/emailService.js',
                             '/js/factories/spotsFactory.js',
