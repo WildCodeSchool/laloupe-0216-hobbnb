@@ -28,8 +28,9 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
         console.log(err);
         console.log('Trying with ipinfo:');
         $http.get("http://ipinfo.io").then(function(ipinfo) {
-            $scope.centerMap = ipinfo.data.loc;
+            $scope.spotMarkerPos = ipinfo.data.loc;
         });
+        console.log($scope.spotMarkerPos);
     });
 
     $scope.getCurrentMarkerLocation = function(event) {
