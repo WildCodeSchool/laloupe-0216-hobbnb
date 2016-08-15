@@ -48,7 +48,8 @@ var spotsSchema = new mongoose.Schema({
         popularity: {
             type: Number,
             max: 5,
-            min: 0
+            min: 0,
+            default: 0
         },
         quality: [{
             type: Number,
@@ -68,7 +69,8 @@ var spotsSchema = new mongoose.Schema({
         overallRating: {
             type: Number,
             max: 5,
-            min: 0
+            min: 0,
+            default: 0
         }
     },
     about: String,

@@ -85,13 +85,7 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
         $scope.obj.isActive = "1";
         $scope.obj.owner = $scope.currentUser._id;
         $scope.obj.spot = {};
-        $scope.obj.rating = {
-            popularity: 3,
-            quality: 3,
-            beauty: 3,
-            accessibility: 3,
-            overallRating: 3
-        };
+        $scope.obj.rating = {};
         $scope.obj.secondarySports = [];
         $scope.obj.creation = new Date();
         $scope.obj.modification = new Date();
