@@ -1,13 +1,8 @@
-var express = require('express'),
-    adminRouter = express.Router(),
-    Admin = require('../models/admin.js'),
+var Admin = require('../models/admin.js'),
     Auth = require('../middlewares/authorization.js');
 
 module.exports = function(app) {
-
-    adminRouter.get('/', Admin.findAll);
-    adminRouter.post('/', Auth.user.isAdministrator, Admin.create);
-    adminRouter.put('/:id', Auth.user.isAdministrator, Admin.update);
-
-    app.use('/admin', adminRouter);
+    app.get('/admin', Admin.findAll);
+    app.post('/admin', Auth.user.isAdministrator, Admin.create);
+    app.put('/admin/:id', Auth.user.isAdministrator, Admin.update);
 };
