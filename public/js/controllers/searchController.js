@@ -24,14 +24,14 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     NgMap.getMap('myMap').then(function(map) {
         $scope.map = map;
     });
-    
+
     NavigatorGeolocation.getCurrentPosition().then(function(res) {
         console.log(res);
     }, function(err) {
         /* when google geoloc fail */
         console.log(err);
         console.log('Trying with ipinfo:');
-        $http.get("http://ipinfo.io").then(function(ipinfo) {
+        $http.get("https://ipinfo.io").then(function(ipinfo) {
             $scope.centerMap = ipinfo.data.loc;
         });
     });
