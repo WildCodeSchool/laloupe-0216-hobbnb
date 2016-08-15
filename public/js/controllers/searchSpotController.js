@@ -27,7 +27,7 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
         /* when google geoloc fail */
         console.log(err);
         console.log('Trying with ipinfo:');
-        $http.get("https://ipinfo.io").then(function(ipinfo) {
+        $http.get("http://ipinfo.io").then(function(ipinfo) {
             $scope.centerMap = ipinfo.data.loc;
         });
     });
