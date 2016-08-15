@@ -2,7 +2,7 @@ angular.module('app')
     .service('placesService', function($http) {
         return {
             get: function() {
-                return $http.get('/api/places/');
+                return $http.get('/api/places');
             },
             getOne: function(id) {
                 return $http.get('/api/places/' + id);
