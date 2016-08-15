@@ -1,17 +1,11 @@
-var express = require('express'),
-    placesRouter = express.Router(),
-    Place = require('../models/places.js'),
+var Place = require('../models/places.js'),
     Auth = require('../middlewares/authorization.js');
-
 module.exports = function(app) {
-
-    placesRouter.get('/user/:id', Auth.user.hasAuthorization, Place.findPlacesOfUser);
-    placesRouter.get('/:id', Place.findOne);
-    placesRouter.get('/', Place.findAll);
-    placesRouter.post('/', Auth.user.hasAuthorization, Place.create);
-    placesRouter.post('/uploadImages/:placeId', Auth.user.hasAuthorization, Place.uploadImages);
-    placesRouter.put('/:id', Auth.user.hasAuthorization, Place.update);
-    placesRouter.delete('/:id', Auth.user.hasAuthorization, Auth.user.isAdministrator, Place.delete);
-
-    app.use('/places', placesRouter);
+    app.get('/places/user/:id', Auth.user.hasAuthorization, Place.findPlacesOfUser);
+    app.get('/places/:id', Place.findOne);
+    app.get('/places', Place.findAll);
+    app.post('/places', Auth.user.hasAuthorization, Place.create);
+    app.post('/places/uploadImages/:placeId', Auth.user.hasAuthorization, Place.uploadImages);
+    app.put('/places/:id', Auth.user.hasAuthorization, Place.update);
+    app.delete('/places/:id', Auth.user.hasAuthorization, Auth.user.isAdministrator, Place.delete);
 };
