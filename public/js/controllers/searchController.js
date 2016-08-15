@@ -50,6 +50,7 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     });
 
     placesService.get().then(function(res) {
+        console.log(res.data);
         $scope.positions = res.data;
         $scope.positions.map(function(e) {
             if (e.rating.cleanness.length <= 0) {

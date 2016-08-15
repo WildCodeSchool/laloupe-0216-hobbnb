@@ -1,4 +1,4 @@
-// MODEL PLACES
+// MODEL SPOTS
 var mongoose = require('mongoose');
 var formidable = require('formidable');
 var im = require('imagemagick');
@@ -192,8 +192,8 @@ var Spots = {
         });
     },
 
-    updateAndDontUpdate: function(placeId, caption, res) {
-        Spots.model.findByIdAndUpdate(placeId, {
+    updateAndDontUpdate: function(spotId, caption, res) {
+        Spots.model.findByIdAndUpdate(spotId, {
             $set: {
                 caption: caption
             }

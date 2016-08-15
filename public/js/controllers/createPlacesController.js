@@ -130,10 +130,10 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
             });
         }
         act.then(function(res) {
-            $scope.isAction == 'création' && emailService.sendToAdmin(
-                'Un hébergement à été créé sur hobbnb',
-                'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
-            );
+            // $scope.isAction == 'création' && emailService.sendToAdmin(
+            //     'Un hébergement à été créé sur hobbnb',
+            //     'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
+            // );
             // $scope.obj = {};
             // resetObj();
             // $location.path('/picture/places/0/' + res.data._id);

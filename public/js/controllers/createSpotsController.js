@@ -1,4 +1,4 @@
-angular.module('app').controller('createSpotsController', function($scope, $q, $window, $http, $location, $routeParams, NgMap, NavigatorGeolocation,GeoCoder, Upload, spotsFactory, spotsService, emailService) {
+angular.module('app').controller('createSpotsController', function($scope, $q, $window, $http, $location, $routeParams, NgMap, NavigatorGeolocation, GeoCoder, Upload, spotsFactory, spotsService, emailService) {
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
@@ -175,13 +175,13 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
             });
         }
         act.then(function(res) {
-            $scope.isAction == 'création' && emailService.sendToAdmin(
-                'Un spot à été créé sur hobbnb',
-                'Un spot a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/spot/' + res.data._id + '">Le consulter</a>'
-            );
+            // $scope.isAction == 'création' && emailService.sendToAdmin(
+            //     'Un spot à été créé sur hobbnb',
+            //     'Un spot a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/spot/' + res.data._id + '">Le consulter</a>'
+            // );
             $scope.addedSpotID = res.data._id;
-            $scope.obj = {};
-            resetObj();
+            // $scope.obj = {};
+            // resetObj();
         }, function(err) {
             $scope.error = err;
         });
