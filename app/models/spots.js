@@ -45,6 +45,11 @@ var spotsSchema = new mongoose.Schema({
         complement: String
     },
     rating: {
+        popularity: {
+            type: Number,
+            max: 5,
+            min: 0
+        },
         quality: [{
             type: Number,
             max: 5,
@@ -59,7 +64,12 @@ var spotsSchema = new mongoose.Schema({
             type: Number,
             max: 5,
             min: 0
-        }]
+        }],
+        overallRating: {
+            type: Number,
+            max: 5,
+            min: 0
+        }
     },
     about: String,
     primarySports: {

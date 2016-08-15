@@ -48,8 +48,8 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
     spotsService.get().then(function(res) {
         $scope.positions = res.data;
         $scope.positions.map(function(e) {
-            if (e.rating.popularity.length <= 0) {
-                e.rating.popularity = [3];
+            if (e.rating.popularity <= 0) {
+                e.rating.popularity = 3;
             }
             if (e.rating.quality.length <= 0) {
                 e.rating.quality = [3];
@@ -60,8 +60,8 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
             if (e.rating.accessibility.length <= 0) {
                 e.rating.accessibility = [3];
             }
-            if (e.rating.overallRating.length <= 0) {
-                e.rating.overallRating = [3];
+            if (e.rating.overallRating <= 0) {
+                e.rating.overallRating = 3;
             }
             usersService.getOne(e.owner).then(function(res) {
                 e.owner = res.data;
