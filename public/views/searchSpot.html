@@ -61,13 +61,13 @@
                 <a href="/spot/{{p._id}}" target="_blank">
                     <div class="card hoverable">
                         <div class="card-image">
-                            <div class="placepict" ng-style="{'background-image': 'url(uploads/spots/{{p._id}}/thumb/img_{{p.caption[0]}})', 'background-size': 'cover'}"></div>
+                            <img ng-src="uploads/spots/{{p._id}}/thumb/img_{{p.pictures[0]}}">
                         </div>
                         <div class="card-content">
                             <p>
-                                <img class="actpict" src="assets/hobbies/{{p.primarySports}}.png" alt=""/>
-
-                                <img class="authorpict" src="/uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}"/>
+                                <img class="actpict" ng-src="assets/hobbies/{{p.primarySports}}.png" alt=""/>
+                                <img class="authorpict" src="/assets/hobbynaut-avatar.gif" ng-show="!p.owner.picture"/>
+                                <img class="authorpict" ng-src="/uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}" ng-show="p.owner.picture"/>
                                 <div>{{p.name}}</div>
                                 <div>
                                     <star-rating ng-model="p.rating.valueForMoney" readonly="true"></star-rating>
@@ -100,7 +100,7 @@
                 <a href="/spot/{{toggleledSpot._id}}" target="_blank">
                     <div class="card">
                         <div class="card-image">
-                            <img src="/uploads/spots/{{toggleledSpot._id}}/thumb/img_{{toggleledSpot.caption[0]}}">
+                            <img ng-src="/uploads/spots/{{toggleledSpot._id}}/thumb/img_{{toggleledSpot.pictures[0]}}">
                         </div>
                         <div class="card-content">
                             <p>

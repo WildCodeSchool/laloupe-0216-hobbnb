@@ -72,7 +72,7 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
 
     $scope.photos = [];
     $scope.photo = null;
-    $scope.maxReached = false;
+    $scope.error = null;
 
     $scope.$watch('photo', function() {
         if ($scope.photo !== null) {
@@ -84,10 +84,8 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
                 } else if (concatenedPhotos.length == 12) {
                     $scope.photos = concatenedPhotos;
                     $scope.error = "Vous avez attend la limite de 12 photos par hébergement";
-                    $scope.maxReached = true;
                 } else {
                     $scope.error = "Vous dépasserez la limite de 12 photos par hébergement";
-                    console.log($scope.error);
                 }
             }
         }
@@ -98,10 +96,10 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
         console.log($scope.photos);
     };
 
-    $scope.upload = function(photos) {
+    function upload(photos, addedPlaceID) {
         if (photos && photos.length) {
             Upload.upload({
-                url: '/api/places/uploadImages/' + $scope.addedPlaceID,
+                url: '/api/places/uploadImages/' + addedPlaceID,
                 data: {
                     totalFiles: photos.length,
                     file: photos
@@ -110,37 +108,25 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
                 var progressPercentage = parseInt(100.0 * event.loaded / event.total);
                 console.log('progress: ' + progressPercentage + '% ' + event.config.data.file.name);
             }).success(function(data, status, headers, config) {
-                console.log('file: ' +
-                    data.name + 'path: ' + data.path +
-                    ', Response: ' + JSON.stringify(data) +
-                    '\n');
+                console.log(JSON.stringify(data));
+                $location.path('/place/' + addedPlaceID);
             });
         }
-    };
+    }
 
     $scope.send = function() {
-        var act;
-        if ($scope.isAction == 'création') {
-            act = placesService.create({
-                content: $scope.obj
+        placesService.create($scope.obj)
+            .then(function(res) {
+                // $scope.isAction == 'création' && emailService.sendToAdmin(
+                //     'Un hébergement à été créé sur hobbnb',
+                //     'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
+                // );
+                console.log(res);
+                if (res.status == 200) upload($scope.photos, res.data._id);
+            },function(err) {
+                console.log(err);
             });
-        } else {
-            act = placesService.update($scope.obj._id, {
-                content: $scope.obj
-            });
-        }
-        act.then(function(res) {
-            // $scope.isAction == 'création' && emailService.sendToAdmin(
-            //     'Un hébergement à été créé sur hobbnb',
-            //     'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
-            // );
-            // $scope.obj = {};
-            // resetObj();
-            // $location.path('/picture/places/0/' + res.data._id);
-            $scope.addedPlaceID = res.data._id;
-        }, function(err) {
-            $scope.error = err;
-        });
+
     };
 
 });

@@ -22,7 +22,7 @@
                     <div class="input-field col s6">
                         <select material-select ng-model="obj.primarySports">
                             <option value="" disable selected>Séléctionnez les hobbies alentours par ordre de préférence</option>
-                            <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
+                            <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat='hobby in hobbiesListing' ng-click="addHobby($index, hobby)">{{hobby}}</option>
                         </select>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2; send()'>
+                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2;'>
                         Confirmer
                         <i class='material-icons right'>keyboard_arrow_right</i>
                     </button>
@@ -77,14 +77,14 @@
                         <label for="slider">Etape 2/3</label>
                     </div>
                 </div>
-                <div class="row" ng-hide="maxReached">
+                <div class="row" ng-hide="error">
                     <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
                     <div ngf-drop ngf-select ng-model="photo" class="drop-box valign-wrapper" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
                         <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
                     </div>
                 </div>
-                <p class="center-align" ng-show="maxReached">
-                    Vous avez attend le maximum de 12 photos autorisées au maximum
+                <p class="center-align" ng-show="error">
+                  {{error}}
                 </p>
 
                 <div class="row">
@@ -100,7 +100,7 @@
                     </ul>
                 </div>
                 <div class="row">
-                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='upload(photos)'>
+                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='send()'>
                         Confirmer
                         <i class='material-icons right'>keyboard_arrow_right</i>
                     </button>

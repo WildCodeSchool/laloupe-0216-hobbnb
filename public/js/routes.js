@@ -43,6 +43,7 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            '/js/directives/onErrorSrc.js',
                             '/js/directives/starRatingDirective.js',
                             '/js/services/usersService.js',
                             '/js/services/placesService.js',

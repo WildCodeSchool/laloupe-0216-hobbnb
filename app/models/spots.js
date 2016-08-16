@@ -17,14 +17,11 @@ var spotsSchema = new mongoose.Schema({
         required: [true, 'title required']
     },
     picture: String,
-    caption: [String],
+    pictures: [String],
     latitude: Number,
     longitude: Number,
     address: {
-        administrative_area_level_1: {
-            type: String,
-            required: [true, 'state required']
-        },
+        administrative_area_level_1: String,
         country: {
             type: String,
             required: [true, 'country required']
@@ -95,11 +92,21 @@ var Spots = {
 
     model: mongoose.model('Spots', spotsSchema),
 
+    create: function(req, res) {
+        Spots.model.create(req.body, function(err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(data);
+            }
+        });
+    },
+
     uploadImages: function(req, res) {
 
         var fileCount = 0,
             processedFileCount = 0,
-            caption = [],
+            pictures = [],
             totalFiles = 0,
             width = 1200;
         var targetPath = './public/uploads/spots/' + req.params.spotId + '/';
@@ -117,7 +124,7 @@ var Spots = {
         form.on('fileBegin', function(name, file) {
             fileCount++;
             file.name = fileCount + file.name.substr(file.name.lastIndexOf('.'));
-            caption.push(file.name);
+            pictures.push(file.name);
         });
         form.on('file', function(name, file) {
             var tmpPath = file.path;
@@ -136,8 +143,8 @@ var Spots = {
                     fs.unlink(tmpPath, function(err) {
                         if (err) throw err;
                         processedFileCount++;
-                        console.log("Upload complete for spot ID: " + req.params.spotId + ' an for image:' + file.name + ' ' + caption.length + ' / ' + totalFiles);
-                        if (totalFiles == processedFileCount) Spots.updateAndDontUpdate(req.params.spotId, caption, res);
+                        console.log("Upload complete for spot ID: " + req.params.spotId + ' an for image:' + file.name + ' ' + processedFileCount + ' / ' + totalFiles);
+                        if (totalFiles == processedFileCount) Spots.updateAndDontUpdate(req.params.spotId, pictures, res);
                     });
                 });
             });
@@ -146,16 +153,6 @@ var Spots = {
             console.log('An error has occured: \n' + err);
         });
         form.parse(req);
-    },
-
-    create: function(req, res) {
-        Spots.model.create(req.body.content, function(err, data) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send(data);
-            }
-        });
     },
 
     findOne: function(req, res) {
@@ -204,17 +201,17 @@ var Spots = {
         });
     },
 
-    updateAndDontUpdate: function(spotId, caption, res) {
+    updateAndDontUpdate: function(spotId, pictures, res) {
         Spots.model.findByIdAndUpdate(spotId, {
             $set: {
-                caption: caption
+                pictures: pictures
             }
         }, function(err) {
             if (err) {
                 console.log(err);
                 res.send(err);
             } else {
-                console.log('DB updates with caption!');
+                console.log('   ------ DB updates with pictures! ------');
                 res.sendStatus(200);
             }
         });

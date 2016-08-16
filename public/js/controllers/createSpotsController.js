@@ -112,7 +112,7 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
 
     $scope.photos = [];
     $scope.photo = null;
-    $scope.maxReached = false;
+    $scope.error = null;
 
     $scope.$watch('photo', function() {
         if ($scope.photo !== null) {
@@ -124,10 +124,8 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
                 } else if (concatenedPhotos.length == 12) {
                     $scope.photos = concatenedPhotos;
                     $scope.error = "Vous avez attend la limite de 12 photos par spots";
-                    $scope.maxReached = true;
                 } else {
                     $scope.error = "Vous dépasserez la limite de 12 photos par spots";
-                    console.log($scope.error);
                 }
             }
         }
@@ -138,53 +136,42 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
         console.log($scope.photos);
     };
 
-    $scope.upload = function(photos) {
+    function upload(photos, addedSpotID) {
         if (photos && photos.length) {
             // for (var i = 0; i < photos.length; i++) {
             //     var photo = photos[i];
             //     if (!photo.$error) {
             Upload.upload({
-                url: '/api/spots/uploadImages/' + $scope.addedSpotID,
+                url: '/api/spots/uploadImages/' + addedSpotID,
                 data: {
                     totalFiles: photos.length,
                     file: photos
                 }
             }).progress(function(event) {
+                console.log('event:');
+                console.log(event);
                 var progressPercentage = parseInt(100.0 * event.loaded / event.total);
                 console.log('progress: ' + progressPercentage + '% ' + event.config.data.file.name);
             }).success(function(data, status, headers, config) {
-                console.log('file: ' +
-                    data.name + 'path: ' + data.path +
-                    ', Response: ' + JSON.stringify(data) +
-                    '\n');
+                console.log(JSON.stringify(data));
+                $location.path('/spot/' + addedSpotID);
             });
         }
         //     }
         // }
-    };
+    }
 
 
     $scope.send = function() {
-        var act;
-        if ($scope.isAction == 'création') {
-            act = spotsService.create({
-                content: $scope.obj
+        spotsService.create($scope.obj)
+            .then(function(res) {
+                // $scope.isAction == 'création' && emailService.sendToAdmin(
+                //     'Un spot à été créé sur hobbnb',
+                //     'Un spot a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/spot/' + res.data._id + '">Le consulter</a>'
+                // );
+                if (res.status == 200) upload($scope.photos, res.data._id);
+            }, function(err) {
+                console.log(err);
             });
-        } else {
-            act = spotsService.update($scope.obj._id, {
-                content: $scope.obj
-            });
-        }
-        act.then(function(res) {
-            // $scope.isAction == 'création' && emailService.sendToAdmin(
-            //     'Un spot à été créé sur hobbnb',
-            //     'Un spot a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/spot/' + res.data._id + '">Le consulter</a>'
-            // );
-            $scope.addedSpotID = res.data._id;
-            // $scope.obj = {};
-            // resetObj();
-        }, function(err) {
-            $scope.error = err;
-        });
     };
 });

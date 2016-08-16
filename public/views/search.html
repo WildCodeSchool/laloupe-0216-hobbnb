@@ -76,14 +76,14 @@
                 <a href="/place/{{p._id}}" target="_blank">
                     <div class="card hoverable">
                         <div class="card-image">
-                            <div class="placepict" ng-style="{'background-image': 'url(uploads/places/{{p._id}}/thumb/img_{{p.caption[0]}})', 'background-size': 'cover'}"></div>
+                            <div class="placepict" ng-style="{'background-image': 'url(uploads/places/{{p._id}}/thumb/img_{{p.pictures[0]}})', 'background-size': 'cover'}"></div>
                             <span class="card-title">{{p.home.price|currency:'€'}}</span>
                         </div>
                         <div class="card-content">
                             <p>
                                 <img class="actpict" src="assets/hobbies/{{p.primarySports}}.png" alt=""/>
-
-                                <img class="authorpict" src="/uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}"/>
+                                <img class="authorpict" src="/assets/hobbynaut-avatar.gif" ng-show="!p.owner.picture"/>
+                                <img class="authorpict" ng-src="{{'/uploads/users/'+p.owner._id+'/thumb/img_'+p.owner.picture}}" ng-show="p.owner.picture"/>
                                 <div>{{p.name}}</div>
                                 <div>
                                     <star-rating ng-model="p.rating.valueForMoney" readonly="true"></star-rating>
@@ -116,7 +116,7 @@
                 <a href="/place/{{toggleledPlace._id}}" target="_blank">
                     <div class="card">
                         <div class="card-image">
-                            <img src="/uploads/places/{{toggleledPlace._id}}/thumb/img_{{toggleledPlace.caption[0]}}">
+                            <img src="/uploads/places/{{toggleledPlace._id}}/thumb/img_{{toggleledPlace.pictures[0]}}">
                             <span class="card-title" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{toggleledPlace.home.price}}€</span>
                         </div>
                         <div class="card-content">
