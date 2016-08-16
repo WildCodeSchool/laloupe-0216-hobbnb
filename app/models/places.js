@@ -135,7 +135,7 @@ var Places = {
     create: function(req, res) {
         Places.model.create(req.body, function(err, data) {
             if (err) {
-                res.send(err);
+                res.status(400).send(err);
             } else {
                 res.send(data);
             }
@@ -251,7 +251,7 @@ var Places = {
         }, function(err) {
             if (err) {
                 console.log(err);
-                res.send(err);
+                res.status(400).send(err);
             } else {
                 console.log('   ------ DB updates with pictures! ------');
                 res.sendStatus(200);
