@@ -21,7 +21,7 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
         $scope.map = map;
     });
 
-    NavigatorGeolocation.getCurrentPosition().then(function(res) {
+    NavigatorGeolocation.getCurrentPosition({timeout:10000, enableHighAccuracy: true}).then(function(res) {
         console.log(res);
     }, function(err) {
         /* when google geoloc fail */
