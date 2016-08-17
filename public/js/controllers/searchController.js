@@ -25,17 +25,6 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         $scope.map = map;
     });
 
-    NavigatorGeolocation.getCurrentPosition().then(function(res) {
-        console.log(res);
-    }, function(err) {
-        /* when google geoloc fail */
-        console.log(err);
-        console.log('Trying with ipinfo:');
-        $http.get("http://ipinfo.io").then(function(ipinfo) {
-            $scope.centerMap = ipinfo.data.loc;
-        });
-    });
-
     $scope.$watch(function() {
         return $scope.details;
     }, function() {

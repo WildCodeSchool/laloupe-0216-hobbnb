@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="col s12 m12 l6">
-                            <ng-map zoom="8" center="{{spotMarkerPos}}" default-style="false" id="myMap" style="height: 100%">
+                            <ng-map zoom="8" center="{{spotMarkerPos}}" geo-fallback-center="48.8534100, 2.3488000" default-style="false" id="myMap" style="height: 100%">
                                 <marker position="{{spotMarkerPos}}" draggable="true" on-dragend="getCurrentMarkerLocation()"></marker>
                             </ng-map>
                         </div>

@@ -17,20 +17,10 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
         postal_code: 'short_name'
     };
 
+    $scope.spotMarkerPos = 'current-location';
+
     NgMap.getMap('myMap').then(function(map) {
         $scope.map = map;
-    });
-
-    NavigatorGeolocation.getCurrentPosition({timeout:10000, enableHighAccuracy: true}).then(function(res) {
-        console.log(res);
-    }, function(err) {
-        /* when google geoloc fail */
-        console.log(err);
-        console.log('Trying with ipinfo:');
-        $http.get("http://ipinfo.io").then(function(ipinfo) {
-            $scope.spotMarkerPos = ipinfo.data.loc;
-        });
-        console.log($scope.spotMarkerPos);
     });
 
     $scope.getCurrentMarkerLocation = function(event) {
@@ -76,7 +66,6 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
                 }
             }
             $scope.spotMarkerPos = $scope.details.geometry.location;
-            $scope.map.setCenter($scope.spotMarkerPos);
             $scope.obj.latitude = $scope.details.geometry.location.lat();
             $scope.obj.longitude = $scope.details.geometry.location.lng();
         }
