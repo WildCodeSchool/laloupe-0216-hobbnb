@@ -24,6 +24,14 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     NgMap.getMap('myMap').then(function(map) {
         $scope.map = map;
     });
+    $scope.getHoveredPlaceIndex = function(index, hovered) {
+        if (hovered) $scope.hoveredPlaceIndex = index;
+        else $scope.hoveredPlaceIndex = null;
+    };
+    $scope.toggleInfoWindow = function(event, place) {
+        $scope.map.showInfoWindow('popup', this);
+        $scope.toggleledPlace = place;
+    };
 
     $scope.$watch(function() {
         return $scope.details;
@@ -74,10 +82,6 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         } else {
             return ~~((widget.quality.length + widget.beauty.length + widget.accessibility.length) / 3);
         }
-    };
-    $scope.toggleInfoWindow = function(event, place) {
-        $scope.map.showInfoWindow('popup', this);
-        $scope.toggleledPlace = place;
     };
     $scope.locationToData = function() {
         searchFactory.data.city = $scope.filters.place;

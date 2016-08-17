@@ -79,8 +79,8 @@
         </form>
         <div id="widgets" class="row">
             <div class="col s12 m12 l6" dir-paginate="p in positions | filter : filters | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8">
-                <a href="/place/{{p._id}}" target="_blank">
-                    <div class="card hoverable">
+                <a href="/place/{{p._id}}" ng-mouseover="getHoveredPlaceIndex($index, true);" ng-mouseleave="getHoveredPlaceIndex($index, false);" target="_blank">
+                    <div class="card">
                         <div class="card-image">
                             <div class="placepict" ng-style="{'background-image': 'url(uploads/places/{{p._id}}/thumb/img_{{p.pictures[0]}})', 'background-size': 'cover'}"></div>
                             <span class="card-title">{{p.home.price|currency:'€'}}</span>
@@ -116,6 +116,7 @@
                       origin: [0,0],
                       anchor: [16,32]
                       }"
+                animation="{{hoveredPlaceIndex == $index ? 'BOUNCE' : 'null'}}"
                 on-click="toggleInfoWindow(event, p)"
                 clickable="true"></marker>
             <info-window id="popup" max-width="200">
