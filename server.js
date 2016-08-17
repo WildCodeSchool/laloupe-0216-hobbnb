@@ -6,6 +6,7 @@ var port = process.env.PORT || 8000; // set the port
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var logger = require('./app/logs/Logger');
 // configuration ===============================================================
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 app.use(morgan('dev')); // log every request to the console
@@ -24,18 +25,11 @@ require('./config/database');
 var server = http.Server(app);
 // routes ======================================================================
 require('./app/routes')(app);
-if (require('./config/s3').useAmazonS3) {
-    // Use Amazon S3
-    require('./app/images/im_s3')(app);
-} else {
-    // Use Local directory
-    require('./app/images/im_promise')(app);
-}
 require('./app/emails/email')(app);
 process.on('SIGINT', function() {
-    console.log('Goodbye sir...');
+    logger.warn('Hobbnb shutdown!');
     process.exit();
 });
 // listen (start app with node server.js) ======================================
 server.listen(port);
-console.log('hobbnb is ready at port ' + port + ' :)');
+logger.warn('Hobbnb started at port ' + port + ', loggin in console and file app/logs/hobbnb.log :)');

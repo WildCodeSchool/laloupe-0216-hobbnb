@@ -91,7 +91,6 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
         $scope.obj.creation = new Date();
         $scope.obj.modification = new Date();
         $scope.obj.address = {};
-        $scope.obj.address.country = 'France';
         $scope.obj.comments = [{
             creation: new Date()
         }];
@@ -99,35 +98,27 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
     resetObj();
 
     $scope.step = 1;
-    if ($routeParams.id) {
-        $scope.isAction = 'modification';
-        spotsService.getOne($routeParams.id).then(function(res) {
-            if (res.data.owner != $scope.currentUser._id || !$scope.currentUser.isAdmin) $location.path('/');
-            $scope.obj = res.data;
-            $scope.obj.modification = new Date();
-        });
-    } else {
-        $scope.isAction = 'création';
-    }
 
     $scope.photos = [];
     $scope.photo = null;
-    $scope.error = null;
+    $scope.infoPhotos = null;
 
     $scope.$watch('photo', function() {
         if ($scope.photo !== null) {
-            if ($scope.photos.length < 12) {
-                var concatenedPhotos = $scope.photos.concat($scope.photo);
-                console.log(concatenedPhotos);
-                if (concatenedPhotos.length < 12) {
-                    $scope.photos = concatenedPhotos;
-                } else if (concatenedPhotos.length == 12) {
-                    $scope.photos = concatenedPhotos;
-                    $scope.error = "Vous avez attend la limite de 12 photos par spots";
-                } else {
-                    $scope.error = "Vous dépasserez la limite de 12 photos par spots";
-                }
-            }
+            $scope.photos = $scope.photos.concat($scope.photo);
+        }
+    });
+
+    $scope.$watch('photos.length', function() {
+        console.log($scope.photos);
+        if ($scope.photos.length == 12) {
+            $scope.infoPhotos = "Vous avez attend la limite de 12 photos par spot.";
+        } else if ($scope.photos.length < 6) {
+            $scope.infoPhotos = "Un minimum de 6 photos est nécésaire à la création d'un spot.";
+        } else if ($scope.photos.length > 12) {
+            $scope.infoPhotos = "Vous avez dépassez la limite de 12 photos par spot. Supprimez des photos.";
+        } else {
+            $scope.infoPhotos = $scope.photos.length;
         }
     });
 
@@ -138,14 +129,11 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
 
     function upload(photos, addedSpotID) {
         if (photos && photos.length) {
-            // for (var i = 0; i < photos.length; i++) {
-            //     var photo = photos[i];
-            //     if (!photo.$error) {
             Upload.upload({
                 url: '/api/spots/uploadImages/' + addedSpotID,
                 data: {
                     totalFiles: photos.length,
-                    file: photos
+                    files: photos
                 }
             }).progress(function(event) {
                 console.log('event:');
@@ -157,8 +145,6 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
                 $location.path('/spot/' + addedSpotID);
             });
         }
-        //     }
-        // }
     }
 
 

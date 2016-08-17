@@ -5,4 +5,5 @@ config/secretToken.js
 config/mail.js
 config/s3.js
 public/uploads
+app/logs/hobbnb.log
 .idea

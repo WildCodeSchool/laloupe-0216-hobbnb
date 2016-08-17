@@ -4,6 +4,7 @@ var formidable = require('formidable');
 var im = require('imagemagick');
 var path = require('path');
 var fs = require('fs');
+logger = require('../logs/Logger');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"],
     propertiesType = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
@@ -135,9 +136,11 @@ var Places = {
     create: function(req, res) {
         Places.model.create(req.body, function(err, data) {
             if (err) {
+                logger.error('An error has occured in Place create: ', err);
                 res.status(400).send(err);
             } else {
-                res.send(data);
+                logger.info('>> PLACE: ', data._id,' / ', data.name, 'WAS CREATED BY: ', data.owner);
+                res.status(200).send(data);
             }
         });
     },
@@ -183,14 +186,14 @@ var Places = {
                     fs.unlink(tmpPath, function(err) {
                         if (err) throw err;
                         processedFileCount++;
-                        console.log("Upload complete for place ID: " + req.params.placeId + ' an for image:' + file.name + ' ' + processedFileCount + ' / ' + totalFiles);
+                        logger.info('Upload complete for place ID: ', req.params.placeId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
                         if (totalFiles == processedFileCount) Places.updateAndDontUpdate(req.params.placeId, pictures, res);
                     });
                 });
             });
         });
         form.on('error', function(err) {
-            console.log('An error has occured: \n' + err);
+            logger.error('An error has occured: ', err);
         });
         form.parse(req);
     },
@@ -198,9 +201,9 @@ var Places = {
     findOne: function(req, res) {
         Places.model.findById(req.params.id, function(err, data) {
             if (err) {
-                res.send(err);
+                res.status(400).send(err);
             } else {
-                res.send(data);
+                res.status(200).send(data);
             }
         });
     },
@@ -211,11 +214,10 @@ var Places = {
 
     findAll: function(req, res) {
         Places.model.find(function(err, data) {
+            logger.info('test');
             if (err) {
-                console.log(err);
                 res.send(err);
             } else {
-                console.log('sending');
                 res.send(data);
             }
         });
@@ -250,10 +252,11 @@ var Places = {
             }
         }, function(err) {
             if (err) {
+                logger.error('Error while trying to add place pictures names in DB: ', err);
                 console.log(err);
                 res.status(400).send(err);
             } else {
-                console.log('   ------ DB updates with pictures! ------');
+                logger.info('DB updates with pictures for place: ', placeId);
                 res.sendStatus(200);
             }
         });

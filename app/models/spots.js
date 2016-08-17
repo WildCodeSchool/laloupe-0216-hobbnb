@@ -178,7 +178,7 @@ var Spots = {
             } else {
                 res.send(data);
             }
-        })
+        });
     },
 
     findAll: function(req, res) {

@@ -8,119 +8,99 @@
                 </div>
             </div>
             <div ng-show='step==1'>
-                <div class='row'>
-                    <div class="range-field">
-                        <input type="range" min="1" max="2" value='1' disabled id='slider'/>
-                        <label for="slider">Etape 1/2</label>
+                <form name="addSpotForm" novalidate>
+                    {{step}}
+                    <div class='row'>
+                        <div class="range-field">
+                            <input type="range" min="1" max="2" value='1' disabled id='slider'/>
+                            <label for="slider">Etape 1/2</label>
+                        </div>
                     </div>
-                </div>
-                <div class='row no-margin hobbnb-font'>
-                    <div class="col s12 m12 l6">
-                        <div class="row no-margin">
-                            <div class="input-field col s12">
-                                <input id="obj.name" type="text" ng-model='obj.name'>
-                                <label for="obj.name">Nom du spot</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <select material-select ng-model="obj.primarySports">
-                                    <option value=''>Spot de</option>
-                                    <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
-                                </select>
-                            </div>
-                            <div class="input-field col s12">
-                                <input type="text" class="autocomplete" ng-model="refAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="" allow-only-results="true" name="address">
-                                <label>Adresse:</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <input type="text" ng-model='spotMarkerPos' disabled>
-                                <label for="address">Coordonées GPS:</label>
+                    <div class='row no-margin hobbnb-font'>
+                        <div class="col s12 m12 l6">
+                            <div class="row no-margin">
+                                <div class="input-field col s12">
+                                    <input id="obj.name" name="spotName" type="text" ng-model='obj.name' required>
+                                    <label for="obj.name">Nom du spot</label>
+                                    <span class="field-error" ng-show="addSpotForm.spotName.$error.required && addSpotForm.$submitted">Un nom est requis pour la création d'un spot.</span>
+                                </div>
+                                <div class="input-field col s12">
+                                    <select material-select ng-model="obj.primarySports" name="hobby" required>
+                                        <option value=''>Spot de</option>
+                                        <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
+                                    </select>
+                                    <span class="field-error" ng-show="addSpotForm.hobby.$error.required && addSpotForm.$submitted">Il est nécéssaire de choisir un sport pour un spot.</span>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input type="text" class="autocomplete" ng-model="refAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="" allow-only-results="true" name="address" required>
+                                    <label>Adresse:</label>
+                                    <span class="field-error" ng-show="!obj.address.country && addSpotForm.$submitted">Il est nécésaire de déplacer le curseur sur le spot.</span>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input type="text" ng-model='spotMarkerPos' disabled>
+                                    <label for="address">Coordonées GPS:</label>
+                                </div>
                             </div>
                         </div>
-                        <!-- <table>
-                        <tbody>
-                            <tr>
-                                <td>Latitude / longitude:</td>
-                                <td>{{obj.latitude}},{{obj.longitude}}</td>
-                            </tr>
-                            <tr>
-                                <td>n° de rue:</td>
-                                <td>{{obj.address.street_number}}</td>
-                            </tr>
-                            <tr>
-                                <td>Route:</td>
-                                <td>{{obj.address.route}}</td>
-                            </tr>
-                            <tr>
-                                <td>Ville:</td>
-                                <td>{{obj.address.locality}}</td>
-                            </tr>
-                            <tr>
-                                <td>Code postal:</td>
-                                <td>{{obj.address.postal_code}}</td>
-                            </tr>
-                            <tr>
-                                <td>Région:</td>
-                                <td>{{obj.address.administrative_area_level_1}}</td>
-                            </tr>
-                        </tbody>
-                    </table> -->
+                        <div class="col s12 m12 l6">
+                            <ng-map zoom="8" center="{{spotMarkerPos}}" default-style="false" id="myMap" style="height: 100%">
+                                <marker position="{{spotMarkerPos}}" draggable="true" on-dragend="getCurrentMarkerLocation()"></marker>
+                            </ng-map>
+                        </div>
                     </div>
-                    <div class="col s12 m12 l6">
-                        <ng-map zoom="8" center="{{spotMarkerPos}}" default-style="false" id="myMap" style="height: 100%">
-                            <marker position="{{spotMarkerPos}}" draggable="true" on-dragend="getCurrentMarkerLocation()"></marker>
-                        </ng-map>
+                    <div class="row center hobbnb-font">
+                        Vous pouvez déplacer le marqueur sur la map pour une localisation plus précise du spot.<br/>
+                        Une adresse connue a proximité des coordonnées est donnée en référence.
                     </div>
-                </div>
-                <div class="row center hobbnb-font">
-                    Vous pouvez déplacer le marqueur sur la map pour une localisation plus précise du spot.<br/>
-                    Une adresse connue a proximité des coordonnées est donnée en référence.
-                </div>
-                <div class="row">
-                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2;'>
-                        Suivant
-                        <i class='material-icons right'>keyboard_arrow_right</i>
-                    </button>
-                </div>
+                    <div class="row">
+                        <button class="btn blue white-text right" ng-class="addSpotForm.$invalid ? 'custom-disabled' : 'waves-effect waves-light white-text'" ng-click='(obj.address.country && addSpotForm.$valid) ? step = 2 : $submitted = true'>
+                            Suivant
+                            <i class='material-icons right'>keyboard_arrow_right</i>
+                        </button>
+                    </div>
+                </form>
             </div>
             <div ng-show='step==2'>
-                <div class='row'>
-                    <div class="range-field">
-                        <input type="range" min="1" max="2" value='2' disabled id='slider2'/>
-                        <label for="slider2">Etape 2/2</label>
-                    </div>
-                </div>
-                <h2>Photos</h2>
-                <div class="row" ng-hide="error">
-                    <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
-                    <div ngf-drop ngf-select ng-model="photo" class="drop-box valign-wrapper" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
-                        <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
-                    </div>
-                </div>
-                <p class="center-align" ng-show="error">
-                  {{error}}
-                </p>
-                <div class="row">
-                    <ul ui-sortable="sortableOptions" ng-model="photos" class="list left">
-                        <div class="col s3" ng-repeat="photo in photos track by $index">
-                            <li class="thumbnail">
-                                <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating red">
-                                    <i class="material-icons">remove</i>
-                                </a>
-                                <img ngf-thumbnail="photo">
-                            </li>
+                <form name="addSpotPicturesForm" novalidate>
+                    <div class='row'>
+                        <div class="range-field">
+                            <input type="range" min="1" max="2" value='2' disabled id='slider2'/>
+                            <label for="slider2">Etape 2/2</label>
                         </div>
-                    </ul>
-                </div>
-                <div class="row">
-                    <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=1'>
-                        Précédent
-                        <i class='material-icons left'>keyboard_arrow_left</i>
-                    </button>
-                    <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='send()'>
-                        Confirmer et envoyer les photos
-                        <i class='material-icons right'>keyboard_arrow_right</i>
-                    </button>
-                </div>
+                    </div>
+                    <h2>Photos</h2>
+                    <div class="row" ng-show="photos.length < 12">
+                        <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
+                        <div ngf-drop ngf-select ng-model="photo" class="drop-box valign-wrapper" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
+                            <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
+                        </div>
+                    </div>
+                    <p class="center-align">
+                        {{infoPhotos}}
+                    </p>
+                    <div class="row">
+                        <ul ui-sortable="sortableOptions" ng-model="photos" class="list left">
+                            <div class="col s3" ng-repeat="photo in photos track by $index">
+                                <li class="thumbnail">
+                                    <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating red">
+                                        <i class="material-icons">remove</i>
+                                    </a>
+                                    <img ngf-thumbnail="photo">
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <button class="btn waves-effect waves-light blue white-text left" ng-click='step=1'>
+                            Précédent
+                            <i class='material-icons left'>keyboard_arrow_left</i>
+                        </button>
+                        <button class="btn blue right white-text" ng-class="(6 > photos.length || photos.length > 12) ? 'custom-disabled' : 'waves-effect waves-light white-text'"  ng-click="(6 < photos.length || photos.length < 12) && send()" ng>
+                            Confirmer et envoyer les photos
+                            <i class='material-icons right'>keyboard_arrow_right</i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

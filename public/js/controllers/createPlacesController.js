@@ -29,16 +29,6 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
     };
     resetObj();
     $scope.step = 1;
-    if ($routeParams.id) {
-        $scope.isAction = 'modification';
-        placesService.getOne($routeParams.id).then(function(res) {
-            if (res.data.owner != $scope.currentUser._id || !$scope.currentUser.isAdmin) $location.path('/');
-            $scope.obj = res.data;
-            $scope.obj.modification = new Date();
-        })
-    } else {
-        $scope.isAction = 'création';
-    }
 
     var componentForm = {
         street_number: 'short_name',
@@ -72,22 +62,24 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
 
     $scope.photos = [];
     $scope.photo = null;
-    $scope.error = null;
+    $scope.infoPhotos = null;
 
     $scope.$watch('photo', function() {
         if ($scope.photo !== null) {
-            if ($scope.photos.length < 12) {
-                var concatenedPhotos = $scope.photos.concat($scope.photo);
-                console.log(concatenedPhotos);
-                if (concatenedPhotos.length < 12) {
-                    $scope.photos = concatenedPhotos;
-                } else if (concatenedPhotos.length == 12) {
-                    $scope.photos = concatenedPhotos;
-                    $scope.error = "Vous avez attend la limite de 12 photos par hébergement";
-                } else {
-                    $scope.error = "Vous dépasserez la limite de 12 photos par hébergement";
-                }
-            }
+            $scope.photos = $scope.photos.concat($scope.photo);
+        }
+    });
+
+    $scope.$watch('photos.length', function() {
+        console.log($scope.photos);
+        if ($scope.photos.length == 12) {
+            $scope.infoPhotos = "Vous avez attend la limite de 12 photos par hébérgement.";
+        } else if ($scope.photos.length < 6) {
+            $scope.infoPhotos = "Un minimum de 6 photos est nécésaire à la création d'un hébérgement.";
+        } else if ($scope.photos.length > 12) {
+            $scope.infoPhotos = "Vous avez dépassez la limite de 12 photos par hébérgement. Supprimez des photos.";
+        } else {
+            $scope.infoPhotos = $scope.photos.length;
         }
     });
 

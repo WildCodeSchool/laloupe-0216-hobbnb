@@ -96,6 +96,19 @@ html {
 .custom-btn img {
     vertical-align: middle;
 }
+.field-error {
+    display: block;
+    position: absolute;
+    bottom: -4px;
+    box-sizing: inherit;
+    margin: 0;
+    font-size: 0.8rem;
+    color: red;
+}
+.custom-disabled {
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
+}
 .thumbnail {
     margin-bottom: 10px !important;
     border: 3px solid #999;
