@@ -98,7 +98,7 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
                 }
             }).progress(function(event) {
                 var progressPercentage = parseInt(100.0 * event.loaded / event.total);
-                console.log('progress: ' + progressPercentage + '% ' + event.config.data.file.name);
+                console.log('progress: ' + progressPercentage + '% ');
             }).success(function(data, status, headers, config) {
                 console.log(JSON.stringify(data));
                 $location.path('/place/' + addedPlaceID);

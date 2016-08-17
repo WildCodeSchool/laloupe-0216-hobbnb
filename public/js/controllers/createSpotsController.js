@@ -17,17 +17,16 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
         postal_code: 'short_name'
     };
 
-    $scope.spotMarkerPos = 'current-location';
-
     NgMap.getMap('myMap').then(function(map) {
         $scope.map = map;
     });
+
+    $scope.spotMarkerPos = 'current-location';
 
     $scope.getCurrentMarkerLocation = function(event) {
         $scope.obj.latitude = event.latLng.lat();
         $scope.obj.longitude = event.latLng.lng();
         $scope.spotMarkerPos = event.latLng;
-        $scope.map.setCenter($scope.spotMarkerPos);
         GeoCoder.geocode({
             'location': this.getPosition()
         }).then(function(res)  {
@@ -125,10 +124,8 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
                     files: photos
                 }
             }).progress(function(event) {
-                console.log('event:');
-                console.log(event);
                 var progressPercentage = parseInt(100.0 * event.loaded / event.total);
-                console.log('progress: ' + progressPercentage + '% ' + event.config.data.file.name);
+                console.log('progress: ' + progressPercentage + '% ');
             }).success(function(data, status, headers, config) {
                 console.log(JSON.stringify(data));
                 $location.path('/spot/' + addedSpotID);

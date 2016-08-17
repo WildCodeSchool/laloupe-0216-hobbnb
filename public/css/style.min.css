@@ -44,15 +44,24 @@ html {
   color: #666;
 }*/
 
+.search-container {
+    position: relative;
+    height: 75vh;
+    margin: 0 !important;
+}
 .search-left-col {
-    height: 100%;
     margin: 0 !important;
     padding: 0 !important;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
 }
 .search-left-col form {
-    margin: 1rem 2rem;
+    flex: 0 1 auto;
+    margin: 1% 2rem;
 }
 .search-rigth-col {
+    margin: 0 !important;
     padding: 0 !important;
     position: absolute;
     right: 0 !important;
@@ -163,8 +172,10 @@ p {
 }
 #widgets {
     background-color: #e0e0e0;
+    flex: 1 1 auto;
     margin: 0 !important;
     padding: 1rem 2rem !important;
+    overflow: auto;
 }
 #widgets .card-image {
     height: 210px;
