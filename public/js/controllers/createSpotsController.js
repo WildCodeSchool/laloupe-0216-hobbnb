@@ -122,8 +122,10 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
                 data: {
                     totalFiles: photos.length,
                     files: photos
-                }
+                },
+                resumeChunkSize: '1.8MB'
             }).progress(function(event) {
+                console.log(event);
                 var progressPercentage = parseInt(100.0 * event.loaded / event.total);
                 console.log('progress: ' + progressPercentage + '% ');
             }).success(function(data, status, headers, config) {
