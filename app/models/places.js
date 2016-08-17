@@ -139,7 +139,7 @@ var Places = {
                 logger.error('An error has occured in Place create: ', err);
                 res.status(400).send(err);
             } else {
-                logger.info('>> PLACE: ', data._id,' / ', data.name, 'WAS CREATED BY: ', data.owner);
+                logger.info('>> PLACE: ', data._id, ' / ', data.name, 'WAS CREATED BY: ', data.owner);
                 res.status(200).send(data);
             }
         });
@@ -170,6 +170,7 @@ var Places = {
             pictures.push(file.name);
         });
         form.on('file', function(name, file) {
+            console.log(totalFiles);
             var tmpPath = file.path;
             im.resize({
                 srcPath: tmpPath,

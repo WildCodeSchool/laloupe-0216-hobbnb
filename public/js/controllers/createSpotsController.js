@@ -117,11 +117,12 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
 
     function upload(photos, addedSpotID) {
         if (photos && photos.length) {
+            console.log(photos.length);
             Upload.upload({
                 url: '/api/spots/uploadImages/' + addedSpotID,
                 data: {
-                    totalFiles: $scope.photos.length,
-                    files: photos
+                    files: photos,
+                    totalFiles: photos.length
                 },
                 resumeChunkSize: '1.8MB'
             }).progress(function(event) {
