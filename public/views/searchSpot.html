@@ -19,41 +19,47 @@
                     </div>
                 </div>
             </div>
-            <div class="row no-margin">
-                <div class="input-field col s12 m12 l6">
-                    <i class="material-icons prefix">search</i>
-                    <input placeholder="Lieu" id="city" type="text" class="autocomplete" ng-model="locality" details="details" ng-autocomplete>
-                    <label>Lieu</label>
+            <div class="vertical-slide-toggle" ng-hide="slideToggle">
+                <div class="row no-margin">
+                    <div class="input-field col s12 m12 l6">
+                        <i class="material-icons prefix">search</i>
+                        <input placeholder="Lieu" id="city" type="text" class="autocomplete" ng-model="locality" details="details" ng-autocomplete>
+                        <label>Lieu</label>
+                    </div>
+                    <div class="input-field col s12 m12 l3">
+                        <select class='' material-select ng-change="hobbyToData()" ng-model="filters.primarySports">
+                            <option value=''>Hobbies</option>
+                            <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
+                        </select>
+                        <label>Hobby</label>
+                    </div>
+                    <div class="input-field col s12 m12 l3">
+                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Popularité</span>
+                        <star-rating ng-model="filters.rating.popularity" on-rating-select=""></star-rating>
+                    </div>
                 </div>
-                <div class="input-field col s12 m12 l3">
-                    <select class='' material-select ng-change="hobbyToData()" ng-model="filters.primarySports">
-                        <option value=''>Hobbies</option>
-                        <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
-                    </select>
-                    <label>Hobby</label>
-                </div>
-                <div class="input-field col s12 m12 l3">
-                    <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Popularité</span>
-                    <star-rating ng-model="filters.rating.popularity" on-rating-select=""></star-rating>
+                <div class="row no-margin">
+                    <div class="input-field col s12 m12 l3">
+                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Qualité</span>
+                        <star-rating ng-model="filters.rating.quality" on-rating-select=""></star-rating>
+                    </div>
+                    <div class="input-field col s12 m12 l3">
+                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Beauté</span>
+                        <star-rating ng-model="filters.rating.beauty" on-rating-select=""></star-rating>
+                    </div>
+                    <div class="input-field col s12 m12 l3">
+                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Facilité</span>
+                        <star-rating ng-model="filters.rating.accessibility" on-rating-select=""></star-rating>
+                    </div>
+                    <div class="input-field col s12 m12 l3">
+                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Note</span>
+                        <star-rating ng-model="filters.rating.overallRating" on-rating-select=""></star-rating>
+                    </div>
                 </div>
             </div>
-            <div class="row no-margin">
-                <div class="input-field col s12 m12 l3">
-                    <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Qualité</span>
-                    <star-rating ng-model="filters.rating.quality" on-rating-select=""></star-rating>
-                </div>
-                <div class="input-field col s12 m12 l3">
-                    <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Beauté</span>
-                    <star-rating ng-model="filters.rating.beauty" on-rating-select=""></star-rating>
-                </div>
-                <div class="input-field col s12 m12 l3">
-                    <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Facilité</span>
-                    <star-rating ng-model="filters.rating.accessibility" on-rating-select=""></star-rating>
-                </div>
-                <div class="input-field col s12 m12 l3">
-                    <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Note</span>
-                    <star-rating ng-model="filters.rating.overallRating" on-rating-select=""></star-rating>
-                </div>
+            <div class="row no-margin center" ng-click="slideToggle=! slideToggle">
+                <span class="slide-arrows" ng-hide="!slideToggle">&#11167;</span>
+                <span class="slide-arrows" ng-hide="slideToggle">&#11165;</span>
             </div>
         </form>
         <div id="widgets" class="row">

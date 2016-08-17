@@ -43,6 +43,7 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            '/js/animations/vertical-slide-toggle.js',
                             '/js/directives/starRatingDirective.js',
                             '/js/services/usersService.js',
                             '/js/services/placesService.js',
@@ -63,6 +64,7 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            '/js/animations/vertical-slide-toggle.js',
                             '/js/directives/starRatingDirective.js',
                             '/js/services/usersService.js',
                             '/js/services/spotsService.js',
