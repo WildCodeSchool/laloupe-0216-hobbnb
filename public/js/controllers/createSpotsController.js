@@ -117,6 +117,11 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
 
     function upload(photos, addedSpotID) {
         if (photos && photos.length) {
+          var totalLength = 0;
+          for (var i = 0; i < photos.length; i++) {
+            totalLength += +photos[i].size;
+          }
+          console.log(totalLength);
             console.log(photos.length);
             Upload.upload({
                 url: '/api/spots/uploadImages/' + addedSpotID,

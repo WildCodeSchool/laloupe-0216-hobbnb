@@ -19,6 +19,7 @@
     "method-override": "^2.3.5",
     "mongoose": "^4.4.12",
     "morgan": "^1.7.0",
+    "multer": "^1.2.0",
     "nodemailer": "^2.4.2",
     "winston": "^2.2.0"
   },

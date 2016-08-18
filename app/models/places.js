@@ -159,18 +159,23 @@ var Places = {
         if (!fs.existsSync(targetPath + 'thumb')) fs.mkdirSync(targetPath + 'thumb');
         if (!fs.existsSync(targetPath + 'large')) fs.mkdirSync(targetPath + 'large');
 
+        logger.info('>> Create Place ID: ', req.params.placeId, 'begin.');
+
         var form = new formidable.IncomingForm();
         form.multiples = true;
+        form.on('progress', function(bytesReceived, bytesExpected) {
+            logger.info('Progress so far: ', (100 * (bytesReceived / bytesExpected)), "%  or  ", bytesReceived, 'bytes');
+        });
         form.on('field', function(field, value) {
             totalFiles = value;
         });
         form.on('fileBegin', function(name, file) {
             fileCount++;
             file.name = fileCount + file.name.substr(file.name.lastIndexOf('.'));
+            logger.info('-- File: ', file.name, ' upload started');
             pictures.push(file.name);
         });
         form.on('file', function(name, file) {
-            console.log(totalFiles);
             var tmpPath = file.path;
             im.resize({
                 srcPath: tmpPath,
@@ -187,14 +192,14 @@ var Places = {
                     fs.unlink(tmpPath, function(err) {
                         if (err) throw err;
                         processedFileCount++;
-                        logger.info('Upload complete for place ID: ', req.params.placeId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
+                        logger.info('Upload and resize complete for place ID: ', req.params.placeId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
                         if (totalFiles == processedFileCount) Places.updateAndDontUpdate(req.params.placeId, pictures, res);
                     });
                 });
             });
         });
         form.on('error', function(err) {
-            logger.error('An error has occured: ', err);
+            logger.error('An error has occured during upload process: ', err);
         });
         form.parse(req);
     },
@@ -215,7 +220,6 @@ var Places = {
 
     findAll: function(req, res) {
         Places.model.find(function(err, data) {
-            logger.info('test');
             if (err) {
                 res.send(err);
             } else {
@@ -253,11 +257,11 @@ var Places = {
             }
         }, function(err) {
             if (err) {
-                logger.error('Error while trying to add place pictures names in DB: ', err);
+                logger.error('An error has occured in Place create DB upload: ', err);
                 console.log(err);
                 res.status(400).send(err);
             } else {
-                logger.info('DB updates with pictures for place: ', placeId);
+                logger.info('>>   ------ DB updates with pictures! ------');
                 res.sendStatus(200);
             }
         });

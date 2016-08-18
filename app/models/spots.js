@@ -4,6 +4,7 @@ var formidable = require('formidable');
 var im = require('imagemagick');
 var path = require('path');
 var fs = require('fs');
+logger = require('../logs/Logger');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
 
@@ -95,8 +96,10 @@ var Spots = {
     create: function(req, res) {
         Spots.model.create(req.body, function(err, data) {
             if (err) {
+                logger.error('An error has occured in Place create: ', err);
                 res.status(400).send(err);
             } else {
+                logger.info('>> SPOT: ', data._id, ' / ', data.name, ' WAS CREATED BY: ', data.owner);
                 res.send(data);
             }
         });
@@ -116,14 +119,20 @@ var Spots = {
         if (!fs.existsSync(targetPath + 'thumb')) fs.mkdirSync(targetPath + 'thumb');
         if (!fs.existsSync(targetPath + 'large')) fs.mkdirSync(targetPath + 'large');
 
+        logger.info('>> Create SPOT ID: ', req.params.spotId, ' upload begin.');
+
         var form = new formidable.IncomingForm();
         form.multiples = true;
+        form.on('progress', function(bytesReceived, bytesExpected) {
+            logger.info('Progress so far: ', (100 * (bytesReceived / bytesExpected)), "%  or  ", bytesReceived, 'bytes');
+        });
         form.on('field', function(field, value) {
             totalFiles = value;
         });
         form.on('fileBegin', function(name, file) {
             fileCount++;
             file.name = fileCount + file.name.substr(file.name.lastIndexOf('.'));
+            logger.info('-- File: ', file.name, ' upload started');
             pictures.push(file.name);
         });
         form.on('file', function(name, file) {
@@ -143,14 +152,14 @@ var Spots = {
                     fs.unlink(tmpPath, function(err) {
                         if (err) throw err;
                         processedFileCount++;
-                        console.log("Upload complete for spot ID: " + req.params.spotId + ' an for image:' + file.name + ' ' + processedFileCount + ' / ' + totalFiles);
+                        logger.info('Upload and resize complete for SPOT ID: ', req.params.spotId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
                         if (totalFiles == processedFileCount) Spots.updateAndDontUpdate(req.params.spotId, pictures, res);
                     });
                 });
             });
         });
         form.on('error', function(err) {
-            console.log('An error has occured: \n' + err);
+            logger.error('An error has occured during upload process: ', err);
         });
         form.parse(req);
     },
@@ -208,10 +217,10 @@ var Spots = {
             }
         }, function(err) {
             if (err) {
-                console.log(err);
+                logger.error('An error has occured in Spot create DB upload: ', err);
                 res.status(400).send(err);
             } else {
-                console.log('   ------ DB updates with pictures! ------');
+                logger.info('>>   ------ DB updates with pictures! ------');
                 res.sendStatus(200);
             }
         });
