@@ -27,7 +27,7 @@
                         <label>Lieu</label>
                     </div>
                     <div class="input-field col s12 m12 l3">
-                        <select class='' material-select ng-change="hobbyToData()" ng-model="filters.primarySports">
+                        <select class='' material-select ng-change="hobbyToData()" ng-model="filters.hobby">
                             <option value=''>Hobbies</option>
                             <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
                         </select>
@@ -35,25 +35,25 @@
                     </div>
                     <div class="input-field col s12 m12 l3">
                         <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Popularité</span>
-                        <star-rating ng-model="filters.rating.popularity" on-rating-select=""></star-rating>
+                        <star-rating ng-model="rating.numberOfRatings" on-rating-select="filters.rating.numberOfRatings = rating.numberOfRatings"></star-rating>
                     </div>
                 </div>
                 <div class="row no-margin">
                     <div class="input-field col s12 m12 l3">
                         <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Qualité</span>
-                        <star-rating ng-model="filters.rating.quality" on-rating-select=""></star-rating>
+                        <star-rating ng-model="rating.quality" on-rating-select="filters.rating.quality = rating.quality"></star-rating>
                     </div>
                     <div class="input-field col s12 m12 l3">
                         <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Beauté</span>
-                        <star-rating ng-model="filters.rating.beauty" on-rating-select=""></star-rating>
+                        <star-rating ng-model="rating.beauty" on-rating-select="filters.rating.beauty = rating.beauty"></star-rating>
                     </div>
                     <div class="input-field col s12 m12 l3">
                         <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Facilité</span>
-                        <star-rating ng-model="filters.rating.accessibility" on-rating-select=""></star-rating>
+                        <star-rating ng-model="rating.accessibility" on-rating-select="filters.rating.accessibility = rating.accessibility"></star-rating>
                     </div>
                     <div class="input-field col s12 m12 l3">
                         <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Note</span>
-                        <star-rating ng-model="filters.rating.overallRating" on-rating-select=""></star-rating>
+                        <star-rating ng-model="rating.overallRating" on-rating-select="filters.rating.overallRating = rating.overallRating"></star-rating>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="card-content">
                             <p>
-                                <img class="actpict" ng-src="assets/hobbies/{{p.primarySports}}.png" alt=""/>
+                                <img class="actpict" ng-src="assets/hobbies/{{p.hobby}}.png" alt=""/>
                                 <img class="authorpict" src="/assets/hobbynaut-avatar.gif" ng-show="!p.owner.picture"/>
                                 <img class="authorpict" ng-src="/uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}" ng-show="p.owner.picture"/>
                                 <div>{{p.name}}</div>

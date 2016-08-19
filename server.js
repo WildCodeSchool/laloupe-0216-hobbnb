@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
 })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());
 app.use(bodyParser.json({
-    limit: '5mb',
+    limit: '10mb',
     type: 'application/vnd.api+json'
 })); // parse application/vnd.api+json as json
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request

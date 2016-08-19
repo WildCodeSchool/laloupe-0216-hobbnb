@@ -128,19 +128,19 @@
                                 <div class="col s10">
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="title" type="text" ng-model='newComment.title'>
+                                            <input id="title" type="text" ng-model='comment.title'>
                                             <label for="title">Titre</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <textarea id="commentaire" ng-model='newComment.comment' class="materialize-textarea"></textarea>
+                                            <textarea id="commentaire" ng-model='comment.comment' class="materialize-textarea"></textarea>
                                             <label for="commentaire">Commentaire</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col s4">
-                                            <select material-select ng-model='newComment.rating.quality'>
+                                            <select material-select ng-model='comment.quality'>
                                                 <option value=''>Qualité</option>
                                                 <option>0</option>
                                                 <option>1</option>
@@ -151,7 +151,7 @@
                                             </select>
                                         </div>
                                         <div class="col s4">
-                                            <select material-select ng-model='newComment.rating.beauty'>
+                                            <select material-select ng-model='comment.beauty'>
                                                 <option value=''>Beauté</option>
                                                 <option>0</option>
                                                 <option>1</option>
@@ -162,7 +162,7 @@
                                             </select>
                                         </div>
                                         <div class="col s4">
-                                            <select material-select ng-model='newComment.rating.accessibility'>
+                                            <select material-select ng-model='comment.accessibility'>
                                                 <option value=''>Accessibilité</option>
                                                 <option>0</option>
                                                 <option>1</option>
@@ -174,7 +174,7 @@
                                         </div>
                                         <div class="col s12">
                                             <p class="center-align">
-                                                <button class="btn green accent-2 waves-effect waves-light" type="button" ng-click='comment()'>Ajouter un commentaire</button>
+                                                <button class="btn green accent-2 waves-effect waves-light" type="button" ng-click='addSpotComment()'>Ajouter un commentaire</button>
                                             </p>
                                         </div>
                                     </div>
@@ -187,8 +187,8 @@
 
                     <!--gallery pictures -->
                     <div class="row">
-                        <div class="col s12 m6 center" ng-repeat="pict in host.caption">
-                            <img materialboxed class="materialboxed responsive-img" src="/uploads/spots/{{host._id}}/{{pict}}" alt=""/>
+                        <div class="col s12 m6 center" ng-repeat="pict in host.pictures">
+                            <img materialboxed class="materialboxed responsive-img" src="/uploads/spots/{{host._id}}/large/img_{{pict}}" alt=""/>
                         </div>
                     </div>
                     <div class="divider"></div>

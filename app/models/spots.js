@@ -1,23 +1,63 @@
 // MODEL SPOTS
 var mongoose = require('mongoose');
+mongoose.set('debug', true);
 var formidable = require('formidable');
-var im = require('imagemagick');
-var path = require('path');
+var gm = require('gm');
 var fs = require('fs');
 logger = require('../logs/Logger');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
 
+
+var spotsCommentsSchema = new mongoose.Schema({
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users'
+    },
+    date: {
+        type: Date
+    },
+    title: {
+        type: String,
+        trim: true
+    },
+    comment: {
+        type: String,
+        trim: true
+    },
+    quality: {
+        type: Number,
+        max: 5,
+        min: 0
+    },
+    beauty: {
+        type: Number,
+        max: 5,
+        min: 0
+    },
+    accessibility: {
+        type: Number,
+        max: 5,
+        min: 0
+    }
+});
+
 var spotsSchema = new mongoose.Schema({
     isActive: Boolean,
-    owner: String,
-    creation: Date,
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users'
+    },
+    creation: {
+        type: Date,
+        default: Date.now()
+    },
     modification: Date,
     name: {
         type: String,
+        trim: true,
         required: [true, 'title required']
     },
-    picture: String,
     pictures: [String],
     latitude: Number,
     longitude: Number,
@@ -43,64 +83,86 @@ var spotsSchema = new mongoose.Schema({
         complement: String
     },
     rating: {
-        popularity: {
+        numberOfRatings: {
+            type: Number,
+            default: 0
+        },
+        overallRating: {
             type: Number,
             max: 5,
             min: 0,
             default: 0
         },
-        quality: [{
+        quality: {
             type: Number,
             max: 5,
-            min: 0
-        }],
-        beauty: [{
+            min: 0,
+            default: 0
+        },
+        beauty: {
             type: Number,
             max: 5,
-            min: 0
-        }],
-        accessibility: [{
-            type: Number,
-            max: 5,
-            min: 0
-        }],
-        overallRating: {
+            min: 0,
+            default: 0
+        },
+        accessibility: {
             type: Number,
             max: 5,
             min: 0,
             default: 0
         }
     },
-    about: String,
-    primarySports: {
+    about: {
+        type: String,
+        trim: true
+    },
+    hobby: {
         type: String,
         enum: hobbiesListing
     },
-    secondarySports: [{
-        type: String,
-        enum: hobbiesListing
-    }],
-    comments: [{
-        owner: String,
-        title: String,
-        creation: Date,
-        comment: String,
-        thanks: Number
-    }]
+    comments: [spotsCommentsSchema]
 });
 
 var Spots = {
 
     model: mongoose.model('Spots', spotsSchema),
 
+    comment: mongoose.model('Comment', spotsCommentsSchema),
+
     create: function(req, res) {
         Spots.model.create(req.body, function(err, data) {
             if (err) {
-                logger.error('An error has occured in Place create: ', err);
+                logger.error('An error has occured in Spot create: ', err);
                 res.status(400).send(err);
             } else {
                 logger.info('>> SPOT: ', data._id, ' / ', data.name, ' WAS CREATED BY: ', data.owner);
                 res.send(data);
+            }
+        });
+    },
+
+    addComment: function(req, res) {
+        Spots.model.findById(req.params.id, function(err, spot) {
+            if (err) console.log(err);
+            var ratedBefore = spot.comments.filter(function(comment) {
+                return comment.owner == req.body.owner;
+            }).length;
+            if (ratedBefore === 0) {
+                spot.rating.quality = (spot.rating.quality * spot.rating.numberOfRatings + Number(req.body.quality)) / (spot.rating.numberOfRatings + 1);
+                spot.rating.beauty = (spot.rating.beauty * spot.rating.numberOfRatings + Number(req.body.beauty)) / (spot.rating.numberOfRatings + 1);
+                spot.rating.accessibility = (spot.rating.accessibility * spot.rating.numberOfRatings + Number(req.body.accessibility)) / (spot.rating.numberOfRatings + 1);
+                spot.rating.overallRating = (spot.rating.quality + spot.rating.beauty + spot.rating.accessibility) / 3;
+                spot.rating.numberOfRatings += 1;
+                req.body.date = Date.now();
+                spot.comments.push(req.body);
+                spot.save(function(err) {
+                    console.log(err);
+                });
+                logger.info('>> Un commentaire a été ajouté au spot', req.params.id, req.body);
+                res.sendStatus(200);
+            } else {
+                logger.info('>>> Dèja commenter!');
+                res.sendStatus(304);
             }
         });
     },
@@ -111,6 +173,7 @@ var Spots = {
             processedFileCount = 0,
             pictures = [],
             totalFiles = 0,
+            uploads = {},
             width = 1200;
         var targetPath = './public/uploads/spots/' + req.params.spotId + '/';
 
@@ -137,26 +200,22 @@ var Spots = {
         });
         form.on('file', function(name, file) {
             var tmpPath = file.path;
-            im.resize({
-                srcPath: tmpPath,
-                dstPath: targetPath + 'large/img_' + file.name,
-                width: width
-            }, function(err) {
-                if (err) throw err;
-                im.resize({
-                    srcPath: tmpPath,
-                    dstPath: targetPath + 'thumb/img_' + file.name,
-                    width: width / 4
-                }, function(err) {
+            gm(tmpPath)
+                .resize(width, width)
+                .write(targetPath + 'large/img_' + file.name, function(err) {
                     if (err) throw err;
-                    fs.unlink(tmpPath, function(err) {
-                        if (err) throw err;
-                        processedFileCount++;
-                        logger.info('Upload and resize complete for SPOT ID: ', req.params.spotId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
-                        if (totalFiles == processedFileCount) Spots.updateAndDontUpdate(req.params.spotId, pictures, res);
-                    });
+                    gm(tmpPath)
+                        .resize(width / 4, width / 4)
+                        .write(targetPath + 'thumb/img_' + file.name, function(err) {
+                            if (err) throw err;
+                            // fs.unlink(tmpPath, function(err) {
+                            //     if (err) throw err;
+                            processedFileCount++;
+                            logger.info('Upload and resize complete for SPOT ID: ', req.params.spotId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
+                            if (totalFiles == processedFileCount) Spots.updatePictures(req.params.spotId, pictures, res);
+                            // });
+                        });
                 });
-            });
         });
         form.on('error', function(err) {
             logger.error('An error has occured during upload process: ', err);
@@ -165,13 +224,16 @@ var Spots = {
     },
 
     findOne: function(req, res) {
-        Spots.model.findById(req.params.id, function(err, data) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send(data);
-            }
-        });
+        Spots.model.findById(req.params.id)
+            .populate('owner', 'identity rating email')
+            .populate('comments.owner', 'identity rating email')
+            .exec(function(err, data) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(data);
+                }
+            });
     },
 
     findOneAndReturn: function(req, res) {
@@ -191,13 +253,16 @@ var Spots = {
     },
 
     findAll: function(req, res) {
-        Spots.model.find(function(err, data) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send(data);
-            }
-        });
+        Spots.model.find()
+            .populate('owner', 'identity rating email')
+            .populate('comments.owner', 'identity rating email')
+            .exec(function(err, data) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(data);
+                }
+            });
     },
 
     update: function(req, res) {
@@ -210,7 +275,7 @@ var Spots = {
         });
     },
 
-    updateAndDontUpdate: function(spotId, pictures, res) {
+    updatePictures: function(spotId, pictures, res) {
         Spots.model.findByIdAndUpdate(spotId, {
             $set: {
                 pictures: pictures

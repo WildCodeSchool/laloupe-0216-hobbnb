@@ -25,7 +25,7 @@
                                     <span class="field-error" ng-show="addSpotForm.spotName.$error.required && addSpotForm.$submitted">Un nom est requis pour la création d'un spot.</span>
                                 </div>
                                 <div class="input-field col s12">
-                                    <select material-select ng-model="obj.primarySports" name="hobby" required>
+                                    <select material-select ng-model="obj.hobby" name="hobby" required>
                                         <option value=''>Spot de</option>
                                         <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
                                     </select>

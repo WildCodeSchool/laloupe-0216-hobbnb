@@ -1,13 +1,13 @@
 // MODEL API
 var mongoose = require('mongoose'),
-    bcrypt = require('bcrypt')
-jwt = require('jsonwebtoken'),
+    bcrypt = require('bcrypt'),
+    jwt = require('jsonwebtoken'),
     secretToken = require('../../config/secretToken.js');
 
 function hashCode(s) {
     return s.split("").reduce(function(a, b) {
         a = ((a << 5) - a) + b.charCodeAt(0);
-        return a & a
+        return a & a;
     }, 0);
 }
 
@@ -162,7 +162,9 @@ var Users = {
                     res.status(400).send('Utilisateur inconnu');
                 } else {
                     if (!data.isValidate) {
-                        Users.model.findByIdAndUpdate(data._id, {isValidate:true}, function(err, data) {
+                        Users.model.findByIdAndUpdate(data._id, {
+                            isValidate: true
+                        }, function(err, data) {
                             if (err) {
                                 console.log(err);
                                 res.status(400).send('Utilisateur inconnu');

@@ -3,14 +3,20 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
     /* initialisation */
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.propertyTypeListing = ["Hebergement", "Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
-    $scope.filters = {
-        rating: {
-            popularity: 3,
-            accessibility: 3,
-            beauty: 3,
-            quality: 3,
-            overallRating: 3
-        }
+    $scope.filters = {};
+    $scope.filters.rating = {
+        numberOfRatings: null,
+        accessibility: null,
+        beauty: null,
+        quality: null,
+        overallRating: null
+      };
+    $scope.rating = {
+        numberOfRatings: -1,
+        accessibility: -1,
+        beauty: -1,
+        quality: -1,
+        overallRating: -1
     };
 
     $scope.latitude =   {};
@@ -35,28 +41,8 @@ angular.module('app').controller('searchSpotController', function($scope, $http,
     });
 
     spotsService.get().then(function(res) {
+        console.log(res.data);
         $scope.positions = res.data;
-        $scope.positions.map(function(e) {
-            if (e.rating.popularity <= 0) {
-                e.rating.popularity = 3;
-            }
-            if (e.rating.quality.length <= 0) {
-                e.rating.quality = [3];
-            }
-            if (e.rating.beauty.length <= 0) {
-                e.rating.beauty = [3];
-            }
-            if (e.rating.accessibility.length <= 0) {
-                e.rating.accessibility = [3];
-            }
-            if (e.rating.overallRating <= 0) {
-                e.rating.overallRating = 3;
-            }
-            usersService.getOne(e.owner).then(function(res) {
-                e.owner = res.data;
-            });
-            return e;
-        });
         //Ask from over page
         $scope.locality = searchFactory.data.city;
         $scope.filters.primarySports = searchFactory.data.hobby;

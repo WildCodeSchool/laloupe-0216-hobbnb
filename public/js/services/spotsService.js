@@ -7,6 +7,9 @@ angular.module('app')
             getOne: function(id) {
                 return $http.get('/api/spots/' + id);
             },
+            addComment: function(id, comment) {
+                return $http.put('/api/spots/addComment/' + id, comment);
+            },
             update: function(id, data) {
                 return $http.put('/api/spots/' + id, data);
             },
