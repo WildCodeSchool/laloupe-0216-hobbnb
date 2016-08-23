@@ -193,7 +193,7 @@
                             {{infoPhotos}}
                         </p>
                         <ul ui-sortable="sortableOptions" ng-model="host.pictures" class="list left">
-                            <div class="col s6" ng-repeat="picture in host.pictures track by $index">
+                            <div class="col s6 no-margin" ng-repeat="picture in host.pictures track by $index">
                                 <li class="thumbnail show">
                                     <a ng-click="removePicture($index)" style="position: absolute;top: 10px;right: 10px;z-index: 100;" class="waves-effect waves-light btn-floating red">
                                         <i class="material-icons">remove</i>

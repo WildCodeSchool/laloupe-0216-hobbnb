@@ -91,11 +91,11 @@
                 <p class="center-align" ng-show="infoPhotos">
                     {{infoPhotos}}
                 </p>
-                <div class="row">
+                <div class="row no-margin">
                     <ul ui-sortable="sortableOptions" ng-model="photos" class="list left">
-                        <div class="col s3" ng-repeat="picture in photos track by $index">
+                        <div class="col s3 no-margin" ng-repeat="picture in photos track by $index">
                             <li class="thumbnail create">
-                                <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating red">
+                                <a ng-click="removePicture($index)" style="position: absolute;top: 10px;right: 10px;z-index: 100;" class="waves-effect waves-light btn-floating red">
                                     <i class="material-icons">remove</i>
                                 </a>
                                 <img ngf-thumbnail="picture" class="object-fit_cover">
