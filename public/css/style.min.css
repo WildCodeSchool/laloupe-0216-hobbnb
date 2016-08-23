@@ -147,7 +147,6 @@ html {
     overflow: hidden;
 }
 .thumbnail.create {
-    border: 3px solid #999;
     padding-bottom: 10px !important;
     height: 150px;
 }

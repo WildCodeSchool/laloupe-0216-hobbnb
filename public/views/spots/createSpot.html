@@ -70,7 +70,20 @@
                     <h2>Photos</h2>
                     <div class="row" ng-hide="photos.length > 11">
                         <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
-                        <div ngf-drop ngf-select ng-model="photos" ngf-max-files="12" ngf-change="picturesLengthValidation()" class="drop-box valign-wrapper" ngf-keep="'distinct'" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
+                        <div
+                            ngf-drop
+                            ngf-select
+                            ng-model="photos"
+                            name="photos"
+                            ngf-max-files="12"
+                            ngf-change="picturesLengthValidation()"
+                            class="drop-box valign-wrapper"
+                            ngf-keep="'distinct'"
+                            ngf-drag-over-class="'dragover'"
+                            ngf-multiple="true"
+                            ngf-allow-dir="true"
+                            accept="image/*"
+                            ngf-pattern="'image/*'">
                             <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
                         </div>
                     </div>
@@ -89,12 +102,20 @@
                             </div>
                         </ul>
                     </div>
-                    <div class="row">
+                    <div class="row" ng-show="showLoader">
+                        <div class="col s12 progress">
+                            <div class="determinate" style="width: {{progressPercentage}}%"></div>
+                        </div>
+                        <div class="col s12 center">
+                            Upload {{progressPercentage}}% completé. Patientez vous allez être automatiquement rediriger.
+                        </div>
+                    </div>
+                    <div class="row" ng-hide="showLoader">
                         <button class="btn waves-effect waves-light blue white-text left" ng-click='step=1'>
                             Précédent
                             <i class='material-icons left'>keyboard_arrow_left</i>
                         </button>
-                        <button class="btn blue right white-text" ng-class="(6 > photos.length || photos.length > 12) ? 'custom-disabled' : 'waves-effect waves-light white-text'"  ng-click="(6 < photos.length || photos.length < 12) && send()" ng>
+                        <button class="btn blue right white-text" ng-class="!valid ? 'custom-disabled' : 'waves-effect waves-light white-text'" ng-click="valid && send()">
                             Confirmer et envoyer les photos
                             <i class='material-icons right'>keyboard_arrow_right</i>
                         </button>

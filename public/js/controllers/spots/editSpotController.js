@@ -25,7 +25,6 @@ angular.module('app').controller('editSpotController', function($scope, $window,
 
     $scope.infoPhotos = null;
     $scope.picturesLengthValidation = function() {
-        console.log($scope.spot.pictures);
         if ($scope.spot.pictures.length == 12) {
             $scope.infoPhotos = "Vous avez attend la limite de 12 photos par hébérgement.";
         } else if ($scope.spot.pictures.length < 6) {
@@ -37,7 +36,6 @@ angular.module('app').controller('editSpotController', function($scope, $window,
         }
     };
     $scope.removePicture = function(index) {
-        console.log(typeof($scope.spot.pictures[index]));
         if (typeof($scope.spot.pictures[index]) === 'string') removedPictures.push($scope.spot.pictures[index]);
         $scope.spot.pictures.splice(index, 1);
         $scope.picturesLengthValidation();
@@ -70,15 +68,12 @@ angular.module('app').controller('editSpotController', function($scope, $window,
                 picturesList.push(picture);
             }
         });
-        console.log(picturesList);
-        console.log(newImages);
         var obj = {};
         obj.removedPictures = removedPictures;
         obj.picturesList = picturesList;
         if (newImages.length > 0) upload(newImages, $scope.currentSpot);
         spotsService.updatePictures($scope.currentSpot, obj).then(function(res) {
             removedPictures = [];
-            console.log(res);
         });
     };
 });

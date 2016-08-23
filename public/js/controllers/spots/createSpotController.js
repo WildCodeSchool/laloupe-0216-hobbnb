@@ -5,12 +5,14 @@ angular.module('app').controller('createSpotController', function($scope, $windo
         _id: null
     };
 
+    $scope.showLoader = false;
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.obj = {};
     $scope.obj.owner = $scope.currentUser._id;
     $scope.obj.address = {};
     $scope.spotMarkerPos = 'current-location';
     $scope.photos = [];
+    $scope.valid = false;
     $scope.infoPhotos = null;
     $scope.step = 1;
 
@@ -73,29 +75,38 @@ angular.module('app').controller('createSpotController', function($scope, $windo
     });
 
     $scope.picturesLengthValidation = function() {
-        console.log($scope.photos);
-        if ($scope.photos.length == 12) {
-            $scope.infoPhotos = "Vous avez attend la limite de 12 photos par hébérgement.";
-        } else if ($scope.photos < 6) {
+        $scope.totalSize = 0;
+        if ($scope.photos.length < 6) {
             $scope.infoPhotos = "Un minimum de 6 photos est nécésaire à la création d'un hébérgement.";
+            $scope.valid = false;
         } else if ($scope.photos.length > 12) {
-            $scope.infoPhotos = "Vous avez dépassez la limite de 12 photos par hébérgement. Supprimez des photos.";
+            $scope.infoPhotos = "Vous avez dépassé la limite de 12 photos par hébérgement. Supprimez des photos.";
+            $scope.valid = false;
         } else {
-            $scope.infoPhotos = $scope.photos.length;
+            for (var i = 0; i < $scope.photos.length; i++) {
+                $scope.totalSize += Number($scope.photos[i].size);
+            }
+            if ($scope.photos.length == 12) {
+                $scope.infoPhotos = "Vous avez attend la limite de 12 photos par hébérgement.";
+                $scope.valid = true;
+            } else {
+                if ($scope.totalSize < 50000000) {
+                    $scope.infoPhotos = $scope.photos.length;
+                    $scope.valid = true;
+                } else {
+                    $scope.infoPhotos = 'Vous avez dépassé la limite de 50mB autorisée. Supprimez des photos.';
+                    $scope.valid = false;
+                }
+            }
         }
     };
     $scope.removePicture = function(index) {
         $scope.photos.splice(index, 1);
-        console.log($scope.photos);
+        $scope.picturesLengthValidation();
     };
+
     function upload(photos, addedSpotID) {
         if (photos && photos.length) {
-            var totalLength = 0;
-            for (var i = 0; i < photos.length; i++) {
-                totalLength += +photos[i].size;
-            }
-            console.log(totalLength);
-            console.log(photos.length);
             Upload.upload({
                 url: '/api/spots/uploadImages/' + addedSpotID,
                 data: {
@@ -103,17 +114,15 @@ angular.module('app').controller('createSpotController', function($scope, $windo
                     totalFiles: photos.length
                 }
             }).progress(function(event) {
-                console.log(event);
-                var progressPercentage = parseInt(100.0 * event.loaded / event.total);
-                console.log('progress: ' + progressPercentage + '% ');
+                $scope.progressPercentage = parseInt(100.0 * event.loaded / event.total);
             }).success(function(data, status, headers, config) {
-                console.log(JSON.stringify(data));
+                $scope.showLoader = false;
                 $location.path('/spot/' + addedSpotID);
             });
         }
     }
-
     $scope.send = function() {
+        $scope.showLoader = true;
         spotsService.create($scope.obj)
             .then(function(res) {
                 // $scope.isAction == 'création' && emailService.sendToAdmin(

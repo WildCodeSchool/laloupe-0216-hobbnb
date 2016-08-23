@@ -5,6 +5,7 @@ angular.module('app').controller('createPlaceController', function($scope, $q, $
         _id: null
     };
 
+    $scope.showLoader = false;
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.propertyTypeListing = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
     $scope.selectedHobbies = ['false', 'false', 'false'];
@@ -15,6 +16,7 @@ angular.module('app').controller('createPlaceController', function($scope, $q, $
     $scope.obj.hobbies = [];
     $scope.obj.address = {};
     $scope.photos = [];
+    $scope.valid = false;
     $scope.infoPhotos = null;
     $scope.step = 1;
 
@@ -62,22 +64,39 @@ angular.module('app').controller('createPlaceController', function($scope, $q, $
         }
     });
 
-    $scope.picturesLengthValidation = function() {
+    $scope.picturesLengthValidation = function () {
+        $scope.totalSize = 0;
         console.log($scope.photos);
-        if ($scope.photos.length == 12) {
-            $scope.infoPhotos = "Vous avez attend la limite de 12 photos par hébérgement.";
-        } else if ($scope.photos < 6) {
+        if ($scope.photos.length < 6) {
             $scope.infoPhotos = "Un minimum de 6 photos est nécésaire à la création d'un hébérgement.";
+            $scope.valid = false;
         } else if ($scope.photos.length > 12) {
-            $scope.infoPhotos = "Vous avez dépassez la limite de 12 photos par hébérgement. Supprimez des photos.";
+            $scope.infoPhotos = "Vous avez dépassé la limite de 12 photos par hébérgement. Supprimez des photos.";
+            $scope.valid = false;
         } else {
-            $scope.infoPhotos = $scope.photos.length;
+            for (var i = 0; i < $scope.photos.length; i++) {
+                $scope.totalSize += Number($scope.photos[i].size);
+            }
+            if ($scope.photos.length == 12) {
+                $scope.infoPhotos = "Vous avez attend la limite de 12 photos par hébérgement.";
+                $scope.valid = true;
+            } else {
+                if ($scope.totalSize < 50000000) {
+                    $scope.infoPhotos = $scope.photos.length;
+                    $scope.valid = true;
+                } else {
+                    $scope.infoPhotos = 'Vous avez dépassé la limite de 50mB autorisée. Supprimez des photos.';
+                    $scope.valid = false;
+                }
+            }
         }
     };
     $scope.removePicture = function(index) {
         $scope.photos.splice(index, 1);
+        $scope.picturesLengthValidation();
         console.log($scope.photos);
     };
+
     function upload(photos, addedPlaceID) {
         if (photos && photos.length) {
             Upload.upload({
@@ -87,23 +106,22 @@ angular.module('app').controller('createPlaceController', function($scope, $q, $
                     totalFiles: photos.length
                 }
             }).progress(function(event) {
-                var progressPercentage = parseInt(100.0 * event.loaded / event.total);
-                console.log('progress: ' + progressPercentage + '% ');
+                $scope.progressPercentage = parseInt(100.0 * event.loaded / event.total);
             }).success(function(data, status, headers, config) {
-                console.log(JSON.stringify(data));
+                $scope.showLoader = false;
                 $location.path('/place/' + addedPlaceID);
             });
         }
     }
 
     $scope.send = function() {
+        $scope.showLoader = true;
         placesService.create($scope.obj)
             .then(function(res) {
                 // $scope.isAction == 'création' && emailService.sendToAdmin(
                 //     'Un hébergement à été créé sur hobbnb',
                 //     'Un hébergement a été créé sur hobbnb !' + "\n<br />" + '<a href="http://hobbnb.com/place/' + res.data._id + '">Le consulter</a>'
                 // );
-                console.log(res);
                 if (res.status == 200) upload($scope.photos, res.data._id);
             }, function(err) {
                 console.log(err);
