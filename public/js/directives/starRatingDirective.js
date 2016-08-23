@@ -8,7 +8,7 @@ angular.module('app')
                 '  </li>' +
                 '</ul>',
             scope: {
-                ratingValue: '=ngModel',
+                ratingValue: '=?ngModel',
                 max: '=?', // optional (default is 5)
                 onRatingSelect: '&?',
                 readonly: '=?'
@@ -34,11 +34,22 @@ angular.module('app')
                         });
                     }
                 };
-                scope.$watch('ratingValue', function(oldValue, newValue) {
+                if (scope.ratingValue || undefined) updateStars();
+                scope.$watch('ratingValue', function(newValue, oldValue) {
                     if (newValue) {
                         updateStars();
                     }
                 });
+
+                if (scope.ratingValue === undefined || scope.ratingValue === 0) {
+                    // scope.ratingValue = '';
+                    scope.stars = [];
+                    for (var i = 0; i < scope.max; i++) {
+                        scope.stars.push({
+                            filled: false
+                        });
+                    }
+                }
             }
         };
     });

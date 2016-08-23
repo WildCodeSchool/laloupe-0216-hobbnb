@@ -1,4 +1,4 @@
-angular.module('app').controller('createSpotsController', function($scope, $q, $window, $http, $location, $routeParams, NgMap, NavigatorGeolocation, GeoCoder, Upload, spotsFactory, spotsService, emailService) {
+angular.module('app').controller('createSpotController', function($scope, $window, $location, $routeParams, NgMap, NavigatorGeolocation, GeoCoder, Upload, spotsFactory, spotsService, emailService) {
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
@@ -7,6 +7,12 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
 
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.obj = {};
+    $scope.obj.owner = $scope.currentUser._id;
+    $scope.obj.address = {};
+    $scope.spotMarkerPos = 'current-location';
+    $scope.photos = [];
+    $scope.infoPhotos = null;
+    $scope.step = 1;
 
     var componentForm = {
         street_number: 'short_name',
@@ -16,13 +22,9 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
         country: 'long_name',
         postal_code: 'short_name'
     };
-
     NgMap.getMap('myMap').then(function(map) {
         $scope.map = map;
     });
-
-    $scope.spotMarkerPos = 'current-location';
-
     $scope.getCurrentMarkerLocation = function(event) {
         $scope.obj.latitude = event.latLng.lat();
         $scope.obj.longitude = event.latLng.lng();
@@ -70,58 +72,29 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
         }
     });
 
-    resetObj = function() {
-        $scope.obj.isActive = "1";
-        $scope.obj.owner = $scope.currentUser._id;
-        $scope.obj.spot = {};
-        $scope.obj.rating = {};
-        $scope.obj.secondarySports = [];
-        $scope.obj.creation = new Date();
-        $scope.obj.modification = new Date();
-        $scope.obj.address = {};
-        $scope.obj.comments = [{
-            creation: new Date()
-        }];
-    };
-    resetObj();
-
-    $scope.step = 1;
-
-    $scope.photos = [];
-    $scope.photo = null;
-    $scope.infoPhotos = null;
-
-    $scope.$watch('photo', function() {
-        if ($scope.photo !== null) {
-            $scope.photos = $scope.photos.concat($scope.photo);
-        }
-    });
-
-    $scope.$watch('photos.length', function() {
+    $scope.picturesLengthValidation = function() {
         console.log($scope.photos);
         if ($scope.photos.length == 12) {
-            $scope.infoPhotos = "Vous avez attend la limite de 12 photos par spot.";
-        } else if ($scope.photos.length < 6) {
-            $scope.infoPhotos = "Un minimum de 6 photos est nécésaire à la création d'un spot.";
+            $scope.infoPhotos = "Vous avez attend la limite de 12 photos par hébérgement.";
+        } else if ($scope.photos < 6) {
+            $scope.infoPhotos = "Un minimum de 6 photos est nécésaire à la création d'un hébérgement.";
         } else if ($scope.photos.length > 12) {
-            $scope.infoPhotos = "Vous avez dépassez la limite de 12 photos par spot. Supprimez des photos.";
+            $scope.infoPhotos = "Vous avez dépassez la limite de 12 photos par hébérgement. Supprimez des photos.";
         } else {
             $scope.infoPhotos = $scope.photos.length;
         }
-    });
-
+    };
     $scope.removePicture = function(index) {
         $scope.photos.splice(index, 1);
         console.log($scope.photos);
     };
-
     function upload(photos, addedSpotID) {
         if (photos && photos.length) {
-          var totalLength = 0;
-          for (var i = 0; i < photos.length; i++) {
-            totalLength += +photos[i].size;
-          }
-          console.log(totalLength);
+            var totalLength = 0;
+            for (var i = 0; i < photos.length; i++) {
+                totalLength += +photos[i].size;
+            }
+            console.log(totalLength);
             console.log(photos.length);
             Upload.upload({
                 url: '/api/spots/uploadImages/' + addedSpotID,
@@ -139,7 +112,6 @@ angular.module('app').controller('createSpotsController', function($scope, $q, $
             });
         }
     }
-
 
     $scope.send = function() {
         spotsService.create($scope.obj)

@@ -1,4 +1,4 @@
-angular.module('app').controller('createPlacesController', function($scope, $q, $window, $http, $location, $routeParams, Upload, placesFactory, placesService, emailService) {
+angular.module('app').controller('createPlaceController', function($scope, $q, $window, $http, $location, $routeParams, Upload, placesFactory, placesService, emailService) {
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
@@ -6,29 +6,32 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
     };
 
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
+    $scope.propertyTypeListing = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
+    $scope.selectedHobbies = ['false', 'false', 'false'];
+    $scope.currentSelectedHobby = 0;
     $scope.obj = {};
-    resetObj = function() {
-        $scope.obj.isActive = "1";
-        $scope.obj.owner = $scope.currentUser._id;
-        $scope.obj.creation = new Date();
-        $scope.obj.modification = new Date();
-        $scope.obj.address = {};
-        $scope.obj.address.country = 'France';
-        $scope.obj.rating = {
-            cleanness: [],
-            location: [],
-            valueForMoney: []
-        };
-        $scope.obj.home = {};
-        $scope.obj.home.houseSpace = {};
-        $scope.obj.home.houseAmenities = {};
-        $scope.obj.home.intro = {};
-        $scope.obj.home.houseExtras = {};
-        $scope.obj.secondarySports = [];
-        $scope.obj.comments = [];
-    };
-    resetObj();
+    $scope.obj.isActive = "1";
+    $scope.obj.owner = $scope.currentUser._id;
+    $scope.obj.hobbies = [];
+    $scope.obj.address = {};
+    $scope.photos = [];
+    $scope.infoPhotos = null;
     $scope.step = 1;
+
+    $scope.addHobby = function(index, hobby) {
+        if ($scope.currentSelectedHobby < 3) {
+            $scope.obj.hobbies[$scope.currentSelectedHobby] = hobby;
+            if (!$scope.obj.hobbies[$scope.currentSelectedHobby + 1]) $scope.currentSelectedHobby++;
+            else if (!$scope.obj.hobbies[$scope.currentSelectedHobby + 2]) $scope.currentSelectedHobby += 2;
+            else $scope.currentSelectedHobby = 3;
+            $scope.hobbiesListing.splice(index, 1);
+        }
+    };
+    $scope.removeHobby = function(index, hobby) {
+        $scope.currentSelectedHobby = index;
+        $scope.hobbiesListing.push($scope.obj.hobbies[index]);
+        $scope.obj.hobbies[index] = false;
+    };
 
     var componentForm = {
         street_number: 'short_name',
@@ -38,7 +41,6 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
         country: 'long_name',
         postal_code: 'short_name'
     };
-
     $scope.$watch(function() {
         return $scope.details;
     }, function() {
@@ -60,34 +62,22 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
         }
     });
 
-    $scope.photos = [];
-    $scope.photo = null;
-    $scope.infoPhotos = null;
-
-    $scope.$watch('photo', function() {
-        if ($scope.photo !== null) {
-            $scope.photos = $scope.photos.concat($scope.photo);
-        }
-    });
-
-    $scope.$watch('photos.length', function() {
+    $scope.picturesLengthValidation = function() {
         console.log($scope.photos);
         if ($scope.photos.length == 12) {
             $scope.infoPhotos = "Vous avez attend la limite de 12 photos par hébérgement.";
-        } else if ($scope.photos.length < 6) {
+        } else if ($scope.photos < 6) {
             $scope.infoPhotos = "Un minimum de 6 photos est nécésaire à la création d'un hébérgement.";
         } else if ($scope.photos.length > 12) {
             $scope.infoPhotos = "Vous avez dépassez la limite de 12 photos par hébérgement. Supprimez des photos.";
         } else {
             $scope.infoPhotos = $scope.photos.length;
         }
-    });
-
+    };
     $scope.removePicture = function(index) {
         $scope.photos.splice(index, 1);
         console.log($scope.photos);
     };
-
     function upload(photos, addedPlaceID) {
         if (photos && photos.length) {
             Upload.upload({
@@ -115,7 +105,7 @@ angular.module('app').controller('createPlacesController', function($scope, $q, 
                 // );
                 console.log(res);
                 if (res.status == 200) upload($scope.photos, res.data._id);
-            },function(err) {
+            }, function(err) {
                 console.log(err);
             });
 

@@ -1,5 +1,5 @@
 <div class="row" style="position: relative; height: 75vh; margin: 0 !important;">
-    <div class="col s6 search-left-col">
+    <div class="col s7 search-left-col">
         <form>
             <div class="row">
                 <div class="col s12 m12 l6">
@@ -23,40 +23,41 @@
                 <div class="row no-margin">
                     <div class="input-field col s12 m12 l6">
                         <i class="material-icons prefix">search</i>
-                        <input placeholder="Lieu" id="city" type="text" class="autocomplete" ng-model="locality" details="details" ng-autocomplete>
+                        <input placeholder="Lieu" id="city" type="text" class="autocomplete" ng-change="searchFactory.data.city = $scope.filters.place;" ng-model="locality" details="details" ng-autocomplete>
                         <label>Lieu</label>
                     </div>
                     <div class="input-field col s12 m12 l3">
-                        <select class='' material-select ng-change="hobbyToData()" ng-model="filters.hobby">
+                        <select class='' material-select ng-change="searchFactory.data.hobby = $scope.filters.hobby;" ng-model="filters.hobby">
                             <option value=''>Hobbies</option>
                             <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
                         </select>
                         <label>Hobby</label>
                     </div>
                     <div class="input-field col s12 m12 l3">
-                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Popularité</span>
-                        <star-rating ng-model="rating.numberOfRatings" on-rating-select="filters.rating.numberOfRatings = rating.numberOfRatings"></star-rating>
+                        <span  class="custom-label">Popularité</span>
+                        <star-rating ng-model="filters.rating.numberOfRatings" on-rating-select=""></star-rating>
                     </div>
                 </div>
                 <div class="row no-margin">
                     <div class="input-field col s12 m12 l3">
-                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Qualité</span>
-                        <star-rating ng-model="rating.quality" on-rating-select="filters.rating.quality = rating.quality"></star-rating>
+                        <span  class="custom-label">Qualité</span>
+                        <star-rating ng-model="filters.rating.quality" on-rating-select=""></star-rating>
                     </div>
                     <div class="input-field col s12 m12 l3">
-                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Beauté</span>
-                        <star-rating ng-model="rating.beauty" on-rating-select="filters.rating.beauty = rating.beauty"></star-rating>
+                        <span  class="custom-label">Beauté</span>
+                        <star-rating ng-model="filters.rating.beauty" on-rating-select=""></star-rating>
                     </div>
                     <div class="input-field col s12 m12 l3">
-                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Facilité</span>
-                        <star-rating ng-model="rating.accessibility" on-rating-select="filters.rating.accessibility = rating.accessibility"></star-rating>
+                        <span  class="custom-label">Facilité</span>
+                        <star-rating ng-model="filters.rating.accessibility" on-rating-select=""></star-rating>
                     </div>
                     <div class="input-field col s12 m12 l3">
-                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Note</span>
-                        <star-rating ng-model="rating.overallRating" on-rating-select="filters.rating.overallRating = rating.overallRating"></star-rating>
+                        <span  class="custom-label">Note</span>
+                        <star-rating ng-model="filters.rating.overallRating" on-rating-select=""></star-rating>
                     </div>
                 </div>
             </div>
+            {{filters}}
             <div class="row no-margin center" ng-click="slideToggle=! slideToggle">
                 <span class="slide-arrows" ng-hide="!slideToggle">&#11167;</span>
                 <span class="slide-arrows" ng-hide="slideToggle">&#11165;</span>
@@ -67,17 +68,17 @@
                 <a href="/spot/{{p._id}}" target="_blank">
                     <div class="card hoverable">
                         <div class="card-image">
-                            <img ng-src="uploads/spots/{{p._id}}/thumb/img_{{p.pictures[0]}}">
+                            <img ng-src="uploads/spots/{{p._id}}/thumb/{{p.pictures[0]}}">
                         </div>
                         <div class="card-content">
                             <p>
                                 <img class="actpict" ng-src="assets/hobbies/{{p.hobby}}.png" alt=""/>
                                 <img class="authorpict" src="/assets/hobbynaut-avatar.gif" ng-show="!p.owner.picture"/>
-                                <img class="authorpict" ng-src="/uploads/users/{{p.owner._id}}/thumb/img_{{p.owner.picture}}" ng-show="p.owner.picture"/>
+                                <img class="authorpict" ng-src="/uploads/users/{{p.owner._id}}/thumb/{{p.owner.picture}}" ng-show="p.owner.picture"/>
                                 <div>{{p.name}}</div>
                                 <div>
                                     <star-rating ng-model="p.rating.valueForMoney" readonly="true"></star-rating>
-                                    <sup>({{nbReview(p.rating)}})</sup>
+                                    <sup>({{p.rating.numberOfRatings}})</sup>
                                 </div>
                             </p>
                         </div>
@@ -88,32 +89,33 @@
         </div>
     </div>
 
-    <div class="col s6 search-rigth-col">
+    <div class="col s5 search-rigth-col">
         <ng-map default-style="false" center="{{centerMap}}" geo-fallback-center="48.8534100, 2.3488000" zoom="6" id="myMap" style='height:100%;'>
             <marker
                 ng-repeat="p in positions | filter : filters | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | itemsPerPage: 8"
                 position="[{{p.latitude}},{{p.longitude}}]"
                 title={{p.name}}
                 icon="{
-                      url:'assets/search/tile{{p.primarySports}}.png',
+                      url:'assets/search/tile{{p.hobby}}.png',
                       scaledSize:[32,32],
                       origin: [0,0],
                       anchor: [16,32]
                       }"
+                scrollwheel="true"
                 on-click="toggleInfoWindow(event, p)"
                 clickable="true"></marker>
             <info-window id="popup" max-width="200">
                 <a href="/spot/{{toggleledSpot._id}}" target="_blank">
                     <div class="card">
                         <div class="card-image">
-                            <img ng-src="/uploads/spots/{{toggleledSpot._id}}/thumb/img_{{toggleledSpot.pictures[0]}}">
+                            <img ng-src="/uploads/spots/{{toggleledSpot._id}}/thumb/{{toggleledSpot.pictures[0]}}">
                         </div>
                         <div class="card-content">
                             <p>
                                 <div>{{toggleledSpot.name}}</div>
                                 <div>
                                     <star-rating ng-model="toggleledSpot.rating.overallRating" readonly="true"></star-rating>
-                                    <sup>({{reviewNb}})</sup>
+                                    <sup>({{toggleledSpot.rating.numberOfRatings}})</sup>
                                 </div>
                             </p>
                         </div>

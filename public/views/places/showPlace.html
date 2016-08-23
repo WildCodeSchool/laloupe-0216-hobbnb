@@ -1,237 +1,157 @@
-<div class="row" ng-show='host.picture'>
-    <div class="col s12">
-        <div style='background-image:url("uploads/places/{{host._id}}/large/img_{{host.picture}}");' class='bg-fullwidth'></div>
-    </div>
-</div>
 <div class="container">
-    <div class="row">
+    <div class="row no-margin">
+        <div style='background-image:url("uploads/places/{{host._id}}/large/{{host.pictures[0]}}");' class='bg-fullwidth'></div>
+    </div>
+    <div class="row no-margin">
         <div class="col s12 m8">
+            <!-- main card -->
             <div class="row card-panel valign-wrapper">
                 <div class="col s4 m3">
                     <div class='valign center-align'>
-                        <img src="/uploads/users/{{owner._id}}/large/img_{{owner.picture}}" alt="Tom" class='circle responsive-img'/>
+                        <img ng-src="{{host.owner.picture && '/uploads/users/'+host.owner._id+'/large/'+host.owner.picture || '/assets/hobbynaut-avatar.gif'}}" alt="{{host.owner.identity.firstName + ' ' + host.owner.identity.lastName}}" class='circle responsive-img'/>
                         <br/>
-                        <b>{{owner.identity.firstName + ' ' + owner.identity.lastName}}</b>
+                        <b>{{host.owner.identity.firstName + ' ' + host.owner.identity.lastName}}</b>
                         <p>
                             <span class="center-align grey-text lighten-5" style='font-size:12px;'>
-                                <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:owner.globalRating'>star</i>
-                                <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:owner.globalLowerRating'>star</i>
-                                <br/>{{owner.numReviews}}
+                                <star-rating ng-model="host.owner.numReviews" readonly="true"></star-rating>
+                                <br/>{{host.owner.numReviews}}
                                 avis</span>
                         </p>
                     </div>
                 </div>
                 <div class="col s8 m9">
                     <div class="right">
-                        <a facebook class="facebookShare" data-picture='http://hobbnb.com/uploads/places/{{host._id}}/large/img_{{host.picture}}' data-url='http://hobbnb.com/place/{{host._id}}' data-shares='shares'>{{ shares }}</a>
+                        <a ng-show="host.owner._id == currentUser._id || currentUser.isAdmin" href="/edition/place/{{currentHost}}" class="btn btn-flat blue">Modifier</a>
+                        <a facebook class="facebookShare" data-picture='http://hobbnb.com/uploads/places/{{host._id}}/large/{{host.picture}}' data-url='http://hobbnb.com/place/{{host._id}}' data-shares='shares'>{{ shares }}</a>
                     </div>
-
-                    <h4>{{host.name}}</h4>
-                    <h5>{{host.address}},
-                        {{host.address.country}}</h5>
-                    <div class='row'>
+                    <div class="row">
                         <div class="col s12">
-                            <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
-                            <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
-                            <sup>({{numReviews}})</sup>
+                            <h4>{{host.name}}</h4>
+                            <h5>
+                                {{host.address.street_number}}
+                                {{host.address.route}}<br/>
+                                {{host.address.postal_code}}
+                                {{host.address.locality}},
+                                {{host.address.country}}</h5>
                         </div>
                     </div>
                     <div class="row center-align">
-                        <div class="col m2 l1">
-                            &nbsp;
-                        </div>
-                        <div class="col m4 l2">
-                            <img src="/assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt=""/><br/>
-                            <span class="textIcon">{{host.primarySports}}</span>
+                        <div class="col m4 l2 offset-m2">
+                            <img ng-src="/assets/hobbies/{{host.hobbies[0]}}.png" class='hobby-main' alt=""/><br/>
+                            <span class="textIcon">{{host.hobbies[0]}}</span>
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons imgIcons">home</i><br/>
-                            <span class="textIcon">{{host.home.houseSpace.propertyType}}</span>
+                            <span class="textIcon">{{host.home.propertyType}}</span>
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons imgIcons">person</i><br/>
-                            <span class="textIcon">{{host.home.intro.travellers}} voyageurs</span>
+                            <span class="textIcon">{{host.home.travellers}}
+                                voyageurs</span>
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons imgIcons">donut_small</i><br/>
-                            <span class="textIcon">{{host.home.intro.rooms}} pièces</span>
+                            <span class="textIcon">{{host.home.rooms}}
+                                pièces</span>
                         </div>
                         <div class="col m4 l2">
                             <i class="medium material-icons imgIcons">hotel</i><br/>
-                            <span class="textIcon">{{host.home.houseSpace.beds}} lits</span>
+                            <span class="textIcon">{{host.home.beds}}
+                                lits</span>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- About -->
             <div class="row card-panel grey lighten-5">
-                <div class="col s12">
-                    <h5>A propos</h5>
-                    <p class='flow-text'>
-                        {{host.shortDescription}}
-                    </p>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            L'hébergement
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Capacité :
-                                    {{host.home.houseSpace.accommodates || 0}}</li>
-                                <li>Salles de bain :
-                                    {{host.home.houseSpace.bathrooms || 0}}</li>
-                                <li>Chambres :
-                                    {{host.home.houseSpace.bedrooms || 0}}</li>
-                                <li>Lits :
-                                    {{host.home.houseSpace.beds || 0}}</li>
-                            </ul>
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Type :
-                                    {{host.home.houseSpace.propertyType || "Maison"}}</li>
-                                <li>Arrivée à :
-                                    {{host.home.houseSpace.checkIn || "09:00"}}</li>
-                                <li>Départ à :
-                                    {{host.home.houseSpace.checkOut || "18:00"}}</li>
-                                <li>
-                                    {{host.home.houseSpace.houseRules || " "}}
-                                </li>
-                            </ul>
-                        </div>
+                <h5>A propos</h5>
+                <div class="row">
+                    <div class="col s12">
+                        <p class='flow-text'>
+                            {{host.shortDescription}}
+                        </p>
                     </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Les hobbies
-                        </div>
-                        <div class="col m8 l5">
-                            <b class="center">Parfait pour</b><br/>
-                            <img src="/assets/hobbies/{{host.primarySports}}.png" class='hobby-small' alt=""/>
-                            {{host.primarySports}}<br/>
-                            <a href="/search">Montrer les spots à proximité</a>
-
-                        </div>
-                        <div class="col m8 l5">
+                </div>
+                <div class="divider"></div>
+                <div class='row'>
+                    <div class="col m4 l2">
+                        L'hébergement
+                    </div>
+                    <div class="col m4 l4">
+                        <ul>
+                            <li>Capacité :
+                                {{host.home.travellers}}</li>
+                        </ul>
+                    </div>
+                    <div class="col m4 l5 offset-l1">
+                        <ul>
+                            <li>Type :
+                                {{host.home.propertyType || "Maison"}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class='row'>
+                    <div class="col m4 l2">
+                        Les hobbies
+                    </div>
+                    <div class="col m8 l4">
+                        <b class="center">Parfait pour</b><br/>
+                        <img ng-src="/assets/hobbies/{{host.hobbies[0]}}.png" class='hobby-small' alt=""/>
+                        {{host.hobbies[0]}}<br/>
+                    </div>
+                    <div class="col m8 l6">
+                        <div class="col m12 l12">
                             <b class="center">Aussi pour</b><br/>
-                            <img src="/assets/hobbies/{{host.secondarySports[0]}}.png" class='hobby-small' alt=""/>
-                            {{host.secondarySports[0]}}<br/><br/>
-                            <img src="/assets/hobbies/{{host.secondarySports[1]}}.png" class='hobby-small' alt=""/>
-                            {{host.secondarySports[1]}}
+                        </div>
+                        <div class="col m6 l6">
+                            <img ng-src="./assets/hobbies/{{host.hobbies[1]}}.png" class='hobby-small' ng-show="host.hobbies[1]"/>
+                            {{host.hobbies[1]}}
+                        </div>
+                        <div class="col m6 l6">
+                            <img ng-src="./assets/hobbies/{{host.hobbies[2]}}.png" class='hobby-small' ng-show="host.hobbies[2]"/>
+                            {{host.hobbies[2]}}
                         </div>
                     </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Equipements
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>{{host.home.houseAmenities.kitchen ? "Cuisine" : ""}}</li>
-                                <li>{{host.home.houseAmenities.tv ? "TV" : ""}}</li>
-                                <li>{{host.home.houseAmenities.bbq ? "BBQ" : ""}}</li>
-                            </ul>
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>{{host.home.houseAmenities.wifi ? "Wifi" : ""}}</li>
-                                <li>{{host.home.houseAmenities.essentials ? "Essentiels" : ""}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Prix
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Lit bébé supplémentaire :
-                                    <b>{{host.home.houseExtras.extraBabyBed}}</b>
-                                </li>
-                                <li>Frais de nettoyage :
-                                    <b>{{host.home.houseExtras.cleaningFee}}</b>
-                                </li>
-                                <li>Caution :
-                                    <b>{{host.home.houseExtras.securityDeposit}}</b>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Promotion par semaine :
-                                    <b>{{host.home.houseExtras.weeklyDiscount}}%</b>
-                                </li>
-                                <li>Promotion par mois :
-                                    <b>{{host.home.houseExtras.monthlyDiscount}}%</b>
-                                </li>
-                                <li>Annulation:
-                                    {{host.home.houseExtras.cancellation}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Description
-                        </div>
-                        <div class="col m8 l10">
-                            <p>{{host.houseSpaceDescription}}</p>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Disponibilité
-                        </div>
-                        <div class="col m8 l10">
-                            <b>{{host.houseAvailability}}</b>
-                        </div>
-                    </div>
+                </div>
+                <div class="row center">
+                    <a href="/search">Montrer les spots à proximité</a>
+                </div>
+            </div>
+            <!-- Comment & Rating -->
+            <div class="row card-panel grey lighten-5">
+                <div class="col s10 offset-s1">
+                    <h5>Avis et commentaires</h5>
+                    <!--rating -->
                     <div class="row">
-                        <div class="col s6" ng-repeat='cap in host.caption'>
-                            <img materialboxed class="materialboxed responsive-img" src="/uploads/places/{{host._id}}/large/img_{{cap}}">
+                        <div class="col s3 center">
+                            <b>{{host.rating.numberOfRatings}}
+                                Avis</b><br/>
+                            <star-rating ng-model="host.rating.overallRating" readonly="true"></star-rating>
+                        </div>
+                        <div class="col s3 center">
+                            Propreté<br/>
+                            <star-rating ng-model="host.rating.cleanness" readonly="true"></star-rating>
+                        </div>
+                        <div class="col s3 center">
+                            Zone<br/>
+                            <star-rating ng-model="host.rating.location" readonly="true"></star-rating>
+                        </div>
+                        <div class="col s3 center">
+                            Monétaire<br/>
+                            <star-rating ng-model="host.rating.valueForMoney" readonly="true"></star-rating>
                         </div>
                     </div>
-                    <div class="divider"></div>
-                    <div class="row">
-                        <br>
-                        <div class="col s4">
-                            <div class="center-align">
-                                <b>{{numReviews}}
-                                    Avis</b><br/>
-                                <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
-                                <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
-                            </div>
-                        </div>
-                        <div class="col s8">
-                            <div class="row">
-                                <div class="col s4 center">
-                                    Propreté<br/>
-                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.cleanness)'>star</i>
-                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.cleanness))'>star</i>
-                                </div>
-                                <div class="col s4 center">
-                                    Zone<br/>
-                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.location)'>star</i>
-                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.location))'>star</i>
-                                </div>
-                                <div class="col s4 center">
-                                    Monétaire<br/>
-                                    <i class="small material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:howManyPositive(host.rating.valueForMoney)'>star</i>
-                                    <i class="small material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:(5-howManyPositive(host.rating.valueForMoney))'>star</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
+                    <!--comments -->
                     <div class="row">
                         <div class="col s10 offset-s1" ng-repeat='comment in host.comments'>
                             <div class="card-panel grey lighten-5 z-depth-1">
                                 <div class="row valign-wrapper">
                                     <div class="col s2 center">
-                                        <img src="/uploads/users/{{comment.owner._id}}/large/img_{{comment.owner.picture}}" alt="" class="circle responsive-img">
+                                        <img
+                                            ng-src="{{comment.owner.picture && '/uploads/users/'+comment.owner._id+'/large/'+comment.owner.picture || '/assets/hobbynaut-avatar.gif'}}"
+                                            alt="{{comment.owner.identity.firstName + ' ' + comment.owner.identity.lastName}}"
+                                            class="circle responsive-img">
                                         <br>
                                         <b>{{comment.owner.identity.firstName + ' ' + comment.owner.identity.lastName}}</b>
                                     </div>
@@ -240,11 +160,14 @@
                                             <b>{{comment.title}}</b>
                                             <br>
                                             {{comment.comment}}<br>
+                                            <br>{{comment.creation.substring(0,10)}}
                                         </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col s12">
                             <div class="grey lighten-5">
                                 <div class="row" ng-hide='toggleComment'>
@@ -252,92 +175,83 @@
                                         <button class='btn green accent-2 waves-effect waves-light' ng-click='toggleComment = true'>Ajouter un commentaire</button>
                                     </div>
                                 </div>
-                                <div class="row valign-wrapper" ng-show='toggleComment'>
+                                <div class="row" ng-show='toggleComment'>
                                     <div class="col s2 center">
-                                        <img src="/uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="" class="circle responsive-img">
+                                        <img
+                                            ng-src="{{currentUser.owner.picture && '/uploads/users/'+currentUser.owner._id+'/large/'+currentUser.owner.picture || '/assets/hobbynaut-avatar.gif'}}"
+                                            alt="{{currentUser.owner.identity.firstName + ' ' + currentUser.owner.identity.lastName}}"
+                                            class="circle responsive-img">
                                         <br>
                                         <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
                                     </div>
                                     <div class="col s10">
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <input id="title" type="text" ng-model='newComment.title'>
+                                                <input id="title" type="text" ng-model='comment.title'>
                                                 <label for="title">Titre</label>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <textarea id="commentaire" ng-model='newComment.comment' class="materialize-textarea"></textarea>
+                                                <textarea id="commentaire" ng-model='comment.comment' class="materialize-textarea"></textarea>
                                                 <label for="commentaire">Commentaire</label>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col s4">
-                                                <select material-select ng-model='newComment.rating.cleanness'>
-                                                    <option value=''>Propreté</option>
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
+                                                <span class="custom-label">Propreté</span>
+                                                <star-rating ng-model="comment.cleanness"></star-rating>
                                             </div>
                                             <div class="col s4">
-                                                <select material-select ng-model='newComment.rating.location'>
-                                                    <option value=''>Zone</option>
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
+                                                <span class="custom-label">Emplacement</span>
+                                                <star-rating ng-model="comment.location"></star-rating>
                                             </div>
                                             <div class="col s4">
-                                                <select material-select ng-model='newComment.rating.money'>
-                                                    <option value=''>Monétaire</option>
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
+                                                <span class="custom-label">Monétaire</span>
+                                                <star-rating ng-model="comment.valueForMoney"></star-rating>
                                             </div>
                                             <div class="col s12">
                                                 <p class="center-align">
-                                                    <button class="btn green accent-2 waves-effect waves-light" type="button" ng-click='comment()'>Ajouter un commentaire</button>
+                                                    <button class="btn green accent-2 waves-effect waves-light" type="button" ng-click='addPlaceComment()'>Ajouter un commentaire</button>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="divider"></div>
-                        <div class="row">
-                            <div class="col s10 offset-s1">
-                                <b>Alentours</b>
-                                <br>
-                                <ng-map default-style="true" center="{{host.address.locality}}" zoom="8" scrollwheel='false'>
-                                    <marker
-                                        position="[{{host.latitude}},{{host.longitude}}]"
-                                        icon="{
+                    </div>
+                </div>
+            </div>
+            <!-- Pictures -->
+            <div class="row card-panel grey lighten-5">
+                <h5>Photos</h5>
+                <div class="row">
+                    <div class="col s6 no-margin" ng-repeat='picture in host.pictures'>
+                        <div materialboxed class="thumbnail show">
+                            <img class="object-fit_cover materialboxed" ng-src="/uploads/places/{{host._id}}/large/{{picture}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row card-panel grey lighten-5">
+                <div class="col s10 offset-s1">
+                    <h5>Alentours</h5>
+                    <br>
+                    <ng-map default-style="true" center="[{{host.latitude}},{{host.longitude}}]" zoom="8" scrollwheel='false'>
+                        <marker
+                            position="[{{host.latitude}},{{host.longitude}}]"
+                            icon="{
                                       url:'../assets/search/tileHome.png',
                                       scaledSize:[42,45],
                                       origin: [0,0],
                                       anchor: [21,45]
                                       }"></marker>
-                                </ng-map>
-                            </div>
-                        </div>
-                    </div>
+                    </ng-map>
                 </div>
             </div>
         </div>
-        <div class="col s12 m4">
+        <div class="col s12 m4" style="padding-right: 0 !important;">
             <div class="card-panel">
                 <div class="row">
                     <div class="col s12 center grey lighten-2 flow-text">{{host.home.price}}€ / nuit</div>

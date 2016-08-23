@@ -1,579 +1,119 @@
 <div class="container">
-
-    <div class="row">
-        <div class="col s12">
-            <h1>{{isAction.charAt(0).toUpperCase() + isAction.slice(1)}}
-                d'un hébergement</h1>
-        </div>
-    </div>
-    <div ng-show='step==1'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="7" value='1' disabled id='slider'/>
-                <label for="slider">Etape 1/7</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.name" type="text" ng-model='obj.name'>
-                <label for="obj.name">Nom de votre hébergement</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="obj.shortDescription" class="materialize-textarea" ng-model='obj.shortDescription'></textarea>
-                <label for="obj.shortDescription">Introduction, décrivez l'espace</label>
-            </div>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=2'>
-                Suivant
-                <i class='material-icons right'>keyboard_arrow_right</i>
-            </button>
-        </div>
-    </div>
-    <div ng-show='step==2'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="7" value='2' disabled id='slider2'/>
-                <label for="slider2">Etape 2/7</label>
-            </div>
-        </div>
-        <h2>Hobbies</h2>
-        <div class="row">
-            <select material-select ng-model="obj.primarySports">
-                <option value=''>Primaire</option>
-                <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
-            </select>
-        </div>
-        <div class="row">
-            <select material-select ng-model="obj.secondarySports[0]">
-                <option value=''>Secondaire</option>
-                <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
-            </select>
-        </div>
-        <div class="row">
-            <select material-select ng-model="obj.secondarySports[1]">
-                <option value=''>Secondaire</option>
-                <option ng-repeat='hobby in hobbiesListing'>{{hobby}}</option>
-            </select>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=1'>
-                Précédent
-                <i class='material-icons left'>keyboard_arrow_left</i>
-            </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=3'>
-                Suivant
-                <i class='material-icons right'>keyboard_arrow_right</i>
-            </button>
-        </div>
-    </div>
-    <div ng-show='step==3'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="7" value='3' disabled id='slider3'/>
-                <label for="slider3">Etape 3/7</label>
-            </div>
-        </div>
-        <h2>Adresse</h2>
-        <div class="row">
-
-            <div class="input-field">
-                <input type="text" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details">
-                <label>Adresse:</label>
-            </div>
-
-            <div class="input-field col s4">
-                <input id="street_number" type="number" ng-model="obj.address.street_number">
-                <label for="street_number">Numéro</label>
-            </div>
-            <div class="input-field col s8">
-                <input id="obj.address.route" type="text" ng-model='obj.address.route'>
-                <label for="obj.address.route">Rue</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s4">
-                <input id="obj.address.postal_code" type="text" ng-model='obj.address.postal_code'>
-                <label for="obj.address.postal_code">Code postal</label>
-            </div>
-            <div class="input-field col s8">
-                <input id="obj.address.locality" type="text" ng-model='obj.address.locality'>
-                <label for="obj.address.locality">Ville</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s8">
-                <input id="obj.address.administrative_area_level_1" type="text" ng-model='obj.address.administrative_area_level_1'>
-                <label for="obj.address.administrative_area_level_1">Région</label>
-            </div>
-            <div class="input-field col s4">
-                <input id="obj.address.country" type="text" ng-model='obj.address.country'>
-                <label for="obj.address.country">Pays</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.address.complement" type="text" ng-model='obj.address.complement'>
-                <label for="obj.address.complement">Complément</label>
-            </div>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=2'>
-                Précédent
-                <i class='material-icons left'>keyboard_arrow_left</i>
-            </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=4'>
-                Suivant
-                <i class='material-icons right'>keyboard_arrow_right</i>
-            </button>
-        </div>
-    </div>
-    <div ng-show='step==4'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="7" value='4' disabled id='slider4'/>
-                <label for="slider4">Etape 4/7</label>
-            </div>
-        </div>
-        <h2>A propos</h2>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.price" type="number" ng-model='obj.home.price'>
-                <label for="obj.home.price">Prix par nuit</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <select material-select ng-model="obj.home.houseSpace.propertyType">
-                    <option value=''>Type de propriété</option>
-                    <option value="Maison">Maison</option>
-                    <option value="Appartement">Appartement</option>
-                    <option value="Chambre">Chambre</option>
-                    <option value="Couchage">Couchage</option>
-                    <option value="Place de camping">Place de camping</option>
-                    <option value="Cabane dans les arbres">Cabane dans les arbres</option>
-                    <option value="Camping car">Camping car</option>
-                    <option value="Tipy">Tipy</option>
-                    <option value="Bateau">Bateau</option>
-                    <option value="Yourte">Yourte</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.intro.travellers" type="number" ng-model='obj.home.intro.travellers'>
-                <label for="obj.home.intro.travellers">Nombre de voyageurs</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.intro.rooms" type="number" ng-model='obj.home.intro.rooms'>
-                <label for="obj.home.intro.rooms">Nombre de pièces</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseSpace.accommodates" type="number" ng-model='obj.home.houseSpace.accommodates'>
-                <label for="obj.home.houseSpace.accommodates">Nombre de places</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseSpace.bathrooms" type="number" ng-model='obj.home.houseSpace.bathrooms'>
-                <label for="obj.home.houseSpace.bathrooms">Nombre de salles de bain</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseSpace.bedrooms" type="number" ng-model='obj.home.houseSpace.bedrooms'>
-                <label for="obj.home.houseSpace.bedrooms">Nombre de chambres</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseSpace.beds" type="number" ng-model='obj.home.houseSpace.beds'>
-                <label for="obj.home.houseSpace.beds">Nombre de lits</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseSpace.checkIn" type="text" ng-model='obj.home.houseSpace.checkIn'>
-                <label for="obj.home.houseSpace.checkIn">Heure d'arrivée</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseSpace.checkOut" type="text" ng-model='obj.home.houseSpace.checkOut'>
-                <label for="obj.home.houseSpace.checkOut">Heure de départ</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="obj.home.houseSpace.houseRules" class="materialize-textarea" ng-model='obj.home.houseSpace.houseRules'></textarea>
-                <label for="obj.home.houseSpace.houseRules">Règles de l'hébergement (pas d'animaux, non fumeur, ...)</label>
-            </div>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=3'>
-                Précédent
-                <i class='material-icons left'>keyboard_arrow_left</i>
-            </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=5'>
-                Suivant
-                <i class='material-icons right'>keyboard_arrow_right</i>
-            </button>
-        </div>
-    </div>
-    <div ng-show='step==5'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="7" value='5' disabled id='slider5'/>
-                <label for="slider5">Etape 5/7</label>
-            </div>
-        </div>
-        <h2>Aménagements</h2>
-        <div class="row">
-            <div class="center col s12">
-                <div class="switch">
-                    <label>
-                        Ne dispose pas de l'essentiel
-                        <input type="checkbox" ng-model="obj.home.houseAmenities.essentials">
-                        <span class="lever"></span>
-                        Dispose de l'essentiel
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="center col s12">
-                <div class="switch">
-                    <label>
-                        N'a pas de cuisine
-                        <input type="checkbox" ng-model="obj.home.houseAmenities.kitchen">
-                        <span class="lever"></span>
-                        A une cuisine
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="center col s12">
-                <div class="switch">
-                    <label>
-                        N'a pas d'accès au wifi
-                        <input type="checkbox" ng-model="obj.home.houseAmenities.wifi">
-                        <span class="lever"></span>
-                        A un accès au wifi
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="center col s12">
-                <div class="switch">
-                    <label>
-                        N'a pas de télévision
-                        <input type="checkbox" ng-model="obj.home.houseAmenities.tv">
-                        <span class="lever"></span>
-                        A une télévision
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="center col s12">
-                <div class="switch">
-                    <label>
-                        N'a pas de barbecue
-                        <input type="checkbox" ng-model="obj.home.houseAmenities.bbq">
-                        <span class="lever"></span>
-                        Dispose d'un barbecue
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix">
-            <br><br><br>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="obj.home.houseAmenities.more" class="materialize-textarea" ng-model='obj.home.houseAmenities.more'></textarea>
-                <label for="obj.home.houseAmenities.more">Autres aménagements...</label>
-            </div>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=4'>
-                Précédent
-                <i class='material-icons left'>keyboard_arrow_left</i>
-            </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=6'>
-                Suivant
-                <i class='material-icons right'>keyboard_arrow_right</i>
-            </button>
-        </div>
-    </div>
-    <div ng-show='step==6'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="7" value='6' disabled id='slider6'/>
-                <label for="slider6">Etape 6/7</label>
-            </div>
-        </div>
-        <h2>Extras</h2>
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="obj.houseSpaceDescription" class="materialize-textarea" ng-model='obj.houseSpaceDescription'></textarea>
-                <label for="obj.houseSpaceDescription">Décrivez l'hébergement</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseExtras.extraBabyBed" type="number" ng-model='obj.home.houseExtras.extraBabyBed'>
-                <label for="obj.home.houseExtras.extraBabyBed">Coût pour lit bébé supplémentaire</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseExtras.weeklyDiscount" type="number" ng-model='obj.home.houseExtras.weeklyDiscount'>
-                <label for="obj.home.houseExtras.weeklyDiscount">Remise pour 7 jours (en %)</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseExtras.monthlyDiscount" type="number" ng-model='obj.home.houseExtras.monthlyDiscount'>
-                <label for="obj.home.houseExtras.monthlyDiscount">Remise pour 30 jours (en %)</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseExtras.cleaningFee" type="number" ng-model='obj.home.houseExtras.cleaningFee'>
-                <label for="obj.home.houseExtras.cleaningFee">Frais nettoyage</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="obj.home.houseExtras.securityDeposit" type="number" ng-model='obj.home.houseExtras.securityDeposit'>
-                <label for="obj.home.houseExtras.securityDeposit">Garantie</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="obj.home.houseExtras.cancellation" class="materialize-textarea" ng-model='obj.home.houseExtras.cancellation'></textarea>
-                <label for="obj.home.houseExtras.cancellation">Conditions d'annulation</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="obj.home.houseAvailability" class="materialize-textarea" ng-model='obj.houseAvailability'></textarea>
-                <label for="obj.houseAvailability">Disponibilités</label>
-            </div>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=5'>
-                Précédent
-                <i class='material-icons left'>keyboard_arrow_left</i>
-            </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='step=7'>
-                Suivant
-                <i class='material-icons right'>keyboard_arrow_right</i>
-            </button>
-        </div>
-    </div>
-    <div ng-show='step==7'>
-        <div class='row'>
-            <div class="range-field">
-                <input type="range" min="1" max="7" value='7' disabled id='slider7'/>
-                <label for="slider7">Etape 7/7</label>
-            </div>
-        </div>
-        <h2>Prévisualisation</h2>
-        <div class="col s12">
-            <div class="row card-panel valign-wrapper">
-                <div class="col s4 m3">
-                    <div class='valign center-align'>
-                        <img src="/uploads/users/{{currentUser._id}}/large/img_{{currentUser.picture}}" alt="Tom" class='circle responsive-img'/>
-                        <br/>
-                        <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
-                    </div>
-                </div>
-                <div class="col s8 m9">
-                    <h4>{{obj.name}}</h4>
-                    <h5>{{obj.address.administrative_area_level_1}},
-                        {{obj.address.country}}</h5>
-                    <div class="row center-align">
-                        <div class="col m2 l1">
-                            &nbsp;
-                        </div>
-                        <div class="col m4 l2">
-                            <img src="/assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt=""/><br/>
-                            {{obj.primarySports}}
-                        </div>
-                        <div class="col m4 l2">
-                            <i class="medium material-icons">home</i><br/>
-                            {{obj.home.houseSpace.propertyType}}
-                        </div>
-                        <div class="col m4 l2">
-                            <i class="medium material-icons">person</i><br/>
-                            {{obj.home.intro.travellers}}
-                            voyageurs
-                        </div>
-                        <div class="col m4 l2">
-                            <i class="medium material-icons">donut_small</i><br/>
-                            {{obj.home.intro.rooms}}
-                            pièces
-                        </div>
-                        <div class="col m4 l2">
-                            <i class="medium material-icons">hotel</i><br/>
-                            {{obj.home.houseSpace.beds}}
-                            lits
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row card-panel grey lighten-5">
+    <div class="card-panel">
+        <div class="container">
+            <div class="row">
                 <div class="col s12">
-                    <h5>A propos</h5>
-                    <p class='flow-text'>
-                        {{obj.shortDescription}}
-                    </p>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            L'hébergement
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Capacité :
-                                    {{obj.home.houseSpace.accommodates || 0}}</li>
-                                <li>Salles de bain :
-                                    {{obj.home.houseSpace.bathrooms || 0}}</li>
-                                <li>Chambres :
-                                    {{obj.home.houseSpace.bedrooms || 0}}</li>
-                                <li>Lits :
-                                    {{obj.home.houseSpace.beds || 0}}</li>
-                            </ul>
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Type :
-                                    {{obj.home.houseSpace.propertyType || ""}}</li>
-                                <li>Arrivée à :
-                                    {{obj.home.houseSpace.checkIn || "09:00"}}</li>
-                                <li>Départ à :
-                                    {{obj.home.houseSpace.checkOut || "18:00"}}</li>
-                                <li>
-                                    {{obj.home.houseSpace.houseRules || " "}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Les hobbies
-                        </div>
-                        <div class="col m8 l5">
-                            <b class="center">Parfait pour</b><br/>
-                            <img src="/assets/hobbies/{{obj.primarySports}}.png" class='hobby-small' alt=""/>
-                            {{obj.primarySports}}<br/>
-                            <a href="/search">Montrer les spots à proximité</a>
-
-                        </div>
-                        <div class="col m8 l5">
-                            <b class="center">Aussi pour</b><br/>
-                            <img src="/assets/hobbies/{{obj.secondarySports[0]}}.png" class='hobby-small' alt=""/>
-                            {{obj.secondarySports[0]}}<br/><br/>
-                            <img src="/assets/hobbies/{{obj.secondarySports[1]}}.png" class='hobby-small' alt=""/>
-                            {{obj.secondarySports[1]}}
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Equipements
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>{{obj.home.houseAmenities.kitchen ? "Cuisine" : ""}}</li>
-                                <li>{{obj.home.houseAmenities.tv ? "TV" : ""}}</li>
-                                <li>{{obj.home.houseAmenities.bbq ? "BBQ" : ""}}</li>
-                            </ul>
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>{{obj.home.houseAmenities.wifi ? "Wifi" : ""}}</li>
-                                <li>{{obj.home.houseAmenities.essentials ? "Essentiels" : ""}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Prix
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Lit bébé supplémentaire :
-                                    <b>{{obj.home.houseExtras.extraBabyBed}}</b>
-                                </li>
-                                <li>Frais de nettoyage :
-                                    <b>{{obj.home.houseExtras.cleaningFee}}</b>
-                                </li>
-                                <li>Caution :
-                                    <b>{{obj.home.houseExtras.securityDeposit}}</b>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col m8 l5">
-                            <ul>
-                                <li>Promotion par semaine :
-                                    <b>{{obj.home.houseExtras.weeklyDiscount}}%</b>
-                                </li>
-                                <li>Promotion par mois :
-                                    <b>{{obj.home.houseExtras.monthlyDiscount}}%</b>
-                                </li>
-                                <li>Annulation:
-                                    {{obj.home.houseExtras.cancellation}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Description
-                        </div>
-                        <div class="col m8 l10">
-                            <p>{{obj.houseSpaceDescription}}</p>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class='row'>
-                        <div class="col m4 l2">
-                            Disponibilité
-                        </div>
-                        <div class="col m8 l10">
-                            <b>{{obj.houseAvailability}}</b>
-                        </div>
-                    </div>
+                    <h1>Création d'un hébergement</h1>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <button class="waves-effect waves-light green accent-2 white-text btn left" ng-click='step=1'>
-                Revenir &amp; modifier
-                <i class='material-icons left'>keyboard_arrow_left</i>
-            </button>
-            <button class="waves-effect waves-light green accent-2 white-text btn right" ng-click='send()'>
-                Confirmer la
-                {{isAction}}
-                de l'hébergement &amp; envoyer des photos
-                <i class='material-icons right'>add</i>
-            </button>
-            <br>
-            {{error}}
+            <div ng-show='step==1'>
+                <form name="addPlaceForm" class="hobbnb-font" novalidate>
+                    <div class='row'>
+                        <div class="range-field">
+                            <input type="range" min="1" max="2" value='1' disabled id='slider'/>
+                            <label for="slider">Etape 1/2</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s9">
+                            <input id="obj.name" type="text" ng-model='obj.name' name="placeName" required>
+                            <label for="obj.name">Nom de votre hébergement</label>
+                            <span class="field-error" ng-show="addPlaceForm.placeName.$error.required && addPlaceForm.$submitted">Un nom est requis pour l'hébérgement.</span>
+                        </div>
+                        <div class="input-field col s1" ng-repeat="selectedHobby in selectedHobbies track by $index" style="padding: 0;">
+                            <img src="./assets/hobbies/{{obj.hobbies[$index]}}.png" ng-click="removeHobby($index,hobby)" class="horizontal-icon-list" style="width: 100%;" ng-show="obj.hobbies[$index]"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <p class="custom-inline-label">Choisisez entre 1 et 3 hobbies à proximité de votre hébérgement</p>
+                            <img src="./assets/hobbies/{{hobby}}.png" ng-repeat="hobby in hobbiesListing" ng-click="addHobby($index, hobby)" ng-style="{'width':100/hobbiesListing.length+'%'}" class="horizontal-icon-list"/>
+                            <span class="field-error" ng-show="currentSelectedHobby==0 && addPlaceForm.$submitted">Renseignez au moins un hobbie à proximité de l'hébérgement.</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="obj.shortDescription" class="materialize-textarea" ng-model='obj.shortDescription' name="placeshortDescription" required></textarea>
+                            <label for="obj.shortDescription">Introduction, décrivez l'espace</label>
+                            <span class="field-error" ng-show="addPlaceForm.placeshortDescription.$error.required && addPlaceForm.$submitted">Entrez une courte description de l'hébérgement.</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s8">
+                            <input type="text" class="autocomplete" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="" name="placeAddress" required>
+                            <label>Adresse:</label>
+                            <span class="field-error" ng-show="!obj.address.country && addPlaceForm.$submitted">Renseignez une adresse valide pour l'hébérgement.</span>
+                        </div>
+                        <div class="input-field col s4">
+                            <select material-select ng-model="obj.home.propertyType" name="placePropertyType" required>
+                                <option value=''>Type de propriété</option>
+                                <option ng-repeat="propertyType in propertyTypeListing">{{propertyType}}</option>
+                            </select>
+                            <span class="field-error" ng-show="addPlaceForm.placePropertyType.$error.required && addPlaceForm.$submitted">Entrez le type d'hébérgement.</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="obj.home.price" type="number" ng-model='obj.home.price' name="placePrice" required>
+                            <label for="obj.home.price">Prix par nuit</label>
+                            <span class="field-error" ng-show="addPlaceForm.placePrice.$error.required && addPlaceForm.$submitted">Entrez un prix par nuitée.</span>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="obj.home.travellers" type="number" ng-model='obj.home.travellers' name="placeTravellersMax" required>
+                            <label for="obj.home.travellers">Nombre de hobbynotes</label>
+                            <span class="field-error" ng-show="addPlaceForm.placeTravellersMax.$error.required && addPlaceForm.$submitted">Renseignez le nombre de hobbynotes pouvant être accueilli.</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button
+                            class="btn blue white-text right"
+                            ng-class="!obj.address.country || currentSelectedHobby==0 || addPlaceForm.$invalid ? 'custom-disabled' : 'waves-effect waves-light white-text'"
+                            ng-click='(obj.address.country && currentSelectedHobby!=0 && addPlaceForm.$valid) ? step = 2 : $submitted = true'>
+                            Suivant
+                            <i class='material-icons right'>keyboard_arrow_right</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div ng-show='step==2'>
+                <div class='row'>
+                    <div class="range-field">
+                        <input type="range" min="1" max="2" value='2' disabled id='slider'/>
+                        <label for="slider">Etape 2/2</label>
+                    </div>
+                </div>
+                <div class="row" ng-hide="photos.length > 11">
+                    <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
+                    <div ngf-drop ngf-select ng-model="photos" ngf-max-files="12" ngf-change="picturesLengthValidation()" class="drop-box valign-wrapper" ngf-keep="'distinct'" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
+                        <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
+                    </div>
+                </div>
+                <p class="center-align" ng-show="infoPhotos">
+                    {{infoPhotos}}
+                </p>
+                <div class="row">
+                    <ul ui-sortable="sortableOptions" ng-model="photos" class="list left">
+                        <div class="col s3" ng-repeat="picture in photos track by $index">
+                            <li class="thumbnail create">
+                                <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating red">
+                                    <i class="material-icons">remove</i>
+                                </a>
+                                <img ngf-thumbnail="picture" class="object-fit_cover">
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="row">
+                    <button class="btn waves-effect waves-light blue white-text left" ng-click='step=1'>
+                        Précédent
+                        <i class='material-icons left'>keyboard_arrow_left</i>
+                    </button>
+                    <button class="btn blue right white-text" ng-class="(6 > photos.length || photos.length > 12) ? 'custom-disabled' : 'waves-effect waves-light white-text'" ng-click="(6 < photos.length || photos.length < 12) && send()" ng>
+                        Confirmer et envoyer les photos
+                        <i class='material-icons right'>keyboard_arrow_right</i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,239 @@
+<div class="container">
+    <div class="row no-margin">
+        <div style='background-image:url("uploads/places/{{host._id}}/large/{{host.pictures[0]}}");' class='bg-fullwidth'></div>
+    </div>
+    <div class="row no-margin">
+        <div class="col s12 m8">
+            <!-- main card -->
+            <div class="row card-panel valign-wrapper">
+                <div class="col s4 m3">
+                    <div class='valign center-align'>
+                        <img ng-src="{{host.owner.picture && '/uploads/users/'+host.owner._id+'/large/'+host.owner.picture || '/assets/hobbynaut-avatar.gif'}}" alt="{{host.owner.identity.firstName + ' ' + host.owner.identity.lastName}}" class='circle responsive-img'/>
+                        <br/>
+                        <b>{{host.owner.identity.firstName + ' ' + host.owner.identity.lastName}}</b>
+                        <p>
+                            <span class="center-align grey-text lighten-5" style='font-size:12px;'>
+                                <star-rating ng-model="host.owner.numReviews" readonly="true"></star-rating>
+                                <br/>{{host.owner.numReviews || 'Pas d\''}}avis </span> </p> </div> </div> <div class="col s8 m9"> <div class="right"> <a facebook class="facebookShare" data-picture='http://hobbnb.com/uploads/places/{{host._id}}/large/{{host.picture}}' data-url='http://hobbnb.com/place/{{host._id}}' data-shares='shares'>{{ shares }}</a>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s9">
+                                <input id="host.name" type="text" ng-model='host.name' name="placeName" required>
+                                <label for="host.name">Nom de votre hébergement</label>
+                            </div>
+                            <div class="input-field col s9">
+                                <input type="text" class="autocomplete" ng-model="formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="" name="placeAddress" required>
+                                <label>Adresse:</label>
+                            </div>
+                        </div>
+                        <div class="row center">
+                            <div class="col m4 l2 offset-m2">
+                                <img src="/assets/hobbies/{{host.hobbies[0]}}.png" class='hobby-main' alt=""/><br/>
+                                <span class="textIcon">{{host.hobbies[0]}}</span>
+                            </div>
+                            <div class="col m4 l2">
+                                <i class="medium material-icons imgIcons">home</i><br/>
+                                <span class="textIcon">{{host.home.propertyType}}</span>
+                            </div>
+                            <div class="col m4 l2">
+                                <i class="medium material-icons imgIcons">person</i><br/>
+                                <span class="textIcon">{{host.home.travellers}}
+                                    voyageurs</span>
+                            </div>
+                            <div class="col m4 l2">
+                                <i class="medium material-icons imgIcons">donut_small</i><br/>
+                                <span class="textIcon">{{host.home.rooms}}
+                                    pièces</span>
+                            </div>
+                            <div class="col m4 l2">
+                                <i class="medium material-icons imgIcons">hotel</i><br/>
+                                <span class="textIcon">{{host.home.beds}}
+                                    lits</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- About -->
+                <div class="row card-panel grey lighten-5">
+                    <div class="col s10 offset-s1">
+                        <h5>A propos</h5>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="host.shortDescription" class="materialize-textarea" ng-model='host.shortDescription' name="placeshortDescription" required></textarea>
+                                <label for="host.shortDescription">Introduction, décrivez l'espace</label>
+                                <span class="field-error" ng-show="addPlaceForm.placeshortDescription.$error.required && addPlaceForm.$submitted">Entrez une courte description de l'hébérgement.</span>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class='row'>
+                            <div class="col m4 l2">
+                                L'hébergement
+                            </div>
+                            <div class="input-field col m4 l4">
+                                <input id="host.home.travellers" type="number" ng-model='host.home.travellers' name="placeTravellersMax" required>
+                                <label for="host.home.travellers">Nombre de hobbynotes</label>
+                                <span class="field-error" ng-show="addPlaceForm.placeTravellersMax.$error.required && addPlaceForm.$submitted">Renseignez le nombre de hobbynotes pouvant être accueilli.</span>
+                            </div>
+                            <div class="input-field col m4 l5 offset-l1">
+                                <select material-select ng-model="host.home.propertyType" name="placePropertyType" required>
+                                    <option value=''>Type de propriété</option>
+                                    <option ng-repeat="propertyType in propertyTypeListing">{{propertyType}}</option>
+                                </select>
+                                <span class="field-error" ng-show="addPlaceForm.placePropertyType.$error.required && addPlaceForm.$submitted">Entrez le type d'hébérgement.</span>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class='row'>
+                            <div class="col m4 l2">
+                                Les hobbies
+                            </div>
+                            <div class="col m8 l4">
+                                <b class="center">Parfait pour</b><br/>
+                                <img src="./assets/hobbies/{{host.hobbies[0]}}.png" ng-click="removeHobby(0,hobby)" class='hobby-small' ng-show="host.hobbies[0]"/>
+                                {{host.hobbies[0]}}
+                            </div>
+                            <div class="col m8 l6">
+                                <div class="col m12 l12">
+                                    <b class="center">Aussi pour</b><br/>
+                                </div>
+                                <div class="col m6 l6">
+                                    <img src="./assets/hobbies/{{host.hobbies[1]}}.png" ng-click="removeHobby(1,hobby)" class='hobby-small' ng-show="host.hobbies[1]"/>
+                                    {{host.hobbies[1]}}
+                                </div>
+                                <div class="col m6 l6">
+                                    <img src="./assets/hobbies/{{host.hobbies[2]}}.png" ng-click="removeHobby(2,hobby)" class='hobby-small' ng-show="host.hobbies[2]"/>
+                                    {{host.hobbies[2]}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <p class="custom-inline-label">Choisisez entre 1 et 3 hobbies à proximité de votre hébérgement</p>
+                                <img src="./assets/hobbies/{{hobby}}.png" ng-repeat="hobby in hobbiesListing" ng-click="addHobby($index, hobby)" ng-style="{'width':100/hobbiesListing.length+'%'}" class="horizontal-icon-list"/>
+                                <span class="field-error" ng-show="currentSelectedHobby==0 && addPlaceForm.$submitted">Renseignez au moins un hobbie à proximité de l'hébérgement.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Comment & Rating -->
+                <div class="row card-panel grey lighten-5">
+                    <div class="col s10 offset-s1">
+                        <h5>Avis et commentaires</h5>
+                        <!--rating -->
+                        <div class="row">
+                            <div class="col s3 center">
+                                <b>{{host.rating.numberOfRatings}}
+                                    Avis</b><br/>
+                                <star-rating ng-model="host.rating.overallRating" readonly="true"></star-rating>
+                            </div>
+                            <div class="col s3 center">
+                                Propreté<br/>
+                                <star-rating ng-model="host.rating.cleanness" readonly="true"></star-rating>
+                            </div>
+                            <div class="col s3 center">
+                                Zone<br/>
+                                <star-rating ng-model="host.rating.location" readonly="true"></star-rating>
+                            </div>
+                            <div class="col s3 center">
+                                Monétaire<br/>
+                                <star-rating ng-model="host.rating.valueForMoney" readonly="true"></star-rating>
+                            </div>
+                        </div>
+                        <!--comments -->
+                        <div class="row">
+                            <div class="col s10 offset-s1" ng-repeat='comment in host.comments'>
+                                <div class="card-panel grey lighten-5 z-depth-1">
+                                    <div class="row valign-wrapper">
+                                        <div class="col s2 center">
+                                            <img
+                                                ng-src="{{comment.owner.picture && '/uploads/users/'+comment.owner._id+'/large/'+comment.owner.picture || '/assets/hobbynaut-avatar.gif'}}"
+                                                alt="{{comment.owner.identity.firstName + ' ' + comment.owner.identity.lastName}}"
+                                                class="circle responsive-img">
+                                            <br>
+                                            <b>{{comment.owner.identity.firstName + ' ' + comment.owner.identity.lastName}}</b>
+                                        </div>
+                                        <div class="col s10">
+                                            <span class="black-text">
+                                                <b>{{comment.title}}</b>
+                                                <br>
+                                                {{comment.comment}}<br>
+                                                <br>{{comment.creation.substring(0,10)}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pictures -->
+                <form name='myform'>
+                    <div class="row card-panel grey lighten-5">
+                        <h5>Modifier vos photos</h5>
+                        <div class="row" ng-hide="host.pictures.length > 11">
+                            <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
+                            <div
+                                ngf-drop
+                                ngf-select
+                                name="hostPhotos"
+                                ng-model="host.pictures"
+                                ngf-max-files="12"
+                                ngf-change="picturesLengthValidation()"
+                                class="drop-box valign-wrapper"
+                                ngf-keep="'distinct'"
+                                ngf-drag-over-class="'dragover'"
+                                ngf-multiple="true"
+                                ngf-allow-dir="true"
+                                accept="image/*"
+                                ngf-pattern="'image/*'">
+                                <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
+                            </div>
+                        </div>
+                        <p class="center-align" ng-show="infoPhotos">
+                            {{infoPhotos}}
+                        </p>
+                        <ul ui-sortable="sortableOptions" ng-model="host.pictures" class="list left">
+                            <div class="col s6" ng-repeat="picture in host.pictures track by $index">
+                                <li class="thumbnail show">
+                                    <a ng-click="removePicture($index)" style="position: absolute;top: 10px;right: 10px;z-index: 100;" class="waves-effect waves-light btn-floating red">
+                                        <i class="material-icons">remove</i>
+                                    </a>
+                                    <img ngf-thumbnail="picture.name && picture || '/uploads/places/'+host._id+'/large/'+picture" class="object-fit_cover">
+                                </li>
+                            </div>
+                        </ul>
+                        <a class="btn btn-falt" ng-click="updateImages()">update</a>
+                    </div>
+                </form>
+                <!-- Around -->
+                <div class="row card-panel grey lighten-5">
+                    <div class="col s10 offset-s1">
+                        <h5>Alentours</h5>
+                        <br>
+                        <ng-map default-style="true" center="[{{host.latitude}},{{host.longitude}}]" zoom="8" scrollwheel='false'>
+                            <marker
+                                position="[{{host.latitude}},{{host.longitude}}]"
+                                icon="{
+                                      url:'../assets/search/tileHome.png',
+                                      scaledSize:[42,45],
+                                      origin: [0,0],
+                                      anchor: [21,45]
+                                      }"></marker>
+                        </ng-map>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4" style="padding-right: 0 !important;">
+                <div class="card-panel">
+                    <div class="row center grey lighten-2 flow-text">
+                        <div class="input-field col s6 offset-s2">
+                            <input id="host.home.price" type="number" ng-model='host.home.price' name="placeTravellersMax" required>
+                        </div>
+                        <div class="col s4 bottom">
+                            € / nuit
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,5 +1,5 @@
 <div class="row search-container">
-    <div class="col s6 search-left-col">
+    <div class="col s7 search-left-col">
         <form>
             <div class="row">
                 <div class="col s12 m12 l6">
@@ -23,32 +23,32 @@
                 <div class="row no-margin">
                     <div class="input-field col s12 m12 l6">
                         <i class="material-icons prefix">search</i>
-                        <input placeholder="Lieu" id="city" type="text" class="autocomplete" ng-model="locality" details="details" ng-autocomplete>
+                        <input placeholder="Lieu" id="city" type="text" class="autocomplete" ng-change="searchFactory.data.city = filters.place;" ng-model="locality" details="details" ng-autocomplete>
                         <label>Lieu</label>
                     </div>
                     <div class="input-field col s12 m12 l3">
-                        <select class='' material-select ng-change="hobbyToData()" ng-model="filters.primarySports">
+                        <select material-select ng-change="searchFactory.data.hobby = selectedHobby;" ng-model="selectedHobby">
                             <option value=''>Hobbies</option>
                             <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
                         </select>
                         <label>Hobby</label>
                     </div>
                     <div class="input-field col s12 m12 l3">
-                        <span style="color: #9e9e9e; font-size: 1rem; font-family: Roboto, Helvetica Neue ,sans-serif;">Popularité</span>
-                        <star-rating ng-model="filters.rating.valueForMoney" on-rating-select=""></star-rating>
+                        <span class="custom-label">Popularité</span>
+                        <star-rating ng-model="filters.rating.overallRating" on-rating-select=""></star-rating>
                     </div>
                 </div>
                 <div class="row no-margin">
                     <div class="input-field col s12 m12 l5">
                         <img src="/assets/search/locateHost.png" class="material-icons prefix" style='height:60%; width: auto;'/>
-                        <select material-select ng-model="filters.home.houseSpace.propertyType">
+                        <select material-select ng-model="filters.home.propertyType">
                             <option value=''>Hébergement</option>
                             <option ng-repeat="propertyType in propertyTypeListing">{{propertyType}}</option>
                         </select>
                         <label>Hebergement</label>
                     </div>
                     <div class="input-field col s12 m12 l4">
-                        <select material-select ng-model="filters.home.intro.travellers">
+                        <select material-select ng-model="filters.home.travellers">
                             <option value=""></option>
                             <option value="1">1 personne</option>
                             <option value="2">2 personnes</option>
@@ -78,22 +78,22 @@
             </div>
         </form>
         <div id="widgets" class="row">
-            <div class="col s12 m12 l6" dir-paginate="p in positions | filter : filters | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8">
+            <div class="col s12 m12 l6" dir-paginate="p in positions | filter : filters | hobbyFilter:selectedHobby | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8">
                 <a href="/place/{{p._id}}" ng-mouseover="getHoveredPlaceIndex($index, true);" ng-mouseleave="getHoveredPlaceIndex($index, false);" target="_blank">
                     <div class="card">
                         <div class="card-image">
-                            <div class="placepict" ng-style="{'background-image': 'url(uploads/places/{{p._id}}/thumb/img_{{p.pictures[0]}})', 'background-size': 'cover'}"></div>
+                            <div class="placepict" ng-style="{'background-image': 'url(uploads/places/{{p._id}}/thumb/{{p.pictures[0]}})', 'background-size': 'cover'}"></div>
                             <span class="card-title">{{p.home.price|currency:'€'}}</span>
                         </div>
                         <div class="card-content">
                             <p>
                                 <img class="actpict" src="assets/hobbies/{{p.primarySports}}.png" alt=""/>
                                 <img class="authorpict" src="/assets/hobbynaut-avatar.gif" ng-show="!p.owner.picture"/>
-                                <img class="authorpict" ng-src="{{'/uploads/users/'+p.owner._id+'/thumb/img_'+p.owner.picture}}" ng-show="p.owner.picture"/>
+                                <img class="authorpict" ng-src="{{'/uploads/users/'+p.owner._id+'/thumb/'+p.owner.picture}}" ng-show="p.owner.picture"/>
                                 <div>{{p.name}}</div>
                                 <div>
                                     <star-rating ng-model="p.rating.valueForMoney" readonly="true"></star-rating>
-                                    <sup>({{nbReview(p.rating)}})</sup>
+                                    <sup>({{p.rating.numberOfRatings}})</sup>
                                 </div>
                             </p>
                         </div>
@@ -104,10 +104,10 @@
         </div>
     </div>
 
-    <div class="col s6 search-rigth-col">
+    <div class="col s5 search-rigth-col">
         <ng-map default-style="false" center="{{centerMap}}" geo-fallback-center="48.8534100, 2.3488000" zoom="6" id="myMap" style='height:100%;'>
             <marker
-                ng-repeat="p in positions | filter : filters | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8"
+                ng-repeat="p in positions | filter : filters | hobbyFilter:selectedHobby | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8"
                 position="[{{p.latitude}},{{p.longitude}}]"
                 title={{p.shortDescription}}
                 icon="{
@@ -116,6 +116,7 @@
                       origin: [0,0],
                       anchor: [16,32]
                       }"
+                scrollwheel="true"                      
                 animation="{{hoveredPlaceIndex == $index ? 'BOUNCE' : 'null'}}"
                 on-click="toggleInfoWindow(event, p)"
                 clickable="true"></marker>
@@ -123,7 +124,7 @@
                 <a href="/place/{{toggleledPlace._id}}" target="_blank">
                     <div class="card">
                         <div class="card-image">
-                            <img src="/uploads/places/{{toggleledPlace._id}}/thumb/img_{{toggleledPlace.pictures[0]}}">
+                            <img src="/uploads/places/{{toggleledPlace._id}}/thumb/{{toggleledPlace.pictures[0]}}">
                             <span class="card-title" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{toggleledPlace.home.price}}€</span>
                         </div>
                         <div class="card-content">
@@ -131,7 +132,7 @@
                                 <div>{{toggleledPlace.name}}</div>
                                 <div>
                                     <star-rating ng-model="toggleledPlace.rating.valueForMoney" readonly="true"></star-rating>
-                                    <sup>({{reviewNb}})</sup>
+                                    <sup>({{p.rating.numberOfRatings}})</sup>
                                 </div>
                             </p>
                         </div>

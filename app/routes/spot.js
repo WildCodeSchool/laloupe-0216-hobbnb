@@ -8,6 +8,7 @@ module.exports = function(app) {
     app.get('/spots', Spot.findAll);
     app.post('/spots', Auth.user.hasAuthorization, Spot.create);
     app.post('/spots/uploadImages/:spotId', Auth.user.hasAuthorization, Spot.uploadImages);
+    app.put('/spots/updatePictures/:spotId', Auth.user.hasAuthorization, Spot.updatePictures);
     app.put('/spots/:id', Auth.user.hasAuthorization, Spot.update);
     app.put('/spots/addComment/:id', Auth.user.hasAuthorization, Spot.addComment);
     app.delete('/spots/:id', Auth.user.hasAuthorization, Auth.user.isAdministrator, Spot.delete);

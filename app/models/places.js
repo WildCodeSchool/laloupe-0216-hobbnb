@@ -1,27 +1,71 @@
 // MODEL PLACES
 var mongoose = require('mongoose');
 var formidable = require('formidable');
-var im = require('imagemagick');
-var path = require('path');
+var gm = require('gm');
 var fs = require('fs');
 logger = require('../logs/Logger');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"],
     propertiesType = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
 
+var placesCommentsSchema = new mongoose.Schema({
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users'
+    },
+    date: {
+        type: Date
+    },
+    title: {
+        type: String,
+        trim: true
+    },
+    comment: {
+        type: String,
+        trim: true
+    },
+    cleanness: {
+        type: Number,
+        max: 5,
+        min: 0
+    },
+    location: {
+        type: Number,
+        max: 5,
+        min: 0
+    },
+    valueForMoney: {
+        type: Number,
+        max: 5,
+        min: 0
+    }
+});
+
 var placesSchema = new mongoose.Schema({
     isActive: Boolean,
-    owner: String,
-    creation: Date,
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users'
+    },
+    creation: {
+        type: Date,
+        default: Date.now()
+    },
     modification: Date,
     name: {
         type: String,
+        trim: true,
         required: [true, 'title required']
     },
     shortDescription: {
         type: String,
+        trim: true,
         required: [true, 'description required']
     },
+    hobbies: [{
+        type: String,
+        enum: hobbiesListing
+    }],
     pictures: [String],
     latitude: Number,
     longitude: Number,
@@ -49,89 +93,52 @@ var placesSchema = new mongoose.Schema({
         },
         complement: String
     },
-    rating: {
-        cleanness: [{
-            type: Number,
-            max: 5,
-            min: 0
-        }],
-        location: [{
-            type: Number,
-            max: 5,
-            min: 0
-        }],
-        valueForMoney: [{
-            type: Number,
-            max: 5,
-            min: 0
-        }]
-    },
     home: {
         price: Number,
-        intro: {
-            travellers: Number,
-            rooms: Number
-        },
-        houseSpace: {
-            accommodates: Number,
-            bathrooms: Number,
-            bedrooms: Number,
-            beds: Number,
-            propertyType: {
-                type: String,
-                enum: propertiesType
-            },
-            checkIn: String,
-            checkOut: String,
-            houseRules: String
-        },
-        houseAmenities: {
-            kitchen: Boolean,
-            wifi: Boolean,
-            tv: Boolean,
-            essentials: Boolean,
-            bbq: Boolean,
-            more: String
-        },
-        houseExtras: {
-            extraBabyBed: Number,
-            weeklyDiscount: {
-                type: Number,
-                min: 0,
-                max: 100
-            },
-            cleaningFee: Number,
-            monthlyDiscount: {
-                type: Number,
-                min: 0,
-                max: 100
-            },
-            securityDeposit: Number,
-            cancellation: String
+        travellers: Number,
+        propertyType: {
+            type: String,
+            enum: propertiesType
         }
     },
-    houseSpaceDescription: String,
-    houseAvailability: String,
-    comments: [{
-        owner: String,
-        title: String,
-        creation: Date,
-        comment: String,
-        thanks: Number
-    }],
-    primarySports: {
-        type: String,
-        enum: hobbiesListing
+    rating: {
+        numberOfRatings: {
+            type: Number,
+            default: 0
+        },
+        overallRating: {
+            type: Number,
+            max: 5,
+            min: 0,
+            default: 0
+        },
+        cleanness: {
+            type: Number,
+            max: 5,
+            min: 0,
+            default: 0
+        },
+        location: {
+            type: Number,
+            max: 5,
+            min: 0,
+            default: 0
+        },
+        valueForMoney: {
+            type: Number,
+            max: 5,
+            min: 0,
+            default: 0
+        }
     },
-    secondarySports: [{
-        type: String,
-        enum: hobbiesListing
-    }]
+    comments: [placesCommentsSchema]
 });
 
 var Places = {
 
     model: mongoose.model('Places', placesSchema),
+
+    comment: mongoose.model('placeComment', placesCommentsSchema),
 
     create: function(req, res) {
         Places.model.create(req.body, function(err, data) {
@@ -145,13 +152,41 @@ var Places = {
         });
     },
 
-    uploadImages: function(req, res) {
+    addComment: function(req, res) {
+        Places.model.findById(req.params.id, function(err, place) {
+            if (err) console.log(err);
+            var ratedBefore = place.comments.filter(function(comment) {
+                return comment.owner == req.body.owner;
+            }).length;
+            if (ratedBefore === 0) {
+                console.log(Number('   >>>>>' + req.body.cleanness));
+                place.rating.cleanness = (place.rating.cleanness * place.rating.numberOfRatings + Number(req.body.cleanness)) / (place.rating.numberOfRatings + 1);
+                place.rating.location = (place.rating.location * place.rating.numberOfRatings + Number(req.body.location)) / (place.rating.numberOfRatings + 1);
+                place.rating.valueForMoney = (place.rating.valueForMoney * place.rating.numberOfRatings + Number(req.body.valueForMoney)) / (place.rating.numberOfRatings + 1);
+                place.rating.overallRating = (place.rating.cleanness + place.rating.location + place.rating.valueForMoney) / 3;
+                place.rating.numberOfRatings += 1;
+                req.body.date = Date.now();
+                place.comments.push(req.body);
+                place.save(function(err) {
+                    console.log(err);
+                });
+                logger.info('>> Un commentaire a été ajouté au place', req.params.id, req.body);
+                res.sendStatus(200);
+            } else {
+                logger.info('>>> Dèja commenter!');
+                res.sendStatus(304);
+            }
+        });
+    },
 
+    uploadImages: function(req, res) {
+        console.log(req.body);
         var fileCount = 0,
             processedFileCount = 0,
             pictures = [],
             totalFiles = 0,
-            width = 1200;
+            width = 1200,
+            update = true;
         var targetPath = './public/uploads/places/' + req.params.placeId + '/';
 
         if (!fs.existsSync('./public/uploads/places/')) fs.mkdirSync('./public/uploads/places/');
@@ -167,36 +202,33 @@ var Places = {
             logger.info('Progress so far: ', (100 * (bytesReceived / bytesExpected)), "%  or  ", bytesReceived, 'bytes');
         });
         form.on('field', function(field, value) {
-            totalFiles = value;
+            if (field == 'totalFiles') totalFiles = value;
+            if (field == 'update') update = value;
         });
         form.on('fileBegin', function(name, file) {
             fileCount++;
-            file.name = fileCount + file.name.substr(file.name.lastIndexOf('.'));
+            // file.name = fileCount + file.name.substr(file.name.lastIndexOf('.'));
             logger.info('-- File: ', file.name, ' upload started');
             pictures.push(file.name);
         });
         form.on('file', function(name, file) {
             var tmpPath = file.path;
-            im.resize({
-                srcPath: tmpPath,
-                dstPath: targetPath + 'large/img_' + file.name,
-                width: width
-            }, function(err) {
-                if (err) throw err;
-                im.resize({
-                    srcPath: tmpPath,
-                    dstPath: targetPath + 'thumb/img_' + file.name,
-                    width: width / 4
-                }, function(err) {
+            gm(tmpPath)
+                .resize(width, width)
+                .write(targetPath + 'large/' + file.name, function(err) {
                     if (err) throw err;
-                    fs.unlink(tmpPath, function(err) {
-                        if (err) throw err;
-                        processedFileCount++;
-                        logger.info('Upload and resize complete for place ID: ', req.params.placeId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
-                        if (totalFiles == processedFileCount) Places.updateAndDontUpdate(req.params.placeId, pictures, res);
-                    });
+                    gm(tmpPath)
+                        .resize(width / 4, width / 4)
+                        .write(targetPath + 'thumb/' + file.name, function(err) {
+                            if (err) throw err;
+                            fs.unlink(tmpPath, function(err) {
+                                if (err) throw err;
+                                processedFileCount++;
+                                logger.info('Upload and resize complete for PLACE ID: ', req.params.placeId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
+                                if (totalFiles == processedFileCount)(update === true) ? Places.updatePicturesInDB(req.params.placeId, pictures, res) : res.sendStatus(200);
+                            });
+                        });
                 });
-            });
         });
         form.on('error', function(err) {
             logger.error('An error has occured during upload process: ', err);
@@ -205,13 +237,16 @@ var Places = {
     },
 
     findOne: function(req, res) {
-        Places.model.findById(req.params.id, function(err, data) {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                res.status(200).send(data);
-            }
-        });
+        Places.model.findById(req.params.id)
+            .populate('owner', 'identity rating email')
+            .populate('comments.owner', 'identity rating email')
+            .exec(function(err, data) {
+                if (err) {
+                    res.status(400).send(err);
+                } else {
+                    res.status(200).send(data);
+                }
+            });
     },
 
     findOneAndReturn: function(req, res) {
@@ -219,13 +254,16 @@ var Places = {
     },
 
     findAll: function(req, res) {
-        Places.model.find(function(err, data) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send(data);
-            }
-        });
+        Places.model.find()
+            .populate('owner', 'identity rating email')
+            .populate('comments.owner', 'identity rating email')
+            .exec(function(err, data) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(data);
+                }
+            });
     },
 
     findPlacesOfUser: function(req, res) {
@@ -241,7 +279,7 @@ var Places = {
     },
 
     update: function(req, res) {
-        Places.model.findByIdAndUpdate(req.params.id, req.body.content, function(err, data) {
+        Places.model.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -250,14 +288,29 @@ var Places = {
         });
     },
 
-    updateAndDontUpdate: function(placeId, pictures, res) {
+    updatePictures: function(req, res) {
+        console.log(req.body);
+        if (typeof req.body.removedPictures !== 'undefined' && req.body.removedPictures.length > 0) {
+            req.body.removedPictures.forEach(function(picture) {
+                fs.unlink('./public/uploads/places/' + req.params.placeId + '/large/' + picture, function(err) {
+                  if (err) throw err;
+                      fs.unlink('./public/uploads/places/' + req.params.placeId + '/thumb/' + picture, function(err) {
+                        if (err) throw err;
+                      });
+                });
+            });
+        }
+        Places.updatePicturesInDB(req.params.placeId, req.body.picturesList, res);
+    },
+
+    updatePicturesInDB: function(placeId, pictures, res) {
         Places.model.findByIdAndUpdate(placeId, {
             $set: {
                 pictures: pictures
             }
         }, function(err) {
             if (err) {
-                logger.error('An error has occured in Place create DB upload: ', err);
+                logger.error('An error has occured in Place create/update DB upload: ', err);
                 console.log(err);
                 res.status(400).send(err);
             } else {

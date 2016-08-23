@@ -1,0 +1,163 @@
+<div class="container">
+    <div class="row no-margin">
+        <div style='background-image:url("uploads/spots/{{spot._id}}/large/{{spot.pictures[0]}}");' class='bg-fullwidth'></div>
+    </div>
+    <div class="row no-margin">
+        <div class="col s12 m8">
+            <!-- main card -->
+            <div class="row card-panel valign-wrapper">
+                <div class="col s4 m3">
+                    <div class='valign center-align'>
+                        <img ng-src="{{spot.owner.picture && '/uploads/users/'+spot.owner._id+'/large/'+spot.owner.picture || '/assets/hobbynaut-avatar.gif'}}" alt="{{spot.owner.identity.firstName + ' ' + spot.owner.identity.lastName}}" class='circle responsive-img'/>
+                        <br/>
+                        <b>{{spot.owner.identity.firstName + ' ' + spot.owner.identity.lastName}}</b>
+                        <p>
+                            <span class="center-align grey-text lighten-5" style='font-size:12px;'>
+                                <star-rating ng-model="spot.owner.numReviews" readonly="true"></star-rating>
+                                <br/>{{spot.owner.numReviews}}
+                                avis</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col s8 m9">
+                    <div class="right">
+                        <a facebook class="facebookShare" data-picture='http://hobbnb.com/uploads/places/{{spot._id}}/large/{{spot.picture}}' data-url='http://hobbnb.com/place/{{spot._id}}' data-shares='shares'>{{ shares }}</a>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s9">
+                            <input id="spot.name" type="text" ng-model='spot.name' name="placeName" required>
+                            <label for="spot.name">Nom de votre hébergement</label>
+                        </div>
+                        <div class="input-field col s9">
+                            <input type="text" class="autocomplete" ng-model="formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="" name="placeAddress" required>
+                            <label>Adresse:</label>
+                        </div>
+                    </div>
+                    <div class="row center-align">
+                        <div class="col m4 l2 offset-m2">
+                            <img src="/assets/hobbies/{{spot.hobby}}.png" class='hobby-small' alt=""/>
+                        </div>
+                        <div class="col m8 l7">
+                            <select material-select ng-model="spot.hobby" name="hobby" required>
+                                <option value=''>Spot de</option>
+                                <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Comment & Rating -->
+            <div class="row card-panel grey lighten-5">
+                <div class="col s10 offset-s1">
+                    <h5>Avis et commentaires</h5>
+                    <!--rating -->
+                    <div class="row">
+                        <div class="col s3 center">
+                            <b>{{spot.rating.numberOfRatings}}
+                                Avis</b><br/>
+                            <star-rating ng-model="spot.rating.overallRating" readonly="true"></star-rating>
+                        </div>
+                        <div class="col s3 center">
+                            <img src="/assets/hobbies/quality.png" width="20%" alt=""/>
+                            Quality<br/>
+                            <star-rating ng-model="spot.rating.quality" readonly="true"></star-rating>
+                        </div>
+                        <div class="col s3 center">
+                            <img src="/assets/hobbies/beauty.png" width="20%" alt=""/>
+                            Beauty<br/>
+                            <star-rating ng-model="spot.rating.beauty" readonly="true"></star-rating>
+                        </div>
+                        <div class="col s3 center">
+                            <img src="/assets/hobbies/facility.png" width="20%" alt=""/>
+                            Accessibility<br/>
+                            <star-rating ng-model="spot.rating.accessibility" readonly="true"></star-rating>
+                        </div>
+                    </div>
+                    <!--comments -->
+                    <div class="row">
+                        <div class="col s10 offset-s1" ng-repeat='comment in spot.comments'>
+                            <div class="card-panel grey lighten-5 z-depth-1">
+                                <div class="row valign-wrapper">
+                                    <div class="col s2 center">
+                                        <img
+                                            ng-src="{{comment.owner.picture && '/uploads/users/'+comment.owner._id+'/large/'+comment.owner.picture || '/assets/hobbynaut-avatar.gif'}}"
+                                            alt="{{comment.owner.identity.firstName + ' ' + comment.owner.identity.lastName}}"
+                                            class="circle responsive-img">
+                                        <br>
+                                        <b>{{comment.owner.identity.firstName + ' ' + comment.owner.identity.lastName}}</b>
+                                    </div>
+                                    <div class="col s10">
+                                        <span class="black-text">
+                                            <b>{{comment.title}}</b>
+                                            <br>
+                                            {{comment.comment}}<br>
+                                            <br>{{comment.creation.substring(0,10)}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pictures -->
+            <form name='myform'>
+                <div class="row card-panel grey lighten-5">
+                    <h5>Modifier vos photos</h5>
+                    <div class="row" ng-hide="spot.pictures.length > 11">
+                        <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
+                        <div
+                            ngf-drop
+                            ngf-select
+                            name="spotPhotos"
+                            ng-model="spot.pictures"
+                            ngf-max-files="12"
+                            ngf-change="picturesLengthValidation()"
+                            class="drop-box valign-wrapper"
+                            ngf-keep="'distinct'"
+                            ngf-drag-over-class="'dragover'"
+                            ngf-multiple="true"
+                            ngf-allow-dir="true"
+                            accept="image/*"
+                            ngf-pattern="'image/*'">
+                            <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
+                        </div>
+                    </div>
+                    <p class="center-align" ng-show="infoPhotos">
+                        {{infoPhotos}}
+                    </p>
+                    <ul ui-sortable="sortableOptions" ng-model="spot.pictures" class="list left">
+                        <div class="col s6 no-margin" ng-repeat="picture in spot.pictures track by $index">
+                            <li class="thumbnail show">
+                                <a ng-click="removePicture($index)" style="position: absolute;top: 10px;right: 10px;z-index: 100;" class="waves-effect waves-light btn-floating red">
+                                    <i class="material-icons">remove</i>
+                                </a>
+                                <img ngf-thumbnail="picture.name && picture || '/uploads/spots/'+spot._id+'/large/'+picture" class="object-fit_cover">
+                            </li>
+                        </div>
+                    </ul>
+                    <a class="btn btn-falt" ng-click="updateImages()">update</a>
+                </div>
+            </form>
+            <!-- Around -->
+            <div class="row card-panel grey lighten-5">
+                <div class="col s10 offset-s1">
+                    <h5>Alentours</h5>
+                    <br>
+                    <ng-map default-style="true" center="[{{spot.latitude}},{{spot.longitude}}]" zoom="8">
+                        <marker
+                            position="[{{spot.latitude}},{{spot.longitude}}]"
+                            title="{{spot.name}}"
+                            icon="{
+                                      url:'{{'/assets/search/tile' + spot.hobby + '.png'}}',
+                                      scaledSize:[42,45],
+                                      origin: [0,0],
+                                      anchor: [21,45]
+                                      }"></marker>
+                    </ng-map>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

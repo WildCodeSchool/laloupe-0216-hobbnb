@@ -3,12 +3,11 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <h1>{{isAction.charAt(0).toUpperCase() + isAction.slice(1)}}
-                        d'un spot</h1>
+                    <h1>Création d'un spot</h1>
                 </div>
             </div>
             <div ng-show='step==1'>
-                <form name="addSpotForm" novalidate>
+                <form name="addSpotForm" class="hobbnb-font" novalidate>
                     {{step}}
                     <div class='row'>
                         <div class="range-field">
@@ -16,7 +15,7 @@
                             <label for="slider">Etape 1/2</label>
                         </div>
                     </div>
-                    <div class='row no-margin hobbnb-font'>
+                    <div class='row no-margin'>
                         <div class="col s12 m12 l6">
                             <div class="row no-margin">
                                 <div class="input-field col s12">
@@ -48,7 +47,7 @@
                             </ng-map>
                         </div>
                     </div>
-                    <div class="row center hobbnb-font">
+                    <div class="row center">
                         Vous pouvez déplacer le marqueur sur la map pour une localisation plus précise du spot.<br/>
                         Une adresse connue a proximité des coordonnées est donnée en référence.
                     </div>
@@ -69,23 +68,23 @@
                         </div>
                     </div>
                     <h2>Photos</h2>
-                    <div class="row" ng-show="photos.length < 12">
+                    <div class="row" ng-hide="photos.length > 11">
                         <div ngf-no-file-drop>Le Drag/Drop n'est pas suporté par votre navigateur</div>
-                        <div ngf-drop ngf-select ng-model="photo" class="drop-box valign-wrapper" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
+                        <div ngf-drop ngf-select ng-model="photos" ngf-max-files="12" ngf-change="picturesLengthValidation()" class="drop-box valign-wrapper" ngf-keep="'distinct'" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
                             <h5 class="valign">Glisser les photos ou cliquer ici pour uploader une photo</h5>
                         </div>
                     </div>
-                    <p class="center-align">
+                    <p class="center-align" ng-show="infoPhotos">
                         {{infoPhotos}}
                     </p>
                     <div class="row">
                         <ul ui-sortable="sortableOptions" ng-model="photos" class="list left">
-                            <div class="col s3" ng-repeat="photo in photos track by $index">
-                                <li class="thumbnail">
+                            <div class="col s3" ng-repeat="picture in photos track by $index">
+                                <li class="thumbnail create">
                                     <a ng-click="removePicture($index)" style="position: absolute;top: 5px;right: 5px;z-index: 100;" class="waves-effect waves-light btn-floating red">
                                         <i class="material-icons">remove</i>
                                     </a>
-                                    <img ngf-thumbnail="photo">
+                                    <img ngf-thumbnail="picture" class="object-fit_cover">
                                 </li>
                             </div>
                         </ul>

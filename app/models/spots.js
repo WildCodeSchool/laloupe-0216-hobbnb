@@ -8,7 +8,6 @@ logger = require('../logs/Logger');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
 
-
 var spotsCommentsSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
@@ -57,6 +56,10 @@ var spotsSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: [true, 'title required']
+    },
+    hobby: {
+        type: String,
+        enum: hobbiesListing
     },
     pictures: [String],
     latitude: Number,
@@ -116,10 +119,6 @@ var spotsSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    hobby: {
-        type: String,
-        enum: hobbiesListing
-    },
     comments: [spotsCommentsSchema]
 });
 
@@ -174,7 +173,8 @@ var Spots = {
             pictures = [],
             totalFiles = 0,
             uploads = {},
-            width = 1200;
+            width = 1200,
+            update = true;
         var targetPath = './public/uploads/spots/' + req.params.spotId + '/';
 
         if (!fs.existsSync('./public/uploads/spots/')) fs.mkdirSync('./public/uploads/spots/');
@@ -194,7 +194,7 @@ var Spots = {
         });
         form.on('fileBegin', function(name, file) {
             fileCount++;
-            file.name = fileCount + file.name.substr(file.name.lastIndexOf('.'));
+            // file.name = fileCount + file.name.substr(file.name.lastIndexOf('.'));
             logger.info('-- File: ', file.name, ' upload started');
             pictures.push(file.name);
         });
@@ -202,18 +202,18 @@ var Spots = {
             var tmpPath = file.path;
             gm(tmpPath)
                 .resize(width, width)
-                .write(targetPath + 'large/img_' + file.name, function(err) {
+                .write(targetPath + 'large/' + file.name, function(err) {
                     if (err) throw err;
                     gm(tmpPath)
                         .resize(width / 4, width / 4)
-                        .write(targetPath + 'thumb/img_' + file.name, function(err) {
+                        .write(targetPath + 'thumb/' + file.name, function(err) {
                             if (err) throw err;
-                            // fs.unlink(tmpPath, function(err) {
-                            //     if (err) throw err;
-                            processedFileCount++;
-                            logger.info('Upload and resize complete for SPOT ID: ', req.params.spotId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
-                            if (totalFiles == processedFileCount) Spots.updatePictures(req.params.spotId, pictures, res);
-                            // });
+                            fs.unlink(tmpPath, function(err) {
+                                if (err) throw err;
+                                processedFileCount++;
+                                logger.info('Upload and resize complete for SPOT ID: ', req.params.spotId, ' an for image:', file.name, ' ', processedFileCount, ' / ', totalFiles);
+                                if (totalFiles == processedFileCount)(update === true) ? Spots.updatePicturesInDB(req.params.spotId, pictures, res) : res.sendStatus(200);
+                            });
                         });
                 });
         });
@@ -266,7 +266,7 @@ var Spots = {
     },
 
     update: function(req, res) {
-        Spots.model.findByIdAndUpdate(req.params.id, req.body.content, function(err, data) {
+        Spots.model.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -275,7 +275,22 @@ var Spots = {
         });
     },
 
-    updatePictures: function(spotId, pictures, res) {
+    updatePictures: function(req, res) {
+        console.log(req.body);
+        if (typeof req.body.removedPictures !== 'undefined' && req.body.removedPictures.length > 0) {
+            req.body.removedPictures.forEach(function(picture) {
+                fs.unlink('./public/uploads/spots/' + req.params.spotId + '/large/' + picture, function(err) {
+                  if (err) throw err;
+                      fs.unlink('./public/uploads/spots/' + req.params.spotId + '/thumb/' + picture, function(err) {
+                        if (err) throw err;
+                      });
+                });
+            });
+        }
+        Spots.updatePicturesInDB(req.params.spotId, req.body.picturesList, res);
+    },
+
+    updatePicturesInDB: function(spotId, pictures, res) {
         Spots.model.findByIdAndUpdate(spotId, {
             $set: {
                 pictures: pictures

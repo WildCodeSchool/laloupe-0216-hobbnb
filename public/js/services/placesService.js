@@ -7,8 +7,14 @@ angular.module('app')
             getOne: function(id) {
                 return $http.get('/api/places/' + id);
             },
+            addComment: function(id, comment) {
+                return $http.put('/api/places/addComment/' + id, comment);
+            },
             update: function(id, data) {
                 return $http.put('/api/places/' + id, data);
+            },
+            updatePictures: function(id, data) {
+                return $http.put('/api/places/updatePictures/' + id, data);
             },
             create: function(data) {
                 return $http.post('/api/places', data);

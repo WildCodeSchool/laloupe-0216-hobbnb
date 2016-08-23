@@ -13,6 +13,9 @@ angular.module('app')
             update: function(id, data) {
                 return $http.put('/api/spots/' + id, data);
             },
+            updatePictures: function(id, data) {
+                return $http.put('/api/spots/updatePictures/' + id, data);
+            },
             create: function(data) {
                 return $http.post('/api/spots', data);
             },

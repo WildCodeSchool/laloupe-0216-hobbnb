@@ -77,29 +77,9 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                 }]
             }
         })
-        .when('/edition/place/:id', {
-            templateUrl: '/views/places/createPlace.html',
-            controller: 'createPlacesController',
-            resolve: {
-                connected: checkIsConnected,
-                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'app',
-                        files: [
-                            '/js/services/placesService.js',
-                            '/js/services/emailService.js',
-                            '/js/factories/placesFactory.js',
-                            '/js/filters/rangeFilter.js',
-                            '/js/controllers/createPlacesController.js'
-                        ]
-                    });
-                }]
-            }
-        })
         .when('/creation/place', {
-            // templateUrl: '/views/places/createPlace.html',
-            templateUrl: '/views/places/createPlaceModal.html',
-            controller: 'createPlacesController',
+            templateUrl: '/views/places/createPlace.html',
+            controller: 'createPlaceController',
             resolve: {
                 connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -113,7 +93,31 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                             '/js/services/emailService.js',
                             '/js/factories/placesFactory.js',
                             '/js/filters/rangeFilter.js',
-                            '/js/controllers/createPlacesController.js'
+                            '/js/controllers/places/createPlaceController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/edition/place/:id', {
+            templateUrl: '/views/places/editPlace.html',
+            controller: 'editPlaceController',
+            resolve: {
+                connected: checkIsConnected,
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            '/js/directives/starRatingDirective.js',
+                            '/js/libs/jquery-ui.min.js',
+                            '/js/libs/sortable.js',
+                            '/js/libs/ng-file-upload.min.js',
+                            '/js/services/usersService.js',
+                            '/js/services/placesService.js',
+                            '/js/services/emailService.js',
+                            '/js/factories/placesFactory.js',
+                            '/js/factories/searchFactory.js',
+                            '/js/controllers/places/editPlaceController.js'
                         ]
                     });
                 }]
@@ -121,12 +125,13 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
         })
         .when('/place/:id', {
             templateUrl: '/views/places/showPlace.html',
-            controller: 'placesController',
+            controller: 'placeController',
             resolve: {
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            '/js/directives/starRatingDirective.js',
                             '/js/services/usersService.js',
                             '/js/services/placesService.js',
                             '/js/services/emailService.js',
@@ -135,25 +140,7 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                             '/js/factories/searchFactory.js',
                             '/js/filters/rangeFilter.js',
                             '/js/controllers/messageController.js',
-                            '/js/controllers/placesController.js'
-                        ]
-                    });
-                }]
-            }
-        })
-        .when('/edition/spot/:id', {
-            templateUrl: '/views/spots/createSpot.html',
-            controller: 'createSpotsController',
-            resolve: {
-                connected: checkIsConnected,
-                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'app',
-                        files: [
-                            '/js/services/spotsService.js',
-                            '/js/services/emailService.js',
-                            '/js/factories/spotsFactory.js',
-                            '/js/controllers/createSpotsController.js'
+                            '/js/controllers/places/placeController.js'
                         ]
                     });
                 }]
@@ -161,7 +148,7 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
         })
         .when('/creation/spot', {
             templateUrl: '/views/spots/createSpot.html',
-            controller: 'createSpotsController',
+            controller: 'createSpotController',
             resolve: {
                 connected: checkIsConnected,
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -174,7 +161,31 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                             '/js/services/spotsService.js',
                             '/js/services/emailService.js',
                             '/js/factories/spotsFactory.js',
-                            '/js/controllers/createSpotsController.js'
+                            '/js/controllers/spots/createSpotController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/edition/spot/:id', {
+            templateUrl: '/views/spots/editSpot.html',
+            controller: 'editSpotController',
+            resolve: {
+                connected: checkIsConnected,
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            '/js/directives/starRatingDirective.js',
+                            '/js/libs/jquery-ui.min.js',
+                            '/js/libs/sortable.js',
+                            '/js/libs/ng-file-upload.min.js',
+                            '/js/services/usersService.js',
+                            '/js/services/spotsService.js',
+                            '/js/services/emailService.js',
+                            '/js/factories/spotsFactory.js',
+                            '/js/factories/searchFactory.js',
+                            '/js/controllers/spots/editSpotController.js'
                         ]
                     });
                 }]
@@ -182,36 +193,21 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
         })
         .when('/spot/:id', {
             templateUrl: '/views/spots/showSpot.html',
-            controller: 'spotsController',
+            controller: 'spotController',
             resolve: {
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
+                            '/js/directives/starRatingDirective.js',
                             '/js/services/usersService.js',
                             '/js/services/spotsService.js',
                             '/js/services/emailService.js',
                             '/js/factories/spotsFactory.js',
                             '/js/factories/searchFactory.js',
                             '/js/filters/rangeFilter.js',
-                            '/js/controllers/spotsController.js'
+                            '/js/controllers/spots/spotController.js'
 
-                        ]
-                    });
-                }]
-            }
-        })
-        .when('/picture/:where/:step/:id', {
-            templateUrl: '/views/picture.html',
-            controller: 'fileUploadController',
-            resolve: {
-                connected: checkIsConnected,
-                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'app',
-                        files: [
-                            '/js/directives/fileDirective.js',
-                            '/js/controllers/fileUploadController.js'
                         ]
                     });
                 }]
