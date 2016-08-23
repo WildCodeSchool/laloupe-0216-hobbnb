@@ -4,7 +4,7 @@ mongoose.set('debug', true);
 var formidable = require('formidable');
 var gm = require('gm');
 var fs = require('fs');
-logger = require('../logs/Logger');
+logger = require('../logs/logger');
 
 var hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
 
