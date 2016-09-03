@@ -7,11 +7,19 @@
                 <a href="#" data-activates="nav-mobile" class="button-collapse">
                     <i class="material-icons">menu</i>
                 </a>
-                <ul class="left hide-on-med-and-down" ng-controller='globalUserController' style='padding-left: 200px;'>
+                <ul class="left hide-on-med-and-down" style='padding-left: 200px;'>
                     <li>
-                        <a href="/search">
-                            <i class="material-icons">search</i>
-                        </a>
+                        <!-- <a href="/search"> -->
+                        <form>
+                            <div class="input-field">
+                                <input id="search" type="search" class="custom_search" required>
+                                <label for="search">
+                                    <i class="material-icons">search</i>
+                                </label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                        <!-- </a> -->
                     </li>
                     <li>
                         <a tooltipped href="/creation/place" data-position="bottom" data-delay="50" data-tooltip="Ajouter un hébergement">
@@ -26,7 +34,7 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="right hide-on-med-and-down" ng-controller='globalUserController'>
+                <ul class="right hide-on-med-and-down">
                     <li ng-show='currentUser.isAdmin'>
                         <a href="/admin">
                             <i class="material-icons left">dashboard</i>Admin</a>
@@ -35,23 +43,25 @@
                         <a href="http://www.hobbnb-magazine.com/">
                             <i class="material-icons left">book</i>Magazine</a>
                     </li>
-                    <li ng-hide='currentUser._id'>
+                    <li ng-hide='currentUser'>
                         <a href="/user/login">
                             <i class="material-icons left">perm_identity</i>Login</a>
                     </li>
-                    <li ng-show='currentUser._id'>
-                        <a href="/user/{{currentUser._id}}">
-                            <i class="material-icons left">perm_identity</i>{{currentUser.identity.firstName}}</a>
-                    </li>
-                    <li ng-show='currentUser._id'>
-                        <a href="/messages">
-                            <i class="material-icons left">mail</i>Messagerie</a>
-                    </li>
-                    <li ng-show='currentUser._id'>
-                        <a href="/user/logout">Logout</a>
-                    </li>
+                    <span ng-show='currentUser'>
+                        <li>
+                            <a href="/user/profile/">
+                                <i class="material-icons left">perm_identity</i>{{currentUser.identity.firstName}}</a>
+                        </li>
+                        <li>
+                            <a href="/messages">
+                                <i class="material-icons left">mail</i>Messagerie</a>
+                        </li>
+                        <li>
+                            <a ng-click="logout()">Logout</a>
+                        </li>
+                    </span>
                 </ul>
-                <ul id="nav-mobile" class="side-nav" ng-controller='globalUserController'>
+                <ul id="nav-mobile" class="side-nav">
                     <li>
                         <a href="/">
                             <i class="material-icons left">home</i>hobbnb</a>
@@ -72,29 +82,31 @@
                             Spot
                         </a>
                     </li>
-                        <li ng-show='currentUser.isAdmin'>
-                            <a href="/admin">
-                                <i class="material-icons left">dashboard</i>Admin</a>
-                        </li>
+                    <li ng-show='currentUser.isAdmin'>
+                        <a href="/admin">
+                            <i class="material-icons left">dashboard</i>Admin</a>
+                    </li>
                     <li>
                         <a href="http://www.hobbnb-magazine.com/">
                             <i class="material-icons left">book</i>Magazine</a>
                     </li>
-                    <li ng-hide='currentUser._id'>
+                    <li ng-show='!currentUser'>
                         <a href="/user/login">
                             <i class="material-icons left">perm_identity</i>Login</a>
                     </li>
-                    <li ng-show='currentUser._id'>
-                        <a href="/user/{{currentUser._id}}">
-                            <i class="material-icons left">perm_identity</i>{{currentUser.identity.firstName}}</a>
-                    </li>
-                    <li ng-show='currentUser._id'>
-                        <a href="/messages">
-                            <i class="material-icons left">mail</i>Messagerie</a>
-                    </li>
-                    <li ng-show='currentUser._id'>
-                        <a href="/user/logout">Logout</a>
-                    </li>
+                    <div ng-show='currentUser'>
+                        <li>
+                            <a href="/user/{{currentUser}}">
+                                <i class="material-icons left">perm_identity</i>{{currentUser.identity.firstName}}</a>
+                        </li>
+                        <li>
+                            <a href="/messages">
+                                <i class="material-icons left">mail</i>Messagerie</a>
+                        </li>
+                        <li>
+                            <a ng-click="logout()">Logout</a>
+                        </li>
+                    </div>
                 </ul>
             </div>
             <script type="text/javascript">

@@ -40,7 +40,7 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s8">
-                            <input type="text" class="autocomplete" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="" name="placeAddress" required>
+                            <input type="text" class="autocomplete" ng-model="address.formattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="" allow-only-results="true" name="placeAddress" required>
                             <label>Adresse:</label>
                             <span class="field-error" ng-show="!obj.address.country && addPlaceForm.$submitted">Renseignez une adresse valide pour l'hébérgement.</span>
                         </div>

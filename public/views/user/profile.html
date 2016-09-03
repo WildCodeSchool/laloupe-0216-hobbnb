@@ -1,78 +1,211 @@
 <div class="container">
-    <div class=" card-panel">
-        <div class="row">
-            <div class="col s6 offset-s3">
-                <div class="card-panel">
-                    <div class='right'>
-                        <span class="center-align grey-text lighten-5" style='font-size:12px;'>
-                            <i class="tiny material-icons yellow-text text-darken-2" ng-repeat='n in [] | range:globalRating'>star</i>
-                            <i class="tiny material-icons yellow-text text-lighten-2" ng-repeat='n in [] | range:globalLowerRating'>star</i>
-                            <br/>{{numReviews}}
-                            avis</span>
+    <div class="row grey lighten-3 pofile_row">
+        <div class="col s3 grey lighten-3">
+            <div class="row thumbnail">
+                <img ng-src="{{user.avatar && '/uploads/users/'+user._id+'/large/'+user.avatar || '/assets/hobbynaut-avatar.gif'}}" class='object-fit_cover'/>
+            </div>
+            <div class="row center">
+                <div class="col s12">
+                    <b>{{user.identity.firstName}}
+                        {{user.identity.lastName}}</b>
+                </div>
+                <div class="col s12">
+                    <div class="col s12">
+                        <star-rating ng-model="user.rating.overallRating" readonly="true"></star-rating>
+                        ({{user.rating.numberOfRatings}})
                     </div>
-                    <div class="valign-wrapper">
-                        <img src="/uploads/users/{{user._id}}/large/img_{{user.picture}}" class='circle responsive-img'/>
-                        <div class='username-spacer'>
-                            <b>{{user.identity.firstName}}
-                                {{user.identity.lastName}}</b>
+                </div>
+            </div>
+            <div class"row" id="podium">
+                <div class="col s4 nb2">
+                    <img src="/assets/hobbies/Randonnée.png"/>
+                </div>
+                <div class="col s4 nb1">
+                    <img src="/assets/hobbies/VTT.png"/>
+                </div>
+                <div class="col s4 nb3">
+                    <img src="/assets/hobbies/VTT.png"/>
+                </div>
+                <!-- test -->
+            </div>
+        </div>
+        <div class="col s9 no-margin">
+            <form name="userUpdateForm" novalidate>
+                <ul class="collection profile_collection no-margin">
+                    <li class="collection-item  profile_collection_item row">
+                        <div class="col s4 no-margin">
+                            <i class="fa fa-user fa-1x" aria-hidden="true" style="width:20px; text-align: center; margin-right: 5px;"></i>
+                            <b>Nom *</b>
                         </div>
-                    </div>
-                    <div class='right' ng-show='canModify'>
-                        <a href='/picture/users/1/{{user._id}}'>Modifier photo</a>
-                        -
-                        <a href='/user/edit'>Editer mon profil</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="divider"></div>
-        <div class="row">
-            <div class="col s8 offset-s2">
-                <h2>Messagerie</h2>
-                <div class="collection">
-                    <a ng-repeat='msg in msgs' href="/messages/{{msg._id}}" class="collection-item">
-                        <div style='max-width:60%;' class='left'>
-                            <div class="truncate">{{msg.message}}</div>
+                        <div class="col s8">
+                            <input type="text" name="userLastName" style="margin: 0; width: 92% !important; height: 1.8rem" ng-model="user.identity.lastName" required>
+                            <i ng-class='(userUpdateForm.userLastName.$error.required) ?  "fa fa-times fa-1x red-text" : "fa fa-check fa-1x green-text"' class="right"></i>
                         </div>
-                        <span class="badge right">{{format(msg.creation)}}</span>
-                        <div class="clearfix"></div>
-                    </a>
-                    <a ng-hide='msgs && msgs.length > 0' href="/messages" class="collection-item">Vous n'avez aucun message</a>
-                    <a href="/messages" class="collection-item right-align">
-                        <i class='tiny material-icons'>add</i>
-                        Nouveau message</a>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s4 no-margin" style="line-height: 2rem;">
+                            <b style="margin-left: 30px;">Prénom *</b>
+                        </div>
+                        <div class="col s8" style="line-height: 2rem;">
+                            <input type="text" name="userFirstName" ng-model="user.identity.firstName" style="margin: 0; height: 100%; width: 92% !important;" ng-required>
+                            <i ng-class='(userFirstName.$error.required) ?  "fa fa-times fa-1x red-text" : " fa fa-check fa-1x green-text"' class="right"></i>
+                        </div>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s4 no-margin">
+                            <i class="fa fa-info-circle fa-1x" aria-hidden="true" style="width:20px; text-align: center; margin-right: 5px;"></i>
+                            <b>A propos de moi</b>
+                        </div>
+                        <div class="col s8">
+                            <textarea name="about" ng-model="user.identity.about" class="materialize-textarea" style="margin: 0; padding: 0; height: 100%; width: 92% !important;" ng-required></textarea>
+                            <i ng-class='(userUpdateForm.$submitted && userUpdateForm.about.$error.required) ?  "fa fa-times fa-1x red-text" : " fa fa-check fa-1x green-text"' class="right"></i>
+                        </div>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s4 no-margin">
+                            <i class="fa fa-envelope fa-1x" aria-hidden="true" style="width:20px; text-align: center; margin-right: 5px;"></i>
+                            <b>Email *</b>
+                        </div>
+                        <div class="col s8" style="line-height: 2rem;">
+                            <input type="text" name="userEmail" ng-model="user.email" style="margin: 0; width: 92% !important; height: 100%" ng-pattern='/^[\w\-\+]+(\.[\w\-]+)*@[\w\-]+(\.[\w\-]+)*\.[\w\-]{2,4}$/' ng-required>
+                            <i ng-class='(userUpdateForm.$submitted && userUpdateForm.userEmail.$error.pattern) ?  "fa fa-times fa-1x red-text" : " fa fa-check fa-1x green-text"' class="right"></i>
+                        </div>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s4 no-margin">
+                            <i class="fa fa-phone fa-1x" aria-hidden="true" style="width:20px; text-align: center; margin-right: 5px;"></i>
+                            <b>Téléphone</b>
+                        </div>
+                        <div class="col s8" style="line-height: 2rem;">
+                            <input type="tel" name="userPhone" ng-model="user.phone" style="margin: 0; width: 92% !important; height: 100%" ng-pattern="/^(\+33|0)[0-9]{1}[0-9]{8}$/">
+                            <i ng-class='(userUpdateForm.$submitted && user.mobile && userUpdateForm.userPhone.$error.pattern) ?  "fa fa-times fa-1x red-text" : " fa fa-check fa-1x green-text"' class="right"></i>
+                        </div>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s4 no-margin">
+                            <i class="fa fa-mobile fa-1x" aria-hidden="true" style="width:20px; text-align: center; margin-right: 5px;"></i>
+                            <b>Téléphone portable</b>
+                        </div>
+                        <div class="col s8" style="line-height: 2rem;">
+                            <input type="tel" name="userMobile" ng-model="user.mobile" style="margin: 0; width: 92% !important; height: 100%" ng-pattern="/^(\+33|0)[0-9]{1}[0-9]{8}$/">
+                            <i ng-class='(userUpdateForm.$submitted && userUpdateForm.userMobile.$dirty && userUpdateForm.userMobile.$error.pattern) ?  "fa fa-times fa-1x red-text" : " fa fa-check fa-1x green-text"' class="right"></i>
+                        </div>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s4 no-margin">
+                            <i class="fa fa-map-marker fa-1x" aria-hidden="true" style="width:20px; text-align: center; margin-right: 5px;"></i>
+                            <b>Adresse *</b>
+                        </div>
+                        <div class="col s8" style="line-height: 2rem;">
+                            <input id="address" type="text" class="autocomplete" name="userFormattedAddress" ng-model="userFormattedAddress" ng-autocomplete options="{types: 'geocode'}" details="details" placeholder="" allow-only-results="true" style="margin: 0; width: 92% !important; height: 100%" ng-required>
+                            <i ng-class='(userUpdateForm.$submitted && userUpdateForm.userFormattedAddress.$error.parse || userUpdateForm.userFormattedAddress.$error.required) ?  "fa fa-times fa-1x red-text" : " fa fa-check fa-1x green-text"' class="right"></i>
+                        </div>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s4 no-margin">
+                            <i class="fa fa-birthday-cake fa-1x" aria-hidden="true" style="width:20px; text-align: center; margin-right: 5px;"></i>
+                            <b>Anniversaire</b>
+                        </div>
+                        <div class="col s8" style="line-height: 2rem;">
+                            <input type="text" name="userBirthday" ng-model="user.birthday" style="margin: 0; width: 92% !important; height: 100%" ng-required>
+                            <i ng-class='(userUpdateForm.userBirthday.$error.required) ?  "fa fa-times fa-1x red-text" : " fa fa-check fa-1x green-text"' class="right"></i>
+                        </div>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s4 no-margin">
+                            <i class="fa fa-key fa-1x" aria-hidden="true" style="width:20px; text-align: center; margin-right: 5px;"></i>
+                            <b>Mot de passe</b>
+                        </div>
+                        <div class="col s8" style="line-height: 2rem;">
+                            <input type="text" name="placeName" ng-model="password" style="margin: 0; width: 92% !important; height: 100%" ng-required>
+                            <i ng-class='(userUpdateForm.userFirstName.$error.required) ?  "fa fa-times fa-1x red-text" : " fa fa-check fa-1x green-text"' class="right"></i>
+                        </div>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s4 no-margin" style="line-height: 2rem;">
+                            <b style="margin-left: 30px;">Confirmer mot de passe</b>
+                        </div>
+                        <div class="col s8" style="line-height: 2rem;">
+                            <input type="text" name="placeName" ng-model="confirmPassword" style="margin: 0; width: 92% !important; height: 100%" ng-required>
+                            <i ng-class='(userUpdateForm.userFirstName.$error.required) ?  "fa fa-times fa-1x red-text" : " fa fa-check fa-1x green-text"' class="right"></i>
+                        </div>
+                    </li>
+                    <li class="collection-item profile_collection_item dismissable row">
+                        <div class="col s12 right-align" style="line-height: 2rem;">
+                            <button type="button" class="waves-effect waves-blue lighten-1 btn-flat light-blue lighten-3 white-text"
+                            ng-class="userUpdateForm.$invalid ? 'custom-disabled' : 'waves-effect waves-light white-text'"
+                            ng-click='(userUpdateForm.$submitted && userUpdateForm.$valid && update()); userUpdateForm.$submitted = true;'>
+                                <i class="fa fa-floppy-o left" aria-hidden="true"></i>Sauvegarder
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div class="row pofile_row">
+        <h2 class="profile_title  grey lighten-3">Mes hébergements</h2>
+        <div class="row no-margin darker_background">
+            <div class="col s6 m4 l3">
+                <div class="card" style="height: 290px">
+                    <div class="card-image valign-wrapper" style="height: 100%;">
+                        <a style="margin-left: auto; margin-right: auto;" class="center">
+                            <i class="material-icons large">add</i>
+                            <span ng-hide='places && places.length > 0' href="/place"><br>Vous n'avez aucun hébérgement</span>
+                            <br>Ajouter un hébérgement
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="divider"></div>
-        <div class="row">
-            <div class="col s8 offset-s2">
-                <h2>Mes hébergements</h2>
-                <div class="collection">
-                    <a ng-repeat='place in places' href="/edition/place/{{place._id}}" class="collection-item">{{place.name}}
-                        <span class="badge">{{place.rating.cleanness.length + ' avis'}}</span>
-                    </a>
-                    <a ng-hide='places && places.length > 0' href="/place" class="collection-item">Vous n'avez aucun hébergement</a>
-                    <a href="/creation/place" class="collection-item right-align">
-                        <i class='tiny material-icons'>add</i>
-                        Nouvel hébergement</a>
-                </div>
-            </div>
-        </div>
-        <div class="divider"></div>
-        <div class="row">
-            <div class="col s8 offset-s2">
-                <h2>Mes spots</h2>
-                <div class="collection">
-                    <a ng-repeat='spot in spots' href="/edition/spot/{{spot._id}}" class="collection-item">{{spot.name}}
-                        <span class="badge">{{spot.rating.beauty.length + ' avis'}}</span>
-                    </a>
-                    <a ng-hide='spots && spots.length > 0' href="/spot" class="collection-item">Vous n'avez aucun spot</a>
-                    <a href="/creation/spot" class="collection-item right-align">
-                        <i class='tiny material-icons'>add</i>
-                        Nouveau spot</a>
+            <div class="col s6 m4 l3" ng-repeat="place in places">
+                <div class="card">
+                    <div class="card-image">
+                        <img ng-src="/uploads/place/{{place._id}}/thumb/{{place.pictures[0]}}">
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            <div>{{place.name}}</div>
+                            <div>
+                                <star-rating ng-model="place.rating.overallRating" readonly="true"></star-rating>
+                                <sup>({{place.rating.numberOfRatings}})</sup>
+                            </div>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row pofile_row">
+        <h2 class="profile_title  grey lighten-3">Mes spots</h2>
+        <div class="row no-margin darker_background">
+            <div class="col s6 m4 l3">
+                <div class="card" style="height: 290px">
+                    <div class="card-image valign-wrapper" style="height: 100%;">
+                        <a style="margin-left: auto; margin-right: auto;" class="center">
+                            <i class="material-icons large">add</i>
+                            <span ng-hide='spots && spots.length > 0' href="/spot"><br>Vous n'avez aucun spot</span>
+                            <br>Ajouter un spot
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s6 m4 l3" ng-repeat="spot in spots">
+                <div class="card">
+                    <div class="card-image">
+                        <img ng-src="/uploads/spots/{{spot._id}}/thumb/{{spot.pictures[0]}}">
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            <div>{{spot.name}}</div>
+                            <div>
+                                <star-rating ng-model="spot.rating.overallRating" readonly="true"></star-rating>
+                                <sup>({{spot.rating.numberOfRatings}})</sup>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
 </div>

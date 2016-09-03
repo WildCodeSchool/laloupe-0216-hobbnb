@@ -3,6 +3,7 @@ var http = require('http');
 var express = require('express');
 var app = express(); // create our app w/ express
 var port = process.env.PORT || 8000; // set the port
+var passport	= require('passport');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
@@ -18,10 +19,20 @@ app.use(bodyParser.json({
     limit: '10mb',
     type: 'application/vnd.api+json'
 })); // parse application/vnd.api+json as json
+app.use(passport.initialize());
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
-// picture thumb ==================================================================
+// Cross Domain
+// app.use(function(request, response, next) {
+//     response.header('Access-Control-Allow-Credentials', true);
+//     response.header('Access-Control-Allow-Origin', "*");
+//     response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//     response.header('Access-Control-Allow-Headers', 'X-ACCESS_TOKEN, Access-Control-Allow-Origin, Authorization, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+//     next();
+// });
+app.set("jsonp callback", true);
 // Mongoose ====================================================================
 require('./config/database');
+require('./config/passport')(passport);
 // Serveur ===================================================================
 var server = http.Server(app);
 // routes ======================================================================

@@ -4,6 +4,12 @@ html {
 .main {
     min-height: 75vh
 }
+.show {
+    display: block;
+}
+.hide {
+    display: none;
+}
 .drop-box {
     background: #F8F8F8;
     border: 5px dashed #DDD;
@@ -129,6 +135,20 @@ html {
 .custom-btn img {
     vertical-align: middle;
 }
+.custom_search {
+    height: 40px !important;
+    margin: 12px 0 !important;
+
+    border-width: 0px!important;
+    border-style: solid!important;
+    border-color: transparent!important;
+}
+.custom_search input {
+}
+.custom_search label {
+  position: absolute;
+  top: 12px !important;
+}
 .field-error {
     display: block;
     position: absolute;
@@ -167,7 +187,8 @@ html {
     object-position: 50% 50%;
 }
 .object-fit_cover {
-    object-fit: cover
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 .object-fit_none {
     object-fit: none
@@ -175,8 +196,49 @@ html {
 .object-fit_scale-down {
     object-fit: scale-down
 }
+#podium {
+    height: 115px;
+}
+#podium img {
+    height: 55px;
+    width: 100%;
+    object-fit: contain;
+}
+#podium .nb1 {
+    border-bottom: 60px #FFD700 solid;
+}
+#podium .nb2 {
+    margin-top: 20px;
+    border-bottom: 40px #C0C0C0 solid;
+}
+#podium .nb3 {
+    margin-top: 30px;
+    border-bottom: 30px #CD7F32 solid;
+}
+
+/*#podium.containeur,img {
+    display: block;
+    width: 10%;
+    text-align: center;
+    position: relative;
+}
+#podium.containeur img:nth-child(2) {
+    top: 2%;
+}
+#podium.containeur img:nth-child(3) {
+    top: 21%;
+}*/
+
 
 /*OLD*/
+
+.blue-hobbnb {
+    background-color: #67C9FF;
+}
+
+/*.btn.blue-hobbnb:hover {
+    background-color: #67A2FF;
+}*/
 
 h1 {
     font-size: 41px
@@ -208,6 +270,29 @@ p {
 }
 .tabs .indicator {
     background-color: #7f7f7f
+}
+.pofile_row {
+    margin: 15px 0;
+    border: 1px solid #e0e0e0;
+}
+.darker_background {
+    background-color: #E0E0E0;
+}
+h2.profile_title {
+    margin: 0;
+    padding: 25px 0;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center font-size: 24px;
+    font-weight: 700;
+    color: #7f7f7f
+}
+.profile_collection {
+    border: none;
+    border-left: 1px solid #e0e0e0;
+    background-color: #F2F4F3 !important;
+}
+.profile_collection_item {
+    background-color: #F2F4F3 !important;
 }
 #widgets {
     background-color: #e0e0e0;

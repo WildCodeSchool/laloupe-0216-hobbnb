@@ -266,46 +266,97 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                 }]
             }
         })
-        .when('/user/:action', {
-            templateUrl: function(params) {
-                switch (params.action) {
-                    case 'login':
-                        //Login then redirect to current profile page
-                        return '/views/user/login.html';
-                        break;
-                    case 'logout':
-                        //Logout and redirect to login page
-                        return '/views/user/logout.html';
-                        break;
-                    case 'create':
-                        //Create an account
-                        return '/views/user/create.html';
-                        break;
-                    case 'edit':
-                        //Create an account
-                        return '/views/user/edit.html';
-                        break;
-                    default:
-                        //Show my profile
-                        return '/views/user/profile.html';
-                }
-            },
-            controller: 'usersController',
+        .when('/user/login', {
+            templateUrl: 'views/user/login.html',
+            controller: 'connectController',
             resolve: {
                 lazy: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
                             '/js/services/emailService.js',
-                            '/js/services/messagingService.js',
                             '/js/services/usersService.js',
-                            '/js/filters/rangeFilter.js',
-                            '/js/controllers/usersController.js'
+                            '/js/controllers/users/connectController.js'
                         ]
                     });
                 }]
             }
         })
+        .when('/user/register', {
+            templateUrl: 'views/user/create.html',
+            controller: 'connectController',
+            resolve: {
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            '/js/services/emailService.js',
+                            '/js/services/usersService.js',
+                            '/js/controllers/connectController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        .when('/user/profile', {
+            templateUrl: 'views/user/profile.html',
+            controller: 'usersController',
+            resolve: {
+                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'app',
+                        files: [
+                            '/js/directives/starRatingDirective.js',
+                            '/js/directives/toggleIt.js',
+                            '/js/services/emailService.js',
+                            '/js/services/messagingService.js',
+                            '/js/services/usersService.js',
+                            '/js/controllers/users/usersController.js'
+                        ]
+                    });
+                }]
+            }
+        })
+        // .when('/user/:action', {}
+        //     templateUrl: function(params) {
+        //         switch (params.action) {
+        //             case 'login':
+        //                 //Login then redirect to current profile page
+        //                 return '/views/user/login.html';
+        //                 break;
+        //             case 'logout':
+        //                 //Logout and redirect to login page
+        //                 return '/views/user/logout.html';
+        //                 break;
+        //             case 'create':
+        //                 //Create an account
+        //                 return '/views/user/create.html';
+        //                 break;
+        //             case 'edit':
+        //                 //Create an account
+        //                 return '/views/user/edit.html';
+        //                 break;
+        //             default:
+        //                 //Show my profile
+        //                 return '/views/user/profile.html';
+        //         }
+        //     },
+        //     controller: 'usersController',
+        //     resolve: {
+        //         lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+        //             return $ocLazyLoad.load({
+        //                 name: 'app',
+        //                 files: [
+        //                     '/js/services/emailService.js',
+        //                     '/js/services/messagingService.js',
+        //                     '/js/services/usersService.js',
+        //                     '/js/filters/rangeFilter.js',
+        //                     '/js/controllers/usersController.js'
+        //                 ]
+        //             });
+        //         }]
+        //     }
+        // })
         .when('/sendEmail/', {
             templateUrl: '/views/sendEmail.html',
             controller: 'emailController',
@@ -362,17 +413,17 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
             },
             'responseError': function(response) {
                 if (response.status === 401 || response.status === 403) {
-                    $window.localStorage.removeItem('token');
-                    $window.localStorage.removeItem('currentUser');
-                    $rootScope.$emit('userUpdated', null);
                     $location.path('/user/login');
+                    // $window.localStorage.removeItem('token');
+                    // $window.localStorage.removeItem('currentUser');
+                    // $location.path('/user/login');
                 }
                 return $q.reject(response);
             }
         };
     });
 
-    function checkIsConnected($q, $http, $location) {
+    function checkIsConnected($q, $http, $location, $window, $rootScope) {
         var deferred = $q.defer();
 
         $http.get('/api/users/loggedin').success(function() {
@@ -381,7 +432,7 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
             deferred.reject();
             $window.localStorage.removeItem('token');
             $window.localStorage.removeItem('currentUser');
-            $rootScope.$emit('userUpdated', null);
+            $rootScope.currentUser = null;
             $location.path('/user/login');
         });
 

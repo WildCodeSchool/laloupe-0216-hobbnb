@@ -3,6 +3,9 @@ var mongoose = require('mongoose'),
     bcrypt = require('bcrypt'),
     jwt = require('jsonwebtoken'),
     secretToken = require('../../config/secretToken.js');
+var passport = require('passport');
+
+require('../../config/passport');
 
 function hashCode(s) {
     return s.split("").reduce(function(a, b) {
@@ -21,16 +24,22 @@ var usersSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        // required: true,
         index: {
             unique: true
         }
     },
-    picture: String,
     password: {
         type: String,
-        required: true
+        // required: true
     },
+    facebook: {
+        id: String,
+        token: String,
+        email: String
+            // name: String
+    },
+    avatar: String,
     identity: {
         firstName: String,
         lastName: String,
@@ -71,29 +80,37 @@ usersSchema.methods.comparePassword = function(pwd, cb) {
     });
 };
 
+usersSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+};
+
 var Users = {
 
     model: mongoose.model('Users', usersSchema),
 
-    create: function(req, res) {
-        if (req.body.obj.password) {
-            var salt = bcrypt.genSaltSync(10);
-            req.body.obj.password = bcrypt.hashSync(req.body.obj.password, salt);
-        }
-        Users.model.create(req.body.obj, function(err, data) {
-            if (err) res.status(400).send(err);
-            else {
-                data.password = null;
-                var token = jwt.sign(data, secretToken, {
-                    expiresIn: '24h'
-                });
-                res.json({
-                    success: true,
-                    user: data,
-                    token: token
-                });
+    create: function(req, res, next) {
+        passport.authenticate('local-signup', function(err, newUser, info) {
+            if (err) {
+                console.log(err);
+                return next(err);
             }
-        });
+            if (!newUser) {
+                return res.status(400).json(info.message);
+            }
+            newUser.password = null;
+            var token = jwt.sign(newUser, secretToken, {
+                expiresIn: '24h'
+            });
+            res.status(200).json({
+                success: true,
+                user: newUser,
+                token: token
+            });
+        })(req, res, next);
+    },
+
+    generateHash: function(password) {
+        return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
     },
 
     findAll: function(req, res) {
@@ -112,42 +129,28 @@ var Users = {
         });
     },
 
-    login: function(req, res) {
-        if (!req.body.email) {
-            res.status(400).send('Veuillez renseigner un e-mail');
-        } else if (!req.body.password) {
-            res.status(400).send('Veuillez renseigner un mot de passe');
-        } else {
-            Users.model.findOne({
-                email: req.body.email
-            }, function(err, data) {
-                if (err) {
-                    res.status(400).send(err);
-                } else if (!data) {
-                    res.status(400).send('Utilisateur inconnu');
-                } else {
-                    data.comparePassword(req.body.password, function(err, isMatch) {
-                        if (err) {
-                            res.status(400).send(err);
-                        } else {
-                            if (isMatch) {
-                                data.password = null;
-                                var token = jwt.sign(data, secretToken, {
-                                    expiresIn: '24h'
-                                });
-                                res.json({
-                                    success: true,
-                                    user: data,
-                                    token: token
-                                });
-                            } else {
-                                res.status(400).send('Mot de passe incorrect');
-                            }
-                        }
-                    });
-                }
+    login: function(req, res, next) {
+        passport.authenticate(['local-login', 'facebook'], function(err, user, info) {
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                return res.status(401).json(info.message);
+            }
+            user.password = null;
+            var token = jwt.sign(user, secretToken, {
+                expiresIn: '24h'
             });
-        }
+            res.status(200).json({
+                success: true,
+                user: user,
+                token: token
+            });
+            // res.cookie('token', token);
+            // res.cookie('user', JSON.stringify(user));
+            // console.log(user._id);
+            // res.redirect('/user/'+user._id);
+        })(req, res, next);
     },
 
     activate: function(req, res) {
@@ -223,7 +226,7 @@ var Users = {
                     res.status(400).send('Votre email a déjà été vérifié');
                 }
             }
-        })
+        });
         Users.model.findByIdAndUpdate(req.params.id, {
             isValidate: true
         }, function(err, data) {

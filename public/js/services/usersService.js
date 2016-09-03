@@ -28,9 +28,7 @@ angular.module('app')
                 });
             },
             create: function(data) {
-                return $http.post('/api/users', {
-                    obj: data
-                });
+                return $http.post('/api/users', data);
             },
             delete: function(id) {
                 return $http.delete('/api/users/' + id);

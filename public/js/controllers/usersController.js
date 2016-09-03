@@ -1,4 +1,11 @@
-angular.module('app').controller('usersController', function($scope, $rootScope, $routeParams, $location, $http, $window, usersService, messagingService, emailService) {
+angular.module('app').controller('usersController', function($scope, $rootScope, $cookies, $routeParams, $location, $http, $window, usersService, messagingService, emailService) {
+
+    if ($cookies.get('token')) {
+        $window.localStorage.setItem('currentUser', $cookies.get('user'));
+        $window.localStorage.token = $cookies.get('token');
+        $cookies.remove('token');
+        $cookies.remove('user');
+    }
 
     if ($window.localStorage.currentUser) $scope.currentUser = JSON.parse($window.localStorage.getItem('currentUser'));
     else $scope.currentUser = {
@@ -7,7 +14,7 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
 
     $scope.format = function(date) {
         return messagingService.format(date);
-    }
+    };
 
     switch ($routeParams.action) {
 
@@ -25,10 +32,10 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
                 }, function(res) {
                     $scope.error = res.data;
                 });
-            }
+            };
             $scope.create = function() {
                 $location.path('/user/create');
-            }
+            };
             break;
 
         case 'logout':
@@ -42,24 +49,26 @@ angular.module('app').controller('usersController', function($scope, $rootScope,
         case 'create':
 
             //Create an account
-            if (!!$scope.currentUser._id) $location.path('/user/' + $scope.currentUser._id)
+            if (!!$scope.currentUser._id) $location.path('/user/' + $scope.currentUser._id);
             $scope.hobbinaut = {};
             $scope.create = function() {
                 if ($scope.hobbinaut.password === $scope.hobbinaut.passwordConfirm) {
+                    console.log($scope.hobbinaut);
                     usersService.create($scope.hobbinaut).then(function(res) {
+                        console.log(res.data);
                         emailService.send(res.data.user.identity.firstName, res.data.user.email, 'Bonjour ' + res.data.user.identity.firstName + ',<br />Vous avez créé un compte sur hobbnb, pour l\'activer cliquez sur le lien suivant : <a href="https://hobbnb.innoveduc.fr/api/users/activate/' + res.data.user._id + '">Activer mon compte</a>');
                         $scope.message = 'Votre compte a été créé, consultez votre boîte mail pour l\'activer ! ;-)';
-                            // $window.localStorage.setItem('currentUser', JSON.stringify(res.data.user));
-                            // $window.localStorage.token = res.data.token;
-                            // $rootScope.$emit('userUpdated', null);
-                            // $location.path('/user/' + res.data.user._id);
+                        // $window.localStorage.setItem('currentUser', JSON.stringify(res.data.user));
+                        // $window.localStorage.token = res.data.token;
+                        // $rootScope.$emit('userUpdated', null);
+                        // $location.path('/user/' + res.data.user._id);
                     }, function(res) {
                         $scope.error = res.data;
                     });
                 } else {
                     $scope.error = 'Mots de passes différents';
                 }
-            }
+            };
             break;
 
         case 'edit':
