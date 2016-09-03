@@ -9,29 +9,16 @@
                 </a>
                 <ul class="left hide-on-med-and-down" style='padding-left: 200px;'>
                     <li>
-                        <!-- <a href="/search"> -->
                         <form>
-                            <div class="input-field">
-                                <input id="search" type="search" class="custom_search" required>
+                            <div class="input-field" style="width: 100% !important;">
                                 <label for="search">
-                                    <i class="material-icons">search</i>
+                                    <i class="material-icons black-text">search</i>
                                 </label>
+                                <input id="search" type="text" class="custom_search" required>
                                 <i class="material-icons">close</i>
                             </div>
                         </form>
                         <!-- </a> -->
-                    </li>
-                    <li>
-                        <a tooltipped href="/creation/place" data-position="bottom" data-delay="50" data-tooltip="Ajouter un hébergement">
-                            <i class='material-icons left'>add</i>
-                            Hébergement
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/creation/spot">
-                            <i class='material-icons left'>add</i>
-                            Spot
-                        </a>
                     </li>
                 </ul>
                 <ul class="right hide-on-med-and-down">
@@ -60,6 +47,16 @@
                             <a ng-click="logout()">Logout</a>
                         </li>
                     </span>
+                    <li>
+                        <a class="btn-navbar-custom" tooltipped href="/creation/place" data-position="bottom" data-delay="50" data-tooltip="Ajouter un hébergement">
+                            Devenir hôte
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn-navbar-custom" href="/creation/spot">
+                            Partager un spot
+                        </a>
+                    </li>
                 </ul>
                 <ul id="nav-mobile" class="side-nav">
                     <li>
