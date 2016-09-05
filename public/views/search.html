@@ -54,7 +54,7 @@
                     <div class="search_element_container" ng-click="slideTogglePlacesFilter=!slideTogglePlacesFilter; !slideToggleSpotsFilter && (slideToggleSpotsFilter=!slideToggleSpotsFilter)">
                         <div class="search_dropdown">
                             <span class="search_dropdown_label">Filtrer les hébergements</span>
-                            <span class="search_dropdown_selectedValues">{{positions.length}}
+                            <span class="search_dropdown_selectedValues">{{places.length}}
                                 résultat</span>
                             <i class="fa fa-caret-down" ng-hide="!slideTogglePlacesFilter"></i>
                             <i class="fa fa-caret-up" ng-hide="slideTogglePlacesFilter"></i>
@@ -65,7 +65,7 @@
                     <div class="search_element_container" ng-click="slideToggleSpotsFilter=!slideToggleSpotsFilter; !slideTogglePlacesFilter && (slideTogglePlacesFilter=!slideTogglePlacesFilter);">
                         <div class="search_dropdown">
                             <span class="search_dropdown_label">Filtrer les spots</span>
-                            <span class="search_dropdown_selectedValues">{{positions.length}}
+                            <span class="search_dropdown_selectedValues">{{spots.length}}
                                 résultat</span>
                             <i class="fa fa-caret-down" ng-hide="!slideToggleSpotsFilter"></i>
                             <i class="fa fa-caret-up" ng-hide="slideToggleSpotsFilter"></i>
@@ -220,27 +220,52 @@
 <div class="row search-container">
     <div class="col s7 search-left-col">
         <div id="widgets" class="row">
-            <div class="col s12 m12 l6" dir-paginate="p in positions | filter : filters | hobbyFilter:selectedHobby | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8">
-                <a href="/place/{{p._id}}" ng-mouseover="getHoveredPlaceIndex($index, true);" ng-mouseleave="getHoveredPlaceIndex($index, false);" target="_blank">
-                    <div class="card">
-                        <div class="card-image">
-                            <div class="placepict" ng-style="{'background-image': 'url(uploads/places/{{p._id}}/thumb/{{p.pictures[0]}})', 'background-size': 'cover'}"></div>
-                            <span class="card-title">{{p.home.price|currency:'€'}}</span>
+            <div ng-if="showPlace">
+                <div class="col s12 m12 l6" dir-paginate="place in places | filter : filters | hobbyFilter:selectedHobby | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8">
+                    <a href="/place/{{place._id}}" ng-mouseover="getHoveredPlaceIndex($index, true);" ng-mouseleave="getHoveredPlaceIndex($index, false);" target="_blank">
+                        <div class="card">
+                            <div class="card-image">
+                                <div class="placepict" ng-style="{'background-image': 'url(uploads/places/{{place._id}}/thumb/{{place.pictures[0]}})', 'background-size': 'cover'}"></div>
+                                <span class="card-title">{{place.home.price|currency:'€'}}</span>
+                            </div>
+                            <div class="card-content">
+                                <p>
+                                    <img class="actpict" src="assets/hobbies/{{place.hobbies[0]}}.png" alt=""/>
+                                    <img class="authorpict" src="./assets/hobbynaut-avatar.gif" ng-show="!place.owner.picture"/>
+                                    <img class="authorpict" ng-src="{{'/uploads/users/'+place.owner._id+'/thumb/'+place.owner.picture}}" ng-show="place.owner.picture"/>
+                                    <div>{{place.name}}</div>
+                                    <div>
+                                        <star-rating ng-model="place.rating.valueForMoney" readonly="true"></star-rating>
+                                        <sup>({{place.rating.numberOfRatings}})</sup>
+                                    </div>
+                                </p>
+                            </div>
                         </div>
-                        <div class="card-content">
-                            <p>
-                                <img class="actpict" src="assets/hobbies/{{p.hobbies[0]}}.png" alt=""/>
-                                <img class="authorpict" src="./assets/hobbynaut-avatar.gif" ng-show="!p.owner.picture"/>
-                                <img class="authorpict" ng-src="{{'/uploads/users/'+p.owner._id+'/thumb/'+p.owner.picture}}" ng-show="p.owner.picture"/>
-                                <div>{{p.name}}</div>
-                                <div>
-                                    <star-rating ng-model="p.rating.valueForMoney" readonly="true"></star-rating>
-                                    <sup>({{p.rating.numberOfRatings}})</sup>
-                                </div>
-                            </p>
+                    </a>
+                </div>
+            </div>
+            <div ng-if="showSpot">
+                <div class="col s12 m12 l6" dir-paginate="spot in spots | filter : filters | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | itemsPerPage: 8">
+                    <a href="/spot/{{spot._id}}" target="_blank">
+                        <div class="card hoverable">
+                            <div class="card-image">
+                                <img ng-src="uploads/spots/{{spot._id}}/thumb/{{spot.pictures[0]}}">
+                            </div>
+                            <div class="card-content">
+                                <p>
+                                    <img class="actpict" ng-src="assets/hobbies/{{spot.hobby}}.png" alt=""/>
+                                    <img class="authorpict" src="/assets/hobbynaut-avatar.gif" ng-show="!spot.owner.picture"/>
+                                    <img class="authorpict" ng-src="/uploads/users/{{spot.owner._id}}/thumb/{{spot.owner.picture}}" ng-show="spot.owner.picture"/>
+                                    <div>{{spot.name}}</div>
+                                    <div>
+                                        <star-rating ng-model="spot.rating.valueForMoney" readonly="true"></star-rating>
+                                        <sup>({{spot.rating.numberOfRatings}})</sup>
+                                    </div>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
             <dir-pagination-controls></dir-pagination-controls>
         </div>
@@ -248,39 +273,74 @@
 
     <div class="col s5 search-rigth-col">
         <ng-map default-style="false" center="{{centerMap}}" geo-fallback-center="48.8534100, 2.3488000" zoom="6" id="myMap" style='height:100%;'>
-            <marker
-                ng-repeat="p in positions | filter : filters | hobbyFilter:selectedHobby | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8"
-                position="[{{p.latitude}},{{p.longitude}}]"
-                title={{p.shortDescription}}
-                icon="{
+            <div ng-if="showPlace">
+                <marker
+                    ng-repeat="place in places | filter : filters | hobbyFilter:selectedHobby | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8"
+                    position="[{{place.latitude}},{{place.longitude}}]"
+                    title={{place.shortDescription}}
+                    icon="{
                       url:'assets/search/tileHome.png',
                       scaledSize:[32,32],
                       origin: [0,0],
                       anchor: [16,32]
                       }"
-                scrollwheel="true"
-                animation="{{hoveredPlaceIndex == $index ? 'BOUNCE' : 'null'}}"
-                on-click="toggleInfoWindow(event, p)"
-                clickable="true"></marker>
-            <info-window id="popup" max-width="200">
-                <a href="/place/{{toggleledPlace._id}}" target="_blank">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="/uploads/places/{{toggleledPlace._id}}/thumb/{{toggleledPlace.pictures[0]}}">
-                            <span class="card-title" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{toggleledPlace.home.price}}€</span>
+                    scrollwheel="true"
+                    animation="{{hoveredPlaceIndex == $index ? 'BOUNCE' : 'null'}}"
+                    on-click="toggleInfoWindow(event, p)"
+                    clickable="true"></marker>
+                <info-window id="popup" max-width="200">
+                    <a href="/place/{{toggleledPlace._id}}" target="_blank">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="/uploads/places/{{toggleledPlace._id}}/thumb/{{toggleledPlace.pictures[0]}}">
+                                <span class="card-title" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{toggleledPlace.home.price}}€</span>
+                            </div>
+                            <div class="card-content">
+                                <p>
+                                    <div>{{toggleledPlace.name}}</div>
+                                    <div>
+                                        <star-rating ng-model="toggleledPlace.rating.valueForMoney" readonly="true"></star-rating>
+                                        <sup>({{place.rating.numberOfRatings}})</sup>
+                                    </div>
+                                </p>
+                            </div>
                         </div>
-                        <div class="card-content">
-                            <p>
-                                <div>{{toggleledPlace.name}}</div>
-                                <div>
-                                    <star-rating ng-model="toggleledPlace.rating.valueForMoney" readonly="true"></star-rating>
-                                    <sup>({{p.rating.numberOfRatings}})</sup>
-                                </div>
-                            </p>
+                    </a>
+                </info-window>
+            </div>
+            <div ng-if="showSpot">
+                <marker
+                    ng-repeat="spot in spots | filter : filters | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | itemsPerPage: 8"
+                    position="[{{spot.latitude}},{{spot.longitude}}]"
+                    title={{spot.name}}
+                    icon="{
+                          url:'assets/search/tile{{spot.hobby}}.png',
+                          scaledSize:[32,32],
+                          origin: [0,0],
+                          anchor: [16,32]
+                          }"
+                    scrollwheel="true"
+                    on-click="toggleInfoWindow(event, p)"
+                    clickable="true"></marker>
+                <info-window id="popup" max-width="200">
+                    <a href="/spot/{{toggleledSpot._id}}" target="_blank">
+                        <div class="card">
+                            <div class="card-image">
+                                <img ng-src="/uploads/spots/{{toggleledSpot._id}}/thumb/{{toggleledSpot.pictures[0]}}">
+                            </div>
+                            <div class="card-content">
+                                <p>
+                                    <div>{{toggleledSpot.name}}</div>
+                                    <div>
+                                        <star-rating ng-model="toggleledSpot.rating.overallRating" readonly="true"></star-rating>
+                                        <sup>({{toggleledSpot.rating.numberOfRatings}})</sup>
+                                    </div>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </info-window>
+                    </a>
+                </info-window>
+            </div>
         </ng-map>
     </div>
 </div>

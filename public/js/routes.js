@@ -47,6 +47,7 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                             '/js/directives/starRatingDirective.js',
                             '/js/services/usersService.js',
                             '/js/services/placesService.js',
+                            '/js/services/spotsService.js',
                             '/js/factories/searchFactory.js',
                             '/js/filters/rangeFilter.js',
                             '/js/filters/betweenFilter.js',

@@ -1,4 +1,4 @@
-angular.module('app').controller('searchController', function($scope, $http, $window, NgMap, NavigatorGeolocation, placesService, usersService, searchFactory) {
+angular.module('app').controller('searchController', function($scope, $http, $window, NgMap, NavigatorGeolocation, placesService, spotsService, usersService, searchFactory) {
     /* initialisation */
     if (searchFactory.data.hobby) $scope.filters.hobby = searchFactory.data.hobby;
     if (searchFactory.data.city) $scope.locality = searchFactory.data.city;
@@ -6,30 +6,26 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     $scope.slideToggleSpotsFilter = true;
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.selectedHobbies = [];
-    $scope.toggleSelectedHobby = function (hobby) {
+    $scope.toggleSelectedHobby = function(hobby) {
         var idx = $scope.selectedHobbies.indexOf(hobby);
         if (idx > -1) {
             $scope.selectedHobbies.splice(idx, 1);
-        }
-        else {
+        } else {
             $scope.selectedHobbies.push(hobby);
         }
     };
-
     $scope.propertyTypeListing = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
     $scope.selectedPropertyType = [];
-    $scope.toggleSelectedPropertyType = function (propertyType) {
+    $scope.toggleSelectedPropertyType = function(propertyType) {
         var idx = $scope.selectedPropertyType.indexOf(propertyType);
         if (idx > -1) {
             $scope.selectedPropertyType.splice(idx, 1);
-        }
-        else {
+        } else {
             $scope.selectedPropertyType.push(propertyType);
         }
     };
 
-    $scope.filters = {
-    };
+    $scope.filters = {};
     $scope.price = {
         min: 0,
         max: 1000
@@ -40,7 +36,10 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
 
     placesService.get().then(function(res) {
         console.log(res.data);
-        $scope.positions = res.data;
+        $scope.places = res.data;
+    });
+    spotsService.get().then(function(res) {
+        $scope.spots = res.data;
     });
 
     NgMap.getMap('myMap').then(function(map) {
