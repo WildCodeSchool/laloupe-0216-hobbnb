@@ -51,17 +51,59 @@ angular.module('app')
             }
         };
     })
-    .filter('hobbyFilter', function() {
-        return function(items, hobby) {
+    .filter('hobbies', function() {
+        return function(items, seletedHobbies) {
             if (!items) {
                 return false;
             }
-            if (hobby !== undefined) {
+            if (seletedHobbies.length !== 0) {
                 var newItems = [];
-                items.forEach(function(value) {
-                    if (value.hobbies[0] == hobby ||  value.hobbies[1] == hobby || value.hobbies[2] == hobby) {
-                        newItems.push(value);
-                    }
+                items.forEach(function(object) {
+                    seletedHobbies.forEach(function(currentHobby) {
+                        if (object.hobbies[0] == currentHobby ||  object.hobbies[1] == currentHobby || object.hobbies[2] == currentHobby) {
+                            newItems.push(object);
+                        }
+                    });
+                });
+                return newItems;
+            } else {
+                return items;
+            }
+        };
+    })
+    .filter('hobbiesInSpots', function() {
+        return function(items, seletedHobbies) {
+            if (!items) {
+                return false;
+            }
+            if (seletedHobbies.length !== 0) {
+                var newItems = [];
+                items.forEach(function(object) {
+                    seletedHobbies.forEach(function(currentHobby) {
+                        if (object.hobby == currentHobby) {
+                            newItems.push(object);
+                        }
+                    });
+                });
+                return newItems;
+            } else {
+                return items;
+            }
+        };
+    })
+    .filter('propertyTypes', function() {
+        return function(items, selectedPropertyTypes) {
+            if (!items) {
+                return false;
+            }
+            if (selectedPropertyTypes.length !== 0) {
+                var newItems = [];
+                items.forEach(function(object) {
+                    selectedPropertyTypes.forEach(function(propertyType) {
+                        if (object.home.propertyType == propertyType) {
+                            newItems.push(object);
+                        }
+                    });
                 });
                 return newItems;
             } else {

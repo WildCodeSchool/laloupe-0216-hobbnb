@@ -1,4 +1,4 @@
-angular.module('app').controller('searchController', function($scope, $http, $window, NgMap, NavigatorGeolocation, placesService, spotsService, usersService, searchFactory) {
+angular.module('app').controller('searchController', function($scope, $http, $window, $filter, NgMap, NavigatorGeolocation, placesService, spotsService, usersService, searchFactory) {
     /* initialisation */
     if (searchFactory.data.hobby) $scope.filters.hobby = searchFactory.data.hobby;
     if (searchFactory.data.city) $scope.locality = searchFactory.data.city;
@@ -13,6 +13,8 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         } else {
             $scope.selectedHobbies.push(hobby);
         }
+        $scope.placeFilter();
+        $scope.spotFilter();
     };
     $scope.propertyTypeListing = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
     $scope.selectedPropertyType = [];
@@ -23,9 +25,9 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         } else {
             $scope.selectedPropertyType.push(propertyType);
         }
+        $scope.placeFilter();
     };
 
-    $scope.filters = {};
     $scope.price = {
         min: 0,
         max: 1000
@@ -34,13 +36,32 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     $scope.longitude =   {};
     $scope.centerMap = 'current-location';
 
+    $scope.placeFilters = {};
+    $scope.filteredPlaces = [];
     placesService.get().then(function(res) {
-        console.log(res.data);
         $scope.places = res.data;
+        $scope.filteredPlaces = $scope.places;
     });
     spotsService.get().then(function(res) {
         $scope.spots = res.data;
+        $scope.filteredSpots = $scope.spots;
     });
+
+    $scope.placeFilter = function() {
+        $scope.filteredPlaces = $filter('hobbies')($scope.places, $scope.selectedHobbies);
+        $scope.filteredPlaces = $filter('propertyTypes')($scope.filteredPlaces, $scope.selectedPropertyType);
+        $scope.filteredPlaces = $filter('filter')($scope.filteredPlaces, $scope.placeFilters);
+        $scope.filteredPlaces = $filter('betweenPrice')($scope.filteredPlaces, $scope.price.min, $scope.price.max);
+        $scope.filteredPlaces = $filter('betweenLon')($scope.filteredPlaces, $scope.latitude.min, $scope.latitude.max);
+        $scope.filteredPlaces = $filter('betweenLat')($scope.filteredPlaces, $scope.longitude.min, $scope.longitude.max);
+    };
+    $scope.spotFilter = function() {
+        $scope.filteredSpots = $filter('hobbiesInSpots')($scope.spots, $scope.selectedHobbies);
+        $scope.filteredSpots = $filter('betweenLon')($scope.filteredSpots, $scope.latitude.min, $scope.latitude.max);
+        $scope.filteredSpots = $filter('betweenLat')($scope.filteredSpots, $scope.longitude.min, $scope.longitude.max);
+        $scope.filteredSpots = $filter('orderBy')($scope.filteredSpots, $scope.spotFilters);
+    };
+
 
     NgMap.getMap('myMap').then(function(map) {
         $scope.map = map;

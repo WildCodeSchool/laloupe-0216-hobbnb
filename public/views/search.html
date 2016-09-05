@@ -81,7 +81,7 @@
                         <div class='dropdown-button search_dropdown' href='javascript:void(0);' data-hover="true" data-beloworigin="true" data-alignment="bottom" data-activates='propertyTypeDropdown' dropdown>
                             <span class="search_dropdown_label">Type de logement</span>
                             <span class="search_dropdown_selectedValues" ng-hide="selectedPropertyType.length > 0">Tous</span>
-                            <span class="search_dropdown_selectedValues" ng-repeat='propertyType in selectedPropertyType'>{{propertyType}}</span>
+                            <span class="search_dropdown_selectedValues" ng-repeat='propertyType in selectedPropertyType | limitTo:3'>{{propertyType}}</span>
                             <span class="search_dropdown_selectedValues" ng-show="selectedPropertyType.length > 3">...</span>
                             <i class="fa fa-caret-down"></i>
                         </div>
@@ -99,38 +99,38 @@
                     <div class="search_element_container">
                         <div class='dropdown-button search_dropdown' href='javascript:void(0);' data-hover="true" data-beloworigin="true" data-alignment="bottom" data-activates='travellersDropdown' dropdown>
                             <span class="search_dropdown_label">Voyageurs</span>
-                            <span class="search_dropdown_selectedValues" ng-hide="filters.home.travellers">Tous</span>
-                            <span class="search_dropdown_selectedValues" ng-show='filters.home.travellers'>{{filters.home.travellers}}</span>
+                            <span class="search_dropdown_selectedValues" ng-hide="placeFilters.home.travellers">Tous</span>
+                            <span class="search_dropdown_selectedValues" ng-show='placeFilters.home.travellers'>{{placeFilters.home.travellers}}</span>
                             <i class="fa fa-caret-down"></i>
                         </div>
-                        <ul id='travellersDropdown' class='dropdown-content'>
-                            <li ng-click="filters.home.travellers = 1;">
+                        <ul id='travellersDropdown' class='dropdown-content' ng-click="filter();">
+                            <li ng-click="placeFilters.home.travellers = 1;">
                                 <span>
-                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 1" ng-checked="filters.home.travellers == 1" id="1traveller"/>
+                                    <input name="travellers" type="radio" ng-click="placeFilters.home.travellers = 1" ng-checked="placeFilters.home.travellers == 1" id="1traveller"/>
                                     <label for="1traveller">1 voyageur</label>
                                 </span>
                             </li>
-                            <li ng-click="filters.home.travellers = 2;">
+                            <li ng-click="placeFilters.home.travellers = 2;">
                                 <span>
-                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 2" ng-checked="filters.home.travellers == 2" id="2traveller"/>
+                                    <input name="travellers" type="radio" ng-click="placeFilters.home.travellers = 2" ng-checked="placeFilters.home.travellers == 2" id="2traveller"/>
                                     <label for="2traveller">2 voyageur</label>
                                 </span>
                             </li>
-                            <li ng-click="filters.home.travellers = 3;">
+                            <li ng-click="placeFilters.home.travellers = 3;">
                                 <span>
-                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 3" ng-checked="filters.home.travellers == 3" id="3traveller"/>
+                                    <input name="travellers" type="radio" ng-click="placeFilters.home.travellers = 3" ng-checked="placeFilters.home.travellers == 3" id="3traveller"/>
                                     <label for="3traveller">3 voyageur</label>
                                 </span>
                             </li>
-                            <li ng-click="filters.home.travellers = 4;">
+                            <li ng-click="placeFilters.home.travellers = 4;">
                                 <span>
-                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 4" ng-checked="filters.home.travellers == 4" id="4traveller"/>
+                                    <input name="travellers" type="radio" ng-click="placeFilters.home.travellers = 4" ng-checked="placeFilters.home.travellers == 4" id="4traveller"/>
                                     <label for="4traveller">4 voyageur</label>
                                 </span>
                             </li>
-                            <li ng-click="filters.home.travellers = 5;">
+                            <li ng-click="placeFilters.home.travellers = 5;">
                                 <span>
-                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 5" ng-checked="filters.home.travellers == 5" id="5traveller"/>
+                                    <input name="travellers" type="radio" ng-click="placeFilters.home.travellers = 5" ng-checked="placeFilters.home.travellers == 5" id="5traveller"/>
                                     <label for="5traveller">5 voyageur</label>
                                 </span>
                             </li>
@@ -142,7 +142,7 @@
                         <div class="search_dropdown">
                             <span class="search_dropdown_label">Prix</span>
                             <span class="search_dropdown_selectedValues search_range_number center">{{price.min}}</span>
-                            <span range-slider min="0" max="1000" model-min="price.min" model-max="price.max" filter="currency:'€'" step="10" show-values="false"></span>
+                            <input  ng-click="filter();" range-slider min="0" max="1000" model-min="price.min" model-max="price.max" filter="currency:'€'" step="10" show-values="false"></input>
                             <span class="search_dropdown_selectedValues search_range_number center">{{price.max}}</span>
                         </div>
                     </div>
@@ -165,7 +165,7 @@
         </div>
         <div class="nav-wrapper search-nav" ng-hide="!showSpot || slideToggleSpotsFilter">
             <ul>
-                <li>
+                <li ng-click="spotFilters = 'rating.quality'; spotFilter();">
                     <div class="search_element_container">
                         <div class='dropdown-button search_dropdown'>
                             <span class="search_dropdown_label">
@@ -175,7 +175,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li ng-click="spotFilters = 'rating.beauty'; spotFilter();">
                     <div class="search_element_container">
                         <div class='dropdown-button search_dropdown'>
                             <span class="search_dropdown_label">
@@ -185,7 +185,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li ng-click="spotFilters = 'rating.accesibility'; spotFilter();">
                     <div class="search_element_container">
                         <div class='dropdown-button search_dropdown'>
                             <span class="search_dropdown_label">
@@ -195,7 +195,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li ng-click="spotFilters = 'rating.numberOfRatings'; spotFilter();">
                     <div class="search_element_container">
                         <div class='dropdown-button search_dropdown'>
                             <span class="search_dropdown_label">
@@ -204,7 +204,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li ng-click="spotFilters = 'rating.overallRating'; spotFilter();">
                     <div class="search_element_container">
                         <div class='dropdown-button search_dropdown'>
                             <span class="search_dropdown_label">
@@ -221,7 +221,7 @@
     <div class="col s7 search-left-col">
         <div id="widgets" class="row">
             <div ng-if="showPlace">
-                <div class="col s12 m12 l6" dir-paginate="place in places | filter : filters | hobbyFilter:selectedHobby | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8">
+                <div class="col s12 m12 l6" dir-paginate="place in filteredPlaces | itemsPerPage: 8">
                     <a href="/place/{{place._id}}" ng-mouseover="getHoveredPlaceIndex($index, true);" ng-mouseleave="getHoveredPlaceIndex($index, false);" target="_blank">
                         <div class="card">
                             <div class="card-image">
@@ -235,7 +235,7 @@
                                     <img class="authorpict" ng-src="{{'/uploads/users/'+place.owner._id+'/thumb/'+place.owner.picture}}" ng-show="place.owner.picture"/>
                                     <div>{{place.name}}</div>
                                     <div>
-                                        <star-rating ng-model="place.rating.valueForMoney" readonly="true"></star-rating>
+                                        <star-rating ng-model="place.rating.overallRating" readonly="true"></star-rating>
                                         <sup>({{place.rating.numberOfRatings}})</sup>
                                     </div>
                                 </p>
@@ -245,7 +245,7 @@
                 </div>
             </div>
             <div ng-if="showSpot">
-                <div class="col s12 m12 l6" dir-paginate="spot in spots | filter : filters | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | itemsPerPage: 8">
+                <div class="col s12 m12 l6" dir-paginate="spot in filteredSpots | itemsPerPage: 8">
                     <a href="/spot/{{spot._id}}" target="_blank">
                         <div class="card hoverable">
                             <div class="card-image">
@@ -258,7 +258,7 @@
                                     <img class="authorpict" ng-src="/uploads/users/{{spot.owner._id}}/thumb/{{spot.owner.picture}}" ng-show="spot.owner.picture"/>
                                     <div>{{spot.name}}</div>
                                     <div>
-                                        <star-rating ng-model="spot.rating.valueForMoney" readonly="true"></star-rating>
+                                        <star-rating ng-model="spot.rating.overallRating" readonly="true"></star-rating>
                                         <sup>({{spot.rating.numberOfRatings}})</sup>
                                     </div>
                                 </p>
@@ -275,7 +275,7 @@
         <ng-map default-style="false" center="{{centerMap}}" geo-fallback-center="48.8534100, 2.3488000" zoom="6" id="myMap" style='height:100%;'>
             <div ng-if="showPlace">
                 <marker
-                    ng-repeat="place in places | filter : filters | hobbyFilter:selectedHobby | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8"
+                    ng-repeat="place in filteredPlaces | itemsPerPage: 8"
                     position="[{{place.latitude}},{{place.longitude}}]"
                     title={{place.shortDescription}}
                     icon="{
@@ -299,7 +299,7 @@
                                 <p>
                                     <div>{{toggleledPlace.name}}</div>
                                     <div>
-                                        <star-rating ng-model="toggleledPlace.rating.valueForMoney" readonly="true"></star-rating>
+                                        <star-rating ng-model="toggleledPlace.rating.overallRating" readonly="true"></star-rating>
                                         <sup>({{place.rating.numberOfRatings}})</sup>
                                     </div>
                                 </p>
@@ -310,7 +310,7 @@
             </div>
             <div ng-if="showSpot">
                 <marker
-                    ng-repeat="spot in spots | filter : filters | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | itemsPerPage: 8"
+                    ng-repeat="spot in filteredSpots | itemsPerPage: 8"
                     position="[{{spot.latitude}},{{spot.longitude}}]"
                     title={{spot.name}}
                     icon="{
