@@ -1,82 +1,224 @@
+<div class="navbar-fixed hide-on-med-and-down">
+    <nav>
+        <div class="nav-wrapper search-nav">
+            <ul class="left">
+                <li>
+                    <div class="search_element_container">
+                        <div class='dropdown-button search_dropdown' href='javascript:void(0);' data-hover="true" data-beloworigin="true" data-alignment="bottom" data-activates='hobbiesDropdown' dropdown>
+                            <span class="search_dropdown_label">Vos hobbies ?</span>
+                            <span class="search_dropdown_selectedValues" ng-hide="selectedHobbies.length > 0">Tous</span>
+                            <span class="search_dropdown_selectedValues" ng-repeat='hobby in selectedHobbies | limitTo:3'><img src='./assets/hobbies/{{hobby}}.png' width='15px' height='15px'/></span>
+                            <span class="search_dropdown_selectedValues" ng-show="selectedHobbies.length > 3">...</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                        <ul id='hobbiesDropdown' class='dropdown-content'>
+                            <li ng-repeat="hobby in hobbiesListing" ng-click="toggleSelectedHobby(hobby)">
+                                <span>
+                                    <input type="checkbox" value="{{hobby}}" ng-click="toggleSelectedHobby(hobby)" ng-checked="selectedHobbies.indexOf(hobby) > -1" id="{{hobby}}"/>
+                                    <label for="{{hobby}}">{{hobby}}</label>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class='dropdown-button search_dropdown' href='javascript:void(0);' data-hover="true" data-beloworigin="true" data-alignment="bottom" data-activates='displayDropdown' dropdown>
+                            <span class="search_dropdown_label">Afficher</span>
+                            <span class="search_dropdown_selectedValues" ng-hide="showPlace || showSpot">Tous</span>
+                            <span class="search_dropdown_selectedValues" ng-show="showPlace"><img src='/assets/search/locateHost.png' width='15px' height='15px'/>
+                                Hébergements</span>
+                            <span class="search_dropdown_selectedValues" ng-show="showSpot"><img src='/assets/search/locateSpot.png' width='15px' height='15px'/>
+                                Spots</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                        <ul id='displayDropdown' class='dropdown-content'>
+                            <li ng-click="showPlace=!showPlace">
+                                <span>
+                                    <input type="checkbox" ng-model="showPlace" ng-checked="showPlace" id="showPlace"/>
+                                    <label for="showPlace">Hébergements</label>
+                                </span>
+                            </li>
+                            <li ng-click="showSpot=!showSpot">
+                                <span>
+                                    <input type="checkbox" ng-model="showSpot" ng-checked="showSpot" id="showSpot"/>
+                                    <label for="showSpot">Spots</label>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <ul class="right">
+                <li ng-show="showPlace">
+                    <div class="search_element_container" ng-click="slideTogglePlacesFilter=!slideTogglePlacesFilter; !slideToggleSpotsFilter && (slideToggleSpotsFilter=!slideToggleSpotsFilter)">
+                        <div class="search_dropdown">
+                            <span class="search_dropdown_label">Filtrer les hébergements</span>
+                            <span class="search_dropdown_selectedValues">{{positions.length}}
+                                résultat</span>
+                            <i class="fa fa-caret-down" ng-hide="!slideTogglePlacesFilter"></i>
+                            <i class="fa fa-caret-up" ng-hide="slideTogglePlacesFilter"></i>
+                        </div>
+                    </div>
+                </li>
+                <li ng-show="showSpot">
+                    <div class="search_element_container" ng-click="slideToggleSpotsFilter=!slideToggleSpotsFilter; !slideTogglePlacesFilter && (slideTogglePlacesFilter=!slideTogglePlacesFilter);">
+                        <div class="search_dropdown">
+                            <span class="search_dropdown_label">Filtrer les spots</span>
+                            <span class="search_dropdown_selectedValues">{{positions.length}}
+                                résultat</span>
+                            <i class="fa fa-caret-down" ng-hide="!slideToggleSpotsFilter"></i>
+                            <i class="fa fa-caret-up" ng-hide="slideToggleSpotsFilter"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-wrapper search-nav" ng-hide="slideTogglePlacesFilter">
+            <ul>
+                <li>
+                    <div class="search_element_container">
+                        <div class='dropdown-button search_dropdown' href='javascript:void(0);' data-hover="true" data-beloworigin="true" data-alignment="bottom" data-activates='propertyTypeDropdown' dropdown>
+                            <span class="search_dropdown_label">Type de logement</span>
+                            <span class="search_dropdown_selectedValues" ng-hide="selectedPropertyType.length > 0">Tous</span>
+                            <span class="search_dropdown_selectedValues" ng-repeat='propertyType in selectedPropertyType'>{{propertyType}}</span>
+                            <span class="search_dropdown_selectedValues" ng-show="selectedPropertyType.length > 3">...</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                        <ul id='propertyTypeDropdown' class='dropdown-content'>
+                            <li ng-repeat="propertyType in propertyTypeListing" ng-click="toggleSelectedPropertyType(propertyType)">
+                                <span>
+                                    <input type="checkbox" value="{{propertyType}}" ng-click="toggleSelectedPropertyType(propertyType)" ng-checked="selectedPropertyType.indexOf(propertyType) > -1" id="{{propertyType}}"/>
+                                    <label for="{{propertyType}}">{{propertyType}}</label>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class='dropdown-button search_dropdown' href='javascript:void(0);' data-hover="true" data-beloworigin="true" data-alignment="bottom" data-activates='travellersDropdown' dropdown>
+                            <span class="search_dropdown_label">Voyageurs</span>
+                            <span class="search_dropdown_selectedValues" ng-hide="filters.home.travellers">Tous</span>
+                            <span class="search_dropdown_selectedValues" ng-show='filters.home.travellers'>{{filters.home.travellers}}</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                        <ul id='travellersDropdown' class='dropdown-content'>
+                            <li ng-click="filters.home.travellers = 1;">
+                                <span>
+                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 1" ng-checked="filters.home.travellers == 1" id="1traveller"/>
+                                    <label for="1traveller">1 voyageur</label>
+                                </span>
+                            </li>
+                            <li ng-click="filters.home.travellers = 2;">
+                                <span>
+                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 2" ng-checked="filters.home.travellers == 2" id="2traveller"/>
+                                    <label for="2traveller">2 voyageur</label>
+                                </span>
+                            </li>
+                            <li ng-click="filters.home.travellers = 3;">
+                                <span>
+                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 3" ng-checked="filters.home.travellers == 3" id="3traveller"/>
+                                    <label for="3traveller">3 voyageur</label>
+                                </span>
+                            </li>
+                            <li ng-click="filters.home.travellers = 4;">
+                                <span>
+                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 4" ng-checked="filters.home.travellers == 4" id="4traveller"/>
+                                    <label for="4traveller">4 voyageur</label>
+                                </span>
+                            </li>
+                            <li ng-click="filters.home.travellers = 5;">
+                                <span>
+                                    <input name="travellers" type="radio" ng-click="filters.home.travellers = 5" ng-checked="filters.home.travellers == 5" id="5traveller"/>
+                                    <label for="5traveller">5 voyageur</label>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class="search_dropdown">
+                            <span class="search_dropdown_label">Prix</span>
+                            <span class="search_dropdown_selectedValues search_range_number center">{{price.min}}</span>
+                            <span range-slider min="0" max="1000" model-min="price.min" model-max="price.max" filter="currency:'€'" step="10" show-values="false"></span>
+                            <span class="search_dropdown_selectedValues search_range_number center">{{price.max}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class="search_dropdown">
+                            <div class="switch">
+                                <label>
+                                    <span class="search_switch_label">Partagé</span>
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                    <span class="search_switch_label">Privé</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-wrapper search-nav" ng-hide="slideToggleSpotsFilter">
+            <ul>
+                <li>
+                    <div class="search_element_container">
+                        <div class='dropdown-button search_dropdown'>
+                            <span class="search_dropdown_label">
+                                <img src='/assets/hobbies/quality.png' width='18px' height='18px'/>
+                                Qualité</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class='dropdown-button search_dropdown'>
+                            <span class="search_dropdown_label">
+                                <img src='/assets/hobbies/beauty.png' width='18px' height='18px'/>
+                                Beauté</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class='dropdown-button search_dropdown'>
+                            <span class="search_dropdown_label">
+                                <img src='/assets/hobbies/facility.png' width='18px' height='18px'/>
+                                Difficulté</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class='dropdown-button search_dropdown'>
+                            <span class="search_dropdown_label">
+                                <i class="icon-value-gris"></i>Popularité</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class='dropdown-button search_dropdown'>
+                            <span class="search_dropdown_label">
+                                <i class="icon-star"></i>Note globale</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
 <div class="row search-container">
     <div class="col s7 search-left-col">
-        <form>
-            <div class="row">
-                <div class="col s12 m12 l6">
-                    <div class="table-wrapper">
-                        <a href="/searchSpot" class="custom-btn sharp">
-                            <img src="/assets/search/locateSpot.png" style='height:80%; width: auto;'/>
-                            <span class="grey-text text-darken-2">Spots</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col s12 m12 l6">
-                    <div class="table-wrapper">
-                        <a href="/search" class="custom-btn sharp active">
-                            <img src="/assets/search/locateHost.png" style='height:80%; width: auto;'/>
-                            <span class="grey-text text-darken-2">Hébergements</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="vertical-slide-toggle" ng-hide="slideToggle">
-                <div class="row no-margin">
-                    <div class="input-field col s12 m12 l6">
-                        <i class="material-icons prefix">search</i>
-                        <input placeholder="Lieu" id="city" type="text" class="autocomplete" ng-change="searchFactory.data.city = filters.place;" ng-model="locality" details="details" ng-autocomplete>
-                        <label>Lieu</label>
-                    </div>
-                    <div class="input-field col s12 m12 l3">
-                        <select material-select ng-change="searchFactory.data.hobby = selectedHobby;" ng-model="selectedHobby">
-                            <option value=''>Hobbies</option>
-                            <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
-                        </select>
-                        <label>Hobby</label>
-                    </div>
-                    <div class="input-field col s12 m12 l3">
-                        <span class="custom-label">Popularité</span>
-                        <star-rating ng-model="filters.rating.overallRating" on-rating-select=""></star-rating>
-                    </div>
-                </div>
-                <div class="row no-margin">
-                    <div class="input-field col s12 m12 l5">
-                        <img src="/assets/search/locateHost.png" class="material-icons prefix" style='height:60%; width: auto;'/>
-                        <select material-select ng-model="filters.home.propertyType">
-                            <option value=''>Hébergement</option>
-                            <option ng-repeat="propertyType in propertyTypeListing">{{propertyType}}</option>
-                        </select>
-                        <label>Hebergement</label>
-                    </div>
-                    <div class="input-field col s12 m12 l4">
-                        <select material-select ng-model="filters.home.travellers">
-                            <option value=""></option>
-                            <option value="1">1 personne</option>
-                            <option value="2">2 personnes</option>
-                            <option value="3">3 personnes</option>
-                            <option value="4">4 personnes</option>
-                            <option value="5">5 personnes</option>
-                            <option value="6">6 personnes</option>
-                        </select>
-                        <label>Invités</label>
-                    </div>
-                    <div class="input-field col s12 m12 l3 switch">
-                        <label>
-                            Partagé
-                            <input type="checkbox">
-                            <span class="lever"></span>
-                            Privé
-                        </label>
-                    </div>
-                    <div class="input-field col s12 m12 l12 no-margin">
-                        <div range-slider min="0" max="1000" model-min="price.min" model-max="price.max" show-values="true" filter="currency:'€'" step="10"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row no-margin center" ng-click="slideToggle=! slideToggle">
-                <span class="slide-arrows" ng-hide="!slideToggle">&#11167;</span>
-                <span class="slide-arrows" ng-hide="slideToggle">&#11165;</span>
-            </div>
-        </form>
         <div id="widgets" class="row">
             <div class="col s12 m12 l6" dir-paginate="p in positions | filter : filters | hobbyFilter:selectedHobby | betweenLat:latitude.min:latitude.max | betweenLon:longitude.min:longitude.max | betweenPrice:price.min:price.max | itemsPerPage: 8">
                 <a href="/place/{{p._id}}" ng-mouseover="getHoveredPlaceIndex($index, true);" ng-mouseleave="getHoveredPlaceIndex($index, false);" target="_blank">
@@ -87,8 +229,8 @@
                         </div>
                         <div class="card-content">
                             <p>
-                                <img class="actpict" src="assets/hobbies/{{p.primarySports}}.png" alt=""/>
-                                <img class="authorpict" src="/assets/hobbynaut-avatar.gif" ng-show="!p.owner.picture"/>
+                                <img class="actpict" src="assets/hobbies/{{p.hobbies[0]}}.png" alt=""/>
+                                <img class="authorpict" src="./assets/hobbynaut-avatar.gif" ng-show="!p.owner.picture"/>
                                 <img class="authorpict" ng-src="{{'/uploads/users/'+p.owner._id+'/thumb/'+p.owner.picture}}" ng-show="p.owner.picture"/>
                                 <div>{{p.name}}</div>
                                 <div>

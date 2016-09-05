@@ -1,0 +1,188 @@
+    @charset "UTF-8";
+    @font-face {
+        font-family: "untitled-font-1";
+        src: url("../fonts/untitled-font-1.eot");
+        src: url("../fonts/untitled-font-1.eot?#iefix") format("embedded-opentype"), url("../fonts/untitled-font-1.woff") format("woff"), url("../fonts/untitled-font-1.ttf") format("truetype"), url("../fonts/untitled-font-1.svg#untitled-font-1") format("svg");
+        font-weight: normal;
+        font-style: normal;
+    }
+    [data-icon]:before {
+        font-family: "untitled-font-1" !important;
+        content: attr(data-icon);
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-variant: normal !important;
+        text-transform: none !important;
+        speak: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    [class^="icon-"]:before, [class*=" icon-"]:before {
+        font-family: "untitled-font-1" !important;
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-variant: normal !important;
+        text-transform: none !important;
+        speak: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    [class^="icon-"] {
+        margin: 0 !important;
+        padding: 0 5px 0 0 !important;
+        vertical-align: middle;
+    }
+    .icon-bike-1:before {
+        content: "\62";
+    }
+    .icon-equitation-1:before {
+        content: "\65";
+    }
+    .icon-surf-1:before {
+        content: "\73";
+    }
+    .icon-ski-1:before {
+        content: "\69";
+    }
+    .icon-tennis-1:before {
+        content: "\74";
+    }
+    .icon-voile-1:before {
+        content: "\76";
+    }
+    .icon-windsurf-1:before {
+        content: "\77";
+    }
+    .icon-kayak-1:before {
+        content: "\63";
+    }
+    .icon-golf-1:before {
+        content: "\67";
+    }
+    .icon-escalade-1:before {
+        content: "\6d";
+    }
+    .icon-kitesurf-1:before {
+        content: "\6b";
+    }
+    .icon-natation-1:before {
+        content: "\6e";
+    }
+    .icon-paddlesurf-1:before {
+        content: "\50";
+    }
+    .icon-parapente-1:before {
+        content: "\70";
+    }
+    .icon-peche:before {
+        content: "\68";
+    }
+    .icon-plongee:before {
+        content: "\6f";
+    }
+    .icon-randonnee-1:before {
+        content: "\72";
+    }
+    .icon-running-1:before {
+        content: "\52";
+    }
+    .icon-campsite:before {
+        content: "\61";
+    }
+    .icon-home:before {
+        content: "\64";
+    }
+    .icon-bin:before {
+        content: "\66";
+    }
+    .icon-bulb-gray:before {
+        content: "\6a";
+    }
+    .icon-clean:before {
+        content: "\6c";
+    }
+    .icon-eye:before {
+        content: "\71";
+        position: relative;
+        top: 2px
+    }
+    .icon-proprete-gris:before {
+        content: "\75";
+    }
+    .icon-quality:before {
+        content: "\78";
+    }
+    .icon-value-gris:before {
+        content: "\79";
+    }
+    .icon-travellers:before {
+        content: "\7a";
+    }
+    .icon-risck:before {
+        content: "\41";
+    }
+    .icon-risk:before {
+        content: "\42";
+    }
+    .icon-rooms:before {
+        content: "\43";
+    }
+    .icon-location-gris:before {
+        content: "\44";
+    }
+    .icon-magic-wand:before {
+        content: "\45";
+    }
+    .icon-mail-gray:before {
+        content: "\46";
+    }
+    .icon-shaka:before {
+        content: "\47";
+    }
+    .icon-hobbnb-smile:before {
+        content: "\48";
+    }
+    .icon-beb:before {
+        content: "\49";
+    }
+    .icon-kayak2:before {
+        content: "\4a";
+    }
+    .icon-plus:before {
+        content: "\4b";
+    }
+    .icon-star:before {
+        content: "\4c";
+    }
+    .icon-spot:before {
+        content: "\4d";
+    }
+    .icon-thumb-up:before {
+        content: "\4e";
+    }
+    .icon-torch:before {
+        content: "\4f";
+    }
+    .icon-coins:before {
+        content: "\51";
+    }
+    .icon-compas:before {
+        content: "\53";
+    }
+    .icon-earth:before {
+        content: "\54";
+    }
+    .icon-fire:before {
+        content: "\55";
+    }
+    .icon-placer:before {
+        content: "\56";
+    }
+    .icon-placer-star:before {
+        content: "\57";
+    }
+    .icon-sleep:before {
+        content: "\58";
+    }

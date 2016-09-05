@@ -5,12 +5,25 @@ angular.module('app').controller('mainController', function($scope, $location, $
         $scope.hideCtrl = !$scope.hideCtrl;
     };
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
+    $scope.selectedHobbies = [];
+
+    $scope.toggleSelection = function toggleSelection(hobby) {
+        var idx = $scope.selectedHobbies.indexOf(hobby);
+        if (idx > -1) {
+            $scope.selectedHobbies.splice(idx, 1);
+        }
+        else {
+            $scope.selectedHobbies.push(hobby);
+        }
+    };
+
+
     $scope.search = function() {
         searchFactory.data.city = $scope.city;
         searchFactory.data.hobby = $scope.hobby;
-        if($scope.selectHome=="spot"){
+        if ($scope.selectHome == "spot") {
             $location.path('/searchSpot');
-        }else{
+        } else {
             $location.path('/search');
         }
     };
@@ -36,13 +49,13 @@ angular.module('app').controller('mainController', function($scope, $location, $
         var url = "uploads/spots/" + widget._id + "/" + widget.picture;
         return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
     };
-// dispay testimonials
+    // dispay testimonials
     $scope.message = {};
     $http.get('/api/admin').then(function(res) {
         if (res.data.length == 0) {
-            $scope.message.title1="En attente de témoignage";
-            $scope.message.title2="En attente de témoignage";
-            $scope.message.title3="En attente de témoignage";
+            $scope.message.title1 = "En attente de témoignage";
+            $scope.message.title2 = "En attente de témoignage";
+            $scope.message.title3 = "En attente de témoignage";
         } else {
             $scope.message = res.data[0];
         }

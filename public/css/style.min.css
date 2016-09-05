@@ -10,6 +10,16 @@ html {
 .hide {
     display: none;
 }
+.search-nav {
+    background-color: white;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24) !important;
+}
+.search-nav:hover {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24) !important;
+}
+.search-nav ul li a {
+    color: black;
+}
 .drop-box {
     background: #F8F8F8;
     border: 5px dashed #DDD;
@@ -91,7 +101,7 @@ html {
 }
 .vertical-slide-toggle {
     overflow: hidden;
-    transition: height 0.8s;
+    transition: height 0.5s;
 }
 .slide-arrows {
     font-family: icons;
@@ -146,8 +156,7 @@ html {
     border: 2px solid white;
     border-radius: 5px;
     display: inline-block;
-    height: 36px;
-    line-height: 36px;
+    line-height: 30px;
     font-size: 14px;
     outline: 0;
     padding: 0 2rem;
@@ -155,15 +164,125 @@ html {
     -webkit-tap-highlight-color: transparent;
 }
 .custom_search {
-    height: 40px !important;
+    height: 30px !important;
     margin: 12px 0 !important;
     background-color: #ffffff !important;
-    color: black;
-
+    color: #7f7f7f;
     border: 1px solid transparent !important;
-    border-radius: 25px !important;
+    border-radius: 20px !important;
 }
-
+.custom_search_icon {
+    font-size: 1.8rem !important;
+    margin-left: 3px;
+    color: #7f7f7f !important;
+}
+.hobbies_dropdown {
+    background-color: #F2F4F3;
+    margin: 0;
+    border: none;
+    -moz-border-radius: 8px 0 0px 8px;
+    -webkit-border-radius: 8px 0 0px 8px;
+    border-radius: 8px 0 0px 8px;
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+    color: #7f7f7f;
+    font-size: 16px;
+    outline: 0;
+    padding: 0 6rem 0 1rem;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+}
+.hobbies_bouton {
+    background-color: #45FFA6;
+    margin: 0;
+    border: none;
+    -moz-border-radius: 0 8px 8px 0;
+    -webkit-border-radius: 0 8px 8px 0;
+    border-radius: 0 8px 8px 0;
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+    color: #F2F4F3;
+    font-weight: bold;
+    font-size: 18px;
+    outline: 0;
+    padding: 0 3rem;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+}
+.search_element_container {
+    position: relative;
+    display: inline-block;
+    margin: 2px 6px;
+    vertical-align: middle;
+}
+.search_dropdown {
+    height: 33px;
+    line-height: 20px;
+    vertical-align: middle;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    cursor: pointer;
+    color: #455a64;
+}
+.search_dropdown_label {
+    display: inline-block;
+    padding: 6px 16px;
+    line-height: 20px;
+    font-weight: bold !important;
+    color: #455a64 !important;
+}
+.search_dropdown_selectedValues {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 20px;
+    padding: 6px 12px;
+    margin-right: 1px;
+    max-height: 32px;
+    background-color: #2cc990;
+    color: #FFF;
+}
+.search_dropdown i {
+    padding: 0 0.5rem;
+    display: inline-block;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.search_range_number {
+    margin: 0;
+    padding: 6px 2px;
+    width: 58px;
+}
+.ngrs-range-slider {
+    margin: 0;
+    width: 250px;
+    display: inline-block;
+    border: none;
+    border-radius: 0;
+    line-height: 20px;
+}
+.search_switch_label {
+    display: inline-block;
+    padding: 6px 10px;
+    line-height: 20px;
+    font-weight: bold !important;
+    color: #455a64 !important;
+}
 .field-error {
     display: block;
     position: absolute;
@@ -283,6 +402,10 @@ p {
     color: #7f7f7f;
     font-family: Roboto, 'sans-serif'
 }
+.hobbnb-font_color {
+    color: #7f7f7f;
+    font-family: Roboto, 'sans-serif'
+}
 .tabs .indicator {
     background-color: #7f7f7f
 }
@@ -378,11 +501,14 @@ h2.profile_title {
 .page-footer {
     clear: both
 }
-.brand-logo {
-    margin-top: 7px;
-    margin-left: 7px
+.hobbnb-logo {
+    line-height: 64px;
+    margin-right: 20px;
 }
-.logo {
+.hobbnb-logo img {
+    vertical-align: middle;
+}
+.header_text {
     position: relative;
     height: 600px;
     z-index: 1;
@@ -395,9 +521,6 @@ h2.profile_title {
     margin-top: 6px;
     font-size: 13px;
     color: #fff
-}
-.homecar {
-    margin-top: -32px
 }
 .rentic {
     text-align: center;

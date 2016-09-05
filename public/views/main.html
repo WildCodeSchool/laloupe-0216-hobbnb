@@ -1,80 +1,67 @@
 <header style="height:600px">
-    <div class="homecar">
-        <div class="slider" style="position:absolute; z-index:1;">
-            <ul class="slides">
-                <li>
-                    <img src="/assets/activities_copyright_free/golf.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/kitesurf.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/biking.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/peche.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/alpinisme.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/diving.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/equitation.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/hiking.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/kayak.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/paragliding.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/ski-freeride.jpg">
-                </li>
-                <li>
-                    <img src="/assets/activities_copyright_free/surfing.jpg">
-                </li>
-            </ul>
-        </div>
-        <div class="logo">
-            <div class="container">
-                <h1 style="padding-top:50px;font-size: 48px;">
-                    <B>Étendez votre aire de jeu</B>
+    <div class="slider" slider height='600' transition='300' indicators="false" style="position: absolute; z-index:0;">
+        <ul class="slides">
+            <li>
+                <img src="/assets/activities_copyright_free/golf.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/kitesurf.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/biking.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/peche.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/alpinisme.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/diving.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/equitation.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/hiking.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/kayak.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/paragliding.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/ski-freeride.jpg">
+            </li>
+            <li>
+                <img src="/assets/activities_copyright_free/surfing.jpg">
+            </li>
+        </ul>
+    </div>
+    <div class="header_text">
+        <div class="container">
+            <div class="row" style="padding-top: 100px; margin-bottom: 0;">
+                <h1 style="font-size: 39px; font-weight: bold; line-height: 47px; font-family: Verdana, Tahoma, Geneva, sans-serif;">
+                    <B>Les meilleurs spots et hébergements<br/>pour vos hobbies</B>
                 </h1>
-                <div class="hide-on-small-only" style="text-align:center;">
-                    <img src="/assets/icone/hobbnb-activities-off.svg" height="61px">
-                </div>
-                <div class="row  hide-on-small-only">
-                    <div class="col s8 offset-s2" style="text-align:center;">
-                        <p style="color:white; font-size: 18px;">Réservez en quelques clics des logements entre particuliers les mieux situés pour pratiquer vos loisirs préférés.</p>
-                    </div>
-                </div>
             </div>
-            <div class="searchbar">
-                <div class="row">
-                    <div class="col s12 m3 l2 offset-l2">
-                        <select class='' material-select watch ng-model="hobby">
-                            <option value="" disable selected>Quel hobby ?</option>
-                            <option data-icon="./assets/hobbies/{{hobby}}.png" class="left" ng-repeat="hobby in hobbiesListing">{{hobby}}</option>
-                        </select>
-                    </div>
-                    <div class="col s12 m3 l2">
-                        <select class='' material-select ng-model="selectHome">
-                            <option value="" disable selected>Spot ou Hébergement ?</option>
-                            <option value="spot">spot</option>
-                            <option value="place">Hébergement</option>
-                        </select>
-                    </div>
-                    <div class="col s6 m3 l2">
-                        <input type="text" placeholder="Où voulez-vous aller ?" ng-model="city" ng-autocomplete></input>
-                    </div>
-                    <div class="col s6 m3 l2">
-                        <a class="waves-effect waves-light btn green accent-2" style="margin-top:10px;display: block; width: 100%;" ng-click="search()">Chercher</a>
-                    </div>
+            <div class="row hide-on-small-only center">
+                <img src="/assets/icone/hobbnb-activities-off.svg" height="57px">
+            </div>
+            <div class="row center">
+                <div class="col s6 offset-s3">
+                    <a class='dropdown-button hobbies_dropdown' href='javascript:void(0);' data-beloworigin="true" data-activates='demoDropdown' dropdown data-hover="true">
+                        Quels sont vos hobbies ?
+                    </a><a class="waves-effect waves-light hobbies_bouton" ng-click="search()">Rechercher</a>
+                    <ul id='demoDropdown' class='dropdown-content'>
+                        <li ng-repeat="hobby in hobbiesListing">
+                            <span>
+                                <input type="checkbox" value="{{hobby}}" ng-checked="selectedHobbies.indexOf(hobby) > -1" ng-click="toggleSelection(hobby)" id="{{hobby}}"/>
+                                <label for="{{hobby}}">{{hobby}}</label>
+                            </span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -302,7 +289,7 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('.slider').slider({full_width: true, height: 600, indicators: false});
+        <!-- $('.slider').slider({full_width: true, height: 600, indicators: false}); -->
         $('.tooltipped').tooltip({delay: 50});
         $(".button-collapse").sideNav();
         $(".dropdown-button").dropdown();

@@ -2,9 +2,34 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     /* initialisation */
     if (searchFactory.data.hobby) $scope.filters.hobby = searchFactory.data.hobby;
     if (searchFactory.data.city) $scope.locality = searchFactory.data.city;
+    $scope.slideTogglePlacesFilter = true;
+    $scope.slideToggleSpotsFilter = true;
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
+    $scope.selectedHobbies = [];
+    $scope.toggleSelectedHobby = function (hobby) {
+        var idx = $scope.selectedHobbies.indexOf(hobby);
+        if (idx > -1) {
+            $scope.selectedHobbies.splice(idx, 1);
+        }
+        else {
+            $scope.selectedHobbies.push(hobby);
+        }
+    };
+
     $scope.propertyTypeListing = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
-    $scope.filters = {};
+    $scope.selectedPropertyType = [];
+    $scope.toggleSelectedPropertyType = function (propertyType) {
+        var idx = $scope.selectedPropertyType.indexOf(propertyType);
+        if (idx > -1) {
+            $scope.selectedPropertyType.splice(idx, 1);
+        }
+        else {
+            $scope.selectedPropertyType.push(propertyType);
+        }
+    };
+
+    $scope.filters = {
+    };
     $scope.price = {
         min: 0,
         max: 1000
