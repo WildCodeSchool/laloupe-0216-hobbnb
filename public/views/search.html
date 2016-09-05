@@ -74,7 +74,7 @@
                 </li>
             </ul>
         </div>
-        <div class="nav-wrapper search-nav" ng-hide="slideTogglePlacesFilter">
+        <div class="nav-wrapper search-nav" ng-hide="!showPlace || slideTogglePlacesFilter">
             <ul>
                 <li>
                     <div class="search_element_container">
@@ -163,7 +163,7 @@
                 </li>
             </ul>
         </div>
-        <div class="nav-wrapper search-nav" ng-hide="slideToggleSpotsFilter">
+        <div class="nav-wrapper search-nav" ng-hide="!showSpot || slideToggleSpotsFilter">
             <ul>
                 <li>
                     <div class="search_element_container">
