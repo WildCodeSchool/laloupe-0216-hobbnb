@@ -37,12 +37,24 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
 
     $scope.filteredPlaces = [];
     placesService.get().then(function(res) {
+        $scope.showPlace = true;
         $scope.places = res.data;
         $scope.filteredPlaces = $scope.places;
+        if (searchFactory.data.selectedHobbies) {
+            $scope.selectedHobbies = searchFactory.data.selectedHobbies;
+            console.log($scope.selectedHobbies);
+            $scope.placeFilter();
+        }
     });
     spotsService.get().then(function(res) {
+        $scope.showSpot = true;
         $scope.spots = res.data;
         $scope.filteredSpots = $scope.spots;
+        if (searchFactory.data.selectedHobbies) {
+            $scope.selectedHobbies = searchFactory.data.selectedHobbies;
+            console.log($scope.selectedHobbies);
+            $scope.spotFilter();
+        }
     });
 
     $scope.placeFilter = function() {
@@ -64,16 +76,7 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
 
     $scope.selectedHobbies = [];
 
-    $timeout(function() {
-        $scope.showPlace = true;
-        $scope.showSpot = true;
-        if (searchFactory.data.selectedHobbies) {
-            $scope.selectedHobbies = searchFactory.data.selectedHobbies;
-            console.log($scope.selectedHobbies);
-            $scope.placeFilter();
-            $scope.spotFilter();
-        }
-    }, 20);
+    // $timeout(function() {}, 20);
 
     // if (searchFactory.data.city) $scope.locality = searchFactory.data.city;
 
