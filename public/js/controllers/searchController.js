@@ -55,6 +55,7 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     };
     $scope.spotFilter = function() {
         $scope.filteredSpots = $filter('hobbiesInSpots')($scope.spots, $scope.selectedHobbies);
+        console.log($scope.filteredSpots);
         $scope.filteredSpots = $filter('betweenLon')($scope.filteredSpots, $scope.latitude.min, $scope.latitude.max);
         $scope.filteredSpots = $filter('betweenLat')($scope.filteredSpots, $scope.longitude.min, $scope.longitude.max);
         console.log($scope.filteredSpots);
@@ -68,6 +69,7 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         $scope.showSpot = true;
         if (searchFactory.data.selectedHobbies) {
             $scope.selectedHobbies = searchFactory.data.selectedHobbies;
+            console.log($scope.selectedHobbies);
             $scope.placeFilter();
             $scope.spotFilter();
         }
