@@ -142,8 +142,17 @@
                         <div class="search_dropdown">
                             <span class="search_dropdown_label">Prix</span>
                             <span class="search_dropdown_selectedValues search_range_number center">{{price.min}}</span>
-                            <input  ng-click="placeFilter();" range-slider min="0" max="1000" model-min="price.min" model-max="price.max" filter="currency:'€'" step="10" show-values="false"></input>
+                            <input ng-click="placeFilter();" range-slider min="0" max="1000" model-min="price.min" model-max="price.max" filter="currency:'€'" step="10" show-values="false"></input>
                             <span class="search_dropdown_selectedValues search_range_number center">{{price.max}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class="search_dropdown">
+                            <span class="search_dropdown_label">Distance</span>
+                            <input ng-click="computeLatLngDiff();" range-slider min="0" max="100" model-max="distance" pin-handle="min" show-values="false"></input>
+                            <span class="search_dropdown_selectedValues search_range_number center">{{distance}} km</span>
                         </div>
                     </div>
                 </li>
@@ -274,6 +283,10 @@
     <div class="col m5 l5 search-rigth-col hide-on-small-only">
         <ng-map default-style="false" center="{{centerMap}}" geo-fallback-center="48.8534100, 2.3488000" zoom="6" id="myMap" style='height:100%;'>
             <div ng-if="showPlace">
+                <shape id="circle" name="circle"
+                  stroke-color='#FF0000' stroke-opacity="0.6" stroke-weight="2"
+                  center="{{centerMap}}" radius="{{distance*1000}}">
+                </shape>
                 <marker
                     ng-repeat="place in filteredPlaces | itemsPerPage: 8"
                     position="[{{place.latitude}},{{place.longitude}}]"

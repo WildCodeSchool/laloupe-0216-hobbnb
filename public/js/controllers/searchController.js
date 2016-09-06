@@ -31,9 +31,6 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         min: 0,
         max: 1000
     };
-    $scope.latitude =   {};
-    $scope.longitude =   {};
-    $scope.centerMap = 'current-location';
 
     $scope.filteredPlaces = [];
     placesService.get().then(function(res) {
@@ -60,13 +57,13 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         $scope.filteredPlaces = $filter('hobbies')($scope.filteredPlaces, $scope.selectedHobbies);
         $scope.filteredPlaces = $filter('propertyTypes')($scope.filteredPlaces, $scope.selectedPropertyType);
         $scope.filteredPlaces = $filter('betweenPrice')($scope.filteredPlaces, $scope.price.min, $scope.price.max);
-        $scope.filteredPlaces = $filter('betweenLon')($scope.filteredPlaces, $scope.latitude.min, $scope.latitude.max);
-        $scope.filteredPlaces = $filter('betweenLat')($scope.filteredPlaces, $scope.longitude.min, $scope.longitude.max);
+        $scope.filteredPlaces = $filter('betweenLat')($scope.filteredPlaces, $scope.latitude.min, $scope.latitude.max);
+        $scope.filteredPlaces = $filter('betweenLon')($scope.filteredPlaces, $scope.longitude.min, $scope.longitude.max);
     };
     $scope.spotFilter = function() {
         $scope.filteredSpots = $filter('hobbiesInSpots')($scope.spots, $scope.selectedHobbies);
-        $scope.filteredSpots = $filter('betweenLon')($scope.filteredSpots, $scope.latitude.min, $scope.latitude.max);
-        $scope.filteredSpots = $filter('betweenLat')($scope.filteredSpots, $scope.longitude.min, $scope.longitude.max);
+        $scope.filteredSpots = $filter('betweenLat')($scope.filteredSpots, $scope.latitude.min, $scope.latitude.max);
+        $scope.filteredSpots = $filter('betweenLon')($scope.filteredSpots, $scope.longitude.min, $scope.longitude.max);
         $scope.filteredSpots = $filter('orderBy')($scope.filteredSpots, $scope.spotFilters);
     };
 
@@ -88,6 +85,29 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         if (hovered) $scope.hoveredSpotIndex = index;
         else $scope.hoveredSpotIndex = null;
     };
+    // $scope.$watch(function() {
+    //     return $scope.details;
+    // }, function() {
+    //     if ($scope.details) {
+    //         $scope.latitude.min = $scope.details.geometry.location.lat() - 0.5;
+    //         $scope.latitude.max = $scope.details.geometry.location.lat() + 0.5;
+    //         $scope.kmbydegree = (111 * Math.cos($scope.details.geometry.location.lat()));
+    //         $scope.longitude.min = $scope.details.geometry.location.lng() + 35 / $scope.kmbydegree;
+    //         $scope.longitude.max = $scope.details.geometry.location.lng() - 35 / $scope.kmbydegree;
+    //         $scope.centerMap = [$scope.details.geometry.location.lat(), $scope.details.geometry.location.lng()];
+    //     }
+    // });
+
+
+    $scope.latitude = {};
+    $scope.longitude = {};
+    $scope.distance = 50;
+    $scope.centerMap = 'current-location';
+    NavigatorGeolocation.getCurrentPosition()
+        .then(function(position) {
+            $scope.latitude.origin = position.coords.latitude;
+            $scope.longitude.origin = position.coords.longitude;
+        });
     $scope.$watch(function() {
         return $scope.details;
     }, function() {
@@ -100,6 +120,36 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
             $scope.centerMap = [$scope.details.geometry.location.lat(), $scope.details.geometry.location.lng()];
         }
     });
+    var r_earth = 6378137;
+    $scope.computeLatLngDiff = function() {
+        var distanceInMetters = $scope.distance * 1000;
+        var LatDiff = (distanceInMetters / r_earth) * (180 / Math.PI);
+        var LngDiff = (distanceInMetters / r_earth) * (180 / Math.PI) / Math.cos($scope.latitude.origin * Math.PI / 180);
+        $scope.latitude.min = $scope.latitude.origin - LatDiff;
+        $scope.latitude.max = $scope.latitude.origin + LatDiff;
+        $scope.longitude.min = $scope.longitude.origin + LngDiff;
+        $scope.longitude.max = $scope.longitude.origin - LngDiff;
+        $scope.placeFilter();
+        $scope.spotFilter();
+    };
+
+    // var diffLatitude = latitude + (dy / r_earth) * (180 / pi);
+    // var new_longitude = longitude + (dx / r_earth) * (180 / pi) / cos(latitude * pi / 180);
+    // var rad = function(x) {
+    //     return x * Math.PI / 180;
+    // };
+    // var getDistance = function(p1, p2) {
+    //     var R = 6378137; // Earth’s mean radius in meter
+    //     var dLat = rad(p2.lat() - p1.lat());
+    //     var dLong = rad(p2.lng() - p1.lng());
+    //     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    //         Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
+    //         Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    //     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    //     var d = R * c;
+    //     return d; // returns the distance in meter
+    // };
+
     $scope.togglePlaceInfoWindow = function(event, place) {
         $scope.map.showInfoWindow('popup', this);
         $scope.toggleledPlace = place;

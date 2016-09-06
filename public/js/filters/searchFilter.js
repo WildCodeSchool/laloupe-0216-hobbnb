@@ -4,7 +4,7 @@ angular.module('app')
             if (origin && end) {
                 var newItems = [];
                 items.forEach(function(e) {
-                    if ((e.latitude >= origin) && (e.latitude <= end) || (e.latitude <= origin) && (e.latitude >= end)) {
+                    if ((e.latitude >= origin && e.latitude <= end) || (e.latitude <= origin && e.latitude >= end)) {
                         newItems.push(e);
                     } else if (isNaN(Number(origin))) {
                         newItems.push(e);
@@ -21,7 +21,7 @@ angular.module('app')
             if (origin && end) {
                 var newItems = [];
                 items.forEach(function(e) {
-                    if ((e.longitude >= origin) && (e.longitude <= end) || (e.longitude <= origin) && (e.longitude >= end)) {
+                    if ((e.longitude >= origin && e.longitude <= end) || (e.longitude <= origin && e.longitude >= end)) {
                         newItems.push(e);
                     } else if (isNaN(Number(origin))) {
                         newItems.push(e);
