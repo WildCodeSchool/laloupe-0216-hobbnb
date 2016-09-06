@@ -2,7 +2,6 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     /* initialisation */
     $scope.slideTogglePlacesFilter = false;
     $scope.slideToggleSpotsFilter = false;
-    $scope.placeFilters = {};
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
 
     $scope.toggleSelectedHobby = function(hobby) {
@@ -65,6 +64,7 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     $timeout(function() {
         $scope.showPlace = true;
         $scope.showSpot = true;
+        $scope.placeFilters = {};
         if (searchFactory.data.selectedHobbies) {
             $scope.selectedHobbies = searchFactory.data.selectedHobbies;
             $scope.placeFilter();
