@@ -2,6 +2,7 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     /* initialisation */
     $scope.slideTogglePlacesFilter = false;
     $scope.slideToggleSpotsFilter = false;
+    $scope.placeFilters = {};
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
 
     $scope.toggleSelectedHobby = function(hobby) {
@@ -45,9 +46,9 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     });
 
     $scope.placeFilter = function() {
-        $scope.filteredPlaces = $filter('hobbies')($scope.places, $scope.selectedHobbies);
+        $scope.filteredPlaces = $filter('filter')($scope.places, $scope.placeFilters);
+        $scope.filteredPlaces = $filter('hobbies')($scope.filteredPlaces, $scope.selectedHobbies);
         $scope.filteredPlaces = $filter('propertyTypes')($scope.filteredPlaces, $scope.selectedPropertyType);
-        $scope.filteredPlaces = $filter('filter')($scope.filteredPlaces, $scope.placeFilters);
         $scope.filteredPlaces = $filter('betweenPrice')($scope.filteredPlaces, $scope.price.min, $scope.price.max);
         $scope.filteredPlaces = $filter('betweenLon')($scope.filteredPlaces, $scope.latitude.min, $scope.latitude.max);
         $scope.filteredPlaces = $filter('betweenLat')($scope.filteredPlaces, $scope.longitude.min, $scope.longitude.max);
@@ -64,7 +65,6 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     $timeout(function() {
         $scope.showPlace = true;
         $scope.showSpot = true;
-        $scope.placeFilters = {};
         if (searchFactory.data.selectedHobbies) {
             $scope.selectedHobbies = searchFactory.data.selectedHobbies;
             $scope.placeFilter();
