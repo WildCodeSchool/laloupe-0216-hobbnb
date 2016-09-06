@@ -56,8 +56,7 @@
                         <span class="index_dropdown_selectedValues hide-on-small-only" ng-hide="selectedHobbies.length > 0">Tous</span>
                         <span class="index_dropdown_selectedValues hide-on-small-only" ng-repeat='hobby in selectedHobbies | limitTo:3'><img src='./assets/hobbies/{{hobby}}.png' width='30px' height='30px'/></span>
                         <span class="index_dropdown_selectedValues hide-on-small-only" ng-show="selectedHobbies.length > 3">...</span>
-                    </div>
-                    <a class="waves-effect waves-light index_dropdown_bouton" ng-click="search()">Rechercher</a>
+                    </div><a class="waves-effect waves-light index_dropdown_bouton" ng-click="search()">Rechercher</a>
                     <ul id='hobbiesDropdown' class='dropdown-content'>
                         <li ng-repeat="hobby in hobbiesListing" ng-click="toggleSelection(hobby)">
                             <span>

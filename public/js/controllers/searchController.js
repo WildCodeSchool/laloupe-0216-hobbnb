@@ -62,14 +62,14 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
 
     $scope.selectedHobbies = [];
     $timeout(function() {
+        $scope.showPlace = true;
+        $scope.showSpot = true;
         if (searchFactory.data.selectedHobbies) {
             $scope.selectedHobbies = searchFactory.data.selectedHobbies;
 
             $scope.placeFilter();
             $scope.spotFilter();
         }
-        $scope.showPlace = true;
-        $scope.showSpot = true;
     }, 10);
 
     // if (searchFactory.data.city) $scope.locality = searchFactory.data.city;
