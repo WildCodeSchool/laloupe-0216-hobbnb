@@ -1,4 +1,4 @@
-angular.module('app').controller('searchController', function($scope, $http, $window, $filter, $timeout, NgMap, NavigatorGeolocation, placesService, spotsService, usersService, searchFactory) {
+angular.module('app').controller('searchController', function($scope, $http, $window, $filter, NgMap, NavigatorGeolocation, placesService, spotsService, usersService, searchFactory) {
     /* initialisation */
     $scope.slideTogglePlacesFilter = false;
     $scope.slideToggleSpotsFilter = false;
@@ -42,7 +42,6 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         $scope.filteredPlaces = $scope.places;
         if (searchFactory.data.selectedHobbies) {
             $scope.selectedHobbies = searchFactory.data.selectedHobbies;
-            console.log($scope.selectedHobbies);
             $scope.placeFilter();
         }
     });
@@ -52,7 +51,6 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         $scope.filteredSpots = $scope.spots;
         if (searchFactory.data.selectedHobbies) {
             $scope.selectedHobbies = searchFactory.data.selectedHobbies;
-            console.log($scope.selectedHobbies);
             $scope.spotFilter();
         }
     });
@@ -67,10 +65,8 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     };
     $scope.spotFilter = function() {
         $scope.filteredSpots = $filter('hobbiesInSpots')($scope.spots, $scope.selectedHobbies);
-        console.log($scope.spots);
         $scope.filteredSpots = $filter('betweenLon')($scope.filteredSpots, $scope.latitude.min, $scope.latitude.max);
         $scope.filteredSpots = $filter('betweenLat')($scope.filteredSpots, $scope.longitude.min, $scope.longitude.max);
-        console.log($scope.filteredSpots);
         $scope.filteredSpots = $filter('orderBy')($scope.filteredSpots, $scope.spotFilters);
     };
 
