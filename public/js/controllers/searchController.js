@@ -65,7 +65,7 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     $timeout(function() {
         $scope.showPlace = true;
         $scope.showSpot = true;
-        if (searchFactory.data.selectedHobbies.length > 0) {
+        if (searchFactory.data.selectedHobbies) {
             $scope.selectedHobbies = searchFactory.data.selectedHobbies;
             $scope.placeFilter();
             $scope.spotFilter();

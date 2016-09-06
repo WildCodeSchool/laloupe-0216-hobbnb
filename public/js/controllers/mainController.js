@@ -17,7 +17,7 @@ angular.module('app').controller('mainController', function($scope, $location, $
     };
 
     $scope.searchSpot = function(activity) {
-        searchFactory.data.selectedHobbies.push = activity;
+        searchFactory.data.selectedHobbies = [activity];
         $location.path('/search');
     };
     spotsService.get().then(function(res) {
