@@ -1,54 +1,32 @@
 // MAIN CONTROLLER
 angular.module('app').controller('mainController', function($scope, $location, $http, placesService, spotsService, searchFactory) {
-    $scope.hideCtrl = false;
-    $scope.toggle = function() {
-        $scope.hideCtrl = !$scope.hideCtrl;
-    };
+    $scope.show = 'places';
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
     $scope.selectedHobbies = [];
-
     $scope.toggleSelection = function toggleSelection(hobby) {
         var idx = $scope.selectedHobbies.indexOf(hobby);
         if (idx > -1) {
             $scope.selectedHobbies.splice(idx, 1);
-        }
-        else {
+        } else {
             $scope.selectedHobbies.push(hobby);
         }
     };
-
-
     $scope.search = function() {
-        searchFactory.data.city = $scope.city;
-        searchFactory.data.hobby = $scope.hobby;
-        if ($scope.selectHome == "spot") {
-            $location.path('/searchSpot');
-        } else {
-            $location.path('/search');
-        }
+        searchFactory.data.selectedHobbies = $scope.selectedHobbies;
+        $location.path('/search');
     };
+
     $scope.searchSpot = function(activity) {
-        searchFactory.data.hobby = activity;
-        $('.tooltipped').tooltip('remove');
+        searchFactory.data.hobby.push = activity;
         $location.path('/search');
     };
     spotsService.get().then(function(res) {
-        $scope.pSpots = res.data;
+        $scope.spots = res.data;
     });
     placesService.get().then(function(res) {
-        $scope.pPlaces = res.data;
+        $scope.places = res.data;
     });
-    $scope.hobbyIco = function(widget) {
-        return "../assets/hobbies/" + widget.primarySports + ".png";
-    };
-    $scope.pictPlace = function(widget) {
-        var url = "uploads/places/" + widget._id + "/" + widget.picture;
-        return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
-    };
-    $scope.pictSpot = function(widget) {
-        var url = "uploads/spots/" + widget._id + "/" + widget.picture;
-        return "{'background-image': 'url(" + url + ")', 'background-size': 'cover'}";
-    };
+
     // dispay testimonials
     $scope.message = {};
     $http.get('/api/admin').then(function(res) {

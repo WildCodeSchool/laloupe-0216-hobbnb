@@ -25,7 +25,7 @@
                     <div class="search_element_container">
                         <div class='dropdown-button search_dropdown' href='javascript:void(0);' data-hover="true" data-beloworigin="true" data-alignment="bottom" data-activates='displayDropdown' dropdown>
                             <span class="search_dropdown_label">Afficher</span>
-                            <span class="search_dropdown_selectedValues" ng-hide="showPlace || showSpot">Tous</span>
+                            <span class="search_dropdown_selectedValues" ng-show="!showPlace && !showSpot">Aucun</span>
                             <span class="search_dropdown_selectedValues" ng-show="showPlace"><img src='/assets/search/locateHost.png' width='15px' height='15px'/>
                                 Hébergements</span>
                             <span class="search_dropdown_selectedValues" ng-show="showSpot"><img src='/assets/search/locateSpot.png' width='15px' height='15px'/>
@@ -51,30 +51,30 @@
             </ul>
             <ul class="right">
                 <li ng-show="showPlace">
-                    <div class="search_element_container" ng-click="slideTogglePlacesFilter=!slideTogglePlacesFilter; !slideToggleSpotsFilter && (slideToggleSpotsFilter=!slideToggleSpotsFilter)">
+                    <div class="search_element_container" ng-click="slideTogglePlacesFilter=!slideTogglePlacesFilter; slideToggleSpotsFilter && (slideToggleSpotsFilter=!slideToggleSpotsFilter)">
                         <div class="search_dropdown">
                             <span class="search_dropdown_label">Filtrer les hébergements</span>
-                            <span class="search_dropdown_selectedValues">{{places.length}}
+                            <span class="search_dropdown_selectedValues">{{filteredPlaces.length}}
                                 résultat</span>
-                            <i class="fa fa-caret-down" ng-hide="!slideTogglePlacesFilter"></i>
-                            <i class="fa fa-caret-up" ng-hide="slideTogglePlacesFilter"></i>
+                            <i class="fa fa-caret-down" ng-hide="slideTogglePlacesFilter"></i>
+                            <i class="fa fa-caret-up" ng-hide="!slideTogglePlacesFilter"></i>
                         </div>
                     </div>
                 </li>
                 <li ng-show="showSpot">
-                    <div class="search_element_container" ng-click="slideToggleSpotsFilter=!slideToggleSpotsFilter; !slideTogglePlacesFilter && (slideTogglePlacesFilter=!slideTogglePlacesFilter);">
+                    <div class="search_element_container" ng-click="slideToggleSpotsFilter=!slideToggleSpotsFilter; slideTogglePlacesFilter && (slideTogglePlacesFilter=!slideTogglePlacesFilter);">
                         <div class="search_dropdown">
                             <span class="search_dropdown_label">Filtrer les spots</span>
-                            <span class="search_dropdown_selectedValues">{{spots.length}}
+                            <span class="search_dropdown_selectedValues">{{filteredSpots.length}}
                                 résultat</span>
-                            <i class="fa fa-caret-down" ng-hide="!slideToggleSpotsFilter"></i>
-                            <i class="fa fa-caret-up" ng-hide="slideToggleSpotsFilter"></i>
+                            <i class="fa fa-caret-down" ng-hide="slideToggleSpotsFilter"></i>
+                            <i class="fa fa-caret-up" ng-hide="!slideToggleSpotsFilter"></i>
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
-        <div class="nav-wrapper search-nav" ng-hide="!showPlace || slideTogglePlacesFilter">
+        <div class="nav-wrapper search-nav" ng-hide="!showPlace || !slideTogglePlacesFilter">
             <ul>
                 <li>
                     <div class="search_element_container">
@@ -103,7 +103,7 @@
                             <span class="search_dropdown_selectedValues" ng-show='placeFilters.home.travellers'>{{placeFilters.home.travellers}}</span>
                             <i class="fa fa-caret-down"></i>
                         </div>
-                        <ul id='travellersDropdown' class='dropdown-content' ng-click="filter();">
+                        <ul id='travellersDropdown' class='dropdown-content' ng-click="placeFilter();">
                             <li ng-click="placeFilters.home.travellers = 1;">
                                 <span>
                                     <input name="travellers" type="radio" ng-click="placeFilters.home.travellers = 1" ng-checked="placeFilters.home.travellers == 1" id="1traveller"/>
@@ -142,7 +142,7 @@
                         <div class="search_dropdown">
                             <span class="search_dropdown_label">Prix</span>
                             <span class="search_dropdown_selectedValues search_range_number center">{{price.min}}</span>
-                            <input  ng-click="filter();" range-slider min="0" max="1000" model-min="price.min" model-max="price.max" filter="currency:'€'" step="10" show-values="false"></input>
+                            <input  ng-click="placeFilter();" range-slider min="0" max="1000" model-min="price.min" model-max="price.max" filter="currency:'€'" step="10" show-values="false"></input>
                             <span class="search_dropdown_selectedValues search_range_number center">{{price.max}}</span>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                 </li>
             </ul>
         </div>
-        <div class="nav-wrapper search-nav" ng-hide="!showSpot || slideToggleSpotsFilter">
+        <div class="nav-wrapper search-nav" ng-hide="!showSpot || !slideToggleSpotsFilter">
             <ul>
                 <li ng-click="spotFilters = 'rating.quality'; spotFilter();">
                     <div class="search_element_container">
@@ -218,10 +218,10 @@
     </nav>
 </div>
 <div class="row search-container">
-    <div class="col s7 search-left-col">
+    <div class="col s12 m7 l7 search-left-col">
         <div id="widgets" class="row">
             <div ng-if="showPlace">
-                <div class="col s12 m12 l6" dir-paginate="place in filteredPlaces | itemsPerPage: 8">
+                <div class="col s12 m6 l4" dir-paginate="place in filteredPlaces | itemsPerPage: 8">
                     <a href="/place/{{place._id}}" ng-mouseover="getHoveredPlaceIndex($index, true);" ng-mouseleave="getHoveredPlaceIndex($index, false);" target="_blank">
                         <div class="card">
                             <div class="card-image">
@@ -245,8 +245,8 @@
                 </div>
             </div>
             <div ng-if="showSpot">
-                <div class="col s12 m12 l6" dir-paginate="spot in filteredSpots | itemsPerPage: 8">
-                    <a href="/spot/{{spot._id}}" target="_blank">
+                <div class="col s12 m6 l4" dir-paginate="spot in filteredSpots | itemsPerPage: 8">
+                    <a href="/spot/{{spot._id}}" ng-mouseover="getHoveredSpotIndex($index, true);" ng-mouseleave="getHoveredSpotIndex($index, false);" target="_blank">
                         <div class="card hoverable">
                             <div class="card-image">
                                 <img ng-src="uploads/spots/{{spot._id}}/thumb/{{spot.pictures[0]}}">
@@ -271,13 +271,13 @@
         </div>
     </div>
 
-    <div class="col s5 search-rigth-col">
+    <div class="col m5 l5 search-rigth-col hide-on-small-only">
         <ng-map default-style="false" center="{{centerMap}}" geo-fallback-center="48.8534100, 2.3488000" zoom="6" id="myMap" style='height:100%;'>
             <div ng-if="showPlace">
                 <marker
                     ng-repeat="place in filteredPlaces | itemsPerPage: 8"
                     position="[{{place.latitude}},{{place.longitude}}]"
-                    title={{place.shortDescription}}
+                    title={{place.name}}
                     icon="{
                       url:'assets/search/tileHome.png',
                       scaledSize:[32,32],
@@ -286,7 +286,7 @@
                       }"
                     scrollwheel="true"
                     animation="{{hoveredPlaceIndex == $index ? 'BOUNCE' : 'null'}}"
-                    on-click="toggleInfoWindow(event, p)"
+                    on-click="toggleInfoPlaceWindow(event, place)"
                     clickable="true"></marker>
                 <info-window id="popup" max-width="200">
                     <a href="/place/{{toggleledPlace._id}}" target="_blank">
@@ -320,7 +320,8 @@
                           anchor: [16,32]
                           }"
                     scrollwheel="true"
-                    on-click="toggleInfoWindow(event, p)"
+                    animation="{{hoveredSpotIndex == $index ? 'BOUNCE' : 'null'}}"
+                    on-click="toggleSpotInfoWindow(event, spot)"
                     clickable="true"></marker>
                 <info-window id="popup" max-width="200">
                     <a href="/spot/{{toggleledSpot._id}}" target="_blank">

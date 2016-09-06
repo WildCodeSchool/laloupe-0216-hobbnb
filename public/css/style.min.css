@@ -1,15 +1,61 @@
+@keyframes kenburns {
+    0% {
+        -moz-transform: scale(1, 1);
+        -webkit-transform: scale(1, 1);
+        -o-transform: scale(1, 1);
+        transform: scale(1, 1);
+        animation-timing-function: linear;
+    }
+    100% {
+        -moz-transform: scale(1.2, 1.2);
+        -webkit-transform: scale(1.3, 1.3);
+        -o-transform: scale(1.3, 1.3);
+        transform: scale(1.3, 1.3);
+        animation-timing-function: linear;
+    }
+}
+.slider .slides li img {
+    animation: kenburns 20s alternate-reverse infinite;
+}
+.one {
+    -webkit-transform-origin: bottom center;
+    -moz-transform-origin: bottom center;
+    -o-transform-origin: bottom center;
+}
+.two {
+    -webkit-transform-origin: bottom left;
+    -moz-transform-origin: bottom left;
+    -o-transform-origin: bottom left;
+}
+.third {
+    -webkit-transform-origin: top right;
+    -moz-transform-origin: top right;
+    -o-transform-origin: top right;
+}
+.fourth {
+    -webkit-transform-origin: bottom right;
+    -moz-transform-origin: bottom right;
+    -o-transform-origin: bottom right;
+}
+.fifth {
+    -webkit-transform-origin: bottom left;
+    -moz-transform-origin: bottom left;
+    -o-transform-origin: bottom left;
+}
 html {
-    background-color: #f2f4f3
+    background-color: #f2f4f3;
 }
 .main {
     min-height: 75vh
 }
-.show {
+
+/*.show {
     display: block;
 }
 .hide {
     display: none;
-}
+}*/
+
 .search-nav {
     background-color: white;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24) !important;
@@ -99,10 +145,12 @@ html {
     width: 50%;
     height: 100%;
 }
-.vertical-slide-toggle {
+
+/*.vertical-slide-toggle {
     overflow: hidden;
-    transition: height 0.5s;
-}
+    transition: height 0.20s;
+}*/
+
 .slide-arrows {
     font-family: icons;
     font-size: 30px;
@@ -176,24 +224,44 @@ html {
     margin-left: 3px;
     color: #7f7f7f !important;
 }
-.hobbies_dropdown {
+.index_dropdown {
+    position: relative;
+    display: inline-block;
     background-color: #F2F4F3;
-    margin: 0;
+    height: 45px;
+    line-height: 45px;
+    vertical-align: middle;
     border: none;
     -moz-border-radius: 8px 0 0px 8px;
     -webkit-border-radius: 8px 0 0px 8px;
     border-radius: 8px 0 0px 8px;
+    color: #7f7f7f;
+    font-size: 18px;
+}
+.index_dropdown_label {
     display: inline-block;
+    overflow: hidden;
     height: 45px;
     line-height: 45px;
-    color: #7f7f7f;
-    font-size: 16px;
-    outline: 0;
-    padding: 0 6rem 0 1rem;
-    vertical-align: middle;
-    -webkit-tap-highlight-color: transparent;
+    padding: 0 3rem 0 1rem;
+    font-weight: bold !important;
+    color: #455a64 !important;
 }
-.hobbies_bouton {
+.index_dropdown_selectedValues {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 45px;
+    line-height: 45px;
+    width: 55px;
+    margin-right: 1px;
+    background-color: #3CDF91;
+    color: #FFF;
+}
+.index_dropdown_selectedValues img {
+    vertical-align: middle;
+}
+.index_dropdown_bouton {
     background-color: #45FFA6;
     margin: 0;
     border: none;
@@ -206,9 +274,7 @@ html {
     color: #F2F4F3;
     font-weight: bold;
     font-size: 18px;
-    outline: 0;
     padding: 0 3rem;
-    vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
 }
 .search_element_container {
@@ -369,6 +435,12 @@ html {
 .blue-hobbnb {
     background-color: #67C9FF;
 }
+.green-hobbnb {
+    background-color: #3CDF91;
+}
+.hobbnb-font_color {
+    color: #7f7f7f;
+}
 
 /*.btn.blue-hobbnb:hover {
     background-color: #67A2FF;
@@ -397,14 +469,45 @@ p {
     font-size: 14px;
     color: #7f7f7f
 }
+.tabs .tab {
+    text-transform: none;
+}
+.tabs .tab a:hover {
+    color: #3CDF91;
+}
 .hobbnb-font {
     font-size: 14px;
     color: #7f7f7f;
     font-family: Roboto, 'sans-serif'
 }
-.hobbnb-font_color {
+.hobbnb_bigTitle {
+    font-size: 39px;
+    line-height: 47px;
+    font-weight: bold;
+    font-family: Verdana, Tahoma, Geneva, sans-serif;
+}
+.hobbnb_title {
+    font-size: 29px;
+    line-height: 32px;
+    font-weight: bold;
     color: #7f7f7f;
-    font-family: Roboto, 'sans-serif'
+    font-family: Verdana, Tahoma, Geneva, sans-serif;
+}
+.hobbnb_tinyTitle {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: bold;
+    color: #7f7f7f;
+    font-family: Verdana, Tahoma, Geneva, sans-serif;
+}
+.hobbnb_p {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 20px;
+    color: #7f7f7f;
+}
+.justify {
+    text-align: justify;
+    text-justify: inter-word;
 }
 .tabs .indicator {
     background-color: #7f7f7f
@@ -435,8 +538,8 @@ h2.profile_title {
 #widgets {
     background-color: #e0e0e0;
     flex: 1 1 auto;
-    margin: 0 !important;
-    padding: 1rem 2rem !important;
+    margin: 0;
+    padding: 1rem 2rem;
     overflow: auto;
 }
 #widgets .card-image {
@@ -479,7 +582,8 @@ h2.profile_title {
     transition: all .3s linear
 }
 .activityPanel img {
-    width: 100%
+    min-width: 100%;
+    height: 100%;
 }
 .raz {
     clear: both;
@@ -521,15 +625,6 @@ h2.profile_title {
     margin-top: 6px;
     font-size: 13px;
     color: #fff
-}
-.rentic {
-    text-align: center;
-    display: inline;
-    font-size: 22px
-}
-.circle {
-    width: 88px;
-    height: 88px
 }
 .wrapped-input {
     border-radius: 60px
@@ -628,10 +723,11 @@ li.active {
     margin: 0 !important;
     background: #64737b!important
 }
-.dropdown-content li>span {
+
+/*.dropdown-content li>span {
     font-size: 16px;
     color: #757575!important;
     display: block;
     line-height: 22px;
     padding: 14px 16px
-}
+}*/

@@ -1,11 +1,10 @@
-angular.module('app').controller('searchController', function($scope, $http, $window, $filter, NgMap, NavigatorGeolocation, placesService, spotsService, usersService, searchFactory) {
+angular.module('app').controller('searchController', function($scope, $http, $window, $filter, $timeout, NgMap, NavigatorGeolocation, placesService, spotsService, usersService, searchFactory) {
     /* initialisation */
-    if (searchFactory.data.hobby) $scope.filters.hobby = searchFactory.data.hobby;
-    if (searchFactory.data.city) $scope.locality = searchFactory.data.city;
-    $scope.slideTogglePlacesFilter = true;
-    $scope.slideToggleSpotsFilter = true;
+    $scope.slideTogglePlacesFilter = false;
+    $scope.slideToggleSpotsFilter = false;
+    $scope.placeFilters = {};
     $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
-    $scope.selectedHobbies = [];
+
     $scope.toggleSelectedHobby = function(hobby) {
         var idx = $scope.selectedHobbies.indexOf(hobby);
         if (idx > -1) {
@@ -36,7 +35,6 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     $scope.longitude =   {};
     $scope.centerMap = 'current-location';
 
-    $scope.placeFilters = {};
     $scope.filteredPlaces = [];
     placesService.get().then(function(res) {
         $scope.places = res.data;
@@ -62,6 +60,20 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         $scope.filteredSpots = $filter('orderBy')($scope.filteredSpots, $scope.spotFilters);
     };
 
+    $scope.selectedHobbies = [];
+    $timeout(function() {
+        if (searchFactory.data.selectedHobbies) {
+            $scope.selectedHobbies = searchFactory.data.selectedHobbies;
+
+            $scope.placeFilter();
+            $scope.spotFilter();
+        }
+        $scope.showPlace = true;
+        $scope.showSpot = true;
+    }, 10);
+
+    // if (searchFactory.data.city) $scope.locality = searchFactory.data.city;
+
 
     NgMap.getMap('myMap').then(function(map) {
         $scope.map = map;
@@ -69,6 +81,10 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
     $scope.getHoveredPlaceIndex = function(index, hovered) {
         if (hovered) $scope.hoveredPlaceIndex = index;
         else $scope.hoveredPlaceIndex = null;
+    };
+    $scope.getHoveredSpotIndex = function(index, hovered) {
+        if (hovered) $scope.hoveredSpotIndex = index;
+        else $scope.hoveredSpotIndex = null;
     };
     $scope.$watch(function() {
         return $scope.details;
@@ -82,8 +98,12 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
             $scope.centerMap = [$scope.details.geometry.location.lat(), $scope.details.geometry.location.lng()];
         }
     });
-    $scope.toggleInfoWindow = function(event, place) {
+    $scope.togglePlaceInfoWindow = function(event, place) {
         $scope.map.showInfoWindow('popup', this);
         $scope.toggleledPlace = place;
+    };
+    $scope.toggleSpotInfoWindow = function(event, spot) {
+        $scope.map.showInfoWindow('popup', this);
+        $scope.toggleledSpot = spot;
     };
 });

@@ -1,4 +1,4 @@
-angular.module('app', ['oc.lazyLoad', 'ngCookies', 'ngSanitize', 'ngMap', 'ngAnimate', 'ui-rangeSlider', 'ngRoute', 'ui.materialize', 'ngAutocomplete', 'angularUtils.directives.dirPagination', 'djds4rce.angular-socialshare'])
+angular.module('app', ['oc.lazyLoad', 'ngCookies', 'ngSanitize', 'ngMap', 'ui-rangeSlider', 'ngRoute', 'ui.materialize', 'ngAutocomplete', 'angularUtils.directives.dirPagination', 'djds4rce.angular-socialshare'])
     .controller('globalUserController', globalUserController)
     .config(routes)
     .run(function($rootScope, $location, $window, $FB) {

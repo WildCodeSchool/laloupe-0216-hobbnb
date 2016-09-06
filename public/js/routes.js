@@ -43,36 +43,14 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                     return $ocLazyLoad.load({
                         name: 'app',
                         files: [
-                            '/js/animations/vertical-slide-toggle.js',
                             '/js/directives/starRatingDirective.js',
+                            '/js/directives/paginationDirective.js',
                             '/js/services/usersService.js',
                             '/js/services/placesService.js',
                             '/js/services/spotsService.js',
                             '/js/factories/searchFactory.js',
-                            '/js/filters/rangeFilter.js',
-                            '/js/filters/betweenFilter.js',
+                            '/js/filters/searchFilter.js',
                             '/js/controllers/searchController.js'
-                        ]
-                    });
-                }]
-            }
-        })
-        .when('/searchSpot', {
-            templateUrl: '/views/searchSpot.html',
-            controller: 'searchSpotController',
-            resolve: {
-                lazy: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'app',
-                        files: [
-                            '/js/animations/vertical-slide-toggle.js',
-                            '/js/directives/starRatingDirective.js',
-                            '/js/services/usersService.js',
-                            '/js/services/spotsService.js',
-                            '/js/factories/searchFactory.js',
-                            '/js/filters/rangeFilter.js',
-                            '/js/filters/betweenFilter.js',
-                            '/js/controllers/searchSpotController.js'
                         ]
                     });
                 }]
@@ -308,7 +286,6 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                         name: 'app',
                         files: [
                             '/js/directives/starRatingDirective.js',
-                            '/js/directives/toggleIt.js',
                             '/js/services/emailService.js',
                             '/js/services/messagingService.js',
                             '/js/services/usersService.js',
