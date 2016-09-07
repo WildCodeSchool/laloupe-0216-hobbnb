@@ -48,6 +48,15 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <div class="search_element_container">
+                        <div class="search_dropdown">
+                            <span class="search_dropdown_label">Aire de recherche</span>
+                            <input ng-click="computeLatLngDiff();" range-slider min="0" max="100000" model-max="searchRadiusModel" step="1000" pin-handle="min" show-values="false"></input>
+                            <span class="search_dropdown_selectedValues search_range_number center">{{searchRadiusModel / 1000}} km</span>
+                        </div>
+                    </div>
+                </li>
             </ul>
             <ul class="right">
                 <li ng-show="showPlace">
@@ -144,15 +153,6 @@
                             <span class="search_dropdown_selectedValues search_range_number center">{{price.min}}</span>
                             <input ng-click="placeFilter();" range-slider min="0" max="1000" model-min="price.min" model-max="price.max" filter="currency:'€'" step="10" show-values="false"></input>
                             <span class="search_dropdown_selectedValues search_range_number center">{{price.max}}</span>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="search_element_container">
-                        <div class="search_dropdown">
-                            <span class="search_dropdown_label">Distance</span>
-                            <input ng-click="computeLatLngDiff();" range-slider min="0" max="100" model-max="distance" pin-handle="min" show-values="false"></input>
-                            <span class="search_dropdown_selectedValues search_range_number center">{{distance}} km</span>
                         </div>
                     </div>
                 </li>
@@ -283,9 +283,9 @@
     <div class="col m5 l5 search-rigth-col hide-on-small-only">
         <ng-map default-style="false" center="{{centerMap}}" geo-fallback-center="48.8534100, 2.3488000" zoom="6" id="myMap" style='height:100%;'>
             <div ng-if="showPlace">
-                <shape id="circle" name="circle"
-                  stroke-color='#FF0000' stroke-opacity="0.6" stroke-weight="2"
-                  center="{{centerMap}}" radius="{{distance*1000}}">
+                <shape ng-if="searchRadius" id="circle" name="circle"
+                  stroke-color='#FF0000' stroke-opacity="0.5" stroke-weight="2"
+                  center="{{centerMap}}" radius="{{searchRadiusModel}}">
                 </shape>
                 <marker
                     ng-repeat="place in filteredPlaces | itemsPerPage: 8"
@@ -299,9 +299,9 @@
                       }"
                     scrollwheel="true"
                     animation="{{hoveredPlaceIndex == $index ? 'BOUNCE' : 'null'}}"
-                    on-click="toggleInfoPlaceWindow(event, place)"
+                    on-click="togglePlaceInfoWindow(event, place)"
                     clickable="true"></marker>
-                <info-window id="popup" max-width="200">
+                <info-window id="placePopup" max-width="200">
                     <a href="/place/{{toggleledPlace._id}}" target="_blank">
                         <div class="card">
                             <div class="card-image">
@@ -313,7 +313,7 @@
                                     <div>{{toggleledPlace.name}}</div>
                                     <div>
                                         <star-rating ng-model="toggleledPlace.rating.overallRating" readonly="true"></star-rating>
-                                        <sup>({{place.rating.numberOfRatings}})</sup>
+                                        <sup>({{toggleledPlace.rating.numberOfRatings}})</sup>
                                     </div>
                                 </p>
                             </div>
@@ -336,7 +336,7 @@
                     animation="{{hoveredSpotIndex == $index ? 'BOUNCE' : 'null'}}"
                     on-click="toggleSpotInfoWindow(event, spot)"
                     clickable="true"></marker>
-                <info-window id="popup" max-width="200">
+                <info-window id="spotPopup" max-width="200">
                     <a href="/spot/{{toggleledSpot._id}}" target="_blank">
                         <div class="card">
                             <div class="card-image">

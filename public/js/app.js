@@ -1,5 +1,6 @@
 angular.module('app', ['oc.lazyLoad', 'ngCookies', 'ngSanitize', 'ngMap', 'ui-rangeSlider', 'ngRoute', 'ui.materialize', 'ngAutocomplete', 'angularUtils.directives.dirPagination', 'djds4rce.angular-socialshare'])
-    .controller('globalUserController', globalUserController)
+    .controller('navBarController', navBarController)
+    .factory('searchFactory', searchFactory)
     .config(routes)
     .run(function($rootScope, $location, $window, $FB) {
         if ($window.localStorage.token) {

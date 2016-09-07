@@ -1,30 +1,25 @@
 angular.module('app')
-    .filter('betweenLat', function() {
-        return function(items, origin, end) {
-            if (origin && end) {
+    .filter('inArea', function() {
+        var r_earth = 6378137;
+        function getDistanceFromLatLonInMetters(lat1, lon1, lat2, lon2) {
+            var dLat = (Math.PI / 180) * (lat2 - lat1);
+            var dLon = (Math.PI / 180) * (lon2 - lon1);
+            var a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos((Math.PI / 180) * (lat1)) * Math.cos((Math.PI / 180) * (lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = r_earth * c; // Distance in km
+            return d;
+        }
+        return function(items, latitudeRange, longitudeRange, center, radius) {
+            if (latitudeRange && longitudeRange && center && radius) {
                 var newItems = [];
                 items.forEach(function(e) {
-                    if ((e.latitude >= origin && e.latitude <= end) || (e.latitude <= origin && e.latitude >= end)) {
-                        newItems.push(e);
-                    } else if (isNaN(Number(origin))) {
-                        newItems.push(e);
-                    }
-                });
-                return newItems;
-            } else {
-                return items;
-            }
-        };
-    })
-    .filter('betweenLon', function() {
-        return function(items, origin, end) {
-            if (origin && end) {
-                var newItems = [];
-                items.forEach(function(e) {
-                    if ((e.longitude >= origin && e.longitude <= end) || (e.longitude <= origin && e.longitude >= end)) {
-                        newItems.push(e);
-                    } else if (isNaN(Number(origin))) {
-                        newItems.push(e);
+                    if ((e.latitude >= latitudeRange.min && e.latitude <= latitudeRange.max) || (e.latitude <= latitudeRange.min && e.latitude >= latitudeRange.max) && (e.longitude >= longitudeRange.min && e.longitude <= longitudeRange.max) || (e.longitude <= longitudeRange.min && e.longitude >= longitudeRange.max)) {
+                        if (getDistanceFromLatLonInMetters(center.latitude, center.longitude, e.latitude, e.longitude) <=  radius) {
+                          newItems.push(e);
+                        }
                     }
                 });
                 return newItems;

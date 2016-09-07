@@ -1,10 +1,14 @@
-angular.module('app').controller('searchController', function($scope, $http, $window, $filter, NgMap, NavigatorGeolocation, placesService, spotsService, usersService, searchFactory) {
+angular.module('app').controller('searchController', function($rootScope, $scope, $http, $window, $filter, NgMap, NavigatorGeolocation, placesService, spotsService, usersService, searchFactory) {
     /* initialisation */
     $scope.slideTogglePlacesFilter = false;
     $scope.slideToggleSpotsFilter = false;
-    $scope.placeFilters = {};
-    $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
+    $scope.price = {
+        min: 0,
+        max: 1000
+    };
 
+    $scope.hobbiesListing = ["Randonnée", "VTT", "Cyclisme", "Equitation", "Pêche", "Plongée", "Golf", "Escalade", "Canoë Kayak", "Surf", "Stand up Paddle", "Kitesurf", "Windsurf", "Ski", "Alpinisme", "Parapente", "Spéléologie", "Cannoning"];
+    $scope.selectedHobbies = [];
     $scope.toggleSelectedHobby = function(hobby) {
         var idx = $scope.selectedHobbies.indexOf(hobby);
         if (idx > -1) {
@@ -15,6 +19,7 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         $scope.placeFilter();
         $scope.spotFilter();
     };
+
     $scope.propertyTypeListing = ["Maison", "Appartement", "Chambre", "Couchage", "Place de camping", "Cabane dans les arbres", "Camping car", "Tipy", "Bateau", "Yourte"];
     $scope.selectedPropertyType = [];
     $scope.toggleSelectedPropertyType = function(propertyType) {
@@ -27,12 +32,6 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         $scope.placeFilter();
     };
 
-    $scope.price = {
-        min: 0,
-        max: 1000
-    };
-
-    $scope.filteredPlaces = [];
     placesService.get().then(function(res) {
         $scope.showPlace = true;
         $scope.places = res.data;
@@ -57,22 +56,13 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         $scope.filteredPlaces = $filter('hobbies')($scope.filteredPlaces, $scope.selectedHobbies);
         $scope.filteredPlaces = $filter('propertyTypes')($scope.filteredPlaces, $scope.selectedPropertyType);
         $scope.filteredPlaces = $filter('betweenPrice')($scope.filteredPlaces, $scope.price.min, $scope.price.max);
-        $scope.filteredPlaces = $filter('betweenLat')($scope.filteredPlaces, $scope.latitude.min, $scope.latitude.max);
-        $scope.filteredPlaces = $filter('betweenLon')($scope.filteredPlaces, $scope.longitude.min, $scope.longitude.max);
+        $scope.filteredPlaces = $filter('inArea')($scope.filteredPlaces, $scope.latitudeRange, $scope.longitudeRange, $scope.center, $scope.searchRadius);
     };
     $scope.spotFilter = function() {
         $scope.filteredSpots = $filter('hobbiesInSpots')($scope.spots, $scope.selectedHobbies);
-        $scope.filteredSpots = $filter('betweenLat')($scope.filteredSpots, $scope.latitude.min, $scope.latitude.max);
-        $scope.filteredSpots = $filter('betweenLon')($scope.filteredSpots, $scope.longitude.min, $scope.longitude.max);
+        $scope.filteredSpots = $filter('inArea')($scope.filteredSpots, $scope.latitudeRange, $scope.longitudeRange, $scope.center, $scope.searchRadius);
         $scope.filteredSpots = $filter('orderBy')($scope.filteredSpots, $scope.spotFilters);
     };
-
-    $scope.selectedHobbies = [];
-
-    // $timeout(function() {}, 20);
-
-    // if (searchFactory.data.city) $scope.locality = searchFactory.data.city;
-
 
     NgMap.getMap('myMap').then(function(map) {
         $scope.map = map;
@@ -85,77 +75,59 @@ angular.module('app').controller('searchController', function($scope, $http, $wi
         if (hovered) $scope.hoveredSpotIndex = index;
         else $scope.hoveredSpotIndex = null;
     };
-    // $scope.$watch(function() {
-    //     return $scope.details;
-    // }, function() {
-    //     if ($scope.details) {
-    //         $scope.latitude.min = $scope.details.geometry.location.lat() - 0.5;
-    //         $scope.latitude.max = $scope.details.geometry.location.lat() + 0.5;
-    //         $scope.kmbydegree = (111 * Math.cos($scope.details.geometry.location.lat()));
-    //         $scope.longitude.min = $scope.details.geometry.location.lng() + 35 / $scope.kmbydegree;
-    //         $scope.longitude.max = $scope.details.geometry.location.lng() - 35 / $scope.kmbydegree;
-    //         $scope.centerMap = [$scope.details.geometry.location.lat(), $scope.details.geometry.location.lng()];
-    //     }
-    // });
 
-
-    $scope.latitude = {};
-    $scope.longitude = {};
-    $scope.distance = 50;
-    $scope.centerMap = 'current-location';
-    NavigatorGeolocation.getCurrentPosition()
+    $scope.center = {};
+    // $scope.centerMap = 'current-location';
+    NavigatorGeolocation.getCurrentPosition({
+            enableHighAccuracy: true
+        })
         .then(function(position) {
-            $scope.latitude.origin = position.coords.latitude;
-            $scope.longitude.origin = position.coords.longitude;
+            $scope.center.latitude = position.coords.latitude;
+            $scope.center.longitude = position.coords.longitude;
+            $scope.centerMap = [$scope.center.latitude, $scope.center.longitude];
+            $scope.currentLocation = position.longitude;
         });
-    $scope.$watch(function() {
-        return $scope.details;
-    }, function() {
-        if ($scope.details) {
-            $scope.latitude.min = $scope.details.geometry.location.lat() - 0.5;
-            $scope.latitude.max = $scope.details.geometry.location.lat() + 0.5;
-            $scope.kmbydegree = (111 * Math.cos($scope.details.geometry.location.lat()));
-            $scope.longitude.min = $scope.details.geometry.location.lng() + 35 / $scope.kmbydegree;
-            $scope.longitude.max = $scope.details.geometry.location.lng() - 35 / $scope.kmbydegree;
-            $scope.centerMap = [$scope.details.geometry.location.lat(), $scope.details.geometry.location.lng()];
-        }
+
+    $scope.latitudeRange = {};
+    $scope.longitudeRange = {};
+    $rootScope.$on('city', function(event, center) {
+        console.log(center);
+        $scope.centerMap = [center.latitude, center.longitude];
+        $scope.center = center;
+        $scope.computeLatLngDiff();
     });
     var r_earth = 6378137;
+    $scope.searchRadiusModel = 50000;
     $scope.computeLatLngDiff = function() {
-        var distanceInMetters = $scope.distance * 1000;
-        var LatDiff = (distanceInMetters / r_earth) * (180 / Math.PI);
-        var LngDiff = (distanceInMetters / r_earth) * (180 / Math.PI) / Math.cos($scope.latitude.origin * Math.PI / 180);
-        $scope.latitude.min = $scope.latitude.origin - LatDiff;
-        $scope.latitude.max = $scope.latitude.origin + LatDiff;
-        $scope.longitude.min = $scope.longitude.origin + LngDiff;
-        $scope.longitude.max = $scope.longitude.origin - LngDiff;
+        $scope.searchRadius = $scope.searchRadiusModel;
+        var LatDiff = ($scope.searchRadius / r_earth) * (180 / Math.PI);
+        var LngDiff = ($scope.searchRadius / r_earth) * (180 / Math.PI) / Math.cos($scope.center.latitude * Math.PI / 180);
+        $scope.latitudeRange.min = $scope.center.latitude - LatDiff;
+        $scope.latitudeRange.max = $scope.center.latitude + LatDiff;
+        $scope.longitudeRange.min = $scope.center.longitude + LngDiff;
+        $scope.longitudeRange.max = $scope.center.longitude - LngDiff;
         $scope.placeFilter();
         $scope.spotFilter();
     };
 
-    // var diffLatitude = latitude + (dy / r_earth) * (180 / pi);
-    // var new_longitude = longitude + (dx / r_earth) * (180 / pi) / cos(latitude * pi / 180);
-    // var rad = function(x) {
-    //     return x * Math.PI / 180;
-    // };
-    // var getDistance = function(p1, p2) {
-    //     var R = 6378137; // Earth’s mean radius in meter
-    //     var dLat = rad(p2.lat() - p1.lat());
-    //     var dLong = rad(p2.lng() - p1.lng());
-    //     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    //         Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
-    //         Math.sin(dLong / 2) * Math.sin(dLong / 2);
-    //     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    //     var d = R * c;
-    //     return d; // returns the distance in meter
-    // };
+    function getDistanceFromLatLonInMetters(lat1, lon1, lat2, lon2) {
+        var dLat = (Math.PI / 180) * (lat2 - lat1);
+        var dLon = (Math.PI / 180) * (lon2 - lon1);
+        var a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos((Math.PI / 180) * (lat1)) * Math.cos((Math.PI / 180) * (lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = r_earth * c; // Distance in km
+        return d;
+    }
 
     $scope.togglePlaceInfoWindow = function(event, place) {
-        $scope.map.showInfoWindow('popup', this);
+        $scope.map.showInfoWindow('placePopup', this);
         $scope.toggleledPlace = place;
     };
     $scope.toggleSpotInfoWindow = function(event, spot) {
-        $scope.map.showInfoWindow('popup', this);
+        $scope.map.showInfoWindow('spotPopup', this);
         $scope.toggleledSpot = spot;
     };
 });

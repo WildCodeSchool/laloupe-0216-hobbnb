@@ -1,6 +1,5 @@
-angular.module('app')
-    .factory('searchFactory', function() {
-        return {
-            data: {}
-        };
-    });
+function searchFactory() {
+    return {
+        data: {}
+    };
+}
