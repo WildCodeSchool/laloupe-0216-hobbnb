@@ -2,6 +2,7 @@ node_modules/
 *.DS_Store
 config/database.js
 config/secretToken.js
+config/socialAuth.js
 config/mail.js
 config/s3.js
 public/uploads
