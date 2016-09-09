@@ -35,20 +35,18 @@ angular.module('app').controller('searchController', function($rootScope, $scope
     placesService.get().then(function(res) {
         $scope.showPlace = true;
         $scope.places = res.data;
-        $scope.filteredPlaces = $scope.places;
         if (searchFactory.data.selectedHobbies) {
             $scope.selectedHobbies = searchFactory.data.selectedHobbies;
-            $scope.placeFilter();
         }
+        $scope.placeFilter();
     });
     spotsService.get().then(function(res) {
         $scope.showSpot = true;
         $scope.spots = res.data;
-        $scope.filteredSpots = $scope.spots;
         if (searchFactory.data.selectedHobbies) {
             $scope.selectedHobbies = searchFactory.data.selectedHobbies;
-            $scope.spotFilter();
         }
+        $scope.spotFilter();
     });
 
     $scope.placeFilter = function() {
@@ -64,7 +62,7 @@ angular.module('app').controller('searchController', function($rootScope, $scope
         $scope.filteredSpots = $filter('orderBy')($scope.filteredSpots, $scope.spotFilters);
     };
 
-    NgMap.getMap('myMap').then(function(map) {
+    NgMap.getMap('map').then(function(map) {
         $scope.map = map;
     });
     $scope.getHoveredPlaceIndex = function(index, hovered) {
@@ -122,10 +120,36 @@ angular.module('app').controller('searchController', function($rootScope, $scope
         return d;
     }
 
+    // var directionsDisplay = new google.maps.DirectionsRenderer();
+    // var directionsService = new google.maps.DirectionsService();
+    // $scope.getDirections = function(origin, destination) {
+    //     var request = {
+    //         origin: new google.maps.LatLng(origin.latitude, origin.longitude),
+    //         destination: new google.maps.LatLng(destination.latitude, destination.longitude),
+    //         travelMode: google.maps.DirectionsTravelMode.DRIVING
+    //     };
+    //     directionsService.route(request, function(response, status) {
+    //         if (status === google.maps.DirectionsStatus.OK) {
+    //             console.log(response);
+    //             console.log($scope.map);
+    //             // directionsDisplay.setDirections(response);
+    //             // directionsDisplay.setMap($scope.map.control.getGMap());
+    //             // directionsDisplay.setPanel(document.getElementById('directionsList'));
+    //             // $scope.directions.showList = true;
+    //         } else {
+    //             console.log(response);
+    //         }
+    //     });
+    // };
+
     $scope.togglePlaceInfoWindow = function(event, place) {
+        // $scope.map.directionsRenderers[0].setMap(null);
         $scope.map.showInfoWindow('placePopup', this);
         $scope.toggleledPlace = place;
+        console.log($scope.map);
+        // $scope.getDirections($scope.center, place);
     };
+
     $scope.toggleSpotInfoWindow = function(event, spot) {
         $scope.map.showInfoWindow('spotPopup', this);
         $scope.toggleledSpot = spot;

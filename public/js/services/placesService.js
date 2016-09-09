@@ -4,6 +4,9 @@ angular.module('app')
             get: function() {
                 return $http.get('/api/places');
             },
+            getPlacesNearBy: function(options) {
+                return $http.post('/api/places/placesNearBy', options);
+            },
             getOne: function(id) {
                 return $http.get('/api/places/' + id);
             },

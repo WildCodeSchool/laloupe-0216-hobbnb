@@ -1,179 +1,439 @@
+<div class="navbar-fixed" ng-show="topReached" style="z-index: 1000; margin-top: -64px;">
+    <nav style=" background-color:rgb(100, 115, 124);">
+        <div class="nav-wrapper">
+            <div class="container">
+                <ul>
+                    <li>
+                        <a href="sass.html">Sass</a>
+                    </li>
+                    <li>
+                        <a href="badges.html">Components</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="row header_show">
+    <img ng-src="uploads/spots/{{spot._id}}/large/{{spot.pictures[0]}}" class="object-fit_cover-top" alt=""/>
+</div>
 <div class="container">
-    <div class="row no-margin">
-        <div style='background-image:url("uploads/spots/{{spot._id}}/large/{{spot.pictures[0]}}");' class='bg-fullwidth'></div>
-    </div>
-    <div class="row no-margin">
-        <div class="col s12 m8">
+    <div class="row small_row_margin_bottom" style="width:100%">
+        <div class="col s12 m8 small_row_margin_top">
             <!-- main card -->
-            <div class="row card-panel valign-wrapper">
-                <div class="col s4 m3">
-                    <div class='valign center-align'>
-                        <img ng-src="{{spot.owner.picture && '/uploads/users/'+spot.owner._id+'/large/'+spot.owner.picture || '/assets/hobbynaut-avatar.gif'}}" alt="{{spot.owner.identity.firstName + ' ' + spot.owner.identity.lastName}}" class='circle responsive-img'/>
-                        <br/>
-                        <b>{{spot.owner.identity.firstName + ' ' + spot.owner.identity.lastName}}</b>
-                        <p>
-                            <span class="center-align grey-text lighten-5" style='font-size:12px;'>
-                                <star-rating ng-model="spot.owner.numReviews" readonly="true"></star-rating>
-                                <br/>{{spot.owner.numReviews}}
-                                avis</span>
-                        </p>
-                    </div>
+            <div class="row no_margin">
+                <div class="col l2 center no-margin">
+                    <img ng-src="{{spot.owner.picture && '/uploads/users/'+spot.owner._id+'/large/'+spot.owner.picture || '/assets/hobbynaut-avatar.gif'}}" alt="{{spot.owner.identity.firstName}}" class='circle responsive-img' width="120px"/>
+                    <br/>
+                    <b>{{spot.owner.identity.firstName}}</b>
+                    <p>
+                        {{spot.owner.rating.overallRating}}
+                        /
+                        {{spot.owner.rating.numReviews}}
+                        reviews<br>
+                        <a href="">Superhero</a>
+                    </p>
+
                 </div>
-                <div class="col s8 m9">
-                    <div class="right">
+                <div class="col l10">
+                    <!-- <div class="right">
                         <a facebook class="facebookShare" data-picture='http://hobbnb.com/uploads/places/{{spot._id}}/large/{{spot.picture}}' data-url='http://hobbnb.com/place/{{spot._id}}' data-shares='shares'>{{ shares }}</a>
                         <a ng-show="spot.owner._id == currentUser._id || currentUser.isAdmin" href="/edition/spot/{{currentSpot}}" class="btn btn-flat blue">Modifier</a>
-                    </div>
-                    <div class='row'>
-                        <h4>{{spot.name}}</h4>
-                        <h5>
-                            {{spot.address.street_number}}
-                            {{spot.address.route}}<br/>
-                            {{spot.address.postal_code}}
-                            {{spot.address.locality}},
-                            {{spot.address.country}}</h5>
-                    </div>
-                    <div class="row center-align">
-                        <div class="col m4 l2">
-                            <img src="/assets/hobbies/{{spot.hobby}}.png" class='hobby-main' alt=""/><br/>
-                            {{spot.hobby}}
+                    </div> -->
+                    <div class="row small_row_margin_bottom">
+                        <div class="col l12">
+                            <span class="hobbnb_h5">{{spot.name}}</span>
+                            <span class="hobbnb_h6">{{spot.address.street_number}}
+                                {{spot.address.route}}
+                                {{spot.address.postal_code}}
+                                {{spot.address.locality}},
+                                {{spot.address.country}}</span>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- Pictures -->
-            <div class="row card-panel grey lighten-5">
-                <h5>Photos</h5>
-                <div class="row" ng-init="clicked = false">
-                    <div class="col s6 no-margin" ng-repeat='picture in spot.pictures' ng-click="clicked = !clicked">
-                        <div materialboxed class="thumbnail show">
-                            <img class="object-fit_cover materialboxed" ng-src="/uploads/spots/{{spot._id}}/large/{{picture}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Comment & Rating -->
-            <div class="row card-panel grey lighten-5">
-                <div class="col s10 offset-s1">
-                    <h5>Avis et commentaires</h5>
-                    <!--rating -->
-                    <div class="row">
-                        <div class="col s3 center">
-                            <b>{{spot.rating.numberOfRatings}}
-                                Avis</b><br/>
+                    <div class="row small_row_margin_bottom">
+                        <div class="col l12">
                             <star-rating ng-model="spot.rating.overallRating" readonly="true"></star-rating>
+                            <sup class="hobbnb_normal_big" style="vertical-align: super;">({{spot.rating.numberOfRatings || 0}})</sup>
+                        </div>
+                    </div>
+                    <div class="row no_margin valign-wrapper">
+                        <div class="col l3 center">
+                            <img src="/assets/hobbies/{{spot.hobby}}.png" width="50%" class="responsive-image" alt=""/>
                         </div>
                         <div class="col s3 center">
-                            <img src="/assets/hobbies/quality.png" width="20%" alt=""/>
-                            Quality<br/>
+                            <img src="/assets/hobbies/quality.png" width="40%" alt=""/>
+                            <br/>
                             <star-rating ng-model="spot.rating.quality" readonly="true"></star-rating>
                         </div>
                         <div class="col s3 center">
-                            <img src="/assets/hobbies/beauty.png" width="20%" alt=""/>
-                            Beauty<br/>
+                            <img src="/assets/hobbies/beauty.png" width="40%" alt=""/>
+                            <br/>
                             <star-rating ng-model="spot.rating.beauty" readonly="true"></star-rating>
                         </div>
                         <div class="col s3 center">
-                            <img src="/assets/hobbies/facility.png" width="20%" alt=""/>
-                            Accessibility<br/>
+                            <img src="/assets/hobbies/facility.png" width="40%" alt=""/>
+                            <br/>
                             <star-rating ng-model="spot.rating.accessibility" readonly="true"></star-rating>
                         </div>
                     </div>
-                    <!--comments -->
-                    <div class="row">
-                        <div class="col s10 offset-s1" ng-repeat='comment in spot.comments'>
-                            <div class="card-panel grey lighten-5 z-depth-1">
-                                <div class="row valign-wrapper">
-                                    <div class="col s2 center">
-                                        <img
-                                            ng-src="{{comment.owner.picture && '/uploads/users/'+comment.owner._id+'/large/'+comment.owner.picture || '/assets/hobbynaut-avatar.gif'}}"
-                                            alt="{{comment.owner.identity.firstName + ' ' + comment.owner.identity.lastName}}"
-                                            class="circle responsive-img">
-                                        <br>
-                                        <b>{{comment.owner.identity.firstName + ' ' + comment.owner.identity.lastName}}</b>
-                                    </div>
-                                    <div class="col s10">
-                                        <span class="black-text">
-                                            <b>{{comment.title}}</b>
-                                            <br>
-                                            {{comment.comment}}<br>
-                                            <br>{{comment.creation.substring(0,10)}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row small_row_margin_bottom">
+                        <div class="col l3 center">
+                            <span class="hobbnb_normal">{{spot.hobby}}</span>
+                        </div>
+                        <div class="col s3 center">
+                            <span class="hobbnb_normal">Quality</span>
+                        </div>
+                        <div class="col s3 center">
+                            <span class="hobbnb_normal">Beauty</span>
+                        </div>
+                        <div class="col s3 center">
+                            <span class="hobbnb_normal">Accessibility</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <divclass="col s12">
-                            <div class="grey lighten-5">
-                                <div class="row" ng-hide='toggleComment'>
-                                    <div class="col s12 center">
-                                        <button class='btn green accent-2 waves-effect waves-light' ng-click='toggleComment = true'>Ajouter un commentaire</button>
-                                    </div>
-                                </div>
-                                <div class="row valign-wrapper" ng-show='toggleComment'>
-                                    <div class="col s2 center">
-                                        <img
-                                            ng-src="{{currentUser.owner.picture && '/uploads/users/'+currentUser.owner._id+'/large/'+currentUser.owner.picture || '/assets/hobbynaut-avatar.gif'}}"
-                                            alt="{{currentUser.owner.identity.firstName + ' ' + currentUser.owner.identity.lastName}}"
-                                            class="circle responsive-img">
-                                        <br>
-                                        <b>{{currentUser.identity.firstName + ' ' + currentUser.identity.lastName}}</b>
-                                    </div>
-                                    <div class="col s10">
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input id="title" type="text" ng-model='comment.title'>
-                                                <label for="title">Titre</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <textarea id="commentaire" ng-model='comment.comment' class="materialize-textarea"></textarea>
-                                                <label for="commentaire">Commentaire</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col s4">
-                                                <span class="custom-label">Qualité</span>
-                                                <star-rating ng-model="comment.quality"></star-rating>
-                                            </div>
-                                            <div class="col s4">
-                                                <span class="custom-label">Beauté</span>
-                                                <star-rating ng-model="comment.beauty"></star-rating>
-                                            </div>
-                                            <div class="col s4">
-                                                <span class="custom-label">Accesibilité</span>
-                                                <star-rating ng-model="comment.accessibility"></star-rating>
-                                            </div>
-                                            <div class="col s12">
-                                                <p class="center-align">
-                                                    <button class="btn green accent-2 waves-effect waves-light" type="button" ng-click='addSpotComment()'>Ajouter un commentaire</button>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr width="250%" style="margin-left: -50%">
+            </div>
+
+            <div class="row">
+                <b>
+                    <span class="label_rating">About this spot</span>
+                </b>
+                <p class="hobbnb_normal">
+                    {{spot.about}}
+                </p>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <a class="left" href="#">Contacter l'auteur</a>
+                </div>
+                <div class="col s6">
+                    <a class="right" href="#">Décrouvrir d'autres spots à proximité</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr width="104%" style="margin-left: -2%">
+            </div>
+
+            <div class="row">
+                <div class="col l12 no_padding">
+                    <div materialboxed class="show_thumbnail row1">
+                        <img class="object-fit_cover materialboxed" ng-src="/uploads/spots/{{spot._id}}/large/{{spot.pictures[0]}}">
+                    </div>
+                </div>
+                <div class="col l6 no_padding">
+                    <div materialboxed class="show_thumbnail row2">
+                        <img class="object-fit_cover materialboxed" ng-src="/uploads/spots/{{spot._id}}/large/{{spot.pictures[1]}}">
+                    </div>
+                </div>
+                <div class="col l6 no_padding">
+                    <div materialboxed class="show_thumbnail row2">
+                        <img class="object-fit_cover materialboxed" ng-src="/uploads/spots/{{spot._id}}/large/{{spot.pictures[2]}}">
+                    </div>
+                </div>
+                <div class="col l4 no_padding">
+                    <div materialboxed class="show_thumbnail row3">
+                        <img class="object-fit_cover materialboxed" ng-src="/uploads/spots/{{spot._id}}/large/{{spot.pictures[3]}}">
+                    </div>
+                </div>
+                <div class="col l4 no_padding">
+                    <div materialboxed class="show_thumbnail row3">
+                        <img class="object-fit_cover materialboxed" ng-src="/uploads/spots/{{spot._id}}/large/{{spot.pictures[4]}}">
+                    </div>
+                </div>
+                <div class="col l4 no_padding">
+                    <div materialboxed class="show_thumbnail row3">
+                        <img class="object-fit_cover materialboxed" ng-src="/uploads/spots/{{spot._id}}/large/{{spot.pictures[5]}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr width="104%" style="margin-left: -2%">
+            </div>
+
+            <div class="row medium_row_margin_top" ng-hide='toggleComment'>
+                <div class="col s12 center">
+                    <button class='btn green accent-2 waves-effect waves-light' ng-click='toggleComment = true'>Ajouter un commentaire</button>
+                </div>
+            </div>
+            <div ng-show='toggleComment'>
+                <div class="row tiny_row_margin_bottom medium_row_margin_top">
+                    <div class="col s3 center">
+                        <img
+                            ng-src="{{currentUser.owner.picture && '/uploads/users/'+currentUser.owner._id+'/large/'+currentUser.owner.picture || '/assets/hobbynaut-avatar.gif'}}"
+                            alt="{{currentUser.owner.identity.firstName}}"
+                            class="circle responsive-img small_row_margin_bottom"
+                            width="85px"/>
+                        <br/>
+                        <b class="hobbnb_userNameLabel small_row_margin_bottom">{{currentUser.identity.firstName}}</b>
+                    </div>
+                    <div class="col s9 no_padding">
+                        <div class="input-field no_margin">
+                            <input id="title" type="text" ng-model='comment.title' class="hobbnb_h6">
+                            <label for="title">Titre</label>
+                        </div>
+                        <div class="input-field no_margin">
+                            <textarea id="commentaire" ng-model='comment.comment' class="materialize-textarea hobbnb_normal"></textarea>
+                            <label for="commentaire">Commentaire</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row tiny_row_margin_bottom ">
+                    <div class="col s9 no_padding offset-s3">
+                        <div class="row tiny_row_margin_bottom">
+                            <div class="col s4">
+                                <span class="hobbnb_normal">Quality</span>
+                                <br/>
+                                <star-rating ng-model="comment.quality"></star-rating>
+                            </div>
+                            <div class="col s4">
+                                <span class="hobbnb_normal">Beauty</span>
+                                <br/>
+                                <star-rating ng-model="comment.beauty"></star-rating>
+                            </div>
+                            <div class="col s4">
+                                <span class="hobbnb_normal">Accessibility</span>
+                                <br/>
+                                <star-rating ng-model="comment.accessibility"></star-rating>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row card-panel grey lighten-5">
-                    <div class="col s10 offset-s1">
-                        <h5>Alentours</h5>
-                        <br>
-                        <ng-map default-style="true" center="[{{spot.latitude}},{{spot.longitude}}]" zoom="8">
-                            <marker
-                                position="[{{spot.latitude}},{{spot.longitude}}]"
-                                title="{{spot.name}}"
-                                icon="{
+                <div class="row medium_row_margin_top">
+                    <div class="col s12 center">
+                        <button class="btn green accent-2 waves-effect waves-light" type="button" ng-click='addSpotComment()'>Envoyer commentaire</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr width="250%" style="margin-left: -50%">
+            </div>
+
+            <div class="row">
+                <div class="col l4 valign-wrapper no_padding">
+                    <span class="label_rating valign">
+                        <b>{{spot.rating.numberOfRatings || 0}}
+                            Reviews</b>
+                    </span>
+                    <star-rating ng-model="spot.rating.overallRating" readonly="true"></star-rating>
+                </div>
+                <div class="col s8 no_padding">
+                    <div class="row valign-wrapper">
+                        <div class="col s12 no_padding_left center">
+                            <span class="hobbnb_normal_big valign" style="line-height: 31px;">
+                                More than 95% of hobbynauts recommend this spot
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row no_margin">
+                        <div class="col s4 center">
+                            <img src="/assets/hobbies/quality.png" width="25%" alt=""/>
+                            <br/>
+                            <star-rating ng-model="spot.rating.quality" readonly="true"></star-rating>
+                        </div>
+                        <div class="col s4 center">
+                            <img src="/assets/hobbies/beauty.png" width="25%" alt=""/>
+                            <br/>
+                            <star-rating ng-model="spot.rating.beauty" readonly="true"></star-rating>
+                        </div>
+                        <div class="col s4 center">
+                            <img src="/assets/hobbies/facility.png" width="25%" alt=""/>
+                            <br/>
+                            <star-rating ng-model="spot.rating.accessibility" readonly="true"></star-rating>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4 center">
+                            <span class="hobbnb_normal">Quality</span>
+                        </div>
+                        <div class="col s4 center">
+                            <span class="hobbnb_normal">Beauty</span>
+                        </div>
+                        <div class="col s4 center">
+                            <span class="hobbnb_normal">Accessibility</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-repeat='comment in spot.comments' ng-show="spot.comments.length">
+
+                <div class="row">
+                    <hr width="104%" style="margin-left: -2%">
+                </div>
+
+                <div class="row tiny_row_margin_bottom medium_row_margin_top">
+                    <div class="col s3 center">
+                        <img
+                            ng-src="{{comment.owner.picture && '/uploads/users/'+comment.owner._id+'/large/'+comment.owner.picture || '/assets/hobbynaut-avatar.gif'}}"
+                            alt="{{comment.owner.identity.firstName}}"
+                            class="circle responsive-img small_row_margin_bottom"
+                            width="85px"/>
+                    </div>
+                    <div class="col s9 no_padding">
+                        <span class="hobbnb_h6">
+                            <b>{{comment.title}}</b>
+                        </span>
+                        <p class="hobbnb_normal">
+                            {{comment.comment}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row tiny_row_margin_bottom ">
+                    <div class="col s3 center">
+                        <b class="hobbnb_userNameLabel small_row_margin_bottom">{{comment.owner.identity.firstName}}</b>
+                    </div>
+                    <div class="col s9 no_padding">
+                        <div class="row tiny_row_margin_bottom">
+                            <div class="col s4">
+                                <span class="hobbnb_normal">Quality</span>
+                                <br/>
+                                <star-rating ng-model="spot.rating.quality" readonly="true"></star-rating>
+                            </div>
+                            <div class="col s4">
+                                <span class="hobbnb_normal">Beauty</span>
+                                <br/>
+                                <star-rating ng-model="spot.rating.beauty" readonly="true"></star-rating>
+                            </div>
+                            <div class="col s4">
+                                <span class="hobbnb_normal">Accessibility</span>
+                                <br/>
+                                <star-rating ng-model="spot.rating.accessibility" readonly="true"></star-rating>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row tiny_row_margin_bottom ">
+                    <div class="col s3 center">
+                        <span class="hobbnb_userNameLabel">Expert</span>
+                    </div>
+                    <div class="col s9 no_padding">
+                        <span class="hobbnb_userNameLabel">{{comment.date.substring(0,10)}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row medium_row_margin_top">
+                <hr width="250%" style="margin-left: -50%">
+            </div>
+
+            <div class="row" id="location">
+                <b>
+                    <span class="label_rating">Localisation</span>
+                </b>
+            </div>
+            <div class="row" style="position: relative;">
+                <ng-map default-style="false" center="[{{spot.latitude}},{{spot.longitude}}]" zoom="8" style="height: 500px;">
+                    <marker
+                        position="[{{spot.latitude}},{{spot.longitude}}]"
+                        title="{{spot.name}}"
+                        icon="{
                                       url:'{{'/assets/search/tile' + spot.hobby + '.png'}}',
                                       scaledSize:[42,45],
                                       origin: [0,0],
                                       anchor: [21,45]
                                       }"></marker>
-                        </ng-map>
+                    <marker
+                        ng-repeat="place in placesNearBy"
+                        position="[{{place.latitude}},{{place.longitude}}]"
+                        title={{place.name}}
+                        icon="{
+                                            url:'assets/search/tileHome.png',
+                                            scaledSize:[32,32],
+                                            origin: [0,0],
+                                            anchor: [16,32]
+                                            }"
+                        scrollwheel="true"
+                        animation="{{hoveredPlaceIndex == $index ? 'BOUNCE' : 'null'}}"
+                        on-click="togglePlaceInfoWindow(event, place)"
+                        clickable="true"></marker>
+                    <info-window id="placePopup" max-width="200">
+                        <a href="/place/{{toggleledPlace._id}}" target="_blank" ng-non-bindable>
+                            <div class="card hobbnb_card">
+                                <div class="card-image">
+                                    <img src="/uploads/places/{{toggleledPlace._id}}/thumb/{{toggleledPlace.pictures[0]}}">
+                                    <span class="card-title" style="background-color: rgba(100,100,100,0.5); padding:2px;">{{toggleledPlace.home.price}}€</span>
+                                </div>
+                                <div class="card-content hobbnb_card_content">
+                                    <img class="authorpict" src="./assets/hobbynaut-avatar.gif" ng-show="!toggleledPlace.owner.picture" style="top: 115px; right: 5px"/>
+                                    <img class="authorpict" ng-src="{{'/uploads/users/'+toggleledPlace.owner._id+'/thumb/'+toggleledPlace.owner.picture}}" ng-show="place.owner.picture"/>
+                                    <div class="hobbnb_h6">{{toggleledPlace.name}}</div>
+                                    <div class="hobbnb_normal_big">
+                                        <star-rating ng-model="toggleledPlace.rating.overallRating" readonly="true"></star-rating>
+                                        <sup>({{toggleledPlace.rating.numberOfRatings}})</sup>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </info-window>
+                </ng-map>
+                <div class="map_card">
+                  test
+                </div>
+            </div>
+        </div>
+        <div class="col m4">
+            <div set-class-when-at-top="fix-to-top">
+                <div class="sidebar_outer">
+                    <div class="row sidebar_outer_header">
+                        <span class="sidebar_outer_header_title">Hébergements à proximité</span>
+                    </div>
+                    <div class="row sidebar_outer_content">
+                        <div class="col s12" ng-repeat="place in placesNearBy">
+                            <a href="/place/{{place._id}}" ng-mouseover="getHoveredPlaceIndex($index, true);" ng-mouseleave="getHoveredPlaceIndex($index, false);" target="_blank">
+                                <div class="card hobbnb_card hoverable">
+                                    <div class="card-image">
+                                        <div class="placepict" ng-style="{'background-image': 'url(uploads/places/{{place._id}}/thumb/{{place.pictures[0]}})', 'background-size': 'cover'}"></div>
+                                        <span class="card-title">{{place.home.price|currency:'€'}}</span>
+                                    </div>
+                                    <div class="card-content hobbnb_card_content white">
+                                        <div class="row tiny_row_margin_bottom">
+                                            <div class="col s12">
+                                                <img class="authorpict" src="./assets/hobbynaut-avatar.gif" ng-show="!place.owner.picture"/>
+                                                <img class="authorpict" ng-src="{{'/uploads/users/'+place.owner._id+'/thumb/'+place.owner.picture}}" ng-show="place.owner.picture"/>
+                                            </div>
+                                            <div class="col s9">
+                                                <div class="hobbnb_h6">
+                                                    <b>{{place.name}}</b>
+                                                </div>
+                                                <div class="hobbnb_normal_big">
+                                                    <star-rating ng-model="place.rating.overallRating" readonly="true"></star-rating>
+                                                    <sup style="vertical-align: super;">({{place.rating.numberOfRatings || 0}})</sup>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="col s12">
+                              <i class="fa fa-road" aria-hidden="true" ng-click="getDirections({latitude: spot.latitude, longitude: spot.longitude}, {latitude: place.latitude, longitude: place.longitude})"></i>{{travelDistance}}
+                              <i class="fa fa-car" aria-hidden="true"></i>{{travelDuration}}
+                              <i class="fa fa-bicycle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col s12 small_row_margin_top center">
+                            <a href>+ voir plus</a>
+                        </div>
+                        <div class="col s12 small_row_margin_top center">
+                            <a href>Vous avez un hébérgement a proximité?</a>
+                        </div>
+                        <div class="col s12 tiny_row_margin_top small_row_margin_bottom center">
+                            <button class="btn green accent-2 waves-effect waves-light">Ajouter un hébérgement</button>
+                        </div>
+                        <div class="col s12 tiny_row_margin_top small_row_margin_bottom center">
+                            <hr style="width:80%;height:2px;border:none;background-color:#333;"/>
+                        </div>
+                        <div class="col s12 tiny_row_margin_top small_row_margin_bottom center">
+                            <a href="">Inviter mes amis à ajouter leurs hébergements</a>
+                        </div>
+                    </div>
+                    <div class="row sidebar_outer_content small_row_margin_top">
+                        Share
                     </div>
                 </div>
             </div>

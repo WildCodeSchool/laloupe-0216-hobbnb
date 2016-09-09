@@ -277,12 +277,19 @@
                 </div>
             </div>
             <dir-pagination-controls></dir-pagination-controls>
+            {{map.directionsRenderers[0].directions.routes[0].overview_path.length}}
         </div>
     </div>
 
     <div class="col m5 l5 search-rigth-col hide-on-small-only">
-        <ng-map default-style="false" center="{{centerMap}}" geo-fallback-center="48.8534100, 2.3488000" zoom="6" id="myMap" style='height:100%;'>
+        <ng-map default-style="false" center="{{centerMap}}" geo-fallback-center="48.8534100, 2.3488000" zoom="6" style='height:100%;'>
             <div ng-if="showPlace">
+                <directions
+                  draggable="true"
+                  travel-mode="DRIVING"
+                  origin="[{{center.latitude}},{{center.longitude}}]"
+                  destination="[{{toggleledPlace.latitude}},{{toggleledPlace.longitude}}]">
+                </directions>
                 <shape ng-if="searchRadius" id="circle" name="circle"
                   stroke-color='#FF0000' stroke-opacity="0.5" stroke-weight="2"
                   center="{{centerMap}}" radius="{{searchRadiusModel}}">
@@ -302,7 +309,7 @@
                     on-click="togglePlaceInfoWindow(event, place)"
                     clickable="true"></marker>
                 <info-window id="placePopup" max-width="200">
-                    <a href="/place/{{toggleledPlace._id}}" target="_blank">
+                    <a href="/place/{{toggleledPlace._id}}" target="_blank" ng-non-bindable>
                         <div class="card">
                             <div class="card-image">
                                 <img src="/uploads/places/{{toggleledPlace._id}}/thumb/{{toggleledPlace.pictures[0]}}">
@@ -337,7 +344,7 @@
                     on-click="toggleSpotInfoWindow(event, spot)"
                     clickable="true"></marker>
                 <info-window id="spotPopup" max-width="200">
-                    <a href="/spot/{{toggleledSpot._id}}" target="_blank">
+                    <a href="/spot/{{toggleledSpot._id}}" target="_blank" ng-non-bindable>
                         <div class="card">
                             <div class="card-image">
                                 <img ng-src="/uploads/spots/{{toggleledSpot._id}}/thumb/{{toggleledSpot.pictures[0]}}">

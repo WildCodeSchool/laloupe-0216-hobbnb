@@ -207,7 +207,7 @@ var Places = {
         });
         form.on('fileBegin', function(name, file) {
             fileCount++;
-            // file.name = fileCount + file.name.substr(file.name.lastIndexOf('.'));
+            // file.name = fileCount + file.namplace.substr(file.namplace.lastIndexOf('.'));
             logger.info('-- File: ', file.name, ' upload started');
             pictures.push(file.name);
         });
@@ -253,6 +253,42 @@ var Places = {
         return Places.model.findById(req.params._id);
     },
 
+    findPlacesNearBy: function(req, res) {
+        var r_earth = 6378137;
+        console.log(req.body);
+        var latitudeRangePlace = req.body.latitudeRange,
+            longitudeRangePlace = req.body.longitudeRange,
+            center = req.body.center,
+            radius = req.body.radius;
+
+        function getDistanceFromLatLonInMetters(lat1, lon1, lat2, lon2) {
+            var dLat = (Math.PI / 180) * (lat2 - lat1);
+            var dLon = (Math.PI / 180) * (lon2 - lon1);
+            var a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos((Math.PI / 180) * (lat1)) * Math.cos((Math.PI / 180) * (lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = r_earth * c; // Distance in km
+            return d;
+        }
+        Places.model.find()
+            .populate('owner', 'identity rating email')
+            .populate('comments.owner', 'identity rating email')
+            .exec(function(err, data) {
+                if (err) res.send(err);
+                var placesNearBy = [];
+                data.forEach(function(place) {
+                    if ((place.latitude >= latitudeRangePlace.min && place.latitude <= latitudeRangePlace.max) || (place.latitude <= latitudeRangePlace.min && place.latitude >= latitudeRangePlace.max) && (place.longitude >= longitudeRangePlace.min && place.longitude <= longitudeRangePlace.max) || (place.longitude <= longitudeRangePlace.min && place.longitude >= longitudeRangePlace.max)) {
+                        if (getDistanceFromLatLonInMetters(center.latitude, center.longitude, place.latitude, place.longitude) <= radius) {
+                            placesNearBy.push(place);
+                        }
+                    }
+                });
+                res.send(placesNearBy);
+            });
+    },
+
     findAll: function(req, res) {
         Places.model.find()
             .populate('owner', 'identity rating email')
@@ -293,10 +329,10 @@ var Places = {
         if (typeof req.body.removedPictures !== 'undefined' && req.body.removedPictures.length > 0) {
             req.body.removedPictures.forEach(function(picture) {
                 fs.unlink('./public/uploads/places/' + req.params.placeId + '/large/' + picture, function(err) {
-                  if (err) throw err;
-                      fs.unlink('./public/uploads/places/' + req.params.placeId + '/thumb/' + picture, function(err) {
+                    if (err) throw err;
+                    fs.unlink('./public/uploads/places/' + req.params.placeId + '/thumb/' + picture, function(err) {
                         if (err) throw err;
-                      });
+                    });
                 });
             });
         }

@@ -179,8 +179,10 @@ function routes($routeProvider, $httpProvider, $locationProvider) {
                         name: 'app',
                         files: [
                             '/js/directives/starRatingDirective.js',
+                            '/js/directives/setClassWhenAtTop.js',
                             '/js/services/usersService.js',
                             '/js/services/spotsService.js',
+                            '/js/services/placesService.js',
                             '/js/services/emailService.js',
                             '/js/factories/spotsFactory.js',
                             '/js/factories/searchFactory.js',
